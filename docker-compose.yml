@@ -1,0 +1,46 @@
+services:
+    lubank_project:
+        container_name: lubank_project
+        build:
+            context: .
+        deploy:
+            resources:
+                limits:
+                    cpus: "1"
+                    memory: 1024M
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./project:/project
+            - ./data/web/static:/data/web/static
+            - ./data/web/media:/data/web/media
+        env_file:
+            - ./dotenv_files/.env
+        depends_on:
+            - lubank_db
+
+    lubank_db:
+        container_name: lubank_db
+        user: "postgres"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_DB: postgres
+            POSTGRES_PASSWORD: postgres
+        image: postgres:13-alpine
+        deploy:
+            resources:
+                limits:
+                    cpus: "1"
+                    memory: 1024M
+        ports:
+            - "5432:5432"
+        env_file:
+            - ./dotenv_files/.env
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+volumes:
+    lubank_db:
