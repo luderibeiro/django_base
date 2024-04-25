@@ -1,6 +1,6 @@
 services:
-    lubank_project:
-        container_name: lubank_project
+    project:
+        container_name: project
         build:
             context: .
         deploy:
@@ -17,10 +17,10 @@ services:
         env_file:
             - ./dotenv_files/.env
         depends_on:
-            - lubank_db
+            - project_db
 
-    lubank_db:
-        container_name: lubank_db
+    project_db:
+        container_name: project_db
         user: "postgres"
         environment:
             POSTGRES_USER: postgres
@@ -32,6 +32,8 @@ services:
                 limits:
                     cpus: "1"
                     memory: 1024M
+        volumes:
+            - project_db:/var/lib/postgresql/data
         ports:
             - "5432:5432"
         env_file:
@@ -43,4 +45,4 @@ services:
             retries: 5
 
 volumes:
-    lubank_db:
+    project_db:

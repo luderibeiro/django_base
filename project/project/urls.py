@@ -1,5 +1,5 @@
 """
-URL configuration for lubank project.
+URL configuration for project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -18,18 +18,20 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("{}/".format(settings.ADMIN_DEFAULT_PATH), admin.site.urls),
+    path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
+    path("", include("core.api.urls.base_urls")),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT,
-    )
-    urlpatterns += static(
-        settings.STATIC_URL,
-        document_root=settings.STATIC_ROOT,
-    )
+# if settings.DEBUG:
+#     urlpatterns += static(
+#         settings.MEDIA_URL,
+#         document_root=settings.MEDIA_ROOT,
+#     )
+#     urlpatterns += static(
+#         settings.STATIC_URL,
+#         document_root=settings.STATIC_ROOT,
+#     )
