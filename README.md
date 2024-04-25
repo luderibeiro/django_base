@@ -12,19 +12,19 @@ Este projeto em Django está Dockerizado e segue os princípios da arquitetura l
 
 Siga estes passos para executar o projeto:
 
-1. **Clonar o Repositório:**
+1.  **Clonar o Repositório:**
 
-`git clone git@github.com:luderibeiro/django_base.git`
+        git clone git@github.com:luderibeiro/django_base.git
 
-2. **Configurar o Ambiente:**
+2.  **Configurar o Ambiente:**
 
 -   Crie um arquivo `.env` na raiz do projeto e adicione as configurações necessárias, como chaves de API, configurações de banco de dados, etc.
 
-4. **Executar o Docker Compose:**
+4.  **Executar o Docker Compose:**
 
-`docker-compose up --build`
+        docker-compose up --build
 
-    obs.: a tag --build deve ser executada somente a primeira vez que o projeto for instalado ou quando houverem alterações nos arquivos de build.
+`obs.: a tag --build deve ser executada somente a primeira vez que o projeto for instalado ou quando houverem alterações nos arquivos de build.`
 
 5. **Acessar a Aplicação:**
    A aplicação estará disponível em `http://localhost:8000`.

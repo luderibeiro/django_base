@@ -12,19 +12,19 @@ This Django project is Dockerized and follows the principles of Clean Architectu
 
 Follow these steps to run the project:
 
-1. **Clone the Repository:**
+1.  **Clone the Repository:**
 
-`git clone git@github.com:luderibeiro/django_base.git`
+        git clone git@github.com:luderibeiro/django_base.git
 
-2. **Set Up the Environment:**
+2.  **Set Up the Environment:**
 
 -   Create a `.env` file in the project root and add necessary configurations such as API keys, database settings, etc.
 
-3. **Run Docker Compose:**
+3.  **Run Docker Compose:**
 
-`docker-compose up --build`
+        docker-compose up --build
 
-    Note: The `--build` flag should be executed only the first time the project is installed or when there are changes in the build files.
+`Note: The `--build` flag should be executed only the first time the project is installed or when there are changes in the build files.`
 
 4. **Access the Application:**
    The application will be available at `http://localhost:8000`.
