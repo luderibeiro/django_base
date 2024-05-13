@@ -5,9 +5,7 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    store = serializers.SerializerMethodField()
     groups = serializers.SerializerMethodField()
-    phone = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -32,10 +30,6 @@ class UserSerializer(serializers.ModelSerializer):
     def get_groups(self, obj):
         return list(obj.groups.all().values_list("name", flat=True))
 
-    def get_phone(self, obj):
-        return (
-            obj.motocycle_courier.phone if hasattr(obj, "motocycle_courier") else None
-        )
 
     def create(self, validated_data):
         return validated_data
