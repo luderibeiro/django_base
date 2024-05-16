@@ -4,6 +4,19 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 class UserAdmin(BaseUserAdmin):
+    """Custom admin panel for the `User` model.
+
+    This admin panel customizes the display and functionality of the `User` model in the admin panel.
+
+    Attributes:
+    ----------
+        fieldsets (tuple): Sets of fields to display in the admin panel for different sections.
+        add_fieldsets (tuple): Sets of fields to display in the admin panel for adding new users.
+        list_display (tuple): Fields to display in the list view of users.
+        search_fields (tuple): Fields to search for users.
+        ordering (tuple): Fields to order users by.
+    """
+
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Personal info", {"fields": ("first_name", "last_name")}),
