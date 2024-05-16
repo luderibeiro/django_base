@@ -28,6 +28,7 @@ Siga estes passos para executar o projeto:
 
 5. **Acessar a Aplicação:**
    A aplicação estará disponível em `http://localhost:8000`.
+   
    Caso queira acessar a pagina admin basta acessar `http://localhost:8000/admin/`
 
 **Tratamento de erros**
