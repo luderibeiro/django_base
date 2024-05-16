@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "oauth2_provider",
+    "rest_framework",
     "core",
 ]
 
@@ -54,12 +55,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "project.urls"
+ROOT_URLCONF = "projekt.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["core/templates/"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -72,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "project.wsgi.application"
+WSGI_APPLICATION = "projekt.wsgi.application"
 
 
 # Database
@@ -84,9 +85,15 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "postgres",
-        "HOST": "project_db",
+        "HOST": "projekt_db",
         "PORT": 5432,  # default PostgreSQL port
-    }
+    },
+    "test": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",  # Use an in-memory SQLite database
+        # Or specify a file path to a temporary SQLite database:
+        # 'NAME': os.path.join(BASE_DIR, 'test_db.sqlite3'),
+    },
 }
 
 
@@ -131,8 +138,14 @@ STATIC_ROOT = DATA_DIR / "static"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = DATA_DIR / "media"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+STORAGES = {
+    "static": {
+        "class": "whitenoise.storage.CompressedManifestStaticFilesStorage",  # Specify your storage class
+        "kwargs": {
+            "location": "static",
+        },
+    },
+}
 
 # Authentication user model definition
 AUTH_USER_MODEL = "core.User"
@@ -145,9 +158,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # API REST configuration
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "oauth2_provider.contrib.rest_framework.OAuth2Authentication"
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["oauth2_provider.contrib.rest_framework.OAuth2Authentication"],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 300,
@@ -174,7 +185,7 @@ OAUTH2_PROVIDER = {
     "DEFAULT_SCOPES": ["read"],
     "ACCESS_TOKEN_EXPIRE_SECONDS": 86400,
     "REFRESH_TOKEN_EXPIRE_SECONDS": 2592000,
-    "OAUTH2_VALIDATOR_CLASS": "delivery.validators.OAuth2Validator",
+    "OAUTH2_VALIDATOR_CLASS": "core.validators.GammaBudgetOAuth2Validator",
     "OAUTH2_BACKEND_CLASS": "oauth2_provider.oauth2_backends.JSONOAuthLibCore",
 }
 
@@ -191,9 +202,9 @@ JAZZMIN_SETTINGS = {
     "login_logo_dark": None,
     # Logo to use for login form in dark themes (defaults to login_logo)
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to the Ludev Django project",
+    "welcome_sign": "Welcome to the Gamma-Budget administration pannel",
     # Copyright on the footer
-    "copyright": "Ludev Django Base project",
+    "copyright": "Gamma-Budget Administration pannel",
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string
     "search_model": [],
