@@ -1,6 +1,6 @@
 # Template para Projetos em Django
 
-Can't read portuguese? Read this README in [english](README-en.md)
+**Can't read portuguese? Read this README in [english](README-en.md)**
 
 Este repositório serve como um template para iniciar projetos em Python (versão 3.12) com o framework Django (versão 5.0).
 
@@ -28,6 +28,17 @@ Siga estes passos para executar o projeto:
 
 5. **Acessar a Aplicação:**
    A aplicação estará disponível em `http://localhost:8000`.
+   Caso queira acessar a pagina admin basta acessar `http://localhost:8000/admin/`
+
+**Tratamento de erros**
+
+-   No caso de receber este erro: `PermissionError: [Errno 13] Permission denied: '/data/web/static/admin'`
+    Rodar o seguinte comando:
+
+        sudo chown -R user:group data
+
+`obs.: Mude "user" por seu usuário local da máquina e "group" pelo grupo do usuário`
+
 
 ## Contribuição
 

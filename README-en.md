@@ -28,6 +28,16 @@ Follow these steps to run the project:
 
 4. **Access the Application:**
    The application will be available at `http://localhost:8000`.
+   If you want to access the admin page, simply go to `http://localhost:8000/admin/`.
+
+**Error Handling**
+
+-   In case you encounter this error: PermissionError: [Errno 13] Permission denied: '/data/web/static/admin'
+    Run the following command:
+
+        sudo chown -R user:group data
+
+`Note: Replace "user" with your local machine username and "group" with the user's group.`
 
 ## Contribution
 
