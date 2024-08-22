@@ -140,9 +140,24 @@ MEDIA_ROOT = DATA_DIR / "media"
 
 STORAGES = {
     "static": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
         "class": "whitenoise.storage.CompressedManifestStaticFilesStorage",  # Specify your storage class
         "kwargs": {
             "location": "static",
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "class": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",  # Specify your storage class
+        "kwargs": {
+            "location": "static",
+        },
+    },
+    "mediafiles": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "class": "django.core.files.storage.FileSystemStorage",
+        "kwargs": {
+            "location": "media",
         },
     },
 }
