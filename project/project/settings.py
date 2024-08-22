@@ -34,14 +34,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "jazzmin",
+    "rest_framework",
+    "oauth2_provider",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
-    "oauth2_provider",
-    "rest_framework",
     "core",
 ]
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "projekt.urls"
+ROOT_URLCONF = "project.urls"
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "projekt.wsgi.application"
+WSGI_APPLICATION = "project.wsgi.application"
 
 
 # Database
@@ -85,7 +85,7 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "postgres",
-        "HOST": "projekt_db",
+        "HOST": "project_db",
         "PORT": 5432,  # default PostgreSQL port
     },
     "test": {
@@ -158,7 +158,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # API REST configuration
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
-    "DEFAULT_AUTHENTICATION_CLASSES": ["oauth2_provider.contrib.rest_framework.OAuth2Authentication"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "oauth2_provider.contrib.rest_framework.OAuth2Authentication"
+    ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 300,
