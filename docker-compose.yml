@@ -11,9 +11,9 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - ./project:/project
-            - ./data/web/static:/data/web/static
-            - ./data/web/media:/data/web/media
+            - ./project:/project:rw
+            - ./data/web/static:/data/web/static:rw
+            - ./data/web/media:/data/web/media:rw
         env_file:
             - ./dotenv_files/.env
         depends_on:

@@ -12,34 +12,24 @@ Este projeto em Django está Dockerizado e segue os princípios da arquitetura l
 
 Siga estes passos para executar o projeto:
 
-1.  **Clonar o Repositório:**
+1. **Clonar o Repositório:**
 
         git clone git@github.com:luderibeiro/django_base.git
 
-2.  **Configurar o Ambiente:**
+2. **Configurar o Ambiente:**
 
--   Crie um arquivo `.env` na raiz do projeto e adicione as configurações necessárias, como chaves de API, configurações de banco de dados, etc.
+    - Crie um arquivo `.env` na raiz do projeto e adicione as configurações necessárias, como chaves de API, configurações de banco de dados, etc.
 
-4.  **Executar o Docker Compose:**
+3. **Executar o Docker Compose:**
 
         docker-compose up --build
 
-`obs.: a tag --build deve ser executada somente a primeira vez que o projeto for instalado ou quando houverem alterações nos arquivos de build.`
+    `obs.: a tag --build deve ser executada somente a primeira vez que o projeto for instalado ou quando houverem alterações nos arquivos de build.`
 
-5. **Acessar a Aplicação:**
-   A aplicação estará disponível em `http://localhost:8000`.
-   
-   Caso queira acessar a pagina admin basta acessar `http://localhost:8000/admin/`
+4. **Acessar a Aplicação:**
+    A aplicação estará disponível em `http://localhost:8000`.
 
-**Tratamento de erros**
-
--   No caso de receber este erro: `PermissionError: [Errno 13] Permission denied: '/data/web/static/admin'`
-    Rodar o seguinte comando:
-
-        sudo chown -R user:group data
-
-`obs.: Mude "user" por seu usuário local da máquina e "group" pelo grupo do usuário`
-
+    Caso queira acessar a pagina admin basta acessar `http://localhost:8000/admin/`
 
 ## Contribuição
 
