@@ -52,7 +52,7 @@ markdown_extensions:
 
 nav:
     - Home: index.md
-    - Resumo das Alterações: SUMMARY_OF_CHANGES.md
+    - Changelog: CHANGELOG.md
     - Guia de Contribuição: CONTRIBUTING.md
     - Código de Conduta: CODE_OF_CONDUCT.md
     - Arquitetura:
