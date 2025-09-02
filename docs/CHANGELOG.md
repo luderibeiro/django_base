@@ -21,6 +21,16 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
     -   `project/core/repositories/user_repository_impl.py`: Adição de logs e tratamento de exceções específicas.
     -   Documentação detalhada em `docs/development/logging-error-handling.md`.
 
+-   **Otimização e Refatoração de Arquivos Docker**: Reestruturação do `Dockerfile` para um modelo multi-stage (build e execução) com imagem base mais leve (`python:3.12-slim-bookworm`), combinação de comandos `RUN` para reduzir camadas, e otimização na instalação de dependências. Introdução de arquivos `docker-compose.dev.yml` e `docker-compose.prod.yml` para separar as configurações de ambientes de desenvolvimento e produção, com `Dockerfile.dev` para desenvolvimento e `.dockerignore` para exclusão de arquivos desnecessários.
+    -   `.dockerignore`: Novo arquivo para exclusão de arquivos irrelevantes no contexto de build.
+    -   `Dockerfile`: Refatorado para multi-stage build e otimizado para produção.
+    -   `Dockerfile.dev`: Novo arquivo para ambiente de desenvolvimento.
+    -   `docker-compose.dev.yml`: Novo arquivo para orquestração de serviços em desenvolvimento.
+    -   `docker-compose.prod.yml`: Novo arquivo para orquestração de serviços em produção.
+    -   `docker-compose.yml`: Removido.
+    -   `dotenv_files/.env.prod`: Novo arquivo para variáveis de ambiente de produção.
+    -   `docs/setup/project-setup.md`: Documentação atualizada para refletir a nova estrutura Docker.
+
 -   **Testes Automatizados**: Implementação de uma suíte abrangente de testes unitários para as camadas de Domínio e Aplicação, e testes de integração para a API (autenticação e gerenciamento de usuários).
     -   `project/core/tests/unit/test_user_entity.py`
     -   `project/core/tests/unit/test_user_use_cases.py`
