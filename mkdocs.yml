@@ -4,66 +4,68 @@ repo_url: https://github.com/your-username/django_base/
 edit_uri: edit/main/docs/
 
 theme:
-  name: material
-  features:
-    - navigation.expand
-    - navigation.tabs
-    - navigation.sections
-    - search.highlight
-    - search.suggest
-    - toc.integrate
-    - content.tabs.link
-    - content.code.annotate
-  palette:
-    - scheme: default
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-      primary: teal
-      accent: purple
-    - scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-      primary: teal
-      accent: lime
+    name: material
+    features:
+        - navigation.expand
+        - navigation.tabs
+        - navigation.sections
+        - search.highlight
+        - search.suggest
+        - toc.integrate
+        - content.tabs.link
+        - content.code.annotate
+    palette:
+        - scheme: default
+          toggle:
+              icon: material/brightness-7
+              name: Switch to dark mode
+          primary: teal
+          accent: purple
+        - scheme: slate
+          toggle:
+              icon: material/brightness-4
+              name: Switch to light mode
+          primary: teal
+          accent: lime
 
 markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.critic
-  - pymdownx.caret
-  - pymdownx.mark
-  - pymdownx.tilde
-  - pymdownx.highlight: { linenums: true, anchor_linenums: true }
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - attr_list
-  - md_in_html
-  - def_list
-  - footnotes
-  - tables
-  - toc: { permalink: true }
-  - fenced_code
-  - codehilite
-  - meta
-  - abbr
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+    - pymdownx.critic
+    - pymdownx.caret
+    - pymdownx.mark
+    - pymdownx.tilde
+    - pymdownx.highlight: { linenums: true, anchor_linenums: true }
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - attr_list
+    - md_in_html
+    - def_list
+    - footnotes
+    - tables
+    - toc: { permalink: true }
+    - fenced_code
+    - codehilite
+    - meta
+    - abbr
 
 nav:
-  - Home: index.md
-  - Resumo das Alterações: SUMMARY_OF_CHANGES.md
-  - Arquitetura:
-    - Visão Geral: architecture/overview.md
-    - Camada de Domínio: architecture/domain-layer.md
-    - Camada de Aplicação (Casos de Uso): architecture/application-layer.md
-    - Camada de Infraestrutura: architecture/infrastructure-layer.md
-    - Camada de Apresentação (API DRF): architecture/presentation-layer.md
-    - Configuração de URLs: architecture/url-configuration.md
-  - Desenvolvimento:
-    - Como Testar: development/testing.md
-    - Guia de Integração Frontend: development/frontend-integration.md
-    - Casos de Uso CRUD Genéricos: development/generic-crud-use-cases.md
-  - Setup:
-    - Configuração do Projeto: setup/project-setup.md
-    - Configuração da Documentação: setup/documentation-setup.md
+    - Home: index.md
+    - Resumo das Alterações: SUMMARY_OF_CHANGES.md
+    - Guia de Contribuição: CONTRIBUTING.md
+    - Código de Conduta: CODE_OF_CONDUCT.md
+    - Arquitetura:
+          - Visão Geral: architecture/overview.md
+          - Camada de Domínio: architecture/domain-layer.md
+          - Camada de Aplicação (Casos de Uso): architecture/application-layer.md
+          - Camada de Infraestrutura: architecture/infrastructure-layer.md
+          - Camada de Apresentação (API DRF): architecture/presentation-layer.md
+          - Configuração de URLs: architecture/url-configuration.md
+    - Desenvolvimento:
+          - Como Testar: development/testing.md
+          - Guia de Integração Frontend: development/frontend-integration.md
+          - Casos de Uso CRUD Genéricos: development/generic-crud-use-cases.md
+    - Setup:
+          - Configuração do Projeto: setup/project-setup.md
+          - Configuração da Documentação: setup/documentation-setup.md

@@ -1,8 +1,12 @@
-# Template para Projetos em Django
+# Template para Projetos em Django - Arquitetura Limpa
 
 **Can't read portuguese? Read this README in [english](README-en.md)**
 
-Este repositório serve como um template para iniciar projetos em Python (versão 3.12) com o framework Django (versão 5.0).
+Este repositório serve como um template robusto para iniciar projetos em Python (versão 3.12) com o framework Django (versão 5.0), seguindo rigorosamente os princípios da Arquitetura Limpa.
+
+## Documentação Completa
+
+Para uma visão aprofundada da arquitetura, configuração, desenvolvimento e guias de integração, acesse a [documentação completa do projeto](https://your-username.github.io/django_base/) gerada com MkDocs.
 
 ## Sobre o Projeto
 
@@ -10,36 +14,11 @@ Este projeto em Django está Dockerizado e segue os princípios da arquitetura l
 
 ## Como Usar
 
-Siga estes passos para executar o projeto:
-
-1. **Clonar o Repositório:**
-
-        git clone git@github.com:luderibeiro/django_base.git
-
-2. **Configurar o Ambiente:**
-
-    - Crie um arquivo `.env` na raiz do projeto e adicione as configurações necessárias, como chaves de API, configurações de banco de dados, etc.
-
-3. **Executar o Docker Compose:**
-
-        docker-compose up --build
-
-    `obs.: a tag --build deve ser executada somente a primeira vez que o projeto for instalado ou quando houverem alterações nos arquivos de build.`
-
-4. **Acessar a Aplicação:**
-    A aplicação estará disponível em `http://localhost:8000`.
-
-    Caso queira acessar a pagina admin basta acessar `http://localhost:8000/admin/`
+Para instruções detalhadas sobre como configurar e executar o projeto localmente (com ou sem Docker), consulte a seção de [Configuração do Projeto na documentação](https://your-username.github.io/django_base/setup/project-setup/).
 
 ## Contribuição
 
-Sinta-se à vontade para contribuir com melhorias ou novas funcionalidades. Basta seguir estes passos:
-
-1. Faça um fork do repositório.
-2. Crie um branch para a sua contribuição: `git checkout -b feature/nova-feature`.
-3. Faça suas alterações e faça commit: `git commit -m 'Adiciona nova feature'`.
-4. Faça push para o branch: `git push origin feature/nova-feature`.
-5. Abra um pull request.
+Quer contribuir? Seu apoio é muito bem-vindo! Para saber como, por favor, consulte nosso [Guia de Contribuição](https://github.com/your-username/django_base/blob/main/CONTRIBUTING.md) detalhado na documentação.
 
 ## Licença
 
