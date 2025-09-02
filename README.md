@@ -2,7 +2,7 @@
 
 **Can't read portuguese? Read this README in [english](README-en.md)**
 
-Este repositório serve como um template robusto para iniciar projetos em Python (versão 3.12) com o framework Django (versão 5.0), seguindo rigorosamente os princípios da Arquitetura Limpa.
+Este repositório serve como um template robusto para iniciar projetos em Python (versão 3.12) com o framework Django (versão 5.2+), seguindo rigorosamente os princípios da Arquitetura Limpa.
 
 ## Documentação Completa
 
