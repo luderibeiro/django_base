@@ -25,10 +25,7 @@ class DjangoUserRepository(UserRepository):
             email=user.email,
             first_name=user.first_name,
             last_name=user.last_name,
-            is_active=user.is_active,
-            is_staff=user.is_staff,
-            is_superuser=user.is_superuser,
-        )
+        ) # is_active, is_staff, is_superuser são tratados pelo UserManager
         return self._to_domain_user(django_user)
 
     def update(self, user: DomainUser) -> DomainUser:
@@ -36,9 +33,8 @@ class DjangoUserRepository(UserRepository):
         django_user.email = user.email
         django_user.first_name = user.first_name
         django_user.last_name = user.last_name
-        django_user.is_active = user.is_active
-        django_user.is_staff = user.is_staff
-        django_user.is_superuser = user.is_superuser
+        # is_active, is_staff, is_superuser não são mais atributos diretos aqui
+        # As permissões são gerenciadas pelo PermissionsMixin
         django_user.save()
         return self._to_domain_user(django_user)
 
@@ -51,13 +47,12 @@ class DjangoUserRepository(UserRepository):
             email=django_user.email,
             first_name=django_user.first_name,
             last_name=django_user.last_name,
-            is_active=django_user.is_active,
-            is_staff=django_user.is_staff,
-            is_superuser=django_user.is_superuser,
+            is_active=django_user.is_active, # AbstractBaseUser tem is_active por padrão
+            is_staff=django_user.is_staff, # PermissionsMixin tem is_staff
+            is_superuser=django_user.is_superuser, # PermissionsMixin tem is_superuser
         )
 
     def get_all(self) -> List[DomainUser]:
-        django_users = DjangoUser.objects.filter(
-            is_superuser=False
-        )  # Excluir superusuários por padrão
+        # A propriedade is_superuser é acessada diretamente via PermissionsMixin
+        django_users = DjangoUser.objects.exclude(is_superuser=True) # Excluir superusuários por padrão
         return [self._to_domain_user(user) for user in django_users]

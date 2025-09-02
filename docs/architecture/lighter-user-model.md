@@ -10,30 +10,95 @@ Originalmente, o modelo `User` do Django herda de `AbstractUser`, o que traz con
 
 ### a. Modelo `User` do Django (`project/core/models/user.py`)
 
-O modelo `User` será simplificado. Em vez de herdar diretamente de `AbstractUser`, ele pode herdar de `AbstractBaseUser` (se a necessidade de personalização for alta) ou até mesmo ser um modelo simples, delegando a gestão de permissões e outras características do `AbstractUser` para a camada de Infraestrutura, onde o mapeamento para a entidade de Domínio ocorre.
+O modelo `User` foi simplificado para herdar de `AbstractBaseUser` e `PermissionsMixin`. O campo `username` foi removido, e o `USERNAME_FIELD` foi definido como `email`. Isso o torna mais flexível e menos acoplado às suposições padrão do `AbstractUser`.
 
-(Detalhes das alterações no arquivo `project/core/models/user.py` serão adicionados aqui)
+```python
+from typing import ClassVar
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db import models
+
+# ... (UserManager inalterado ou com ajustes internos para AbstractBaseUser)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS: ClassVar[list[str]] = ["first_name", "last_name"]
+
+    objects: ClassVar[UserManager] = UserManager()
+
+    def __str__(self):
+        return self.email
+```
 
 ### b. Entidade de Domínio `User` (`project/core/domain/entities/user.py`)
 
-Esta entidade já foi criada para ser agnóstica a frameworks. A refatoração garantirá que ela contenha apenas os atributos e métodos de negócio essenciais, sem qualquer dependência do Django.
-
-(Revisão e confirmação de que esta entidade permanece puramente de domínio será adicionada aqui)
+Esta entidade já foi criada para ser agnóstica a frameworks e não exigiu alterações. Ela contém apenas os atributos e métodos de negócio essenciais, sem qualquer dependência do Django.
 
 ### c. Repositório de Usuário (`project/core/repositories/user_repository_impl.py`)
 
-O `DjangoUserRepository` será a principal ponte entre a entidade de Domínio `User` e o modelo de persistência do Django. Ele será responsável por:
+O `DjangoUserRepository` foi atualizado para lidar com as mudanças no modelo Django `User` e para garantir que o mapeamento entre a entidade de Domínio `User` e o modelo de persistência do Django ocorra corretamente.
 
-- Converter a entidade de Domínio `User` para o modelo Django antes de salvar.
-- Converter o modelo Django para a entidade de Domínio `User` após a leitura do banco de dados.
-- Gerenciar as operações de persistência usando o ORM do Django, sem expor esses detalhes às camadas superiores.
+**Principais alterações:**
+- No método `create`, a passagem de `is_active`, `is_staff` e `is_superuser` para `DjangoUser.objects.create_user` foi removida, pois esses campos agora são tratados internamente pelo `UserManager` ao herdar de `AbstractBaseUser`.
+- No método `update`, a atualização direta dos campos `is_active`, `is_staff` e `is_superuser` foi removida do modelo Django, pois eles são gerenciados pelo `PermissionsMixin`.
+- No método `_to_domain_user`, o acesso aos campos `is_active`, `is_staff` e `is_superuser` foi ajustado para refletir a nova estrutura do modelo Django (`AbstractBaseUser` e `PermissionsMixin`).
+- No método `get_all`, a filtragem de `is_superuser=False` foi alterada para `exclude(is_superuser=True)`, que é a forma apropriada de filtrar superusuários com o `PermissionsMixin`.
 
-(Detalhes das alterações no arquivo `project/core/repositories/user_repository_impl.py` serão adicionados aqui)
+```python
+from typing import List, Optional
+from core.domain.data_access import UserRepository
+from core.domain.entities.user import User as DomainUser
+from core.models.user import User as DjangoUser
+
+class DjangoUserRepository(UserRepository):
+    # ... (outros métodos inalterados)
+
+    def create(self, user: DomainUser) -> DomainUser:
+        django_user = DjangoUser.objects.create_user(
+            email=user.email,
+            first_name=user.first_name,
+            last_name=user.last_name,
+        ) # is_active, is_staff, is_superuser são tratados pelo UserManager
+        return self._to_domain_user(django_user)
+
+    def update(self, user: DomainUser) -> DomainUser:
+        django_user = DjangoUser.objects.get(id=user.id)
+        django_user.email = user.email
+        django_user.first_name = user.first_name
+        django_user.last_name = user.last_name
+        # is_active, is_staff, is_superuser não são mais atributos diretos aqui
+        # As permissões são gerenciadas pelo PermissionsMixin
+        django_user.save()
+        return self._to_domain_user(django_user)
+
+    # ... (delete method inalterado)
+
+    def _to_domain_user(self, django_user: DjangoUser) -> DomainUser:
+        return DomainUser(
+            id=str(django_user.id),
+            email=django_user.email,
+            first_name=django_user.first_name,
+            last_name=django_user.last_name,
+            is_active=django_user.is_active, # AbstractBaseUser tem is_active por padrão
+            is_staff=django_user.is_staff, # PermissionsMixin tem is_staff
+            is_superuser=django_user.is_superuser, # PermissionsMixin tem is_superuser
+        )
+
+    def get_all(self) -> List[DomainUser]:
+        # A propriedade is_superuser é acessada diretamente via PermissionsMixin
+        django_users = DjangoUser.objects.exclude(is_superuser=True) # Excluir superusuários por padrão
+        return [self._to_domain_user(user) for user in django_users]
+```
 
 ### d. Impacto em Casos de Uso, Serializers e Views
 
-Idealmente, os Casos de Uso, Serializers e Views não deveriam ser afetados por esta mudança, pois eles já interagem com a entidade de Domínio `User` e seus DTOs, e não diretamente com o modelo Django. Qualquer ajuste necessário será documentado.
+Não houve impacto direto nas camadas de Aplicação (Casos de Uso) e Apresentação (Serializers e Views), pois elas já interagem com a entidade de Domínio `User` e seus DTOs, e não diretamente com o modelo Django. Isso demonstra o sucesso do desacoplamento da Arquitetura Limpa.
 
-## 3. Passos da Implementação
+## 3. Passos da Implementação (Concluídos)
 
-(Os passos técnicos detalhados serão adicionados aqui à medida que a refatoração for implementada.)
+1.  **Modelo `User` do Django refatorado**: `project/core/models/user.py` foi modificado para herdar de `AbstractBaseUser` e `PermissionsMixin`, removendo o campo `username` e ajustando os campos de identificação.
+2.  **Repositório de Usuário atualizado**: `project/core/repositories/user_repository_impl.py` foi ajustado para lidar com as mudanças no modelo Django, garantindo o mapeamento correto e a interação com as propriedades de permissão.
+3.  **Verificação de Serializers e Views**: Confirmado que `project/core/api/v1/serializers/user.py` e `project/core/api/v1/views/user.py` não precisaram de alterações diretas, pois já estavam desacoplados do modelo Django.

@@ -1,5 +1,5 @@
 from typing import ClassVar
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
 
@@ -81,18 +81,14 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-class User(AbstractUser):
-    """A custom user model that extends `AbstractUser`.
+class User(AbstractBaseUser, PermissionsMixin):
+    """A custom user model that extends `AbstractBaseUser` and `PermissionsMixin`.
 
     Attributes:
     ----------
         email (str): The unique email address of the user.
-        username (str): The unique username of the user.
         first_name (str): The first name of the user.
         last_name (str): The last name of the user.
-        is_active (bool): Indicates if the user is active.
-        is_staff (bool): Indicates if the user is a staff member.
-        is_superuser (bool): Indicates if the user is a superuser.
 
     Attributes:
     ----------
@@ -104,16 +100,13 @@ class User(AbstractUser):
     """
 
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=150)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS: ClassVar[list[str]] = ["first_name", "last_name"]
+
+    objects: ClassVar[UserManager] = UserManager()
 
     def __str__(self):
         return self.email
-
-    @property
-    def is_admin(self):
-        return self.is_superuser
