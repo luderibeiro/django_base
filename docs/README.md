@@ -14,5 +14,6 @@ Este diretório contém a documentação completa do projeto, que foi refatorado
 -   [Como Testar](#development/testing)
 -   [Guia de Integração Frontend](#development/frontend-integration)
 -   [Casos de Uso CRUD Genéricos](#development/generic-crud-use-cases)
+-   [Resumo das Alterações](#SUMMARY_OF_CHANGES)
 
 Navegue pelas pastas para encontrar os detalhes específicos de cada seção.
