@@ -1,46 +1,66 @@
+import logging
 from typing import List, Optional
-from django.db.models import Q
 
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
 from core.models.user import User as DjangoUser
+from django.db.models import Q
+
+logger = logging.getLogger(__name__)
 
 
 class DjangoUserRepository(UserRepository):
     def get_by_id(self, user_id: str) -> Optional[DomainUser]:
         try:
             user = DjangoUser.objects.get(id=user_id)
+            logger.debug("User found by ID: %s", user_id)
             return self._to_domain_user(user)
         except DjangoUser.DoesNotExist:
+            logger.warning("User not found by ID: %s", user_id)
             return None
 
     def get_user_by_email(self, email: str) -> Optional[DomainUser]:
         try:
             user = DjangoUser.objects.get(email=email)
+            logger.debug("User found by email: %s", email)
             return self._to_domain_user(user)
         except DjangoUser.DoesNotExist:
+            logger.warning("User not found by email: %s", email)
             return None
 
     def create(self, user: DomainUser) -> DomainUser:
+        logger.info("Attempting to create user with email: %s", user.email)
         django_user = DjangoUser.objects.create_user(
             email=user.email,
             first_name=user.first_name,
             last_name=user.last_name,
         )  # is_active, is_staff, is_superuser são tratados pelo UserManager
+        logger.info("User created successfully with ID: %s", django_user.id)
         return self._to_domain_user(django_user)
 
     def update(self, user: DomainUser) -> DomainUser:
-        django_user = DjangoUser.objects.get(id=user.id)
-        django_user.email = user.email
-        django_user.first_name = user.first_name
-        django_user.last_name = user.last_name
-        # is_active, is_staff, is_superuser não são mais atributos diretos aqui
-        # As permissões são gerenciadas pelo PermissionsMixin
-        django_user.save()
-        return self._to_domain_user(django_user)
+        logger.info("Attempting to update user with ID: %s", user.id)
+        try:
+            django_user = DjangoUser.objects.get(id=user.id)
+            django_user.email = user.email
+            django_user.first_name = user.first_name
+            django_user.last_name = user.last_name
+            # is_active, is_staff, is_superuser não são mais atributos diretos aqui
+            # As permissões são gerenciadas pelo PermissionsMixin
+            django_user.save()
+            logger.info("User updated successfully with ID: %s", django_user.id)
+            return self._to_domain_user(django_user)
+        except DjangoUser.DoesNotExist:
+            logger.warning("Update failed: User not found with ID: %s", user.id)
+            raise ValueError("User not found for update")
 
     def delete(self, user_id: str) -> None:
-        DjangoUser.objects.filter(id=user_id).delete()
+        logger.info("Attempting to delete user with ID: %s", user_id)
+        deleted_count, _ = DjangoUser.objects.filter(id=user_id).delete()
+        if deleted_count == 0:
+            logger.warning("Delete failed: User not found with ID: %s", user_id)
+            raise ValueError("User not found for deletion")
+        logger.info("User deleted successfully with ID: %s", user_id)
 
     def _to_domain_user(self, django_user: DjangoUser) -> DomainUser:
         return DomainUser(

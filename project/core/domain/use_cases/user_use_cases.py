@@ -1,3 +1,4 @@
+import logging
 from dataclasses import dataclass
 
 from core.domain.data_access import UserRepository
@@ -13,6 +14,9 @@ from core.domain.use_cases.generic_use_cases import (
     GetEntityByIdUseCase,
     ListEntitiesUseCase,
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -92,11 +96,18 @@ class LoginUserUseCase:
         self.auth_gateway = auth_gateway
 
     def execute(self, request: LoginUserRequest) -> LoginUserResponse:
+        logger.info("Attempting to log in user with email: %s", request.email)
         user = self.user_repository.get_user_by_email(request.email)
-        if not user or not self.auth_gateway.check_password(user.id, request.password):
+        if not user:
+            logger.warning("Login failed: User not found for email %s", request.email)
+            raise ValueError("Invalid credentials")
+
+        if not self.auth_gateway.check_password(user.id, request.password):
+            logger.warning("Login failed: Invalid password for user ID %s", user.id)
             raise ValueError("Invalid credentials")
 
         access_token, refresh_token = self.auth_gateway.create_tokens(user.id)
+        logger.info("User %s logged in successfully. User ID: %s", request.email, user.id)
 
         return LoginUserResponse(
             id=user.id,
@@ -158,9 +169,16 @@ class ListUsersUseCase:
         # pois precisamos de uma lógica de paginação/filtragem mais específica.
 
     def execute(self, request: ListUsersRequest) -> ListUsersResponse:
-        users_domain, total_items = self.user_repository.get_all_paginated_filtered(
-            offset=request.offset, limit=request.limit, search_query=request.search_query
+        logger.info(
+            "Listing users with offset: %s, limit: %s, search_query: %s",
+            request.offset, request.limit, request.search_query
         )
+        users_domain, total_items = self.user_repository.get_all_paginated_filtered(
+            offset=request.offset,
+            limit=request.limit,
+            search_query=request.search_query,
+        )
+        logger.debug("Found %s users in total, returning %s users.", total_items, len(users_domain))
 
         users_response = [
             CreateUserResponse(
