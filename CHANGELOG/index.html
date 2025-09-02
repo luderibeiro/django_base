@@ -488,13 +488,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#120-2024-07-30" class="md-nav__link">
+  <a href="#200-2024-07-30" class="md-nav__link">
     <span class="md-ellipsis">
-      [1.2.0] - 2024-07-30
+      [2.0.0] - 2024-07-30
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[1.2.0] - 2024-07-30">
+    <nav class="md-nav" aria-label="[2.0.0] - 2024-07-30">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1019,6 +1019,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/logging-error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logs e Tratamento de Exceções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1148,10 +1171,22 @@
 <p>O formato é baseado em <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <h2 id="unreleased">[Unreleased]<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
-<h2 id="120-2024-07-30">[1.2.0] - 2024-07-30<a class="headerlink" href="#120-2024-07-30" title="Permanent link">&para;</a></h2>
+<h2 id="200-2024-07-30">[2.0.0] - 2024-07-30<a class="headerlink" href="#200-2024-07-30" title="Permanent link">&para;</a></h2>
 <h3 id="adicionado">Adicionado<a class="headerlink" href="#adicionado" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Testes Automatizados</strong>: Implementação de uma suíte abrangente de testes unitários para as camadas de Domínio e Aplicação, e testes de integração para a API (autenticação e gerenciamento de usuários).<ul>
+<li>
+<p><strong>Configuração de Logs e Tratamento Global de Exceções</strong>: Implementação de uma estratégia robusta de <em>logging</em> com múltiplos <em>handlers</em> (console, arquivo de log, arquivo de erros), formatadores padronizados e <em>loggers</em> específicos. Criação de um <em>middleware</em> customizado para tratamento global de exceções no Django REST Framework, que captura, registra e padroniza respostas de erro da API. Logs foram adicionados a casos de uso (<code>LoginUserUseCase</code>, <code>ListUsersUseCase</code>) e repositórios (<code>DjangoUserRepository</code>) para maior observabilidade.</p>
+<ul>
+<li><code>project/project/settings.py</code>: Configuração de <code>LOGGING</code> e integração do <em>middleware</em> no <code>REST_FRAMEWORK</code>.</li>
+<li><code>project/core/middleware/custom_exception_middleware.py</code>: Novo arquivo com o <em>handler</em> de exceções customizado.</li>
+<li><code>project/core/domain/use_cases/user_use_cases.py</code>: Adição de logs.</li>
+<li><code>project/core/repositories/user_repository_impl.py</code>: Adição de logs e tratamento de exceções específicas.</li>
+<li>Documentação detalhada em <code>docs/development/logging-error-handling.md</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Testes Automatizados</strong>: Implementação de uma suíte abrangente de testes unitários para as camadas de Domínio e Aplicação, e testes de integração para a API (autenticação e gerenciamento de usuários).</p>
+<ul>
 <li><code>project/core/tests/unit/test_user_entity.py</code></li>
 <li><code>project/core/tests/unit/test_user_use_cases.py</code></li>
 <li><code>project/core/tests/unit/test_generic_use_cases.py</code></li>
@@ -1161,12 +1196,22 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <li>Documentação detalhada em <code>docs/development/automated-testing.md</code>.</li>
 </ul>
 </li>
+<li><strong>Paginação e Filtragem</strong>: Adicionadas capacidades de paginação (<code>offset</code>, <code>limit</code>) e filtragem (<code>search_query</code>) para a API de listagem de usuários. Isso envolveu modificações nos DTOs, interface de repositório, implementação do repositório (<code>DjangoUserRepository</code> usando <code>Q</code> objects), <em>serializers</em> e <em>views</em> do DRF, e testes de integração abrangentes.<ul>
+<li><code>project/core/domain/use_cases/user_use_cases.py</code>: DTOs <code>ListUsersRequest</code>, <code>ListUsersResponse</code> e <code>ListUsersUseCase</code> atualizados.</li>
+<li><code>project/core/domain/data_access.py</code>: Interface <code>UserRepository</code> com <code>get_all_paginated_filtered</code>.</li>
+<li><code>project/core/repositories/user_repository_impl.py</code>: Implementação de <code>get_all_paginated_filtered</code>.</li>
+<li><code>project/core/api/v1/serializers/user.py</code>: <code>ListUsersRequestSerializer</code> e <code>UserListResponseSerializer</code>.</li>
+<li><code>project/core/api/v1/views/user.py</code>: <code>UserListAPIView</code> atualizada.</li>
+<li><code>project/core/tests/integration/test_user_api.py</code>: Novos testes de paginação e filtragem.</li>
+<li>Documentação detalhada em <code>docs/development/pagination-filtering.md</code>.</li>
+</ul>
+</li>
 <li><strong>Estrutura de Changelog</strong>: Criação deste arquivo <code>CHANGELOG.md</code> para rastrear todas as alterações do projeto, substituindo o antigo <code>SUMMARY_OF_CHANGES.md</code>.</li>
 </ul>
 <h3 id="alterado">Alterado<a class="headerlink" href="#alterado" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Links de Documentação</strong>: Corrigidos links absolutos e relativos no <code>README.md</code> da raiz e no <code>docs/CONTRIBUTING.md</code> para garantir o funcionamento correto no GitHub Pages.</li>
-<li><strong>Navegação do MkDocs</strong>: Atualização do <code>mkdocs.yml</code> para incluir a nova entrada <code>Changelog</code>.</li>
+<li><strong>Navegação do MkDocs</strong>: Atualização do <code>mkdocs.yml</code> para incluir novas entradas de documentação (Testes Automatizados, Paginação e Filtragem, Logs e Tratamento de Exceções) e a nova entrada <code>Changelog</code>.</li>
 </ul>
 <h3 id="refatorado">Refatorado<a class="headerlink" href="#refatorado" title="Permanent link">&para;</a></h3>
 <ul>
