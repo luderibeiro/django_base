@@ -1,16 +1,20 @@
+import uuid
 from unittest.mock import Mock
 
 import pytest
-
 from core.domain.data_access import GenericRepository
-from core.domain.entities.user import User as DomainUser
+from core.domain.entities.user import (
+    User as DomainUser,  # Usar DomainUser como entidade de exemplo
+)
 from core.domain.use_cases.generic_use_cases import (
     CreateEntityUseCase,
     DeleteEntityUseCase,
     GenericCreateRequest,
     GenericDeleteRequest,
     GenericListRequest,
+    GenericListResponse,
     GenericReadResponse,
+    GenericSuccessResponse,
     GenericUpdateRequest,
     GetEntityByIdUseCase,
     ListEntitiesUseCase,
@@ -18,130 +22,161 @@ from core.domain.use_cases.generic_use_cases import (
 )
 
 
+# Fixture para um repositório genérico mock
 @pytest.fixture
 def mock_generic_repository():
     return Mock(spec=GenericRepository)
 
 
-@pytest.fixture
-def sample_user():
-    return DomainUser(
-        id="1",
-        email="test@example.com",
-        first_name="Test",
-        last_name="User",
-        is_active=True,
-        is_staff=False,
-        is_superuser=False,
+# Testes para CreateEntityUseCase
+def test_create_entity_use_case_success(mock_generic_repository):
+    entity_id = str(uuid.uuid4())
+    domain_user = DomainUser(
+        id=entity_id, email="test@example.com", first_name="Test", last_name="User"
     )
+    mock_generic_repository.create.return_value = domain_user
 
-
-def test_create_entity_use_case_success(mock_generic_repository, sample_user):
-    # Given
-    mock_generic_repository.create.return_value = sample_user
     use_case = CreateEntityUseCase(repository=mock_generic_repository)
-    request = GenericCreateRequest(data=sample_user)
-
-    # When
+    request = GenericCreateRequest(data=domain_user)
     response = use_case.execute(request)
 
-    # Then
-    mock_generic_repository.create.assert_called_once_with(sample_user)
-    assert response.data == sample_user
+    mock_generic_repository.create.assert_called_once_with(domain_user)
+    assert response == GenericReadResponse(data=domain_user)
 
 
-def test_list_entities_use_case_success(mock_generic_repository, sample_user):
-    # Given
-    mock_generic_repository.get_all.return_value = [sample_user]
+# Testes para ListEntitiesUseCase
+def test_list_entities_use_case_success(mock_generic_repository):
+    domain_users = [
+        DomainUser(
+            id=str(uuid.uuid4()),
+            email="user1@example.com",
+            first_name="User1",
+            last_name="Last1",
+        ),
+        DomainUser(
+            id=str(uuid.uuid4()),
+            email="user2@example.com",
+            first_name="User2",
+            last_name="Last2",
+        ),
+    ]
+    mock_generic_repository.get_all.return_value = domain_users
+
     use_case = ListEntitiesUseCase(repository=mock_generic_repository)
     request = GenericListRequest()
-
-    # When
     response = use_case.execute(request)
 
-    # Then
     mock_generic_repository.get_all.assert_called_once()
-    assert len(response.items) == 1
-    assert response.items[0] == sample_user
+    assert response == GenericListResponse(items=domain_users)
 
 
-def test_get_entity_by_id_use_case_success(mock_generic_repository, sample_user):
-    # Given
-    mock_generic_repository.get_by_id.return_value = sample_user
-    use_case = GetEntityByIdUseCase(repository=mock_generic_repository)
-    request = GenericDeleteRequest(id=sample_user.id)
+def test_list_entities_use_case_empty(mock_generic_repository):
+    mock_generic_repository.get_all.return_value = []
 
-    # When
+    use_case = ListEntitiesUseCase(repository=mock_generic_repository)
+    request = GenericListRequest()
     response = use_case.execute(request)
 
-    # Then
-    mock_generic_repository.get_by_id.assert_called_once_with(sample_user.id)
-    assert response.data == sample_user
+    mock_generic_repository.get_all.assert_called_once()
+    assert response == GenericListResponse(items=[])
+
+
+# Testes para GetEntityByIdUseCase
+def test_get_entity_by_id_use_case_success(mock_generic_repository):
+    entity_id = str(uuid.uuid4())
+    domain_user = DomainUser(
+        id=entity_id, email="test@example.com", first_name="Test", last_name="User"
+    )
+    mock_generic_repository.get_by_id.return_value = domain_user
+
+    use_case = GetEntityByIdUseCase(repository=mock_generic_repository)
+    request = GenericDeleteRequest(
+        id=entity_id
+    )  # Usando GenericDeleteRequest como um request para ID
+    response = use_case.execute(request)
+
+    mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
+    assert response == GenericReadResponse(data=domain_user)
 
 
 def test_get_entity_by_id_use_case_not_found(mock_generic_repository):
-    # Given
+    entity_id = str(uuid.uuid4())
     mock_generic_repository.get_by_id.return_value = None
-    use_case = GetEntityByIdUseCase(repository=mock_generic_repository)
-    request = GenericDeleteRequest(id="non-existent-id")
 
-    # When / Then
+    use_case = GetEntityByIdUseCase(repository=mock_generic_repository)
+    request = GenericDeleteRequest(id=entity_id)
+
     with pytest.raises(ValueError, match="Entity not found"):
         use_case.execute(request)
 
-    mock_generic_repository.get_by_id.assert_called_once_with("non-existent-id")
+    mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
 
 
-def test_update_entity_use_case_success(mock_generic_repository, sample_user):
-    # Given
-    updated_user_data = DomainUser(
-        id=sample_user.id,
-        email="updated@example.com",
-        first_name="Updated",
-        last_name="User",
-        is_active=True,
-        is_staff=False,
-        is_superuser=False,
+# Testes para UpdateEntityUseCase
+def test_update_entity_use_case_success(mock_generic_repository):
+    entity_id = str(uuid.uuid4())
+    existing_user = DomainUser(
+        id=entity_id, email="old@example.com", first_name="Old", last_name="User"
     )
-    mock_generic_repository.get_by_id.return_value = sample_user
+    updated_user_data = DomainUser(
+        id=entity_id, email="new@example.com", first_name="New", last_name="User"
+    )
+
+    mock_generic_repository.get_by_id.return_value = existing_user
     mock_generic_repository.update.return_value = updated_user_data
 
     use_case = UpdateEntityUseCase(repository=mock_generic_repository)
-    request = GenericUpdateRequest(id=sample_user.id, data=updated_user_data)
-
-    # When
+    request = GenericUpdateRequest(id=entity_id, data=updated_user_data)
     response = use_case.execute(request)
 
-    # Then
-    mock_generic_repository.get_by_id.assert_called_once_with(sample_user.id)
+    mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
     mock_generic_repository.update.assert_called_once_with(updated_user_data)
-    assert response.data == updated_user_data
+    assert response == GenericReadResponse(data=updated_user_data)
 
 
-def test_update_entity_use_case_not_found(mock_generic_repository, sample_user):
-    # Given
+def test_update_entity_use_case_not_found(mock_generic_repository):
+    entity_id = str(uuid.uuid4())
+    updated_user_data = DomainUser(
+        id=entity_id, email="new@example.com", first_name="New", last_name="User"
+    )
+
     mock_generic_repository.get_by_id.return_value = None
-    use_case = UpdateEntityUseCase(repository=mock_generic_repository)
-    request = GenericUpdateRequest(id="non-existent-id", data=sample_user)
 
-    # When / Then
+    use_case = UpdateEntityUseCase(repository=mock_generic_repository)
+    request = GenericUpdateRequest(id=entity_id, data=updated_user_data)
+
     with pytest.raises(ValueError, match="Entity not found"):
         use_case.execute(request)
 
-    mock_generic_repository.get_by_id.assert_called_once_with("non-existent-id")
+    mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
     mock_generic_repository.update.assert_not_called()
 
 
-def test_delete_entity_use_case_success(mock_generic_repository, sample_user):
-    # Given
-    mock_generic_repository.get_by_id.return_value = sample_user
-    mock_generic_repository.delete.return_value = None
-    use_case = DeleteEntityUseCase(repository=mock_generic_repository)
-    request = GenericDeleteRequest(id=sample_user.id)
+# Testes para DeleteEntityUseCase
+def test_delete_entity_use_case_success(mock_generic_repository):
+    entity_id = str(uuid.uuid4())
+    mock_generic_repository.delete.return_value = (
+        None  # delete não precisa retornar valor
+    )
 
-    # When
+    use_case = DeleteEntityUseCase(repository=mock_generic_repository)
+    request = GenericDeleteRequest(id=entity_id)
     response = use_case.execute(request)
 
-    # Then
-    mock_generic_repository.delete.assert_called_once_with(sample_user.id)
-    assert response.success is True
+    mock_generic_repository.delete.assert_called_once_with(entity_id)
+    assert response == GenericSuccessResponse(success=True)
+
+
+def test_delete_entity_use_case_not_found(mock_generic_repository):
+    entity_id = str(uuid.uuid4())
+    mock_generic_repository.delete.side_effect = ValueError(
+        "Entity not found"
+    )  # Simula a exceção do repositório
+
+    use_case = DeleteEntityUseCase(repository=mock_generic_repository)
+    request = GenericDeleteRequest(id=entity_id)
+
+    with pytest.raises(ValueError, match="Entity not found"):
+        use_case.execute(request)
+
+    mock_generic_repository.delete.assert_called_once_with(entity_id)
