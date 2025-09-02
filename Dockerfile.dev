@@ -1,0 +1,56 @@
+FROM python:3.12
+LABEL mantainer="@luderibeiro"
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+# Instalação de dependências de sistema para psycopg e outras ferramentas
+# Para desenvolvimento, podemos simplificar e instalar o essencial.
+RUN apt update -y && \
+    apt install -y --no-install-recommends \
+    build-essential \
+    libc6-dev \
+    postgresql-client \
+    freetds-dev \
+    freetds-bin \
+    unixodbc-dev \
+    tdsodbc \
+    # Limpeza do cache APT para reduzir o tamanho da imagem de build
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Configuração FreeTDS ODBC (se necessário para dev)
+RUN echo " \n\
+[FreeTDS] \n\
+Description=TDS driver (Sybase/MS SQL) \n\
+Driver=libtdsodbc.so \n\
+Setup=libtdsS.so \n\
+CPTimeout= \n\
+CPReuse= \n\
+UsageCount=1 \n\
+" >> /etc/odbcinst.ini
+
+# Copiar requirements.txt e instalar dependências Python
+COPY project/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o código do projeto e scripts
+COPY project/ /app/project
+COPY scripts/ /app/scripts
+
+# Definir PATH para scripts
+ENV PATH="/app/scripts:/usr/local/bin:$PATH"
+
+EXPOSE 8000
+
+# Não criamos um usuário appuser aqui, pois em desenvolvimento o volume do código é montado
+# e a execução é muitas vezes feita como root para evitar problemas de permissão.
+# Ou, se preferir, pode-se adicionar o usuário appuser e usar USER appuser aqui também.
+# Para simplificar em dev, vou manter como root por enquanto, se o usuário precisar mudar,
+# podemos adaptar, mas para hot-reload e volumes, root é mais comum para evitar atritos iniciais.
+# USER appuser
+
+# ENTRYPOINT é definido no docker-compose para desenvolvimento
+CMD [ "python", "/app/project/manage.py", "runserver", "0.0.0.0:8000" ]

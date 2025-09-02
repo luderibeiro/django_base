@@ -1,30 +1,36 @@
-FROM python:3.12
+FROM python:3.12-slim-bookworm AS builder
 LABEL mantainer="@luderibeiro"
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY project/ /project
-COPY scripts/ /scripts
+WORKDIR /app
 
-WORKDIR /project
-
-EXPOSE 8000
-
-RUN apt update -y
-RUN apt install -y wget \
+# Instalação de dependências de sistema para psycopg e outras ferramentas
+RUN apt update -y && \
+    apt install -y --no-install-recommends \
+    wget \
     build-essential \
-    libc6-dev
+    libc6-dev \
+    postgresql-client \
+    freetds-dev \
+    freetds-bin \
+    unixodbc-dev \
+    tdsodbc \
+    python3-gdal \
+    # Limpeza do cache APT para reduzir o tamanho da imagem
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Instalação wkhtmltopdf (se necessário para a imagem final)
+# Se wkhtmltopdf for usado apenas durante o build ou em um serviço separado, isso pode ser movido.
+# Mantendo aqui por enquanto, assumindo que é necessário no runtime.
 RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
     tar xvJf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
-    cp wkhtmltox/bin/wkhtmlto* /usr/bin/
-RUN wget ftp://ftp.freetds.org/pub/freetds/stable/freetds-1.1.20.tar.gz -T 360 && \
-    tar -xvf freetds-1.1.20.tar.gz && \
-    cd freetds-1.1.20/ && \
-    ./configure --prefix=/usr/local --with-tdsver=7.4 && \
-    make && \
-    make install
-RUN apt-get install freetds-dev freetds-bin unixodbc-dev tdsodbc python3-gdal -y
+    cp wkhtmltox/bin/wkhtmlto* /usr/bin/ && \
+    rm wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+
+# Configuração FreeTDS ODBC
 RUN echo " \n\
 [FreeTDS] \n\
 Description=TDS driver (Sybase/MS SQL) \n\
@@ -34,22 +40,48 @@ CPTimeout= \n\
 CPReuse= \n\
 UsageCount=1 \n\
 " >> /etc/odbcinst.ini
-RUN python -m venv /venv \
-    && /venv/bin/pip install --upgrade pip \
-    && /venv/bin/pip install -r /project/requirements.txt \
-    && adduser --disabled-password --no-create-home appuser \
-    && mkdir -p /data/web/static \
-    && mkdir -p /data/web/media \
-    && chown -R appuser:appuser /venv \
-    && chown -R appuser:appuser /data/web/static \
-    && chown -R appuser:appuser /data/web/media \
-    && chmod -R 755 /data/web/static \
-    && chmod -R 755 /data/web/media \
-    && chmod -R +x /scripts \
-    && chmod +rx /scripts/run.sh
 
-ENV PATH="/scripts:/venv/bin:$PATH"
+# Copiar requirements.txt e instalar dependências Python
+COPY project/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# --- IMAGEM FINAL DE EXECUÇÃO ---
+FROM python:3.12-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+# Copiar as dependências do sistema e binários instalados na etapa de build
+# Isso é um pouco complexo devido ao wkhtmltopdf e freetds
+# Vamos copiar apenas o essencial.
+COPY --from=builder /usr/bin/wkhtmlto* /usr/bin/
+COPY --from=builder /etc/odbcinst.ini /etc/odbcinst.ini
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libtds* /usr/lib/x86_64-linux-gnu/ # Exemplo, pode precisar de mais libs
+COPY --from=builder /usr/local/lib/libtds* /usr/local/lib/ # Exemplo, pode precisar de mais libs
+
+# Copiar as dependências Python instaladas
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+
+# Criar diretórios de dados e usuário appuser
+RUN adduser --disabled-password --no-create-home appuser
+RUN mkdir -p /data/web/static && \
+    mkdir -p /data/web/media && \
+    chown -R appuser:appuser /data/web/static && \
+    chown -R appuser:appuser /data/web/media && \
+    chmod -R 755 /data/web/static && \
+    chmod -R 755 /data/web/media
+
+# Copiar o código do projeto e scripts
+COPY project/ /app/project
+COPY scripts/ /app/scripts
+
+# Definir PATH para scripts e binários python
+ENV PATH="/app/scripts:/usr/local/bin:$PATH"
+
+EXPOSE 8000
 
 USER appuser
 
-ENTRYPOINT [ "run.sh" ]
+ENTRYPOINT [ "/app/scripts/run.sh" ]

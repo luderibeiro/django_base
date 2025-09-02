@@ -1,0 +1,42 @@
+services:
+  project:
+    container_name: project_dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./project:/app/project:rw
+      - ./scripts:/app/scripts:rw
+      - ./data/web/static:/data/web/static:rw
+      - ./data/web/media:/data/web/media:rw
+    env_file:
+      - ./dotenv_files/.env
+    depends_on:
+      project_db:
+        condition: service_healthy
+    command: sh -c "/app/scripts/run.sh"
+
+  project_db:
+    container_name: project_db_dev
+    user: "postgres"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+    image: postgres:13-alpine
+    volumes:
+      - project_db_dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./dotenv_files/.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  project_db_dev:
