@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase
+from django.conf import settings
 
 User = get_user_model()
 
@@ -190,20 +191,26 @@ class UserAPITest(APITestCase):
         # Given
         headers = self.get_auth_headers(self.admin_access_token)
         # Quando: Solicitar 5 usuários com limite de 5
-        response = self.client.get(f"{self.user_list_url}?limit=5", **headers, format="json")
+        response = self.client.get(
+            f"{self.user_list_url}?limit=5", **headers, format="json"
+        )
 
         # Então
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data["items"]), 5)
         self.assertEqual(response.data["limit"], 5)
         self.assertEqual(response.data["offset"], 0)
-        self.assertGreaterEqual(response.data["total_items"], 15) # Pelo menos 14 + regular_user
+        self.assertGreaterEqual(
+            response.data["total_items"], 15
+        )  # Pelo menos 14 + regular_user
 
     def test_list_users_pagination_offset(self):
         # Given
         headers = self.get_auth_headers(self.admin_access_token)
         # Quando: Solicitar 5 usuários a partir do offset 5
-        response = self.client.get(f"{self.user_list_url}?limit=5&offset=5", **headers, format="json")
+        response = self.client.get(
+            f"{self.user_list_url}?limit=5&offset=5", **headers, format="json"
+        )
 
         # Então
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -217,7 +224,11 @@ class UserAPITest(APITestCase):
         search_email = self.test_users[0].email  # Primeiro usuário de teste
 
         # Quando: Filtrar por email
-        response = self.client.get(f"{self.user_list_url}?search_query={search_email}", **headers, format="json")
+        response = self.client.get(
+            f"{self.user_list_url}?search_query={search_email}",
+            **headers,
+            format="json",
+        )
 
         # Então
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -230,7 +241,9 @@ class UserAPITest(APITestCase):
         search_name = self.test_users[5].first_name  # Sexto usuário de teste
 
         # Quando: Filtrar por first_name
-        response = self.client.get(f"{self.user_list_url}?search_query={search_name}", **headers, format="json")
+        response = self.client.get(
+            f"{self.user_list_url}?search_query={search_name}", **headers, format="json"
+        )
 
         # Então
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -251,10 +264,31 @@ class UserAPITest(APITestCase):
         # Quando: Filtrar por um termo e paginar
         # Busca por 'User' que é comum, e 'Unique' que é específico.
         # Esperamos encontrar o 'Unique User' e possivelmente outros 'UserX'
-        response = self.client.get(f"{self.user_list_url}?search_query=Unique&limit=1", **headers, format="json")
+        response = self.client.get(
+            f"{self.user_list_url}?search_query=Unique&limit=1",
+            **headers,
+            format="json",
+        )
 
         # Então
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data["items"]), 1)
         self.assertEqual(response.data["items"][0]["email"], "unique@example.com")
-        self.assertEqual(response.data["total_items"], 1) # apenas o usuário 'Unique'
+        self.assertEqual(response.data["total_items"], 1)  # apenas o usuário 'Unique'
+
+    def test_global_exception_handler_internal_server_error(self):
+        # Given
+        headers = self.get_auth_headers(self.admin_access_token)
+        # When: Forçar um erro interno na UserListAPIView
+        response = self.client.get(
+            f"{self.user_list_url}?raise_error=true", **headers, format="json"
+        )
+
+        # Then
+        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.assertIn("detail", response.data)
+        self.assertEqual(response.data["detail"], "Ocorreu um erro inesperado.")
+        self.assertIn("status_code", response.data)
+        self.assertEqual(response.data["status_code"], 500)
+        if settings.DEBUG: # Importar settings se necessário
+            self.assertIn("traceback", response.data)

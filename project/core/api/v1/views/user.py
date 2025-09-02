@@ -13,13 +13,13 @@ from rest_framework import filters, generics, status
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
+from ..serializers.user import ListUsersRequestSerializer  # Nova importação
 from ..serializers.user import (
     UserAlterPasswordSerializer,
     UserCreateRequestSerializer,
     UserListResponseSerializer,
     UserReadSerializer,
     UserSerializer,
-    ListUsersRequestSerializer, # Nova importação
 )
 
 User = get_user_model()
@@ -44,7 +44,9 @@ class UserListAPIView(generics.ListAPIView):
     def list(self, request, *args, **kwargs):
         request_serializer = ListUsersRequestSerializer(data=request.query_params)
         request_serializer.is_valid(raise_exception=True)
-        list_users_request = request_serializer.to_internal_value(request_serializer.validated_data)
+        list_users_request = request_serializer.to_internal_value(
+            request_serializer.validated_data
+        )
 
         list_users_use_case = get_list_users_use_case()
         list_users_response = list_users_use_case.execute(list_users_request)
