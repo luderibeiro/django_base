@@ -62,6 +62,7 @@ nav:
           - Camada de Infraestrutura: architecture/infrastructure-layer.md
           - Camada de Apresentação (API DRF): architecture/presentation-layer.md
           - Configuração de URLs: architecture/url-configuration.md
+          - Modelo de Usuário Mais Leve: architecture/lighter-user-model.md
     - Desenvolvimento:
           - Como Testar: development/testing.md
           - Guia de Integração Frontend: development/frontend-integration.md
