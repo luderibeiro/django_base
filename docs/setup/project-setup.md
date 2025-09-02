@@ -64,7 +64,7 @@ Para simular o ambiente de produção localmente ou preparar para o deploy, util
     docker compose -f docker-compose.prod.yml up --build -d
     ```
 
-    Este comando construirá a imagem Docker de produção (`Dockerfile`) e iniciará os serviços em modo *detached* (`-d`). Em produção, a porta exposta será a 80.
+    Este comando construirá a imagem Docker de produção (`Dockerfile`) e iniciará os serviços em modo _detached_ (`-d`). Em produção, a porta exposta será a 80.
 
 3.  **Executar Migrações do Banco de Dados (Produção):**
 

@@ -4,21 +4,21 @@ Esta seção detalha a implementação de uma estratégia robusta de logs e um t
 
 ## 1. Contexto e Justificativa
 
-Uma boa estratégia de *logging* permite monitorar o comportamento da aplicação, identificar problemas e diagnosticar erros em tempo real. O tratamento global de exceções garante que erros inesperados sejam capturados, registrados e apresentados ao cliente de forma consistente e segura, sem expor detalhes internos sensíveis.
+Uma boa estratégia de _logging_ permite monitorar o comportamento da aplicação, identificar problemas e diagnosticar erros em tempo real. O tratamento global de exceções garante que erros inesperados sejam capturados, registrados e apresentados ao cliente de forma consistente e segura, sem expor detalhes internos sensíveis.
 
 ## 2. Visão Geral da Implementação
 
 A implementação envolverá as seguintes alterações:
 
--   **Configuração de Logs**: Definir uma configuração avançada de *logging* no `settings.py` do Django, com diferentes níveis, *handlers* (console, arquivo) e formatadores.
--   **Middleware de Tratamento de Exceções**: Criar um *middleware* personalizado para capturar e registrar exceções não tratadas na camada de apresentação (API), retornando respostas de erro padronizadas.
--   **Integração do Middleware**: Adicionar o novo *middleware* à configuração do Django.
--   **Uso de Logs**: Exemplos de como utilizar o *logger* em diferentes camadas para registrar eventos e erros específicos.
+-   **Configuração de Logs**: Definir uma configuração avançada de _logging_ no `settings.py` do Django, com diferentes níveis, _handlers_ (console, arquivo) e formatadores.
+-   **Middleware de Tratamento de Exceções**: Criar um _middleware_ personalizado para capturar e registrar exceções não tratadas na camada de apresentação (API), retornando respostas de erro padronizadas.
+-   **Integração do Middleware**: Adicionar o novo _middleware_ à configuração do Django.
+-   **Uso de Logs**: Exemplos de como utilizar o _logger_ em diferentes camadas para registrar eventos e erros específicos.
 -   **Testes de Integração**: Adicionar testes para validar o comportamento do tratamento global de exceções na API.
 
 ## 3. Configuração de Logs (`project/project/settings.py`)
 
-Configuramos o sistema de *logging* do Django para incluir múltiplos *handlers* (console, arquivo, arquivo de erros), formatadores detalhados e *loggers* específicos para as aplicações `django`, `core` e `project`. Isso permite um controle granular sobre como e onde as mensagens de log são registradas.
+Configuramos o sistema de _logging_ do Django para incluir múltiplos _handlers_ (console, arquivo, arquivo de erros), formatadores detalhados e _loggers_ específicos para as aplicações `django`, `core` e `project`. Isso permite um controle granular sobre como e onde as mensagens de log são registradas.
 
 ```python
 # project/project/settings.py
@@ -95,7 +95,7 @@ LOGGING = {
 
 ### a. `custom_exception_middleware.py` (Novo arquivo)
 
-Criamos um *handler* de exceções customizado que se integra ao Django REST Framework. Ele captura exceções, registra-as usando o sistema de *logging*, e retorna uma resposta padronizada ao cliente, incluindo detalhes do *traceback* em ambiente de `DEBUG`.
+Criamos um _handler_ de exceções customizado que se integra ao Django REST Framework. Ele captura exceções, registra-as usando o sistema de _logging_, e retorna uma resposta padronizada ao cliente, incluindo detalhes do _traceback_ em ambiente de `DEBUG`.
 
 ```python
 # project/core/middleware/custom_exception_middleware.py
@@ -142,7 +142,7 @@ def custom_exception_handler(exc, context):
 
 ## 5. Integração do Middleware (`project/project/settings.py`)
 
-Para ativar o *middleware* e o *handler* de exceções customizado, fizemos as seguintes alterações no `settings.py`:
+Para ativar o _middleware_ e o _handler_ de exceções customizado, fizemos as seguintes alterações no `settings.py`:
 
 -   Adicionamos o `CustomExceptionMiddleware` à lista `MIDDLEWARE`.
 -   Configuramos o `REST_FRAMEWORK` para usar o `custom_exception_handler`.
@@ -174,7 +174,7 @@ REST_FRAMEWORK = {
 
 ## 6. Uso de Logs em Casos de Uso e Repositórios
 
-Exemplos de como integrar o *logging* em diferentes camadas do projeto para registrar eventos importantes, *warnings* e erros.
+Exemplos de como integrar o _logging_ em diferentes camadas do projeto para registrar eventos importantes, _warnings_ e erros.
 
 ### Exemplo: `LoginUserUseCase` (`project/core/domain/use_cases/user_use_cases.py`)
 
@@ -276,7 +276,7 @@ class AuthAPITest(APITestCase):
 
 ### Exemplo: Simulação de Erro Interno Inesperado (`project/core/tests/integration/test_user_api.py`)
 
-Este teste simula um erro interno (`RuntimeError`) em um *endpoint* da API para verificar se o tratamento global de exceções o captura e retorna um `HTTP 500 Internal Server Error` com uma mensagem genérica e o *traceback* em modo `DEBUG`.
+Este teste simula um erro interno (`RuntimeError`) em um _endpoint_ da API para verificar se o tratamento global de exceções o captura e retorna um `HTTP 500 Internal Server Error` com uma mensagem genérica e o _traceback_ em modo `DEBUG`.
 
 ```python
 # project/core/tests/integration/test_user_api.py
@@ -308,7 +308,7 @@ class UserAPITest(APITestCase):
 1.  **Criação do arquivo de documentação**: Criado `docs/development/logging-error-handling.md`.
 2.  **Atualização do `mkdocs.yml`**: Adicionado o link para o novo documento na navegação.
 3.  **Configuração de Logs**: Adicionada a configuração de `LOGGING` em `project/project/settings.py`.
-4.  **Criação do Middleware**: Criado `project/core/middleware/custom_exception_middleware.py` com o *handler* de exceções.
+4.  **Criação do Middleware**: Criado `project/core/middleware/custom_exception_middleware.py` com o _handler_ de exceções.
 5.  **Integração do Middleware**: Adicionado o `CustomExceptionMiddleware` à lista `MIDDLEWARE` e configurado `REST_FRAMEWORK["EXCEPTION_HANDLER"]` em `project/project/settings.py`.
 6.  **Uso de Logs no Código**: Inseridas chamadas de `logger.info`, `logger.warning` e `logger.debug` em `project/core/domain/use_cases/user_use_cases.py` e `project/core/repositories/user_repository_impl.py`.
 7.  **Adição de Testes de Integração**: Adicionado `test_global_exception_handler_internal_server_error` em `project/core/tests/integration/test_user_api.py` para validar o comportamento do tratamento de exceções 500.

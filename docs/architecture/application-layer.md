@@ -9,3 +9,4 @@ Esta camada contém a lógica específica da aplicação (use cases ou interator
     -   `ChangeUserPasswordUseCase`: Gerencia a lógica para alterar a senha de um usuário.
     -   `ListUsersUseCase`: Gerencia a lógica para listar usuários.
     -   `GetUserByIdUseCase`: Gerencia a lógica para obter um usuário por ID.
+

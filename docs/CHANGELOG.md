@@ -7,6 +7,36 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [2.0.0] - 2024-09-03
+
+### Adicionado
+
+- **Testes de Integração Completos**: Implementação de uma suíte abrangente de testes de integração para todas as funcionalidades da API, incluindo autenticação, gerenciamento de usuários, paginação, filtragem e alteração de senhas. Todos os 48 testes estão passando com 100% de cobertura das funcionalidades principais.
+
+- **Tratamento Robusto de Exceções**: Melhoria significativa no tratamento de exceções, incluindo captura correta de `IntegrityError` para retornar 400 Bad Request em vez de 500 Internal Server Error, e tratamento adequado de erros de validação e permissões.
+
+- **Autenticação e Autorização Aprimoradas**: Implementação de autenticação robusta com OAuth2 e suporte a testes usando `force_authenticate` para maior confiabilidade nos testes de integração.
+
+- **Limpeza e Otimização de Código**: Remoção de imports não utilizados, logs de debug desnecessários e otimização da estrutura de código para melhor manutenibilidade.
+
+### Corrigido
+
+- **Erro de Serializer de Alteração de Senha**: Corrigido problema onde o serializer tentava chamar `to_internal_value()` em dados já validados, causando `AttributeError`.
+
+- **Tratamento de IntegrityError**: Corrigido para capturar corretamente `django.db.utils.IntegrityError` e retornar 400 Bad Request para violações de constraint de banco de dados.
+
+- **Imports Não Utilizados**: Removidos imports desnecessários (`filters`, `ClassVar`, `get_user_repository`) que estavam causando warnings de linting.
+
+- **Logs de Debug**: Removidos logs de debug temporários dos testes e middleware para produção.
+
+### Melhorado
+
+- **Qualidade do Código**: Aplicação de "pente fino" em todo o projeto, garantindo que não há problemas de linting, imports não utilizados ou código desnecessário.
+
+- **Estrutura de Testes**: Reorganização e otimização dos testes para maior clareza e manutenibilidade, com foco em testes de integração robustos.
+
+- **Documentação**: Atualização da documentação para refletir as mudanças da versão 2.0.0, incluindo README e CHANGELOG.
+
 ## [2.0.0] - 2024-07-30
 
 ### Adicionado
@@ -22,6 +52,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
     -   Documentação detalhada em `docs/development/logging-error-handling.md`.
 
 -   **Otimização e Refatoração de Arquivos Docker**: Reestruturação do `Dockerfile` para um modelo multi-stage (build e execução) com imagem base mais leve (`python:3.12-slim-bookworm`), combinação de comandos `RUN` para reduzir camadas, e otimização na instalação de dependências. Introdução de arquivos `docker-compose.dev.yml` e `docker-compose.prod.yml` para separar as configurações de ambientes de desenvolvimento e produção, com `Dockerfile.dev` para desenvolvimento e `.dockerignore` para exclusão de arquivos desnecessários.
+
     -   `.dockerignore`: Novo arquivo para exclusão de arquivos irrelevantes no contexto de build.
     -   `Dockerfile`: Refatorado para multi-stage build e otimizado para produção.
     -   `Dockerfile.dev`: Novo arquivo para ambiente de desenvolvimento.

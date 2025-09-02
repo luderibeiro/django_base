@@ -4,9 +4,9 @@ Este projeto serve como um template robusto para iniciar novas aplicações em P
 
 ## Por Que Arquitetura Limpa?
 
-A Arquitetura Limpa foca na separação de interesses, garantindo que o código seja independente de *frameworks*, bancos de dados ou interfaces de usuário. Isso resulta em um sistema:
+A Arquitetura Limpa foca na separação de interesses, garantindo que o código seja independente de _frameworks_, bancos de dados ou interfaces de usuário. Isso resulta em um sistema:
 
--   **Independente de Frameworks**: A lógica de negócio não está amarrada a nenhum *framework* específico (como Django), permitindo flexibilidade para futuras mudanças.
+-   **Independente de Frameworks**: A lógica de negócio não está amarrada a nenhum _framework_ específico (como Django), permitindo flexibilidade para futuras mudanças.
 -   **Testável**: As regras de negócio podem ser testadas sem a necessidade de banco de dados, servidor web ou UI.
 -   **Independente de UI**: A UI pode mudar facilmente sem alterar o restante do sistema.
 -   **Independente de Banco de Dados**: Você pode trocar o banco de dados sem alterar as regras de negócio.

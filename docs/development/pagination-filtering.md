@@ -289,6 +289,6 @@ A implementação da paginação e filtragem para a listagem de usuários seguiu
 5.  **Atualização da Implementação de Repositório (`DjangoUserRepository`)**: O método `get_all_paginated_filtered` foi implementado, utilizando o ORM do Django (com `Q` para filtragem `icontains`) para aplicar a lógica de paginação e filtragem.
 6.  **Atualização de Serializers da API**: Um `ListUsersRequestSerializer` foi criado para validar os parâmetros de `query` de entrada, e o `UserListResponseSerializer` foi atualizado para incluir os metadados de paginação (`total_items`, `offset`, `limit`) na resposta.
 7.  **Atualização de Views da API (`UserListAPIView`)**: A `UserListAPIView` foi modificada para utilizar o `ListUsersRequestSerializer` para processar os parâmetros da requisição e passar os dados para o `ListUsersUseCase`.
-8.  **Atualização de Testes de Integração**: Novos testes foram adicionados em `project/core/tests/integration/test_user_api.py` para validar o funcionamento da paginação e filtragem nos *endpoints* da API.
+8.  **Atualização de Testes de Integração**: Novos testes foram adicionados em `project/core/tests/integration/test_user_api.py` para validar o funcionamento da paginação e filtragem nos _endpoints_ da API.
 
 Com a paginação e filtragem implementadas e documentadas, a API de listagem de usuários torna-se mais flexível e eficiente.

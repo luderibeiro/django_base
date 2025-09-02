@@ -215,3 +215,4 @@ curl -X PUT http://localhost:8000/v1/users/alter_password/$USER_ID/ \
      -H "Authorization: Bearer $TOKEN" \
      -d '{ "old_password": "mypassword123", "new_password": "mynewpassword456" }'
 ```
+

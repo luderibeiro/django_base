@@ -233,6 +233,6 @@ A implementação dos testes automatizados seguiu os seguintes passos:
 5.  **Configuração do `pytest.ini`**: Um arquivo `pytest.ini` foi criado na raiz do projeto com configurações básicas para o `pytest` (ex: `DJANGO_SETTINGS_MODULE`, `python_files`, `addopts`).
 6.  **Implementação de Testes Unitários (Domínio)**: O arquivo `project/core/tests/unit/test_user_entity.py` foi criado com testes para a entidade `User`.
 7.  **Implementação de Testes Unitários (Aplicação)**: Os arquivos `project/core/tests/unit/test_user_use_cases.py` e `project/core/tests/unit/test_generic_use_cases.py` foram criados com testes para os casos de uso de `User` e casos de uso genéricos, respectivamente, utilizando mocks.
-8.  **Implementação de Testes de Integração (API)**: Os arquivos `project/core/tests/integration/test_auth_api.py` e `project/core/tests/integration/test_user_api.py` foram criados com testes de integração para os *endpoints* da API de autenticação e gerenciamento de usuários, incluindo a obtenção e uso de tokens de acesso.
+8.  **Implementação de Testes de Integração (API)**: Os arquivos `project/core/tests/integration/test_auth_api.py` e `project/core/tests/integration/test_user_api.py` foram criados com testes de integração para os _endpoints_ da API de autenticação e gerenciamento de usuários, incluindo a obtenção e uso de tokens de acesso.
 
 Com esses testes implementados, o projeto possui uma base robusta para garantir a qualidade do código e a funcionalidade da aplicação.
