@@ -53,7 +53,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "core.middleware.custom_exception_middleware.CustomExceptionMiddleware", # Adicionado middleware de exceção customizado
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -159,6 +158,12 @@ DATABASES = {
     },
 }
 
+if DEBUG:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -242,7 +247,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 300,
-    "EXCEPTION_HANDLER": "core.middleware.custom_exception_middleware.custom_exception_handler", # Handler de exceção customizado
+    "EXCEPTION_HANDLER": "core.middleware.custom_exception_middleware.custom_exception_handler",  # Handler de exceção customizado
 }
 
 if DEBUG:
