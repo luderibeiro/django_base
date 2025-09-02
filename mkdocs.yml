@@ -70,6 +70,7 @@ nav:
           - Implementação OAuth2: development/oauth2-implementation.md
           - Testes Automatizados: development/automated-testing.md
           - Paginação e Filtragem: development/pagination-filtering.md
+          - Logs e Tratamento de Exceções: development/logging-error-handling.md
     - Setup:
           - Configuração do Projeto: setup/project-setup.md
           - Configuração da Documentação: setup/documentation-setup.md
