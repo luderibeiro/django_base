@@ -5,15 +5,15 @@
          <lastmod>2025-09-02</lastmod>
     </url>
     <url>
+         <loc>https://your-username.github.io/django_base/CHANGELOG/</loc>
+         <lastmod>2025-09-02</lastmod>
+    </url>
+    <url>
          <loc>https://your-username.github.io/django_base/CODE_OF_CONDUCT/</loc>
          <lastmod>2025-09-02</lastmod>
     </url>
     <url>
          <loc>https://your-username.github.io/django_base/CONTRIBUTING/</loc>
-         <lastmod>2025-09-02</lastmod>
-    </url>
-    <url>
-         <loc>https://your-username.github.io/django_base/SUMMARY_OF_CHANGES/</loc>
          <lastmod>2025-09-02</lastmod>
     </url>
     <url>
@@ -45,6 +45,10 @@
          <lastmod>2025-09-02</lastmod>
     </url>
     <url>
+         <loc>https://your-username.github.io/django_base/development/automated-testing/</loc>
+         <lastmod>2025-09-02</lastmod>
+    </url>
+    <url>
          <loc>https://your-username.github.io/django_base/development/frontend-integration/</loc>
          <lastmod>2025-09-02</lastmod>
     </url>
@@ -54,6 +58,10 @@
     </url>
     <url>
          <loc>https://your-username.github.io/django_base/development/oauth2-implementation/</loc>
+         <lastmod>2025-09-02</lastmod>
+    </url>
+    <url>
+         <loc>https://your-username.github.io/django_base/development/pagination-filtering/</loc>
          <lastmod>2025-09-02</lastmod>
     </url>
     <url>
