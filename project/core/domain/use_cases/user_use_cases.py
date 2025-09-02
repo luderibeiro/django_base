@@ -15,7 +15,6 @@ from core.domain.use_cases.generic_use_cases import (
     ListEntitiesUseCase,
 )
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -107,7 +106,9 @@ class LoginUserUseCase:
             raise ValueError("Invalid credentials")
 
         access_token, refresh_token = self.auth_gateway.create_tokens(user.id)
-        logger.info("User %s logged in successfully. User ID: %s", request.email, user.id)
+        logger.info(
+            "User %s logged in successfully. User ID: %s", request.email, user.id
+        )
 
         return LoginUserResponse(
             id=user.id,
@@ -171,14 +172,20 @@ class ListUsersUseCase:
     def execute(self, request: ListUsersRequest) -> ListUsersResponse:
         logger.info(
             "Listing users with offset: %s, limit: %s, search_query: %s",
-            request.offset, request.limit, request.search_query
+            request.offset,
+            request.limit,
+            request.search_query,
         )
         users_domain, total_items = self.user_repository.get_all_paginated_filtered(
             offset=request.offset,
             limit=request.limit,
             search_query=request.search_query,
         )
-        logger.debug("Found %s users in total, returning %s users.", total_items, len(users_domain))
+        logger.debug(
+            "Found %s users in total, returning %s users.",
+            total_items,
+            len(users_domain),
+        )
 
         users_response = [
             CreateUserResponse(

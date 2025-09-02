@@ -1,5 +1,8 @@
 from core.api.deps import get_login_user_use_case
 from core.api.v1.serializers.user import LoginRequestSerializer, LoginResponseSerializer
+from core.domain.use_cases.user_use_cases import (
+    LoginUserRequest,  # Corrigido o caminho de importação
+)
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -12,7 +15,10 @@ class LoginAPIView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = LoginRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        login_request = serializer.to_internal_value(serializer.validated_data)
+        login_request = LoginUserRequest(
+            email=serializer.validated_data["email"],
+            password=serializer.validated_data["password"],
+        )
 
         login_user_use_case = get_login_user_use_case()
         try:

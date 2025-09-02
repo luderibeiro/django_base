@@ -1,8 +1,11 @@
 import os
+from datetime import timedelta
 from typing import Tuple
 
 from core.domain.gateways import AuthGateway
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
+from django.utils import timezone
 from oauth2_provider.models import AccessToken, Application, RefreshToken
 
 User = get_user_model()
@@ -12,7 +15,8 @@ class DjangoAuthGateway(AuthGateway):
     def check_password(self, user_id: str, password: str) -> bool:
         try:
             user = User.objects.get(id=user_id)
-            return user.check_password(password)
+            result = user.check_password(password)
+            return result
         except User.DoesNotExist:
             return False
 
@@ -47,7 +51,10 @@ class DjangoAuthGateway(AuthGateway):
             + "_"
             + os.urandom(30).hex(),  # Gerar um token real
             scope="read write",
-            expires=AccessToken.get_expiration_delta(),
+            expires=timezone.now()
+            + timedelta(
+                seconds=settings.OAUTH2_PROVIDER["ACCESS_TOKEN_EXPIRE_SECONDS"]
+            ),
         )
 
         # Crie um novo refresh token

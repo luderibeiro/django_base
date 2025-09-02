@@ -1,3 +1,4 @@
+import uuid
 from typing import ClassVar
 
 from django.contrib.auth.models import (
@@ -36,7 +37,16 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError("The given email must be set")
         email = self.normalize_email(email)
+
+        # Extrair campos de PermissionsMixin e AbstractBaseUser de extra_fields
+        is_staff = extra_fields.pop("is_staff", False)
+        is_superuser = extra_fields.pop("is_superuser", False)
+        is_active = extra_fields.pop("is_active", True)
+
         user = self.model(email=email, **extra_fields)
+        user.is_staff = is_staff
+        user.is_superuser = is_superuser
+        user.is_active = is_active
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -104,9 +114,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         is_admin (bool): Property to check if the user is a superuser (admin).
     """
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=150)
+
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS: ClassVar[list[str]] = ["first_name", "last_name"]

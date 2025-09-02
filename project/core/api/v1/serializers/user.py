@@ -76,13 +76,6 @@ class ListUsersRequestSerializer(serializers.Serializer):
     limit = serializers.IntegerField(default=10, required=False, min_value=1)
     search_query = serializers.CharField(required=False, allow_blank=True)
 
-    def to_internal_value(self, data):
-        return ListUsersRequest(
-            offset=data.get("offset", 0),
-            limit=data.get("limit", 10),
-            search_query=data.get("search_query", None),
-        )
-
 
 class UserAlterPasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(
@@ -130,11 +123,9 @@ class LoginRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(write_only=True, required=True)
 
-    def to_internal_value(self, data):
-        return LoginUserRequest(
-            email=data.get("email"),
-            password=data.get("password"),
-        )
+    def validate(self, attrs: LoginUserRequest) -> LoginUserRequest:
+        # Simplesmente retorna o DTO, pois a validação de campo já ocorreu
+        return attrs
 
 
 class LoginResponseSerializer(serializers.Serializer):
