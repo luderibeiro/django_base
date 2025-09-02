@@ -25,7 +25,7 @@ class DjangoUserRepository(UserRepository):
             email=user.email,
             first_name=user.first_name,
             last_name=user.last_name,
-        ) # is_active, is_staff, is_superuser são tratados pelo UserManager
+        )  # is_active, is_staff, is_superuser são tratados pelo UserManager
         return self._to_domain_user(django_user)
 
     def update(self, user: DomainUser) -> DomainUser:
@@ -47,12 +47,14 @@ class DjangoUserRepository(UserRepository):
             email=django_user.email,
             first_name=django_user.first_name,
             last_name=django_user.last_name,
-            is_active=django_user.is_active, # AbstractBaseUser tem is_active por padrão
-            is_staff=django_user.is_staff, # PermissionsMixin tem is_staff
-            is_superuser=django_user.is_superuser, # PermissionsMixin tem is_superuser
+            is_active=django_user.is_active,  # AbstractBaseUser tem is_active por padrão
+            is_staff=django_user.is_staff,  # PermissionsMixin tem is_staff
+            is_superuser=django_user.is_superuser,  # PermissionsMixin tem is_superuser
         )
 
     def get_all(self) -> List[DomainUser]:
         # A propriedade is_superuser é acessada diretamente via PermissionsMixin
-        django_users = DjangoUser.objects.exclude(is_superuser=True) # Excluir superusuários por padrão
+        django_users = DjangoUser.objects.exclude(
+            is_superuser=True
+        )  # Excluir superusuários por padrão
         return [self._to_domain_user(user) for user in django_users]

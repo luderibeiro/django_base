@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
+from core.domain.gateways import AuthGateway
 from core.domain.use_cases.generic_use_cases import (
     CreateEntityUseCase,
     GenericCreateRequest,
@@ -86,7 +87,7 @@ class LoginUserResponse:
 
 
 class LoginUserUseCase:
-    def __init__(self, user_repository: UserRepository, auth_gateway: "AuthGateway"):
+    def __init__(self, user_repository: UserRepository, auth_gateway: AuthGateway):
         self.user_repository = user_repository
         self.auth_gateway = auth_gateway
 
@@ -118,7 +119,7 @@ class ChangeUserPasswordResponse:
 
 
 class ChangeUserPasswordUseCase:
-    def __init__(self, user_repository: UserRepository, auth_gateway: "AuthGateway"):
+    def __init__(self, user_repository: UserRepository, auth_gateway: AuthGateway):
         self.user_repository = user_repository
         self.auth_gateway = auth_gateway
 
