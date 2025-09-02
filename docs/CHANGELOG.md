@@ -11,9 +11,12 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ### Adicionado
 
--   **Configuração de Logs e Tratamento Global de Exceções**: Implementação de uma estratégia robusta de *logging* com múltiplos *handlers* (console, arquivo de log, arquivo de erros), formatadores padronizados e *loggers* específicos. Criação de um *middleware* customizado para tratamento global de exceções no Django REST Framework, que captura, registra e padroniza respostas de erro da API. Logs foram adicionados a casos de uso (`LoginUserUseCase`, `ListUsersUseCase`) e repositórios (`DjangoUserRepository`) para maior observabilidade.
-    -   `project/project/settings.py`: Configuração de `LOGGING` e integração do *middleware* no `REST_FRAMEWORK`.
-    -   `project/core/middleware/custom_exception_middleware.py`: Novo arquivo com o *handler* de exceções customizado.
+-   **Atualização de Dependências e Correção de Vulnerabilidades**: Todas as dependências do projeto foram atualizadas para suas versões estáveis mais recentes, e as vulnerabilidades de segurança conhecidas no Django (5.0.14) e setuptools (66.1.1) foram corrigidas. Isso garante um ambiente de desenvolvimento e produção mais seguro e estável.
+
+-   **Configuração de Logs e Tratamento Global de Exceções**: Implementação de uma estratégia robusta de _logging_ com múltiplos _handlers_ (console, arquivo de log, arquivo de erros), formatadores padronizados e _loggers_ específicos. Criação de um _middleware_ customizado para tratamento global de exceções no Django REST Framework, que captura, registra e padroniza respostas de erro da API. Logs foram adicionados a casos de uso (`LoginUserUseCase`, `ListUsersUseCase`) e repositórios (`DjangoUserRepository`) para maior observabilidade.
+
+    -   `project/project/settings.py`: Configuração de `LOGGING` e integração do _middleware_ no `REST_FRAMEWORK`.
+    -   `project/core/middleware/custom_exception_middleware.py`: Novo arquivo com o _handler_ de exceções customizado.
     -   `project/core/domain/use_cases/user_use_cases.py`: Adição de logs.
     -   `project/core/repositories/user_repository_impl.py`: Adição de logs e tratamento de exceções específicas.
     -   Documentação detalhada em `docs/development/logging-error-handling.md`.
@@ -26,7 +29,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
     -   `project/core/tests/integration/test_user_api.py`
     -   Configuração do Pytest (`pytest.ini`) e adição de dependências (`pytest`, `pytest-mock`, `pytest-django`).
     -   Documentação detalhada em `docs/development/automated-testing.md`.
--   **Paginação e Filtragem**: Adicionadas capacidades de paginação (`offset`, `limit`) e filtragem (`search_query`) para a API de listagem de usuários. Isso envolveu modificações nos DTOs, interface de repositório, implementação do repositório (`DjangoUserRepository` usando `Q` objects), *serializers* e *views* do DRF, e testes de integração abrangentes.
+-   **Paginação e Filtragem**: Adicionadas capacidades de paginação (`offset`, `limit`) e filtragem (`search_query`) para a API de listagem de usuários. Isso envolveu modificações nos DTOs, interface de repositório, implementação do repositório (`DjangoUserRepository` usando `Q` objects), _serializers_ e _views_ do DRF, e testes de integração abrangentes.
     -   `project/core/domain/use_cases/user_use_cases.py`: DTOs `ListUsersRequest`, `ListUsersResponse` e `ListUsersUseCase` atualizados.
     -   `project/core/domain/data_access.py`: Interface `UserRepository` com `get_all_paginated_filtered`.
     -   `project/core/repositories/user_repository_impl.py`: Implementação de `get_all_paginated_filtered`.
