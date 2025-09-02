@@ -69,6 +69,7 @@ nav:
           - Casos de Uso CRUD Genéricos: development/generic-crud-use-cases.md
           - Implementação OAuth2: development/oauth2-implementation.md
           - Testes Automatizados: development/automated-testing.md
+          - Paginação e Filtragem: development/pagination-filtering.md
     - Setup:
           - Configuração do Projeto: setup/project-setup.md
           - Configuração da Documentação: setup/documentation-setup.md
