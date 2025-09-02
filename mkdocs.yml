@@ -67,6 +67,7 @@ nav:
           - Como Testar: development/testing.md
           - Guia de Integração Frontend: development/frontend-integration.md
           - Casos de Uso CRUD Genéricos: development/generic-crud-use-cases.md
+          - Implementação OAuth2: development/oauth2-implementation.md
     - Setup:
           - Configuração do Projeto: setup/project-setup.md
           - Configuração da Documentação: setup/documentation-setup.md
