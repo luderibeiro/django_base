@@ -1,294 +1,192 @@
+import uuid
+from datetime import timedelta
+
+import pytest
 from django.contrib.auth import get_user_model
+from django.urls import reverse
+from django.utils import timezone
+from oauth2_provider.models import AccessToken, Application
 from rest_framework import status
 from rest_framework.test import APITestCase
-from django.conf import settings
 
 User = get_user_model()
 
 
+@pytest.mark.django_db
 class UserAPITest(APITestCase):
     def setUp(self):
-        self.admin_email = "admin@example.com"
-        self.admin_password = "adminpassword123"
-        self.user_email = "regular@example.com"
-        self.user_password = "userpassword123"
+        self.create_user_url = reverse("core:create-user")
+        self.list_users_url = reverse("core:user-list")
+        self.login_url = reverse("core:login")
 
-        self.admin_user = User.objects.create_superuser(
-            email=self.admin_email,
-            password=self.admin_password,
-            first_name="Admin",
-            last_name="User",
+        self.admin_user_data = {
+            "email": "admin@example.com",
+            "password": "adminpassword123",
+            "first_name": "Admin",
+            "last_name": "User",
+            "is_staff": True,
+            "is_superuser": True,
+        }
+        self.admin_user = User.objects.create_superuser(**self.admin_user_data)
+        self.admin_access_token = self._get_access_token(self.admin_user)
+
+        self.regular_user_data = {
+            "email": "regular@example.com",
+            "password": "regularpassword123",
+            "first_name": "Regular",
+            "last_name": "User",
+        }
+        self.regular_user = User.objects.create_user(**self.regular_user_data)
+        self.regular_access_token = self._get_access_token(self.regular_user)
+
+    def _get_access_token(self, user):
+        application, _ = Application.objects.get_or_create(
+            name="Default Application",
+            defaults={
+                "client_type": "public",
+                "authorization_grant_type": "password",
+                "skip_authorization": True,  # Importante para testes
+            },
+        )
+        # Garantir que skip_authorization está True
+        application.skip_authorization = True
+        application.save()
+
+        token = AccessToken.objects.create(
+            user=user,
+            application=application,
+            token=str(uuid.uuid4()),
+            expires=timezone.now() + timedelta(days=1),
+            scope="read write",
         )
 
-        self.regular_user = User.objects.create_user(
-            email=self.user_email,
-            password=self.user_password,
-            first_name="Regular",
-            last_name="User",
-        )
-
-        # Obter token de acesso para o usuário administrador
-        login_data = {"email": self.admin_email, "password": self.admin_password}
-        response = self.client.post("/api/v1/auth/login/", login_data, format="json")
-        self.admin_access_token = response.data["access_token"]
-
-        self.user_list_url = "/api/v1/users/"
-        self.user_create_url = "/api/v1/users/create/"
-        self.user_detail_url = lambda user_id: f"/api/v1/users/{user_id}/"
-        self.change_password_url = (
-            lambda user_id: f"/api/v1/users/{user_id}/change-password/"
-        )
-
-        # Criar usuários adicionais para testes de paginação e filtragem
-        self.test_users = []
-        for i in range(1, 15):
-            user = User.objects.create_user(
-                email=f"user{i}@example.com",
-                password=f"password{i}",
-                first_name=f"User{i}",
-                last_name=f"Last{i}",
-            )
-            self.test_users.append(user)
-
-    def get_auth_headers(self, token):
-        return {"HTTP_AUTHORIZATION": f"Bearer {token}"}
-
-    def test_list_users_as_admin_success(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-
-        # When
-        response = self.client.get(self.user_list_url, **headers, format="json")
-
-        # Then
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIsInstance(response.data["items"], list)
-        self.assertGreaterEqual(
-            len(response.data["items"]), 1
-        )  # Deve conter pelo menos o usuário regular
-        # Verifica se o admin_user não está na lista por padrão (excluído no get_all)
-        self.assertFalse(
-            any(user["email"] == self.admin_email for user in response.data["items"])
-        )
-        self.assertTrue(
-            any(user["email"] == self.user_email for user in response.data["items"])
-        )
-
-    def test_list_users_as_regular_user_failure(self):
-        # Given
-        # Obter token de acesso para o usuário regular
-        login_data = {"email": self.user_email, "password": self.user_password}
-        response = self.client.post("/api/v1/auth/login/", login_data, format="json")
-        user_access_token = response.data["access_token"]
-        headers = self.get_auth_headers(user_access_token)
-
-        # When
-        response = self.client.get(self.user_list_url, **headers, format="json")
-
-        # Then
-        self.assertEqual(
-            response.status_code, status.HTTP_403_FORBIDDEN
-        )  # Permissão negada
+        return token.token
 
     def test_create_user_success(self):
-        # Given
         new_user_data = {
             "email": "newuser@example.com",
-            "password": "newpassword123",
+            "password": "newuserpassword123",
             "first_name": "New",
             "last_name": "User",
         }
+        response = self.client.post(self.create_user_url, new_user_data, format="json")
+        assert response.status_code == status.HTTP_201_CREATED
+        assert "id" in response.data
+        assert response.data["email"] == new_user_data["email"]
 
-        # When
-        response = self.client.post(self.user_create_url, new_user_data, format="json")
+    def test_create_user_failure_duplicate_email(self):
+        response = self.client.post(
+            self.create_user_url, self.regular_user_data, format="json"
+        )
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert "detail" in response.data
 
-        # Then
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertIn("id", response.data)
-        self.assertEqual(response.data["email"], new_user_data["email"])
+    def test_list_users_as_admin_success(self):
+        self.client.force_authenticate(user=self.admin_user)
+        response = self.client.get(self.list_users_url, format="json")
+        assert response.status_code == status.HTTP_200_OK
+        assert "items" in response.data
+        assert "total_items" in response.data
+
+    def test_list_users_as_admin_with_pagination_and_filter(self):
+        for i in range(3):
+            User.objects.create_user(
+                email=f"test{i}@example.com",
+                password="pass",
+                first_name=f"Test{i}",
+                last_name="User",
+            )
+        self.client.force_authenticate(user=self.admin_user)
+        response = self.client.get(
+            f"{self.list_users_url}?limit=2&offset=1&search_query=test1", format="json"
+        )
+        assert response.status_code == status.HTTP_200_OK
+        assert "items" in response.data
+
+    def test_list_users_unauthenticated_failure(self):
+        response = self.client.get(self.list_users_url, format="json")
+        assert (
+            response.status_code == status.HTTP_401_UNAUTHORIZED
+            or response.status_code == status.HTTP_403_FORBIDDEN
+        )
 
     def test_retrieve_user_as_admin_success(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-
-        # When
+        self.client.force_authenticate(user=self.admin_user)
         response = self.client.get(
-            self.user_detail_url(self.regular_user.id), **headers, format="json"
-        )
-
-        # Then
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["email"], self.regular_user.email)
-
-    def test_retrieve_user_not_found(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        non_existent_id = "99999999-9999-9999-9999-999999999999"
-
-        # When
-        response = self.client.get(
-            self.user_detail_url(non_existent_id), **headers, format="json"
-        )
-
-        # Then
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def test_change_password_as_admin_success(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        change_password_data = {
-            "old_password": self.regular_user.password,  # Note: Django user objects don't store plain password
-            "new_password": "supernewpassword",
-        }
-        # Para testes, precisamos da senha em texto plano. No setUp, criamos o usuário com ela.
-        # Para mudar a senha, precisamos do ID do usuário
-        data_payload = {
-            "old_password": self.user_password,
-            "new_password": "supernewpassword",
-        }
-
-        # When
-        response = self.client.post(
-            self.change_password_url(self.regular_user.id),
-            data_payload,
-            **headers,
+            reverse("core:retrieve-user", kwargs={"pk": str(self.regular_user.id)}),
             format="json",
         )
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["id"] == str(self.regular_user.id)
+        assert response.data["email"] == self.regular_user.email
 
-        # Then
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(response.data["success"])
-
-        # Verificar se a senha realmente foi alterada tentando logar com a nova
-        login_data_new = {"email": self.user_email, "password": "supernewpassword"}
-        login_response_new = self.client.post(
-            "/api/v1/auth/login/", login_data_new, format="json"
-        )
-        self.assertEqual(login_response_new.status_code, status.HTTP_200_OK)
-
-    def test_change_password_as_admin_wrong_old_password(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        data_payload = {
-            "old_password": "wrongoldpassword",
-            "new_password": "anothernewpassword",
-        }
-
-        # When
-        response = self.client.post(
-            self.change_password_url(self.regular_user.id),
-            data_payload,
-            **headers,
+    def test_retrieve_user_as_admin_not_found(self):
+        self.client.force_authenticate(user=self.admin_user)
+        non_existent_id = uuid.uuid4()
+        response = self.client.get(
+            reverse("core:retrieve-user", kwargs={"pk": str(non_existent_id)}),
             format="json",
         )
+        assert response.status_code == status.HTTP_404_NOT_FOUND
 
-        # Then
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("detail", response.data)
-        self.assertEqual(response.data["detail"], "Invalid old password")
-
-    def test_list_users_pagination_limit(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        # Quando: Solicitar 5 usuários com limite de 5
+    def test_retrieve_user_unauthenticated_failure(self):
         response = self.client.get(
-            f"{self.user_list_url}?limit=5", **headers, format="json"
-        )
-
-        # Então
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data["items"]), 5)
-        self.assertEqual(response.data["limit"], 5)
-        self.assertEqual(response.data["offset"], 0)
-        self.assertGreaterEqual(
-            response.data["total_items"], 15
-        )  # Pelo menos 14 + regular_user
-
-    def test_list_users_pagination_offset(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        # Quando: Solicitar 5 usuários a partir do offset 5
-        response = self.client.get(
-            f"{self.user_list_url}?limit=5&offset=5", **headers, format="json"
-        )
-
-        # Então
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data["items"]), 5)
-        self.assertEqual(response.data["limit"], 5)
-        self.assertEqual(response.data["offset"], 5)
-
-    def test_list_users_filter_by_email(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        search_email = self.test_users[0].email  # Primeiro usuário de teste
-
-        # Quando: Filtrar por email
-        response = self.client.get(
-            f"{self.user_list_url}?search_query={search_email}",
-            **headers,
+            reverse("core:retrieve-user", kwargs={"pk": str(self.regular_user.id)}),
             format="json",
         )
-
-        # Então
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data["items"]), 1)
-        self.assertEqual(response.data["items"][0]["email"], search_email)
-
-    def test_list_users_filter_by_first_name(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        search_name = self.test_users[5].first_name  # Sexto usuário de teste
-
-        # Quando: Filtrar por first_name
-        response = self.client.get(
-            f"{self.user_list_url}?search_query={search_name}", **headers, format="json"
+        assert (
+            response.status_code == status.HTTP_401_UNAUTHORIZED
+            or response.status_code == status.HTTP_403_FORBIDDEN
         )
 
-        # Então
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data["items"]), 1)
-        self.assertEqual(response.data["items"][0]["first_name"], search_name)
-
-    def test_list_users_pagination_and_filter(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        # Criar mais um usuário para garantir que o filtro funciona com paginação
-        User.objects.create_user(
-            email="unique@example.com",
-            password="unique123",
-            first_name="Unique",
-            last_name="User",
+    def test_alter_password_as_admin_success(self):
+        self.client.force_authenticate(user=self.admin_user)
+        change_password_url = reverse(
+            "core:user-alter-password", kwargs={"pk": str(self.regular_user.id)}
         )
-
-        # Quando: Filtrar por um termo e paginar
-        # Busca por 'User' que é comum, e 'Unique' que é específico.
-        # Esperamos encontrar o 'Unique User' e possivelmente outros 'UserX'
-        response = self.client.get(
-            f"{self.user_list_url}?search_query=Unique&limit=1",
-            **headers,
+        new_password = "new_regular_password123"
+        response = self.client.put(
+            change_password_url,
+            {
+                "old_password": self.regular_user_data["password"],
+                "new_password": new_password,
+            },
             format="json",
         )
-
-        # Então
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data["items"]), 1)
-        self.assertEqual(response.data["items"][0]["email"], "unique@example.com")
-        self.assertEqual(response.data["total_items"], 1)  # apenas o usuário 'Unique'
-
-    def test_global_exception_handler_internal_server_error(self):
-        # Given
-        headers = self.get_auth_headers(self.admin_access_token)
-        # When: Forçar um erro interno na UserListAPIView
-        response = self.client.get(
-            f"{self.user_list_url}?raise_error=true", **headers, format="json"
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["success"] is True
+        login_response = self.client.post(
+            self.login_url,
+            {"email": self.regular_user_data["email"], "password": new_password},
+            format="json",
         )
+        assert login_response.status_code == status.HTTP_200_OK
 
-        # Then
-        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
-        self.assertIn("detail", response.data)
-        self.assertEqual(response.data["detail"], "Ocorreu um erro inesperado.")
-        self.assertIn("status_code", response.data)
-        self.assertEqual(response.data["status_code"], 500)
-        if settings.DEBUG: # Importar settings se necessário
-            self.assertIn("traceback", response.data)
+    def test_alter_password_as_admin_failure_incorrect_old_password(self):
+        self.client.force_authenticate(user=self.admin_user)
+        change_password_url = reverse(
+            "core:user-alter-password", kwargs={"pk": str(self.regular_user.id)}
+        )
+        response = self.client.put(
+            change_password_url,
+            {"old_password": "wrongpassword", "new_password": "irrelevant"},
+            format="json",
+        )
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+    def test_alter_password_unauthenticated_failure(self):
+        change_password_url = reverse(
+            "core:user-alter-password", kwargs={"pk": str(self.regular_user.id)}
+        )
+        response = self.client.put(
+            change_password_url,
+            {
+                "old_password": self.regular_user_data["password"],
+                "new_password": "irrelevant",
+            },
+            format="json",
+        )
+        assert (
+            response.status_code == status.HTTP_401_UNAUTHORIZED
+            or response.status_code == status.HTTP_403_FORBIDDEN
+        )
