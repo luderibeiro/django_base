@@ -1,86 +1,77 @@
+import pytest
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-
-from core.domain.entities.user import User as DomainUser
-from core.repositories.user_repository_impl import DjangoUserRepository
 
 User = get_user_model()
 
 
+@pytest.mark.django_db
 class AuthAPITest(APITestCase):
     def setUp(self):
-        self.user_repository = DjangoUserRepository()
-        self.email = "test@example.com"
-        self.password = "testpassword123"
-        self.first_name = "Test"
-        self.last_name = "User"
-
-        # Criar um usuário Django diretamente para testes de integração
-        self.django_user = User.objects.create_user(
-            email=self.email,
-            password=self.password,
-            first_name=self.first_name,
-            last_name=self.last_name,
-        )
-
-        self.login_url = "/api/v1/auth/login/"
+        self.login_url = reverse("core:login")
+        self.user_data = {
+            "email": "test@example.com",
+            "password": "testpassword123",
+            "first_name": "Test",
+            "last_name": "User",
+        }
+        self.user = User.objects.create_user(**self.user_data)
 
     def test_login_success(self):
-        # Given
-        data = {
-            "email": self.email,
-            "password": self.password,
-        }
+        response = self.client.post(
+            self.login_url,
+            {
+                "email": self.user_data["email"],
+                "password": self.user_data["password"],
+            },
+            format="json",
+        )
 
-        # When
-        response = self.client.post(self.login_url, data, format="json")
-
-        # Then
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn("id", response.data)
-        self.assertIn("email", response.data)
         self.assertIn("access_token", response.data)
         self.assertIn("refresh_token", response.data)
-        self.assertEqual(response.data["email"], self.email)
+        self.assertIn("id", response.data)
+        self.assertIn("email", response.data)
 
-    def test_login_failure_invalid_password(self):
-        # Given
-        data = {
-            "email": self.email,
-            "password": "wrongpassword",
-        }
+    def test_login_failure_invalid_credentials(self):
+        response = self.client.post(
+            self.login_url,
+            {
+                "email": "test@example.com",
+                "password": "wrongpassword",
+            },
+            format="json",
+        )
 
-        # When
-        response = self.client.post(self.login_url, data, format="json")
-
-        # Then
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("detail", response.data)
         self.assertEqual(response.data["detail"], "Invalid credentials")
 
     def test_login_failure_user_not_found(self):
-        # Given
-        data = {
-            "email": "nonexistent@example.com",
-            "password": self.password,
-        }
+        response = self.client.post(
+            self.login_url,
+            {
+                "email": "nonexistent@example.com",
+                "password": "anypassword",
+            },
+            format="json",
+        )
 
-        # When
-        response = self.client.post(self.login_url, data, format="json")
-
-        # Then
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("detail", response.data)
         self.assertEqual(response.data["detail"], "Invalid credentials")
 
-    def test_login_missing_fields(self):
-        # Given
-        data = {"email": self.email}  # Missing password
-
-        # When
-        response = self.client.post(self.login_url, data, format="json")
-
-        # Then
+    def test_login_failure_missing_fields(self):
+        response = self.client.post(
+            self.login_url, {"email": "test@example.com"}, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("password", response.data)
+
+        response = self.client.post(
+            self.login_url, {"password": "testpassword123"}, format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("email", response.data)
