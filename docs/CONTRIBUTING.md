@@ -8,7 +8,7 @@ Por favor, reserve um momento para revisar este documento antes de abrir um Pull
 
 ## 1. Código de Conduta
 
-Por favor, leia nosso [Código de Conduta](CODE_OF_CONDUCT.md). Esperamos que todos os colaboradores o sigam.
+Por favor, leia nosso [Código de Conduta](https://your-username.github.io/django_base/CODE_OF_CONDUCT/). Esperamos que todos os colaboradores o sigam.
 
 ## 2. Como Contribuir
 
