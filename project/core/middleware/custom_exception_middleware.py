@@ -2,7 +2,10 @@ import logging
 import traceback
 
 from django.conf import settings
+from django.db import IntegrityError
+from django.db import utils as db_utils
 from rest_framework import status
+from rest_framework.exceptions import APIException, ValidationError
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
 
@@ -14,19 +17,30 @@ def custom_exception_handler(exc, context):
     # to get the standard error response.
     response = exception_handler(exc, context)
 
-    # Now add the HTTP status code to the response.
+    # If it is a ValidationError from DRF, it will already be handled by the default exception_handler
+    # and will have a 400 status code with detailed errors.
+    if response is not None and isinstance(exc, ValidationError):
+        # Do nothing, default handler already formats it correctly.
+        pass
+    elif isinstance(exc, ValueError):
+        # Handle ValueErrors from domain/use cases as 400 Bad Request
+        response_data = {"detail": str(exc), "status_code": status.HTTP_400_BAD_REQUEST}
+        if settings.DEBUG:
+            response_data["traceback"] = traceback.format_exc()
+        response = Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+    elif isinstance(exc, (IntegrityError, db_utils.IntegrityError)):
+        response_data = {"detail": str(exc), "status_code": status.HTTP_400_BAD_REQUEST}
+        if settings.DEBUG:
+            response_data["traceback"] = traceback.format_exc()
+        response = Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+    # Now add the HTTP status code to the response if it's not already there
     if response is not None:
-        # Adicione o código de status HTTP à resposta se não estiver presente
-        if not response.data.get("status_code"):
+        if not response.data.get("status_code") and hasattr(response, "status_code"):
             response.data["status_code"] = response.status_code
 
-        # Personalize a mensagem de erro para exceções específicas
-        if isinstance(exc, ValueError):
-            response.data["detail"] = str(exc)
-            response.status_code = status.HTTP_400_BAD_REQUEST
-
         # Em modo de depuração, inclua o rastreamento completo da pilha
-        if settings.DEBUG:
+        if settings.DEBUG and "traceback" not in response.data:
             response.data["traceback"] = traceback.format_exc()
 
         # Log de exceções
@@ -36,7 +50,7 @@ def custom_exception_handler(exc, context):
             logger.warning("Erro de cliente: %s", exc)
 
     else:
-        # Captura exceções não tratadas pelo DRF
+        # Captura exceções não tratadas pelo DRF ou outras exceções não processadas acima
         logger.exception("Erro inesperado: %s", exc)
         response = Response(
             {"detail": "Ocorreu um erro inesperado.", "status_code": 500},
