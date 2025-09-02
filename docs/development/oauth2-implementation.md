@@ -46,7 +46,7 @@ class DjangoAuthGateway(AuthGateway):
             application = Application.objects.get(name="Default Application")
         except Application.DoesNotExist:
             application = Application.objects.create(name="Default Application", client_type="public", authorization_grant_type="password")
-        
+
         AccessToken.objects.filter(user=user, application=application).delete()
         RefreshToken.objects.filter(user=user, application=application).delete()
 

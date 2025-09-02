@@ -42,10 +42,11 @@ Esta entidade já foi criada para ser agnóstica a frameworks e não exigiu alte
 O `DjangoUserRepository` foi atualizado para lidar com as mudanças no modelo Django `User` e para garantir que o mapeamento entre a entidade de Domínio `User` e o modelo de persistência do Django ocorra corretamente.
 
 **Principais alterações:**
-- No método `create`, a passagem de `is_active`, `is_staff` e `is_superuser` para `DjangoUser.objects.create_user` foi removida, pois esses campos agora são tratados internamente pelo `UserManager` ao herdar de `AbstractBaseUser`.
-- No método `update`, a atualização direta dos campos `is_active`, `is_staff` e `is_superuser` foi removida do modelo Django, pois eles são gerenciados pelo `PermissionsMixin`.
-- No método `_to_domain_user`, o acesso aos campos `is_active`, `is_staff` e `is_superuser` foi ajustado para refletir a nova estrutura do modelo Django (`AbstractBaseUser` e `PermissionsMixin`).
-- No método `get_all`, a filtragem de `is_superuser=False` foi alterada para `exclude(is_superuser=True)`, que é a forma apropriada de filtrar superusuários com o `PermissionsMixin`.
+
+-   No método `create`, a passagem de `is_active`, `is_staff` e `is_superuser` para `DjangoUser.objects.create_user` foi removida, pois esses campos agora são tratados internamente pelo `UserManager` ao herdar de `AbstractBaseUser`.
+-   No método `update`, a atualização direta dos campos `is_active`, `is_staff` e `is_superuser` foi removida do modelo Django, pois eles são gerenciados pelo `PermissionsMixin`.
+-   No método `_to_domain_user`, o acesso aos campos `is_active`, `is_staff` e `is_superuser` foi ajustado para refletir a nova estrutura do modelo Django (`AbstractBaseUser` e `PermissionsMixin`).
+-   No método `get_all`, a filtragem de `is_superuser=False` foi alterada para `exclude(is_superuser=True)`, que é a forma apropriada de filtrar superusuários com o `PermissionsMixin`.
 
 ```python
 from typing import List, Optional

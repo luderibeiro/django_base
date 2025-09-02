@@ -25,40 +25,41 @@ repo_url: https://github.com/your-username/django_base/ # Atualize com o seu rep
 edit_uri: edit/main/docs/ # Caminho para editar arquivos no GitHub
 
 theme:
-  name: material
-  features:
-    - navigation.expand
-    - navigation.tabs
-    - navigation.sections
-    - search.highlight
-    - search.suggest
-    - toc.integrate
-    - content.tabs.link
-    - content.code.annotate
-  palette:
-    - scheme: default
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-      primary: teal
-      accent: purple
-    - scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-      primary: teal
-      accent: lime
+    name: material
+    features:
+        - navigation.expand
+        - navigation.tabs
+        - navigation.sections
+        - search.highlight
+        - search.suggest
+        - toc.integrate
+        - content.tabs.link
+        - content.code.annotate
+    palette:
+        - scheme: default
+          toggle:
+              icon: material/brightness-7
+              name: Switch to dark mode
+          primary: teal
+          accent: purple
+        - scheme: slate
+          toggle:
+              icon: material/brightness-4
+              name: Switch to light mode
+          primary: teal
+          accent: lime
 
 markdown_extensions:
-  # ... (extensões configuradas)
+    # ... (extensões configuradas)
 
 nav:
-  # ... (estrutura de navegação)
+    # ... (estrutura de navegação)
 ```
 
 **Pontos importantes:**
-- Atualize `site_url` e `repo_url` com as informações do seu próprio repositório e URL de publicação no GitHub Pages.
-- A seção `nav` define a hierarquia e os links para todos os seus arquivos Markdown.
+
+-   Atualize `site_url` e `repo_url` com as informações do seu próprio repositório e URL de publicação no GitHub Pages.
+-   A seção `nav` define a hierarquia e os links para todos os seus arquivos Markdown.
 
 ## 4. Visualização Local da Documentação
 
@@ -81,6 +82,7 @@ Para publicar a documentação no GitHub Pages, o MkDocs usa a ferramenta `ghp-i
     ```
 
     Este comando fará o seguinte:
+
     -   Construirá o site estático da documentação no diretório `site/`.
     -   Criará um branch `gh-pages` no seu repositório Git (ou atualizará um existente).
     -   Fará o push do conteúdo do diretório `site/` para o branch `gh-pages`.
@@ -88,6 +90,7 @@ Para publicar a documentação no GitHub Pages, o MkDocs usa a ferramenta `ghp-i
 2.  **Configurar GitHub Pages no Repositório:**
 
     No seu repositório GitHub, vá em `Settings` > `Pages`:
+
     -   Em `Build and deployment`, selecione `Deploy from a branch`.
     -   Em `Branch`, selecione `gh-pages` e a pasta `/ (root)`. Salve as alterações.
 
@@ -103,20 +106,20 @@ Você pode configurar um GitHub Action para isso. Um exemplo de workflow (`.gith
 name: Deploy Docs
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.11 # Use a versão do seu projeto
-      - run: pip install mkdocs mkdocs-material
-      - run: mkdocs gh-deploy --force
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: 3.11 # Use a versão do seu projeto
+            - run: pip install mkdocs mkdocs-material
+            - run: mkdocs gh-deploy --force
 ```
 
 Este workflow garantirá que sua documentação esteja sempre atualizada no GitHub Pages após cada push para o `main`.
