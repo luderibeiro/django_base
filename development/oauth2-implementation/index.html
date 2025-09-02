@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://your-username.github.io/django_base/architecture/overview/">
+        <link rel="canonical" href="https://your-username.github.io/django_base/development/oauth2-implementation/">
       
       
-        <link rel="prev" href="../../CODE_OF_CONDUCT/">
+        <link rel="prev" href="../generic-crud-use-cases/">
       
       
-        <link rel="next" href="../domain-layer/">
+        <link rel="next" href="../../setup/project-setup/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Visão Geral - Django Clean Architecture Base Project</title>
+        <title>Implementação OAuth2 - Django Clean Architecture Base Project</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#visao-geral-da-arquitetura-limpa" class="md-skip">
+        <a href="#implementacao-completa-de-oauth2" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Visão Geral
+              Implementação OAuth2
             
           </span>
         </div>
@@ -295,13 +295,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
           
   
   
@@ -317,11 +315,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../development/testing/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../testing/" class="md-tabs__link">
           
   
   
@@ -492,31 +492,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -529,7 +526,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Arquitetura
@@ -540,19 +537,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
         
   
   
@@ -563,7 +551,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -576,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../domain-layer/" class="md-nav__link">
+      <a href="../../architecture/domain-layer/" class="md-nav__link">
         
   
   
@@ -599,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../application-layer/" class="md-nav__link">
+      <a href="../../architecture/application-layer/" class="md-nav__link">
         
   
   
@@ -622,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../infrastructure-layer/" class="md-nav__link">
+      <a href="../../architecture/infrastructure-layer/" class="md-nav__link">
         
   
   
@@ -645,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../presentation-layer/" class="md-nav__link">
+      <a href="../../architecture/presentation-layer/" class="md-nav__link">
         
   
   
@@ -668,7 +655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../url-configuration/" class="md-nav__link">
+      <a href="../../architecture/url-configuration/" class="md-nav__link">
         
   
   
@@ -691,7 +678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lighter-user-model/" class="md-nav__link">
+      <a href="../../architecture/lighter-user-model/" class="md-nav__link">
         
   
   
@@ -718,28 +705,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -752,7 +742,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Desenvolvimento
@@ -766,7 +756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/testing/" class="md-nav__link">
+      <a href="../testing/" class="md-nav__link">
         
   
   
@@ -789,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/frontend-integration/" class="md-nav__link">
+      <a href="../frontend-integration/" class="md-nav__link">
         
   
   
@@ -812,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/generic-crud-use-cases/" class="md-nav__link">
+      <a href="../generic-crud-use-cases/" class="md-nav__link">
         
   
   
@@ -832,10 +822,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../development/oauth2-implementation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Implementação OAuth2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -846,6 +858,95 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-contexto-e-justificativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Contexto e Justificativa
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-abordagem-da-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Abordagem da Implementação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Abordagem da Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-configuracao-do-django-oauth-toolkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      a. Configuração do django-oauth-toolkit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-authgateway-projectcoredomaingatewayspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      b. AuthGateway (project/core/domain/gateways.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-djangoauthgateway-projectcorerepositoriesauth_gateway_implpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      c. DjangoAuthGateway (project/core/repositories/auth_gateway_impl.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-impacto-em-casos-de-uso-e-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      d. Impacto em Casos de Uso e Views
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-passos-da-implementacao-concluidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Passos da Implementação (Concluídos)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -975,8 +1076,21 @@
   
 
 
-<h1 id="visao-geral-da-arquitetura-limpa">Visão Geral da Arquitetura Limpa<a class="headerlink" href="#visao-geral-da-arquitetura-limpa" title="Permanent link">&para;</a></h1>
-<p>A Arquitetura Limpa organiza o software em camadas concêntricas, onde as dependências fluem apenas para dentro. As camadas internas (Domínio e Aplicação) contêm a lógica de negócio principal e são independentes de frameworks, bancos de dados ou interfaces de usuário. As camadas externas (Infraestrutura e Apresentação) são responsáveis por detalhes de implementação e dependem das camadas internas.</p>
+<h1 id="implementacao-completa-de-oauth2">Implementação Completa de OAuth2<a class="headerlink" href="#implementacao-completa-de-oauth2" title="Permanent link">&para;</a></h1>
+<p>Esta seção detalha a implementação completa do protocolo OAuth2 para autenticação e autorização, utilizando a biblioteca <code>django-oauth-toolkit</code>.</p>
+<h2 id="1-contexto-e-justificativa">1. Contexto e Justificativa<a class="headerlink" href="#1-contexto-e-justificativa" title="Permanent link">&para;</a></h2>
+<p>Atualmente, a autenticação básica de login retorna tokens simplificados. Para um projeto-base robusto, é essencial ter um sistema de autenticação e autorização baseado em padrões da indústria. O OAuth2, com o <code>django-oauth-toolkit</code>, oferece uma solução completa para gerenciamento de tokens de acesso e refresh, permitindo uma integração segura com clientes externos (frontends, aplicativos móveis, outras APIs).</p>
+<h2 id="2-abordagem-da-implementacao">2. Abordagem da Implementação<a class="headerlink" href="#2-abordagem-da-implementacao" title="Permanent link">&para;</a></h2>
+<h3 id="a-configuracao-do-django-oauth-toolkit">a. Configuração do <code>django-oauth-toolkit</code><a class="headerlink" href="#a-configuracao-do-django-oauth-toolkit" title="Permanent link">&para;</a></h3>
+<p>O <code>django-oauth-toolkit</code> já estava configurado no projeto. Os seguintes pontos confirmam isso:</p>
+<ul>
+<li><strong><code>INSTALLED_APPS</code></strong>: <code>oauth2_provider</code> já está incluído em <code>project/project/settings.py</code>.</li>
+<li><strong>URLs</strong>: As URLs do <code>oauth2_provider</code> já estão configuradas em <code>project/project/urls.py</code> com <code>path("o/", include("oauth2_provider.urls", namespace="oauth2_provider"))</code>.</li>
+</ul>
+<h3 id="b-authgateway-projectcoredomaingatewayspy">b. <code>AuthGateway</code> (<code>project/core/domain/gateways.py</code>)<a class="headerlink" href="#b-authgateway-projectcoredomaingatewayspy" title="Permanent link">&para;</a></h3>
+<p>A interface <code>AuthGateway</code> já define o método <code>create_tokens</code> e não foi alterada, pois ela já abstrai a necessidade de um gateway de autenticação.</p>
+<h3 id="c-djangoauthgateway-projectcorerepositoriesauth_gateway_implpy">c. <code>DjangoAuthGateway</code> (<code>project/core/repositories/auth_gateway_impl.py</code>)<a class="headerlink" href="#c-djangoauthgateway-projectcorerepositoriesauth_gateway_implpy" title="Permanent link">&para;</a></h3>
+<p>A implementação concreta do <code>create_tokens</code> no <code>DjangoAuthGateway</code> foi modificada para utilizar a API do <code>django-oauth-toolkit</code> para gerar tokens OAuth2 padrão (access token e refresh token). Também foi adicionada uma lógica para criar uma <code>Application</code> padrão (<code>Default Application</code>) se ela não existir, o que é útil para ambientes de desenvolvimento e teste.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -987,18 +1101,88 @@
 <span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>graph TD
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    A[Frameworks &amp; Drivers] --&gt; B(Interface Adapters)
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>    B --&gt; C(Application Business Rules)
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a>    C --&gt; D(Enterprise Business Rules)
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a>    subgraph Layers
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>        direction LR
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a>        D -- Core Domain --&gt; C
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a>        C -- Application Logic --&gt; B
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a>        B -- Presentation/Persistence --&gt; A
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a>    end
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">core.domain.gateways</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthGateway</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">get_user_model</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">oauth2_provider.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AccessToken</span><span class="p">,</span> <span class="n">RefreshToken</span><span class="p">,</span> <span class="n">Application</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">User</span> <span class="o">=</span> <span class="n">get_user_model</span><span class="p">()</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="k">class</span><span class="w"> </span><span class="nc">DjangoAuthGateway</span><span class="p">(</span><span class="n">AuthGateway</span><span class="p">):</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>    <span class="c1"># ... (check_password e set_password inalterados)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>            <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>        <span class="k">except</span> <span class="n">User</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;User not found&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>            <span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Default Application&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="k">except</span> <span class="n">Application</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a>            <span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Default Application&quot;</span><span class="p">,</span> <span class="n">client_type</span><span class="o">=</span><span class="s2">&quot;public&quot;</span><span class="p">,</span> <span class="n">authorization_grant_type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a>        <span class="n">AccessToken</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">application</span><span class="o">=</span><span class="n">application</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>        <span class="n">RefreshToken</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">application</span><span class="o">=</span><span class="n">application</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="n">access_token</span> <span class="o">=</span> <span class="n">AccessToken</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>            <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>            <span class="n">application</span><span class="o">=</span><span class="n">application</span><span class="p">,</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>            <span class="n">token</span><span class="o">=</span><span class="s2">&quot;access_token_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>            <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;read write&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>            <span class="n">expires</span><span class="o">=</span><span class="n">AccessToken</span><span class="o">.</span><span class="n">get_expiration_delta</span><span class="p">(),</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="p">)</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="n">refresh_token</span> <span class="o">=</span> <span class="n">RefreshToken</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>            <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>            <span class="n">application</span><span class="o">=</span><span class="n">application</span><span class="p">,</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>            <span class="n">token</span><span class="o">=</span><span class="s2">&quot;refresh_token_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>            <span class="n">access_token</span><span class="o">=</span><span class="n">access_token</span><span class="p">,</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>        <span class="p">)</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>        <span class="k">return</span> <span class="n">access_token</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">refresh_token</span><span class="o">.</span><span class="n">token</span>
 </code></pre></div></td></tr></table></div>
+<h3 id="d-impacto-em-casos-de-uso-e-views">d. Impacto em Casos de Uso e Views<a class="headerlink" href="#d-impacto-em-casos-de-uso-e-views" title="Permanent link">&para;</a></h3>
+<p>Não houve impacto direto no <code>LoginUserUseCase</code> nem na <code>LoginAPIView</code>. Eles continuam a interagir com a interface <code>AuthGateway</code> e seus DTOs, recebendo os tokens OAuth2 gerados pela camada de infraestrutura sem a necessidade de alterações em sua lógica interna. Isso valida a eficácia do desacoplamento da Arquitetura Limpa.</p>
+<h2 id="3-passos-da-implementacao-concluidos">3. Passos da Implementação (Concluídos)<a class="headerlink" href="#3-passos-da-implementacao-concluidos" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Configuração de <code>django-oauth-toolkit</code> verificada</strong>: Confirmado que <code>oauth2_provider</code> está em <code>INSTALLED_APPS</code> e as URLs estão configuradas.</li>
+<li><strong><code>create_tokens</code> implementado</strong>: O método <code>create_tokens</code> em <code>project/core/repositories/auth_gateway_impl.py</code> foi atualizado para gerar tokens OAuth2 reais.</li>
+<li><strong>Verificação de Impacto</strong>: Confirmado que <code>LoginUserUseCase</code> e <code>LoginAPIView</code> não precisaram de alterações diretas.</li>
+</ol>
 
 
 
