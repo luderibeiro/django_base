@@ -7,9 +7,16 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
-## [1.2.0] - 2024-07-30
+## [2.0.0] - 2024-07-30
 
 ### Adicionado
+
+-   **Configuração de Logs e Tratamento Global de Exceções**: Implementação de uma estratégia robusta de *logging* com múltiplos *handlers* (console, arquivo de log, arquivo de erros), formatadores padronizados e *loggers* específicos. Criação de um *middleware* customizado para tratamento global de exceções no Django REST Framework, que captura, registra e padroniza respostas de erro da API. Logs foram adicionados a casos de uso (`LoginUserUseCase`, `ListUsersUseCase`) e repositórios (`DjangoUserRepository`) para maior observabilidade.
+    -   `project/project/settings.py`: Configuração de `LOGGING` e integração do *middleware* no `REST_FRAMEWORK`.
+    -   `project/core/middleware/custom_exception_middleware.py`: Novo arquivo com o *handler* de exceções customizado.
+    -   `project/core/domain/use_cases/user_use_cases.py`: Adição de logs.
+    -   `project/core/repositories/user_repository_impl.py`: Adição de logs e tratamento de exceções específicas.
+    -   Documentação detalhada em `docs/development/logging-error-handling.md`.
 
 -   **Testes Automatizados**: Implementação de uma suíte abrangente de testes unitários para as camadas de Domínio e Aplicação, e testes de integração para a API (autenticação e gerenciamento de usuários).
     -   `project/core/tests/unit/test_user_entity.py`
@@ -19,18 +26,25 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
     -   `project/core/tests/integration/test_user_api.py`
     -   Configuração do Pytest (`pytest.ini`) e adição de dependências (`pytest`, `pytest-mock`, `pytest-django`).
     -   Documentação detalhada em `docs/development/automated-testing.md`.
+-   **Paginação e Filtragem**: Adicionadas capacidades de paginação (`offset`, `limit`) e filtragem (`search_query`) para a API de listagem de usuários. Isso envolveu modificações nos DTOs, interface de repositório, implementação do repositório (`DjangoUserRepository` usando `Q` objects), *serializers* e *views* do DRF, e testes de integração abrangentes.
+    -   `project/core/domain/use_cases/user_use_cases.py`: DTOs `ListUsersRequest`, `ListUsersResponse` e `ListUsersUseCase` atualizados.
+    -   `project/core/domain/data_access.py`: Interface `UserRepository` com `get_all_paginated_filtered`.
+    -   `project/core/repositories/user_repository_impl.py`: Implementação de `get_all_paginated_filtered`.
+    -   `project/core/api/v1/serializers/user.py`: `ListUsersRequestSerializer` e `UserListResponseSerializer`.
+    -   `project/core/api/v1/views/user.py`: `UserListAPIView` atualizada.
+    -   `project/core/tests/integration/test_user_api.py`: Novos testes de paginação e filtragem.
+    -   Documentação detalhada em `docs/development/pagination-filtering.md`.
 -   **Estrutura de Changelog**: Criação deste arquivo `CHANGELOG.md` para rastrear todas as alterações do projeto, substituindo o antigo `SUMMARY_OF_CHANGES.md`.
 
 ### Alterado
 
 -   **Links de Documentação**: Corrigidos links absolutos e relativos no `README.md` da raiz e no `docs/CONTRIBUTING.md` para garantir o funcionamento correto no GitHub Pages.
--   **Navegação do MkDocs**: Atualização do `mkdocs.yml` para incluir a nova entrada `Changelog`.
+-   **Navegação do MkDocs**: Atualização do `mkdocs.yml` para incluir novas entradas de documentação (Testes Automatizados, Paginação e Filtragem, Logs e Tratamento de Exceções) e a nova entrada `Changelog`.
 
 ### Refatorado
 
 -   **Modelo de Usuário Mais Leve**: O modelo `User` do Django foi refatorado para herdar de `AbstractBaseUser` e `PermissionsMixin`, removendo o campo `username` e definindo `USERNAME_FIELD = "email"` e `REQUIRED_FIELDS` apropriadamente. A lógica em `DjangoUserRepository` e nos casos de uso foi adaptada para o novo modelo.
 -   **Implementação OAuth2 Completa**: A `DjangoAuthGateway` foi atualizada para utilizar o `django-oauth-toolkit` para a geração real de tokens de acesso e refresh, substituindo a lógica de tokens fictícios. Configurações OAuth2 confirmadas em `settings.py` e `urls.py`.
-
 
 ## [1.1.0] - Projeto Base de Arquitetura Limpa Inicial
 
