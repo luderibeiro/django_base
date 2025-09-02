@@ -3,6 +3,7 @@ from core.domain.use_cases.user_use_cases import (
     ChangeUserPasswordResponse,
     CreateUserRequest,
     CreateUserResponse,
+    ListUsersRequest,
     ListUsersResponse,
     LoginUserRequest,
     LoginUserResponse,
@@ -57,9 +58,30 @@ class UserSerializer(serializers.Serializer):
 
 class UserListResponseSerializer(serializers.Serializer):
     users = UserSerializer(many=True)
+    total_items = serializers.IntegerField()
+    offset = serializers.IntegerField()
+    limit = serializers.IntegerField()
 
     def to_representation(self, instance: ListUsersResponse):
-        return {"users": [UserSerializer(user).data for user in instance.users]}
+        return {
+            "items": [UserSerializer(user).data for user in instance.users],
+            "total_items": instance.total_items,
+            "offset": instance.offset,
+            "limit": instance.limit,
+        }
+
+
+class ListUsersRequestSerializer(serializers.Serializer):
+    offset = serializers.IntegerField(default=0, required=False, min_value=0)
+    limit = serializers.IntegerField(default=10, required=False, min_value=1)
+    search_query = serializers.CharField(required=False, allow_blank=True)
+
+    def to_internal_value(self, data):
+        return ListUsersRequest(
+            offset=data.get("offset", 0),
+            limit=data.get("limit", 10),
+            search_query=data.get("search_query", None),
+        )
 
 
 class UserAlterPasswordSerializer(serializers.Serializer):

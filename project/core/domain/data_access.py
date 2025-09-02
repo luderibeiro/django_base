@@ -52,3 +52,9 @@ class UserRepository(GenericRepository[User]):
     @abstractmethod
     def get_all(self) -> List[User]:
         pass
+
+    @abstractmethod
+    def get_all_paginated_filtered(
+        self, offset: int, limit: int, search_query: str | None
+    ) -> tuple[List[User], int]:
+        pass

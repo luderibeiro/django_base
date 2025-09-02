@@ -1,4 +1,5 @@
 from typing import List, Optional
+from django.db.models import Q
 
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
@@ -58,3 +59,19 @@ class DjangoUserRepository(UserRepository):
             is_superuser=True
         )  # Excluir superusuários por padrão
         return [self._to_domain_user(user) for user in django_users]
+
+    def get_all_paginated_filtered(
+        self, offset: int, limit: int, search_query: str | None
+    ) -> tuple[List[DomainUser], int]:
+        queryset = DjangoUser.objects.exclude(is_superuser=True)
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(email__icontains=search_query)
+                | Q(first_name__icontains=search_query)
+                | Q(last_name__icontains=search_query)
+            )
+
+        total_items = queryset.count()
+        django_users = queryset[offset : offset + limit]
+        return [self._to_domain_user(user) for user in django_users], total_items

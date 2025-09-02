@@ -138,26 +138,29 @@ class ChangeUserPasswordUseCase:
 
 @dataclass
 class ListUsersRequest:
-    # Adicione campos para filtros, paginação, etc., se necessário
-    pass
+    offset: int = 0
+    limit: int = 10
+    search_query: str | None = None
 
 
 @dataclass
 class ListUsersResponse:
     users: list[CreateUserResponse]
+    total_items: int
+    offset: int
+    limit: int
 
 
 class ListUsersUseCase:
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
-        self.generic_list_use_case = ListEntitiesUseCase[DomainUser](
-            repository=user_repository
-        )
+        # Não usaremos o generic_list_use_case diretamente aqui,
+        # pois precisamos de uma lógica de paginação/filtragem mais específica.
 
     def execute(self, request: ListUsersRequest) -> ListUsersResponse:
-        generic_request = GenericListRequest()  # No filters/pagination for now
-        list_entities_response = self.generic_list_use_case.execute(generic_request)
-        users_domain = list_entities_response.items
+        users_domain, total_items = self.user_repository.get_all_paginated_filtered(
+            offset=request.offset, limit=request.limit, search_query=request.search_query
+        )
 
         users_response = [
             CreateUserResponse(
@@ -171,7 +174,12 @@ class ListUsersUseCase:
             )
             for user in users_domain
         ]
-        return ListUsersResponse(users=users_response)
+        return ListUsersResponse(
+            users=users_response,
+            total_items=total_items,
+            offset=request.offset,
+            limit=request.limit,
+        )
 
 
 @dataclass

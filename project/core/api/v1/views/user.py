@@ -19,6 +19,7 @@ from ..serializers.user import (
     UserListResponseSerializer,
     UserReadSerializer,
     UserSerializer,
+    ListUsersRequestSerializer, # Nova importação
 )
 
 User = get_user_model()
@@ -41,10 +42,11 @@ class UserListAPIView(generics.ListAPIView):
     permission_classes = (IsAdminUser,)
 
     def list(self, request, *args, **kwargs):
+        request_serializer = ListUsersRequestSerializer(data=request.query_params)
+        request_serializer.is_valid(raise_exception=True)
+        list_users_request = request_serializer.to_internal_value(request_serializer.validated_data)
+
         list_users_use_case = get_list_users_use_case()
-        list_users_request = (
-            ListUsersRequest()
-        )  # Pode adicionar filtros/paginação aqui se necessário
         list_users_response = list_users_use_case.execute(list_users_request)
 
         response_serializer = UserListResponseSerializer(instance=list_users_response)
