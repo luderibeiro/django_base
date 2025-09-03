@@ -160,3 +160,20 @@ cython_debug/
 #.idea/
 
 /data/
+
+# Arquivos de segurança - NUNCA commitar
+*.key
+*.pem
+*.p12
+*.pfx
+.env.local
+.env.production
+.env.staging
+secrets/
+credentials/
+backups/
+project_report.md
+
+# Arquivos de configuração sensíveis
+docker-compose.override.yml
+local_settings.py

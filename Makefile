@@ -84,8 +84,8 @@ makemigrations: ## Cria novas migrações
 
 createsuperuser: ## Cria um superusuário
 	@echo "$(BLUE)👤 Criando superusuário...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(email='admin@example.com').exists() or User.objects.create_superuser('admin@example.com', 'admin', 'admin123')" | $(MANAGE) shell
-	@echo "$(GREEN)✅ Superusuário criado: admin@example.com / admin123$(NC)"
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && $(MANAGE) createsuperuser
+	@echo "$(GREEN)✅ Superusuário criado com sucesso!$(NC)"
 
 # Limpeza
 clean: ## Limpa arquivos temporários e cache

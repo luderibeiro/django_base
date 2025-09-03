@@ -78,3 +78,5 @@ nav:
           - 🚀 Deploy Completo em Produção: setup/production-complete-guide.md
     - Análise do Projeto:
           - 📊 Análise Completa da Arquitetura: architecture/project-analysis.md
+    - Segurança:
+          - 🔒 Diretrizes de Segurança: security/security-guidelines.md

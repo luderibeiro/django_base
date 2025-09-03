@@ -50,13 +50,16 @@ Após executar os comandos acima, você deve ver:
 
 Acesse http://127.0.0.1:8000 no seu navegador e você verá a página inicial do Django.
 
-## 🔐 Credenciais Padrão
+## 🔐 Criação de Superusuário
 
-O comando `make setup` cria automaticamente um superusuário:
+O comando `make setup` solicitará que você crie um superusuário interativamente:
 
-- **Email**: admin@example.com
-- **Usuário**: admin
-- **Senha**: admin123
+```bash
+# Durante o setup, você será solicitado a criar credenciais seguras
+make createsuperuser
+```
+
+**⚠️ Importante**: Sempre use credenciais seguras em produção!
 
 Acesse http://127.0.0.1:8000/admin para entrar no painel administrativo.
 
