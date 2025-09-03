@@ -1,6 +1,6 @@
-site_name: Django Clean Architecture Base Project
-site_url: https://your-username.github.io/django_base/
-repo_url: https://github.com/your-username/django_base/
+site_name: Django Base - Template com Arquitetura Limpa
+site_url: https://luderibeiro.github.io/django_base/
+repo_url: https://github.com/luderibeiro/django_base/
 edit_uri: edit/main/docs/
 
 theme:
@@ -72,5 +72,9 @@ nav:
           - Paginação e Filtragem: development/pagination-filtering.md
           - Logs e Tratamento de Exceções: development/logging-error-handling.md
     - Setup:
+          - 🚀 Guia de Início Rápido: setup/quick-start-guide.md
           - Configuração do Projeto: setup/project-setup.md
           - Configuração da Documentação: setup/documentation-setup.md
+          - 🚀 Deploy Completo em Produção: setup/production-complete-guide.md
+    - Análise do Projeto:
+          - 📊 Análise Completa da Arquitetura: architecture/project-analysis.md
