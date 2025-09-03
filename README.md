@@ -1,25 +1,168 @@
-# Template para Projetos em Django - Arquitetura Limpa
+# 🚀 Django Base - Template com Arquitetura Limpa
 
-**Can't read portuguese? Read this README in [english](README-en.md)**
+<div align="center">
 
-Este repositório serve como um template robusto para iniciar projetos em Python (versão 3.12) com o framework Django (versão 5.2+), seguindo rigorosamente os princípios da Arquitetura Limpa.
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+[![Django](https://img.shields.io/badge/Django-5.2+-green.svg)](https://djangoproject.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue.svg)](https://luderibeiro.github.io/django_base/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
 
-## Documentação Completa
+**🌟 Template profissional para projetos Django com Arquitetura Limpa**
 
-Para uma visão aprofundada da arquitetura, configuração, desenvolvimento e guias de integração, acesse a [documentação completa do projeto](https://your-username.github.io/django_base/) gerada com MkDocs.
+[📖 Documentação](https://luderibeiro.github.io/django_base/) • [🚀 Início Rápido](#-início-rápido) • [🏗️ Arquitetura](#️-arquitetura) • [🤝 Contribuir](#-contribuição)
 
-## Sobre o Projeto
+</div>
 
-Este projeto em Django está Dockerizado e segue os princípios da arquitetura limpa (Clean Architecture). Ele proporciona uma estrutura sólida para o desenvolvimento de uma variedade de aplicações, desde APIs até aplicações web.
+---
 
-## Como Usar
+## 🎯 Sobre o Projeto
 
-Para instruções detalhadas sobre como configurar e executar o projeto localmente (com ou sem Docker), consulte a seção de [Configuração do Projeto na documentação](https://your-username.github.io/django_base/setup/project-setup/).
+Este template Django oferece uma **base sólida e profissional** para desenvolvimento de aplicações web e APIs, seguindo os princípios da **Clean Architecture**. Ideal para:
 
-## Contribuição
+- 🔥 **Startups** que precisam de desenvolvimento rápido e escalável
+- 🏢 **Empresas** que buscam padronização e qualidade de código
+- 👨‍💻 **Desenvolvedores** que querem aprender boas práticas de arquitetura
+- 🎓 **Estudantes** interessados em projetos bem estruturados
 
-Quer contribuir? Seu apoio é muito bem-vindo! Para saber como, por favor, consulte nosso [Guia de Contribuição na documentação](https://your-username.github.io/django_base/CONTRIBUTING.md).
+### ✨ Principais Características
 
-## Licença
+- 🏗️ **Arquitetura Limpa** - Separação clara de responsabilidades
+- 🐳 **Docker Ready** - Containerização completa para desenvolvimento e produção
+- 🧪 **Testes Automatizados** - Suite completa de testes com pytest
+- 📚 **Documentação Rica** - Guias detalhados e exemplos práticos
+- 🔧 **Makefile Poderoso** - Automação de tarefas de desenvolvimento
+- 🎨 **Interface Admin** - Django Jazzmin para administração elegante
+- 🔐 **Autenticação OAuth** - Sistema de autenticação robusto
+- 📊 **API REST** - Django REST Framework configurado
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+## 🚀 Início Rápido
+
+### Pré-requisitos
+
+- Python 3.12+
+- Docker & Docker Compose (opcional)
+- Git
+
+### ⚡ Setup em 3 comandos
+
+```bash
+# 1. Clone o template
+git clone https://github.com/luderibeiro/django_base.git meu_projeto
+cd meu_projeto
+
+# 2. Configure o ambiente
+make setup
+
+# 3. Inicie o servidor
+make run
+```
+
+🎉 **Pronto!** Acesse http://127.0.0.1:8000
+
+### 🐳 Com Docker
+
+```bash
+# Desenvolvimento
+make docker-run
+
+# Produção
+make docker-prod
+```
+
+## 🏗️ Arquitetura
+
+```
+project/
+├── core/                    # Aplicação principal
+│   ├── domain/             # Regras de negócio
+│   ├── repositories/       # Acesso a dados
+│   ├── api/               # Endpoints REST
+│   └── admin/             # Interface administrativa
+├── project/               # Configurações Django
+└── tests/                 # Testes automatizados
+```
+
+### 🎯 Camadas da Arquitetura
+
+- **🎯 Domain**: Entidades e regras de negócio
+- **🔄 Repository**: Abstração de acesso a dados
+- **🌐 API**: Endpoints e serializers
+- **⚙️ Infrastructure**: Configurações e integrações
+
+## 📋 Comandos Disponíveis
+
+```bash
+make help              # Lista todos os comandos
+make setup             # Configuração inicial completa
+make test              # Executa todos os testes
+make test-coverage     # Testes com cobertura
+make lint              # Análise de código
+make format            # Formatação automática
+make docs-serve        # Serve documentação local
+make clean             # Limpeza de arquivos temporários
+```
+
+## 🛠️ Tecnologias
+
+- **Backend**: Django 5.2+, Django REST Framework
+- **Database**: PostgreSQL (produção), SQLite (desenvolvimento)
+- **Authentication**: Django OAuth Toolkit
+- **Testing**: pytest, pytest-django
+- **Documentation**: MkDocs
+- **Containerization**: Docker, Docker Compose
+- **Code Quality**: Black, Flake8, pip-audit
+
+## 📖 Documentação Completa
+
+Para guias detalhados, exemplos e referências da API, acesse nossa [**documentação completa**](https://luderibeiro.github.io/django_base/).
+
+### 📚 Guias Disponíveis
+
+- [🚀 Setup do Projeto](https://luderibeiro.github.io/django_base/setup/project-setup/)
+- [🏗️ Arquitetura Detalhada](https://luderibeiro.github.io/django_base/architecture/)
+- [🧪 Testes Automatizados](https://luderibeiro.github.io/django_base/development/automated-testing/)
+- [🚀 Deploy em Produção](https://luderibeiro.github.io/django_base/setup/production-setup/)
+
+## 🤝 Contribuição
+
+Contribuições são muito bem-vindas! Este projeto foi criado para ser um **template comunitário**.
+
+### 💡 Como Contribuir
+
+1. 🍴 Faça um fork do projeto
+2. 🌟 Crie sua feature branch (`git checkout -b feature/AmazingFeature`)
+3. ✅ Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. 📤 Push para a branch (`git push origin feature/AmazingFeature`)
+5. 🔄 Abra um Pull Request
+
+### 🎯 Ideias para Contribuição
+
+- 📱 Templates específicos (e-commerce, blog, API, etc.)
+- 🔧 Melhorias na automação
+- 📚 Tradução da documentação
+- 🧪 Novos casos de teste
+- 🎨 Melhorias na UI/UX
+
+## 📄 Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE) - veja o arquivo LICENSE para detalhes.
+
+## 🌟 Apoie o Projeto
+
+Se este template foi útil para você:
+
+- ⭐ Dê uma estrela no repositório
+- 🍴 Faça um fork para suas customizações
+- 📢 Compartilhe com outros desenvolvedores
+- 🐛 Reporte bugs ou sugira melhorias
+
+---
+
+<div align="center">
+
+**Desenvolvido com ❤️ para a comunidade Django**
+
+[📖 Documentação](https://luderibeiro.github.io/django_base/) • [🐛 Issues](https://github.com/luderibeiro/django_base/issues) • [💬 Discussões](https://github.com/luderibeiro/django_base/discussions)
+
+</div>
