@@ -1,13 +1,16 @@
-import logging
+"""
+Views da API para gerenciamento de usuários.
 
-logger = logging.getLogger(__name__)
+Contém as views para listagem, criação, recuperação e alteração de senha
+de usuários, seguindo os padrões de Clean Architecture.
+"""
+import logging
 
 from core.api.deps import (
     get_change_user_password_use_case,
     get_create_user_use_case,
     get_get_user_by_id_use_case,
     get_list_users_use_case,
-    get_login_user_use_case,
 )
 from core.domain.use_cases.user_use_cases import GetUserByIdRequest, ListUsersRequest
 from django.contrib.auth import get_user_model
@@ -15,30 +18,21 @@ from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
-from ..serializers.user import ListUsersRequestSerializer  # Nova importação
 from ..serializers.user import (
+    ListUsersRequestSerializer,
     UserAlterPasswordSerializer,
     UserCreateRequestSerializer,
     UserListResponseSerializer,
     UserReadSerializer,
-    UserSerializer,
 )
+
+logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
 
 class UserListAPIView(generics.ListAPIView):
-    """List API view for users.
-
-    This view lists non-superuser users.
-
-    Attributes:
-    ----------
-        queryset: The queryset of users to display.
-        serializer_class: The serializer class to use for user serialization.
-        filterset_fields (ClassVar[list[str]]): List of fields for filtering users.
-        search_fields (ClassVar[list[str]]): List of fields for searching users.
-    """
+    """Lista usuários paginados e filtrados (apenas admins)."""
 
     serializer_class = UserListResponseSerializer
     permission_classes = (IsAdminUser,)  # Restaurado para IsAdminUser
@@ -60,16 +54,7 @@ class UserListAPIView(generics.ListAPIView):
 
 
 class UserAlterPasswordAPIView(generics.UpdateAPIView):
-    """API view for altering user passwords.
-
-    This view is used for updating non-superuser user passwords.
-
-    Attributes:
-    ----------
-        queryset: The queryset of users to update passwords.
-        serializer_class: The serializer class to use for password update.
-        permission_classes: The permission classes required to access this view.
-    """
+    """Atualiza a senha de um usuário. Requer privilégio de admin."""
 
     queryset = User.objects.all()  # Alterado para permitir superusuários
     serializer_class = UserAlterPasswordSerializer
@@ -94,6 +79,8 @@ class UserAlterPasswordAPIView(generics.UpdateAPIView):
 
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
+    """Recupera um usuário pelo ID. Acesso restrito a admins."""
+
     serializer_class = UserReadSerializer
     permission_classes = (IsAdminUser,)  # Restaurado para IsAdminUser
     queryset = User.objects.all()  # Adicionado queryset
@@ -112,6 +99,8 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
 
 
 class UserCreateAPIView(generics.CreateAPIView):
+    """Cria um novo usuário (público)."""
+
     queryset = User.objects.all()
     serializer_class = UserCreateRequestSerializer
     permission_classes = (AllowAny,)

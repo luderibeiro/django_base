@@ -1,3 +1,9 @@
+"""Handler de exceções customizado para respostas padronizadas da API.
+
+Integra com o exception_handler do DRF e adiciona tratamento para
+ValueError e IntegrityError, além de logs e traceback opcional em DEBUG.
+"""
+
 import logging
 import traceback
 
@@ -13,6 +19,10 @@ logger = logging.getLogger(__name__)
 
 
 def custom_exception_handler(exc, context):
+    """Formata exceções da API em respostas consistentes.
+
+    Em caso de DEBUG, inclui traceback para facilitar diagnóstico.
+    """
     # Call REST framework's default exception handler first,
     # to get the standard error response.
     response = exception_handler(exc, context)

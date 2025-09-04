@@ -1,3 +1,5 @@
+"""Views de autenticação (login) para API v1."""
+
 from core.api.deps import get_login_user_use_case
 from core.api.v1.serializers.user import LoginRequestSerializer, LoginResponseSerializer
 from core.domain.use_cases.user_use_cases import (
@@ -10,9 +12,14 @@ from rest_framework.views import APIView
 
 
 class LoginAPIView(APIView):
+    """
+    Realiza login via email/senha e retorna tokens OAuth2.
+    """
+
     permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):
+        """Processa requisição de login."""
         serializer = LoginRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         login_request = LoginUserRequest(

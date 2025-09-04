@@ -10,6 +10,13 @@ logger = logging.getLogger(__name__)
 
 
 class DjangoUserRepository(UserRepository):
+    """Implementação Django do `UserRepository`.
+
+    Responsável por mapear `core.models.user.User` para a entidade de
+    domínio `core.domain.entities.user.User` e oferecer operações de
+    persistência e consulta.
+    """
+
     def get_by_id(self, user_id: str) -> Optional[DomainUser]:
         try:
             user = DjangoUser.objects.get(id=user_id)
@@ -29,6 +36,11 @@ class DjangoUserRepository(UserRepository):
             return None
 
     def create(self, user: DomainUser) -> DomainUser:
+        """Cria um usuário Django a partir da entidade de domínio.
+
+        Observação: a senha deve ser tratada em um caso de uso específico
+        se for parte do fluxo de criação.
+        """
         logger.info("Attempting to create user with email: %s", user.email)
         django_user = DjangoUser.objects.create_user(
             email=user.email,
@@ -39,6 +51,7 @@ class DjangoUserRepository(UserRepository):
         return self._to_domain_user(django_user)
 
     def update(self, user: DomainUser) -> DomainUser:
+        """Atualiza campos básicos de perfil do usuário."""
         logger.info("Attempting to update user with ID: %s", user.id)
         try:
             django_user = DjangoUser.objects.get(id=user.id)

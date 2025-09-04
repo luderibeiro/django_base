@@ -41,6 +41,12 @@ class CreateUserResponse:
 
 
 class CreateUserUseCase:
+    """Caso de uso para criação de usuários.
+
+    Constrói a entidade de domínio e delega ao caso de uso genérico
+    de criação. A definição de senha deve ocorrer por gateway/autenticação.
+    """
+
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
         self.generic_create_use_case = CreateEntityUseCase[DomainUser](
@@ -90,6 +96,8 @@ class LoginUserResponse:
 
 
 class LoginUserUseCase:
+    """Caso de uso para autenticação e geração de tokens."""
+
     def __init__(self, user_repository: UserRepository, auth_gateway: AuthGateway):
         self.user_repository = user_repository
         self.auth_gateway = auth_gateway
@@ -131,6 +139,8 @@ class ChangeUserPasswordResponse:
 
 
 class ChangeUserPasswordUseCase:
+    """Caso de uso para troca segura de senha de usuário."""
+
     def __init__(self, user_repository: UserRepository, auth_gateway: AuthGateway):
         self.user_repository = user_repository
         self.auth_gateway = auth_gateway
@@ -164,6 +174,8 @@ class ListUsersResponse:
 
 
 class ListUsersUseCase:
+    """Caso de uso para listagem paginada e filtrada de usuários."""
+
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
         # Não usaremos o generic_list_use_case diretamente aqui,
@@ -213,6 +225,8 @@ class GetUserByIdRequest:
 
 
 class GetUserByIdUseCase:
+    """Caso de uso para obter usuário por identificador único."""
+
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
         self.generic_get_by_id_use_case = GetEntityByIdUseCase[DomainUser](

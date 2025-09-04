@@ -10,29 +10,25 @@ from django.db import models
 
 
 class UserManager(BaseUserManager):
-    """A model manager for the `User` model with no username field.
+    """Manager para o modelo `User` baseado em email.
 
-    Methods:
-    -------
-        _create_user: Internal method to create and save a user with the given email and password.
-        create_user: Creates and saves a regular user with the given email and password.
-        create_superuser: Creates and saves a superuser with the given email and password.
+    Fornece criação consistente de usuários e superusuários com validações
+    claras. Normalize email e centraliza atributos do PermissionsMixin.
     """
 
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        """Creates and saves a user with the given email and password.
+        """Cria e persiste um usuário com email e senha.
 
-        Args:
-        ----
-            email (str): The email address of the user.
-            password (str): The password of the user.
-            **extra_fields: Additional fields for the user model.
-
-        Returns:
-        -------
-            User: The created user object.
+        Parameters
+        ----------
+        email: str
+            Endereço de email do usuário.
+        password: str
+            Senha em texto plano (será hasheada).
+        **extra_fields:
+            Campos adicionais do modelo.
         """
         if not email:
             raise ValueError("The given email must be set")
@@ -52,39 +48,16 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
-        """Creates and saves a regular user with the given email and password.
+        """Cria um usuário regular.
 
-        Args:
-        ----
-            email (str): The email address of the user.
-            password (str, optional): The password of the user.
-            **extra_fields: Additional fields for the user model.
-
-        Returns:
-        -------
-            User: The created user object.
+        Retorna a instância criada.
         """
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
-        """Creates and saves a superuser with the given email and password.
-
-        Args:
-        ----
-            email (str): The email address of the superuser.
-            password (str): The password of the superuser.
-            **extra_fields: Additional fields for the user model.
-
-        Returns:
-        -------
-            User: The created superuser object.
-
-        Raises:
-        ------
-            ValueError: If is_staff or is_superuser is not set to True.
-        """
+        """Cria um superusuário com validações obrigatórias de privilégios."""
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -97,21 +70,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """A custom user model that extends `AbstractBaseUser` and `PermissionsMixin`.
+    """Modelo de usuário autenticado por email.
 
-    Attributes:
-    ----------
-        email (str): The unique email address of the user.
-        first_name (str): The first name of the user.
-        last_name (str): The last name of the user.
-
-    Attributes:
-    ----------
-        USERNAME_FIELD (str): The field used as the unique identifier for authentication (email).
-        REQUIRED_FIELDS (ClassVar[list[str]]): A list of fields required when creating a user.
-
-    Properties:
-        is_admin (bool): Property to check if the user is a superuser (admin).
+    Guarda informações básicas de perfil e flags de permissão. Usa UUID
+    como chave primária e segue boas práticas de segurança do Django.
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -129,4 +91,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects: ClassVar[UserManager] = UserManager()
 
     def __str__(self):
+        """Representação string do usuário."""
         return self.email
