@@ -7,6 +7,56 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [2.1.0] - 2024-12-19
+
+### Adicionado
+
+- **OpenAPI/Swagger Documentation**: Implementação completa de documentação automática da API usando `drf-spectacular`, incluindo schema OpenAPI 3.0, interface Swagger UI e ReDoc para melhor experiência de desenvolvedor.
+
+- **Pre-commit Hooks**: Configuração de hooks de pre-commit para garantir qualidade de código, incluindo formatação automática (Black), linting (Flake8), verificação de docstrings (pydocstyle) e verificação de tipos (MyPy).
+
+- **MyPy Static Type Checking**: Implementação de verificação de tipos estática em modo gradual, com configuração específica para diferentes módulos e integração com Django via `django-stubs`.
+
+- **MkDocstrings Integration**: Integração do `mkdocstrings` para gerar documentação automática da API Python diretamente dos docstrings, criando referências completas para camadas de domínio, casos de uso e repositórios.
+
+- **GitHub Actions CI/CD**: Pipeline completo de CI/CD com workflows para testes, documentação, qualidade de código e deploy, incluindo templates para issues e pull requests.
+
+- **Documentação Abrangente**:
+  - Guias completos de setup (produção, staging, quick-start)
+  - Análise detalhada de arquitetura do projeto
+  - Diretrizes de segurança e melhores práticas
+  - Referências de API e documentação técnica
+
+- **Ferramentas de Qualidade**: Configuração de `pydocstyle`, `pytest-cov`, `flake8`, `black` e `pip-audit` para garantir padrões de código e segurança.
+
+- **Assets e Branding**: Logos e assets visuais do projeto em diferentes tamanhos para uso em documentação e interfaces.
+
+### Melhorado
+
+- **Docstrings Completas**: Adição de docstrings detalhadas em todo o projeto seguindo padrões PEP 257, incluindo módulos, classes, métodos e funções.
+
+- **Cobertura de Testes**: Aumento da cobertura de testes para 93% com testes unitários adicionais para middleware, URLs e casos de uso.
+
+- **Configuração de Ambiente**: Melhoria significativa na configuração de variáveis de ambiente com suporte a diferentes ambientes (desenvolvimento, staging, produção).
+
+- **Makefile**: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.
+
+- **Estrutura de Documentação**: Reorganização completa da documentação com navegação melhorada e seções específicas para diferentes aspectos do projeto.
+
+### Corrigido
+
+- **Exposição de Credenciais**: Correção de problemas de segurança relacionados à exposição de credenciais em configurações e logs.
+
+- **Configurações de Template**: Correção de configurações de templates e paths para funcionamento correto em diferentes ambientes.
+
+- **Imports Não Utilizados**: Limpeza de imports desnecessários e otimização da estrutura de código.
+
+### Refatorado
+
+- **Configurações de Settings**: Refatoração das configurações do Django para melhor organização e segurança, incluindo configuração condicional de banco de dados.
+
+- **Estrutura de Arquivos**: Reorganização de arquivos estáticos, templates e configurações para melhor manutenibilidade.
+
 ## [2.0.0] - 2024-09-03
 
 ### Adicionado
