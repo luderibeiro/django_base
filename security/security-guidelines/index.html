@@ -1785,10 +1785,12 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="nv">API_KEY</span><span class="o">=</span>sua-api-key-secreta
 </code></pre></div></td></tr></table></div>
 <h4 id="2-github-secrets">2. GitHub Secrets<a class="headerlink" href="#2-github-secrets" title="Permanent link">&para;</a></h4>
-<p>Para CI/CD, use GitHub Secrets:
-- <code>SECRET_KEY_FOR_CI</code>
-- <code>DATABASE_URL_TEST</code>
-- <code>API_KEYS</code></p>
+<p>Para CI/CD, use GitHub Secrets:</p>
+<ul>
+<li><code>SECRET_KEY_FOR_CI</code></li>
+<li><code>DATABASE_URL_TEST</code></li>
+<li><code>API_KEYS</code></li>
+</ul>
 <h4 id="3-configuracao-segura-do-superusuario">3. Configuração Segura do Superusuário<a class="headerlink" href="#3-configuracao-segura-do-superusuario" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
@@ -1936,8 +1938,10 @@
 <p>Notificar equipe de segurança</p>
 </li>
 <li>
-<p><strong>Limpeza do Git</strong>:
-   <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<p><strong>Limpeza do Git</strong>:</p>
+</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>
 <span class="normal"><a href="#__codelineno-6-4">4</a></span>
@@ -1950,11 +1954,9 @@
 <a id="__codelineno-6-5" name="__codelineno-6-5"></a>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="c1"># Force push (coordenar com equipe)</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--force<span class="w"> </span>--all
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p><strong>Prevenção</strong>:</p>
-</li>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Prevenção</strong>:</li>
 <li>Implementar pre-commit hooks</li>
 <li>Usar ferramentas como git-secrets</li>
 <li>Treinamento da equipe</li>

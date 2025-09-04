@@ -872,9 +872,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Testes Unitários (Camadas de Domínio e Aplicação)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#testes-de-integracao-camada-de-apresentacao-api" class="md-nav__link">
     <span class="md-ellipsis">
       Testes de Integração (Camada de Apresentação - API)
@@ -882,8 +883,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#comandos-curl-para-teste-manual" class="md-nav__link">
     <span class="md-ellipsis">
       Comandos curl para Teste Manual
@@ -891,8 +892,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#1-criar-usuario-register" class="md-nav__link">
     <span class="md-ellipsis">
       1. Criar Usuário (Register)
@@ -900,8 +901,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#2-login-de-usuario" class="md-nav__link">
     <span class="md-ellipsis">
       2. Login de Usuário
@@ -909,8 +910,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#3-listar-usuarios" class="md-nav__link">
     <span class="md-ellipsis">
       3. Listar Usuários
@@ -918,8 +919,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#4-obter-detalhes-de-um-usuario-por-id" class="md-nav__link">
     <span class="md-ellipsis">
       4. Obter Detalhes de um Usuário por ID
@@ -927,13 +928,18 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#5-alterar-senha-de-usuario" class="md-nav__link">
     <span class="md-ellipsis">
       5. Alterar Senha de Usuário
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1609,7 +1615,7 @@
 
 <h1 id="como-testar">Como Testar<a class="headerlink" href="#como-testar" title="Permanent link">&para;</a></h1>
 <p>A adoção da Arquitetura Limpa torna o projeto altamente testável. A lógica de negócio reside nas camadas de Domínio e Aplicação, que são completamente independentes de frameworks e bancos de dados, permitindo testes unitários rápidos e isolados.</p>
-<h3 id="testes-unitarios-camadas-de-dominio-e-aplicacao">Testes Unitários (Camadas de Domínio e Aplicação)<a class="headerlink" href="#testes-unitarios-camadas-de-dominio-e-aplicacao" title="Permanent link">&para;</a></h3>
+<h2 id="testes-unitarios-camadas-de-dominio-e-aplicacao">Testes Unitários (Camadas de Domínio e Aplicação)<a class="headerlink" href="#testes-unitarios-camadas-de-dominio-e-aplicacao" title="Permanent link">&para;</a></h2>
 <p>Para testar as camadas de Domínio e Aplicação, você pode usar um framework de teste como <code>pytest</code>. Você precisaria:</p>
 <ol>
 <li><strong>Mockar as dependências</strong>: Criar <code>mocks</code> para <code>UserRepository</code> e <code>AuthGateway</code> (que são interfaces). Isso permite que você teste os casos de uso sem precisar de um banco de dados real ou sistema de autenticação.</li>

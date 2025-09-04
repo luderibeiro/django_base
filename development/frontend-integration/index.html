@@ -916,12 +916,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#autenticacao-no-frontend" class="md-nav__link">
     <span class="md-ellipsis">
       Autenticação no Frontend
@@ -929,8 +924,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#exemplo-listar-usuarios" class="md-nav__link">
     <span class="md-ellipsis">
       Exemplo: Listar Usuários
@@ -938,8 +933,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#exemplo-obter-detalhes-de-um-usuario-por-id" class="md-nav__link">
     <span class="md-ellipsis">
       Exemplo: Obter Detalhes de um Usuário por ID
@@ -947,13 +942,18 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#exemplo-alterar-senha-de-usuario" class="md-nav__link">
     <span class="md-ellipsis">
       Exemplo: Alterar Senha de Usuário
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1606,14 +1606,15 @@
 
 <h1 id="guia-de-integracao-frontend">Guia de Integração Frontend<a class="headerlink" href="#guia-de-integracao-frontend" title="Permanent link">&para;</a></h1>
 <p>Este guia detalha como um aplicativo frontend pode interagir com a API refatorada, focando nos endpoints de usuário e autenticação.</p>
-<h3 id="formato-de-dados-dtos">Formato de Dados (DTOs)<a class="headerlink" href="#formato-de-dados-dtos" title="Permanent link">&para;</a></h3>
+<h2 id="formato-de-dados-dtos">Formato de Dados (DTOs)<a class="headerlink" href="#formato-de-dados-dtos" title="Permanent link">&para;</a></h2>
 <p>As requisições e respostas da API seguem os DTOs definidos na camada de aplicação. É crucial que o frontend envie e espere dados nesses formatos.</p>
-<h4 id="exemplo-criacao-de-usuario">Exemplo: Criação de Usuário<a class="headerlink" href="#exemplo-criacao-de-usuario" title="Permanent link">&para;</a></h4>
+<h3 id="exemplo-criacao-de-usuario">Exemplo: Criação de Usuário<a class="headerlink" href="#exemplo-criacao-de-usuario" title="Permanent link">&para;</a></h3>
 <p><strong>Requisição (Input):</strong></p>
 <ul>
 <li><strong>Endpoint</strong>: <code>POST /v1/users/</code></li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>CreateUserRequest</code>
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>CreateUserRequest</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span>
 <span class="normal"><a href="#__codelineno-0-4">4</a></span>
@@ -1630,13 +1631,15 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nt">&quot;is_staff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;is_superuser&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
 <p><strong>Resposta (Output):</strong></p>
 <ul>
 <li><strong>Status</strong>: <code>201 Created</code> (sucesso), <code>400 Bad Request</code> (erro de validação/domínio)</li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>CreateUserResponse</code> (e <code>UserReadSerializer</code>)
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>CreateUserResponse</code> (e <code>UserReadSerializer</code>)</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
@@ -1653,27 +1656,31 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="nt">&quot;is_staff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="nt">&quot;is_superuser&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
-<h4 id="exemplo-login-de-usuario">Exemplo: Login de Usuário<a class="headerlink" href="#exemplo-login-de-usuario" title="Permanent link">&para;</a></h4>
+<h3 id="exemplo-login-de-usuario">Exemplo: Login de Usuário<a class="headerlink" href="#exemplo-login-de-usuario" title="Permanent link">&para;</a></h3>
 <p><strong>Requisição (Input):</strong></p>
 <ul>
 <li><strong>Endpoint</strong>: <code>POST /v1/login/</code></li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>LoginUserRequest</code>
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>LoginUserRequest</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
 <span class="normal"><a href="#__codelineno-2-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usuario.existente@example.com&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;senhaExistente123&quot;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
 <p><strong>Resposta (Output):</strong></p>
 <ul>
 <li><strong>Status</strong>: <code>200 OK</code> (sucesso), <code>400 Bad Request</code> (credenciais inválidas)</li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>LoginUserResponse</code>
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>LoginUserResponse</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
 <span class="normal"><a href="#__codelineno-3-4">4</a></span>
@@ -1684,7 +1691,8 @@
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;token-de-acesso&gt;&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;token-de-refresh&gt;&quot;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
 <h3 id="autenticacao-no-frontend">Autenticação no Frontend<a class="headerlink" href="#autenticacao-no-frontend" title="Permanent link">&para;</a></h3>
 <p>Após o login, o frontend receberá <code>access_token</code> e <code>refresh_token</code>. O <code>access_token</code> deve ser incluído em todas as requisições subsequentes a endpoints protegidos (que exigem autenticação, como listar usuários ou alterar senha) no cabeçalho <code>Authorization</code> como um <code>Bearer Token</code>.</p>
@@ -1707,8 +1715,9 @@
 <p><strong>Resposta (Output):</strong></p>
 <ul>
 <li><strong>Status</strong>: <code>200 OK</code> (sucesso), <code>401 Unauthorized</code> (sem token), <code>403 Forbidden</code> (sem permissão)</li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>ListUsersResponse</code>
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>ListUsersResponse</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
@@ -1751,7 +1760,8 @@
 <a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">    </span><span class="p">]</span>
 <a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
 <h3 id="exemplo-obter-detalhes-de-um-usuario-por-id">Exemplo: Obter Detalhes de um Usuário por ID<a class="headerlink" href="#exemplo-obter-detalhes-de-um-usuario-por-id" title="Permanent link">&para;</a></h3>
 <p><strong>Requisição (Input):</strong></p>
@@ -1764,8 +1774,9 @@
 <p><strong>Resposta (Output):</strong></p>
 <ul>
 <li><strong>Status</strong>: <code>200 OK</code> (sucesso), <code>401 Unauthorized</code>, <code>403 Forbidden</code>, <code>404 Not Found</code></li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>CreateUserResponse</code> (e <code>UserReadSerializer</code>)
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>CreateUserResponse</code> (e <code>UserReadSerializer</code>)</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>
 <span class="normal"><a href="#__codelineno-6-4">4</a></span>
@@ -1782,7 +1793,8 @@
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="nt">&quot;is_staff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="nt">&quot;is_superuser&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
 <h3 id="exemplo-alterar-senha-de-usuario">Exemplo: Alterar Senha de Usuário<a class="headerlink" href="#exemplo-alterar-senha-de-usuario" title="Permanent link">&para;</a></h3>
 <p><strong>Requisição (Input):</strong></p>
@@ -1790,26 +1802,30 @@
 <li><strong>Endpoint</strong>: <code>PUT /v1/users/alter_password/:id/</code></li>
 <li><strong>Cabeçalhos</strong>: Necessita <code>Authorization: Bearer &lt;access_token&gt;</code> de um usuário com permissão (<code>IsAdminUser</code>).</li>
 <li><strong>Parâmetros de URL</strong>: <code>:id</code> é o ID do usuário (UUID).</li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>ChangeUserPasswordRequest</code>
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>ChangeUserPasswordRequest</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
 <span class="normal"><a href="#__codelineno-7-3">3</a></span>
 <span class="normal"><a href="#__codelineno-7-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="w">    </span><span class="nt">&quot;old_password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;senhaAntiga123&quot;</span><span class="p">,</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;new_password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;senhaNovaSegura123&quot;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
 <p><strong>Resposta (Output):</strong></p>
 <ul>
 <li><strong>Status</strong>: <code>200 OK</code> (sucesso), <code>400 Bad Request</code> (senha antiga incorreta), <code>401 Unauthorized</code>, <code>403 Forbidden</code>, <code>404 Not Found</code></li>
-<li><strong>Body (JSON)</strong>: Corresponde a <code>ChangeUserPasswordResponse</code>
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<li>
+<p><strong>Body (JSON)</strong>: Corresponde a <code>ChangeUserPasswordResponse</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
 <span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div></li>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
 
 

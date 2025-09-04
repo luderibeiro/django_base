@@ -1506,12 +1506,18 @@
 <h1 id="camada-de-apresentacao-api-django-rest-framework">Camada de Apresentação (API Django REST Framework)<a class="headerlink" href="#camada-de-apresentacao-api-django-rest-framework" title="Permanent link">&para;</a></h1>
 <p>Esta camada é responsável por apresentar os dados ao usuário e receber entradas. Ela atua como um adaptador, traduzindo as requisições HTTP para os DTOs dos casos de uso e as respostas dos casos de uso para o formato JSON da API.</p>
 <ul>
-<li><code>project/core/api/deps.py</code>: Criado um simples injetor de dependências para fornecer as instâncias concretas dos repositórios e gateways aos casos de uso. Isso garante que as views e casos de uso não precisem saber sobre as implementações concretas.<ul>
+<li>
+<p><code>project/core/api/deps.py</code>: Criado um simples injetor de dependências para fornecer as instâncias concretas dos repositórios e gateways aos casos de uso. Isso garante que as views e casos de uso não precisem saber sobre as implementações concretas.</p>
+<ul>
 <li>Funções como <code>get_user_repository()</code>, <code>get_create_user_use_case()</code>, <code>get_auth_gateway()</code>, <code>get_login_user_use_case()</code>, <code>get_change_user_password_use_case()</code>, <code>get_list_users_use_case()</code> e <code>get_get_user_by_id_use_case()</code> foram adicionadas.</li>
 </ul>
 </li>
-<li><code>project/core/api/v1/serializers/user.py</code>: Os serializadores foram adaptados para trabalhar com os DTOs dos casos de uso em vez de diretamente com os modelos do Django. Novos serializadores incluem <code>UserReadSerializer</code>, <code>UserCreateRequestSerializer</code>, <code>LoginRequestSerializer</code>, <code>LoginResponseSerializer</code>, <code>UserAlterPasswordSerializer</code> e <code>UserListResponseSerializer</code>.</li>
-<li><code>project/core/api/v1/views/user.py</code>: As views foram modificadas para:<ul>
+<li>
+<p><code>project/core/api/v1/serializers/user.py</code>: Os serializadores foram adaptados para trabalhar com os DTOs dos casos de uso em vez de diretamente com os modelos do Django. Novos serializadores incluem <code>UserReadSerializer</code>, <code>UserCreateRequestSerializer</code>, <code>LoginRequestSerializer</code>, <code>LoginResponseSerializer</code>, <code>UserAlterPasswordSerializer</code> e <code>UserListResponseSerializer</code>.</p>
+</li>
+<li>
+<p><code>project/core/api/v1/views/user.py</code>: As views foram modificadas para:</p>
+<ul>
 <li>Injetar os casos de uso relevantes usando as funções do <code>deps.py</code>.</li>
 <li>Converter os dados da requisição HTTP para os DTOs de entrada do caso de uso.</li>
 <li>Chamar o método <code>execute</code> do caso de uso.</li>

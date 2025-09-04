@@ -2007,23 +2007,23 @@
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
 <span class="normal"><a href="#__codelineno-0-17">17</a></span>
 <span class="normal"><a href="#__codelineno-0-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>django_base/
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>├── 📁 project/                 # Aplicação Django principal
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>│   ├── 📁 core/               # App principal com arquitetura limpa
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a>│   │   ├── 📁 domain/         # 🎯 Regras de negócio (Entities, Value Objects)
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>│   │   ├── 📁 repositories/   # 🔄 Abstração de dados (Repository Pattern)
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a>│   │   ├── 📁 api/           # 🌐 Endpoints REST (Serializers, ViewSets)
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>│   │   ├── 📁 admin/         # ⚙️ Interface administrativa
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a>│   │   ├── 📁 models/        # 🗄️ Modelos Django (Infrastructure)
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a>│   │   ├── 📁 middleware/    # 🔧 Middlewares customizados
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a>│   │   └── 📁 tests/         # 🧪 Testes automatizados
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a>│   ├── 📁 project/           # ⚙️ Configurações Django
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a>│   └── 📄 manage.py          # 🚀 Entry point Django
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a>├── 📁 docs/                  # 📚 Documentação MkDocs
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a>├── 📁 scripts/               # 🔧 Scripts de automação
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a>├── 📄 Makefile              # 🤖 Automação de tarefas
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a>├── 📄 Dockerfile            # 🐳 Container de produção
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>├── 📄 docker-compose.yml    # 🐳 Orquestração de containers
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a>└── 📄 mkdocs.yml           # 📖 Configuração da documentação
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>├──<span class="w"> </span>📁<span class="w"> </span>project/<span class="w">                 </span><span class="c1"># Aplicação Django principal</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>core/<span class="w">                </span><span class="c1"># App principal com arquitetura limpa</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>domain/<span class="w">          </span><span class="c1"># 🎯 Regras de negócio (Entities, Value Objects)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>repositories/<span class="w">    </span><span class="c1"># 🔄 Abstração de dados (Repository Pattern)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>api/<span class="w">             </span><span class="c1"># 🌐 Endpoints REST (Serializers, ViewSets)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>admin/<span class="w">           </span><span class="c1"># ⚙️ Interface administrativa</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>models/<span class="w">          </span><span class="c1"># 🗄️ Modelos Django (Infrastructure)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>middleware/<span class="w">      </span><span class="c1"># 🔧 Middlewares customizados</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>tests/<span class="w">           </span><span class="c1"># 🧪 Testes automatizados</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>project/<span class="w">             </span><span class="c1"># ⚙️ Configurações Django</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>│<span class="w">   </span>└──<span class="w"> </span>📄<span class="w"> </span>manage.py<span class="w">            </span><span class="c1"># 🚀 Entry point Django</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>├──<span class="w"> </span>📁<span class="w"> </span>docs/<span class="w">                    </span><span class="c1"># 📚 Documentação MkDocs</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>├──<span class="w"> </span>📁<span class="w"> </span>scripts/<span class="w">                 </span><span class="c1"># 🔧 Scripts de automação</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>├──<span class="w"> </span>📄<span class="w"> </span>Makefile<span class="w">                 </span><span class="c1"># 🤖 Automação de tarefas</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>├──<span class="w"> </span>📄<span class="w"> </span>Dockerfile<span class="w">               </span><span class="c1"># 🐳 Container de produção</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>├──<span class="w"> </span>📄<span class="w"> </span>docker-compose.yml<span class="w">       </span><span class="c1"># 🐳 Orquestração de containers</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>└──<span class="w"> </span>📄<span class="w"> </span>mkdocs.yml<span class="w">               </span><span class="c1"># 📖 Configuração da documentação</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="arquitetura-limpa-implementada">🎯 Arquitetura Limpa Implementada<a class="headerlink" href="#arquitetura-limpa-implementada" title="Permanent link">&para;</a></h2>
 <h3 id="camadas-da-arquitetura">Camadas da Arquitetura<a class="headerlink" href="#camadas-da-arquitetura" title="Permanent link">&para;</a></h3>
@@ -2053,11 +2053,13 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Email inválido&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12"></a>        <span class="k">return</span> <span class="n">email</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Características</strong>:
-- ✅ Sem dependências externas
-- ✅ Regras de negócio puras
-- ✅ Facilmente testável
-- ✅ Reutilizável em outros contextos</p>
+<p><strong>Características</strong>:</p>
+<ul>
+<li>✅ Sem dependências externas</li>
+<li>✅ Regras de negócio puras</li>
+<li>✅ Facilmente testável</li>
+<li>✅ Reutilizável em outros contextos</li>
+</ul>
 <h4 id="2-repository-layer-corerepositories">2. 🔄 <strong>Repository Layer</strong> (<code>core/repositories/</code>)<a class="headerlink" href="#2-repository-layer-corerepositories" title="Permanent link">&para;</a></h4>
 <p><strong>Responsabilidade</strong>: Abstração de acesso a dados</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
@@ -2086,10 +2088,12 @@
 <a id="__codelineno-2-12" name="__codelineno-2-12"></a>        <span class="c1"># Implementação específica do Django</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13"></a>        <span class="k">pass</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Vantagens</strong>:
-- 🔄 Troca fácil de banco de dados
-- 🧪 Testes isolados com mocks
-- 🎯 Lógica de negócio independente</p>
+<p><strong>Vantagens</strong>:</p>
+<ul>
+<li>🔄 Troca fácil de banco de dados</li>
+<li>🧪 Testes isolados com mocks</li>
+<li>🎯 Lógica de negócio independente</li>
+</ul>
 <h4 id="3-api-layer-coreapi">3. 🌐 <strong>API Layer</strong> (<code>core/api/</code>)<a class="headerlink" href="#3-api-layer-coreapi" title="Permanent link">&para;</a></h4>
 <p><strong>Responsabilidade</strong>: Endpoints REST e serialização</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
@@ -2112,11 +2116,13 @@
 <a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">UserSerializer</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10"></a>    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Funcionalidades</strong>:
-- 📊 Paginação automática
-- 🔍 Filtragem avançada
-- 🔐 Autenticação OAuth2
-- 📝 Documentação automática</p>
+<p><strong>Funcionalidades</strong>:</p>
+<ul>
+<li>📊 Paginação automática</li>
+<li>🔍 Filtragem avançada</li>
+<li>🔐 Autenticação OAuth2</li>
+<li>📝 Documentação automática</li>
+</ul>
 <h4 id="4-infrastructure-layer-coremodels-project">4. ⚙️ <strong>Infrastructure Layer</strong> (<code>core/models/</code>, <code>project/</code>)<a class="headerlink" href="#4-infrastructure-layer-coremodels-project" title="Permanent link">&para;</a></h4>
 <p><strong>Responsabilidade</strong>: Implementações técnicas e configurações</p>
 <h2 id="sistema-de-testes">🧪 Sistema de Testes<a class="headerlink" href="#sistema-de-testes" title="Permanent link">&para;</a></h2>
@@ -2126,10 +2132,10 @@
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
 <span class="normal"><a href="#__codelineno-4-4">4</a></span>
 <span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>core/tests/
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a>├── 📁 unit/              # Testes unitários (domain, repositories)
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a>├── 📁 integration/       # Testes de integração (API, database)
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a>├── 📁 fixtures/          # Dados de teste reutilizáveis
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a>└── 📄 conftest.py       # Configurações pytest
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>├──<span class="w"> </span>📁<span class="w"> </span>unit/<span class="w">              </span><span class="c1"># Testes unitários (domain, repositories)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>├──<span class="w"> </span>📁<span class="w"> </span>integration/<span class="w">       </span><span class="c1"># Testes de integração (API, database)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>├──<span class="w"> </span>📁<span class="w"> </span>fixtures/<span class="w">          </span><span class="c1"># Dados de teste reutilizáveis</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>└──<span class="w"> </span>📄<span class="w"> </span>conftest.py<span class="w">        </span><span class="c1"># Configurações pytest</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="cobertura-de-testes">Cobertura de Testes<a class="headerlink" href="#cobertura-de-testes" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2171,26 +2177,30 @@
 <li><strong>Token refresh</strong> automático</li>
 </ul>
 <h3 id="fluxo-de-autenticacao">Fluxo de Autenticação<a class="headerlink" href="#fluxo-de-autenticacao" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>graph LR
-    A[Cliente] --&gt; B[Authorization Server]
-    B --&gt; C[Resource Server]
-    C --&gt; D[Protected Resource]</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>graph LR
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>    A[Cliente] --&gt; B[Authorization Server]
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>    B --&gt; C[Resource Server]
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>    C --&gt; D[Protected Resource]
+</code></pre></div></td></tr></table></div>
 <h2 id="apis-rest">📊 APIs REST<a class="headerlink" href="#apis-rest" title="Permanent link">&para;</a></h2>
 <h3 id="funcionalidades-implementadas">Funcionalidades Implementadas<a class="headerlink" href="#funcionalidades-implementadas" title="Permanent link">&para;</a></h3>
 <h4 id="paginacao-inteligente">Paginação Inteligente<a class="headerlink" href="#paginacao-inteligente" title="Permanent link">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
-<span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># Paginação automática em todos os endpoints</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="err">?</span><span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="n">page_size</span><span class="o">=</span><span class="mi">20</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># Paginação automática em todos os endpoints</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="err">?</span><span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="n">page_size</span><span class="o">=</span><span class="mi">20</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="filtragem-avancada">Filtragem Avançada<a class="headerlink" href="#filtragem-avancada" title="Permanent link">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># Múltiplos filtros combinados</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="err">?</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">john</span><span class="o">&amp;</span><span class="n">created_at__gte</span><span class="o">=</span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># Múltiplos filtros combinados</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="err">?</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">john</span><span class="o">&amp;</span><span class="n">created_at__gte</span><span class="o">=</span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="ordenacao-flexivel">Ordenação Flexível<a class="headerlink" href="#ordenacao-flexivel" title="Permanent link">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
-<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># Ordenação por múltiplos campos</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="err">?</span><span class="n">ordering</span><span class="o">=-</span><span class="n">created_at</span><span class="p">,</span><span class="n">name</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1"># Ordenação por múltiplos campos</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="err">?</span><span class="n">ordering</span><span class="o">=-</span><span class="n">created_at</span><span class="p">,</span><span class="n">name</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="endpoints-disponiveis">Endpoints Disponíveis<a class="headerlink" href="#endpoints-disponiveis" title="Permanent link">&para;</a></h3>
 <table>
@@ -2231,23 +2241,23 @@
 </table>
 <h2 id="containerizacao">🐳 Containerização<a class="headerlink" href="#containerizacao" title="Permanent link">&para;</a></h2>
 <h3 id="docker-multi-stage">Docker Multi-stage<a class="headerlink" href="#docker-multi-stage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
-<span class="normal"><a href="#__codelineno-9-2">2</a></span>
-<span class="normal"><a href="#__codelineno-9-3">3</a></span>
-<span class="normal"><a href="#__codelineno-9-4">4</a></span>
-<span class="normal"><a href="#__codelineno-9-5">5</a></span>
-<span class="normal"><a href="#__codelineno-9-6">6</a></span>
-<span class="normal"><a href="#__codelineno-9-7">7</a></span>
-<span class="normal"><a href="#__codelineno-9-8">8</a></span>
-<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c"># Dockerfile otimizado com multi-stage build</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">base</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="c"># ... configurações base</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">development</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="c"># ... dependências de desenvolvimento</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">production</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="c"># ... otimizações para produção</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">6</a></span>
+<span class="normal"><a href="#__codelineno-10-7">7</a></span>
+<span class="normal"><a href="#__codelineno-10-8">8</a></span>
+<span class="normal"><a href="#__codelineno-10-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c"># Dockerfile otimizado com multi-stage build</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">base</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="c"># ... configurações base</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">development</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="c"># ... dependências de desenvolvimento</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">production</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="c"># ... otimizações para produção</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="docker-compose">Docker Compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2257,19 +2267,19 @@
 </ul>
 <h2 id="automacao-com-makefile">🔧 Automação com Makefile<a class="headerlink" href="#automacao-com-makefile" title="Permanent link">&para;</a></h2>
 <h3 id="comandos-principais">Comandos Principais<a class="headerlink" href="#comandos-principais" title="Permanent link">&para;</a></h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
-<span class="normal"><a href="#__codelineno-10-2">2</a></span>
-<span class="normal"><a href="#__codelineno-10-3">3</a></span>
-<span class="normal"><a href="#__codelineno-10-4">4</a></span>
-<span class="normal"><a href="#__codelineno-10-5">5</a></span>
-<span class="normal"><a href="#__codelineno-10-6">6</a></span>
-<span class="normal"><a href="#__codelineno-10-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="err">make</span><span class="w"> </span><span class="err">setup</span><span class="w">          </span><span class="c"># Configuração completa do ambiente</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="err">make</span><span class="w"> </span><span class="err">test</span><span class="w">           </span><span class="c"># Executa todos os testes</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="err">make</span><span class="w"> </span><span class="err">test-coverage</span><span class="w">  </span><span class="c"># Testes com relatório de cobertura</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="err">make</span><span class="w"> </span><span class="err">lint</span><span class="w">           </span><span class="c"># Análise de qualidade do código</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="err">make</span><span class="w"> </span><span class="err">format</span><span class="w">         </span><span class="c"># Formatação automática</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="err">make</span><span class="w"> </span><span class="err">docker-run</span><span class="w">     </span><span class="c"># Executa com Docker</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="err">make</span><span class="w"> </span><span class="err">docs-serve</span><span class="w">     </span><span class="c"># Serve documentação localmente</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="err">make</span><span class="w"> </span><span class="err">setup</span><span class="w">          </span><span class="c"># Configuração completa do ambiente</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="err">make</span><span class="w"> </span><span class="err">test</span><span class="w">           </span><span class="c"># Executa todos os testes</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="err">make</span><span class="w"> </span><span class="err">test-coverage</span><span class="w">  </span><span class="c"># Testes com relatório de cobertura</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="err">make</span><span class="w"> </span><span class="err">lint</span><span class="w">           </span><span class="c"># Análise de qualidade do código</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="err">make</span><span class="w"> </span><span class="err">format</span><span class="w">         </span><span class="c"># Formatação automática</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="err">make</span><span class="w"> </span><span class="err">docker-run</span><span class="w">     </span><span class="c"># Executa com Docker</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="err">make</span><span class="w"> </span><span class="err">docs-serve</span><span class="w">     </span><span class="c"># Serve documentação localmente</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="automacoes-implementadas">Automações Implementadas<a class="headerlink" href="#automacoes-implementadas" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2281,21 +2291,21 @@
 </ul>
 <h2 id="sistema-de-documentacao">📚 Sistema de Documentação<a class="headerlink" href="#sistema-de-documentacao" title="Permanent link">&para;</a></h2>
 <h3 id="mkdocs-configuration">MkDocs Configuration<a class="headerlink" href="#mkdocs-configuration" title="Permanent link">&para;</a></h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
-<span class="normal"><a href="#__codelineno-11-2">2</a></span>
-<span class="normal"><a href="#__codelineno-11-3">3</a></span>
-<span class="normal"><a href="#__codelineno-11-4">4</a></span>
-<span class="normal"><a href="#__codelineno-11-5">5</a></span>
-<span class="normal"><a href="#__codelineno-11-6">6</a></span>
-<span class="normal"><a href="#__codelineno-11-7">7</a></span>
-<span class="normal"><a href="#__codelineno-11-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1"># mkdocs.yml</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Django Base - Clean Architecture</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="nt">theme</span><span class="p">:</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">material</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">  </span><span class="nt">features</span><span class="p">:</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">navigation.tabs</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">navigation.sections</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">toc.integrate</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span>
+<span class="normal"><a href="#__codelineno-12-6">6</a></span>
+<span class="normal"><a href="#__codelineno-12-7">7</a></span>
+<span class="normal"><a href="#__codelineno-12-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># mkdocs.yml</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Django Base - Clean Architecture</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="nt">theme</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">material</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="nt">features</span><span class="p">:</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">navigation.tabs</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">navigation.sections</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">toc.integrate</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="estrutura-da-documentacao">Estrutura da Documentação<a class="headerlink" href="#estrutura-da-documentacao" title="Permanent link">&para;</a></h3>
 <ul>

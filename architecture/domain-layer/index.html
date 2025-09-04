@@ -682,9 +682,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Entidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#interfaces-de-acesso-a-dados-repositories" class="md-nav__link">
     <span class="md-ellipsis">
       Interfaces de Acesso a Dados (Repositories)
@@ -692,13 +693,18 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#interfaces-de-gateways-auth-etc" class="md-nav__link">
     <span class="md-ellipsis">
       Interfaces de Gateways (Auth, etc.)
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1564,7 +1570,7 @@
 
 <h1 id="camada-de-dominio">Camada de Domínio<a class="headerlink" href="#camada-de-dominio" title="Permanent link">&para;</a></h1>
 <p>Esta é a camada mais interna e contém as regras de negócio essenciais da aplicação (Entidades) e as abstrações para interações com o mundo exterior (Interfaces de Repositório e Gateways). Ela é completamente independente de qualquer framework ou banco de dados.</p>
-<h3 id="entidades">Entidades<a class="headerlink" href="#entidades" title="Permanent link">&para;</a></h3>
+<h2 id="entidades">Entidades<a class="headerlink" href="#entidades" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>project/core/domain/entities/user.py</code>: Criada a entidade <code>User</code> para representar um usuário de forma agnóstica a frameworks, contendo apenas os atributos e métodos de domínio (ex: <code>email</code>, <code>first_name</code>, <code>is_admin</code>). Esta entidade não herda de <code>django.db.models.Model</code>.</li>
 </ul>

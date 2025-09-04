@@ -1505,17 +1505,28 @@
 
 <h1 id="visao-geral-da-arquitetura-limpa">Visão Geral da Arquitetura Limpa<a class="headerlink" href="#visao-geral-da-arquitetura-limpa" title="Permanent link">&para;</a></h1>
 <p>A Arquitetura Limpa organiza o software em camadas concêntricas, onde as dependências fluem apenas para dentro. As camadas internas (Domínio e Aplicação) contêm a lógica de negócio principal e são independentes de frameworks, bancos de dados ou interfaces de usuário. As camadas externas (Infraestrutura e Apresentação) são responsáveis por detalhes de implementação e dependem das camadas internas.</p>
-<pre class="mermaid"><code>graph TD
-    A[Frameworks &amp; Drivers] --&gt; B(Interface Adapters)
-    B --&gt; C(Application Business Rules)
-    C --&gt; D(Enterprise Business Rules)
-
-    subgraph Layers
-        direction LR
-        D -- Core Domain --&gt; C
-        C -- Application Logic --&gt; B
-        B -- Presentation/Persistence --&gt; A
-    end</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>graph TD
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    A[Frameworks &amp; Drivers] --&gt; B(Interface Adapters)
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>    B --&gt; C(Application Business Rules)
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>    C --&gt; D(Enterprise Business Rules)
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>    subgraph Layers
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>        direction LR
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>        D -- Core Domain --&gt; C
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>        C -- Application Logic --&gt; B
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>        B -- Presentation/Persistence --&gt; A
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>    end
+</code></pre></div></td></tr></table></div>
 
 
 
