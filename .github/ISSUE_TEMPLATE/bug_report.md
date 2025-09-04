@@ -38,7 +38,7 @@ Se aplicável, adicione screenshots para ajudar a explicar seu problema.
 
 ## 📋 Logs
 
-```
+```bash
 Cole aqui os logs relevantes
 ```
 

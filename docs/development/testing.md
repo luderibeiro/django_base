@@ -2,7 +2,7 @@
 
 A adoção da Arquitetura Limpa torna o projeto altamente testável. A lógica de negócio reside nas camadas de Domínio e Aplicação, que são completamente independentes de frameworks e bancos de dados, permitindo testes unitários rápidos e isolados.
 
-### Testes Unitários (Camadas de Domínio e Aplicação)
+## Testes Unitários (Camadas de Domínio e Aplicação)
 
 Para testar as camadas de Domínio e Aplicação, você pode usar um framework de teste como `pytest`. Você precisaria:
 

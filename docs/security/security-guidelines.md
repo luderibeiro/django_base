@@ -117,6 +117,7 @@ SECURE_HSTS_PRELOAD = True
 ## 📋 Checklist de Segurança
 
 ### Antes do Deploy
+
 - [ ] Todas as credenciais estão em variáveis de ambiente
 - [ ] `.env` está no `.gitignore`
 - [ ] `DEBUG = False` em produção
@@ -126,6 +127,7 @@ SECURE_HSTS_PRELOAD = True
 - [ ] Backup seguro configurado
 
 ### Monitoramento
+
 - [ ] Logs de segurança habilitados
 - [ ] Alertas de tentativas de acesso não autorizado
 - [ ] Auditoria de dependências (pip-audit)
@@ -141,6 +143,7 @@ SECURE_HSTS_PRELOAD = True
    - Notificar equipe de segurança
 
 2. **Limpeza do Git**:
+
    ```bash
    # Remover do histórico (CUIDADO!)
    git filter-branch --force --index-filter \
@@ -159,6 +162,7 @@ SECURE_HSTS_PRELOAD = True
 ## 🔧 Ferramentas de Segurança
 
 ### Pre-commit Hooks
+
 ```yaml
 # .pre-commit-config.yaml
 repos:
@@ -170,6 +174,7 @@ repos:
 ```
 
 ### Auditoria Automática
+
 ```bash
 # No Makefile
 security-audit:

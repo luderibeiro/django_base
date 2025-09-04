@@ -54,6 +54,7 @@ Que documentação seria necessária?
 ## 🏷️ Labels Sugeridas
 
 Marque as que se aplicam:
+
 - [ ] `good-first-issue` - Boa para iniciantes
 - [ ] `help-wanted` - Precisa de ajuda da comunidade
 - [ ] `breaking-change` - Quebra compatibilidade

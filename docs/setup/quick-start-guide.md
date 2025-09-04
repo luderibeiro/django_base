@@ -5,10 +5,12 @@ Este guia te levará do zero ao projeto rodando em menos de 5 minutos!
 ## 📋 Pré-requisitos
 
 ### Obrigatórios
+
 - **Python 3.12+** ([Download](https://python.org/downloads/))
 - **Git** ([Download](https://git-scm.com/downloads))
 
 ### Opcionais (mas recomendados)
+
 - **Docker & Docker Compose** ([Download](https://docker.com/get-started))
 - **Make** (geralmente já instalado no Linux/Mac)
 
@@ -43,12 +45,12 @@ make docker-run
 
 Após executar os comandos acima, você deve ver:
 
-```
+```bash
 ✅ Ambiente configurado com sucesso!
 🚀 Servidor iniciado em http://127.0.0.1:8000
 ```
 
-Acesse http://127.0.0.1:8000 no seu navegador e você verá a página inicial do Django.
+Acesse <http://127.0.0.1:8000> no seu navegador e você verá a página inicial do Django.
 
 ## 🔐 Criação de Superusuário
 
@@ -61,7 +63,7 @@ make createsuperuser
 
 **⚠️ Importante**: Sempre use credenciais seguras em produção!
 
-Acesse http://127.0.0.1:8000/admin para entrar no painel administrativo.
+Acesse <http://127.0.0.1:8000/admin> para entrar no painel administrativo.
 
 ## 🧪 Executando Testes
 
@@ -90,12 +92,14 @@ make docs-serve        # Serve documentação localmente
 ## 🐳 Usando Docker
 
 ### Desenvolvimento
+
 ```bash
 make docker-run        # Inicia containers de desenvolvimento
 make docker-stop       # Para os containers
 ```
 
 ### Produção
+
 ```bash
 make docker-prod       # Inicia em modo produção
 ```
@@ -135,6 +139,7 @@ DATABASE_URL=postgresql://user:password@localhost:5432/dbname
 ## 🚨 Problemas Comuns
 
 ### Python não encontrado
+
 ```bash
 # Verifique a versão
 python3 --version
@@ -145,6 +150,7 @@ python3 --version
 ```
 
 ### Make não encontrado
+
 ```bash
 # Ubuntu/Debian
 sudo apt install make
@@ -154,6 +160,7 @@ brew install make
 ```
 
 ### Permissões no Docker
+
 ```bash
 # Adicione seu usuário ao grupo docker
 sudo usermod -aG docker $USER

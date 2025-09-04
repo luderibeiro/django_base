@@ -8,7 +8,9 @@
 <a href="https://github.com/luderibeiro/django_base/releases"><img src="https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge" alt="Version"></a>
 </div>
 
-**O template Django mais completo e profissional para iniciar seus projetos com Arquitetura Limpa!**
+<div align="center">
+<p style="font-size: 1.5rem; font-weight: bold;">O template Django mais completo e profissional para iniciar seus projetos com Arquitetura Limpa!</p>
+</div>
 
 <div align="center">
 <a href="https://github.com/luderibeiro/django_base/generate"><img src="https://img.shields.io/badge/Use%20this%20template-2DA44E?style=for-the-badge&logo=github" alt="Use this template"></a>
@@ -189,13 +191,11 @@ Este template é perfeito para criar forks especializados:
 
 ---
 
-<div align="center">
+### 🌟 Se este projeto te ajudou, considere dar uma estrela!\*\*
 
-**🌟 Se este projeto te ajudou, considere dar uma estrela!**
+<div align="center">
 
 <a href="https://github.com/luderibeiro/django_base"><img src="https://img.shields.io/badge/Star%20on%20GitHub-181717?style=for-the-badge&logo=github" alt="Star on GitHub"></a>
 <a href="https://github.com/luderibeiro/django_base/fork"><img src="https://img.shields.io/badge/Fork%20on%20GitHub-181717?style=for-the-badge&logo=github" alt="Fork on GitHub"></a>
-
--   **Feito com ❤️ pela comunidade Django**
 
 </div>

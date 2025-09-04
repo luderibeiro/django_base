@@ -8,7 +8,7 @@ Por favor, reserve um momento para revisar este documento antes de abrir um Pull
 
 ## 1. Código de Conduta
 
-Por favor, leia nosso [Código de Conduta](https://your-username.github.io/django_base/CODE_OF_CONDUCT/). Esperamos que todos os colaboradores o sigam.
+Por favor, leia nosso [Código de Conduta](CODE_OF_CONDUCT.md). Esperamos que todos os colaboradores o sigam.
 
 ## 2. Como Contribuir
 
@@ -43,9 +43,11 @@ Estamos sempre abertos a contribuições de código! Para isso, siga o fluxo de 
 1.  **Faça Fork do Repositório**: Clique no botão "Fork" no GitHub.
 2.  **Clone o seu Fork**: `git clone https://github.com/SEU_USERNAME/django_base.git`
 3.  **Crie um Branch**: Crie um novo branch para a sua contribuição. Use um nome descritivo (e.g., `feat/adiciona-autenticacao`, `fix/corrige-bug-de-login`, `docs/melhora-readme`).
+
     ```bash
     git checkout -b seu-branch-descritivo
     ```
+
 4.  **Desenvolva Suas Alterações**: Implemente suas funcionalidades ou correções.
     -   **Estilo de Código**: Siga o estilo de código existente no projeto (geralmente PEP 8 para Python, com formatação por `black` e `isort`). Usaremos `ruff` para linting.
     -   **Testes**: Adicione testes unitários para o novo código e atualize os testes de integração, se necessário. Certifique-se de que todos os testes existentes continuem passando.
@@ -62,8 +64,8 @@ Estamos sempre abertos a contribuições de código! Para isso, siga o fluxo de 
 
 ## 3. Ambiente de Desenvolvimento
 
-Para configurar seu ambiente de desenvolvimento local, por favor, consulte a seção de [Configuração do Projeto na documentação](https://your-username.github.io/django_base/setup/project-setup/).
+Para configurar seu ambiente de desenvolvimento local, por favor, consulte a seção de [Configuração do Projeto na documentação](setup/project-setup.md).
 
 ## 4. Testes
 
-Para informações sobre como executar os testes do projeto, consulte a seção [Como Testar na documentação](https://your-username.github.io/django_base/development/testing/).
+Para informações sobre como executar os testes do projeto, consulte a seção [Como Testar na documentação](development/testing.md).

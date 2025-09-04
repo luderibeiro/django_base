@@ -5,16 +5,19 @@ Este guia abrangente cobre todos os aspectos do deploy do Django Base em produç
 ## 📋 Pré-requisitos de Produção
 
 ### Servidor
+
 - **Ubuntu 20.04+ / CentOS 8+** (recomendado)
 - **4GB RAM mínimo** (8GB+ recomendado)
 - **20GB+ de armazenamento SSD**
 - **Acesso root ou sudo**
 
 ### Domínio e SSL
+
 - **Domínio próprio** configurado
 - **Certificado SSL** (Let's Encrypt gratuito)
 
 ### Serviços Externos
+
 - **PostgreSQL 13+** (banco de dados)
 - **Redis 6+** (cache e sessões)
 - **SMTP** (envio de emails)
@@ -379,6 +382,7 @@ chmod +x update.sh
 ### Problemas Comuns
 
 #### 1. Erro 502 Bad Gateway
+
 ```bash
 # Verificar status do Gunicorn
 sudo systemctl status django
@@ -391,6 +395,7 @@ sudo nginx -t
 ```
 
 #### 2. Problemas de Permissão
+
 ```bash
 # Ajustar permissões dos arquivos estáticos
 sudo chown -R django:www-data /home/django/seu-projeto/project/static/
@@ -398,6 +403,7 @@ sudo chmod -R 755 /home/django/seu-projeto/project/static/
 ```
 
 #### 3. Problemas de Banco de Dados
+
 ```bash
 # Verificar conexão
 sudo -u postgres psql -c "SELECT version();"

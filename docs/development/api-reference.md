@@ -38,6 +38,7 @@ A API utiliza OAuth2 para autenticação. Para acessar os endpoints protegidos:
     ```
 
 2. **Usar token nas requisições**:
+
     ```bash
     curl -H "Authorization: Bearer SEU_TOKEN" \
       http://localhost:8000/api/v1/users/

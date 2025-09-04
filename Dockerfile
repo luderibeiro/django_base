@@ -56,9 +56,10 @@ WORKDIR /app
 # Copiar as dependências do sistema e binários instalados na etapa de build
 # Isso é um pouco complexo devido ao wkhtmltopdf e freetds
 # Vamos copiar apenas o essencial.
+# Copiar binários wkhtmltopdf
 COPY --from=builder /usr/bin/wkhtmlto* /usr/bin/
+# Copiar configuração ODBC
 COPY --from=builder /etc/odbcinst.ini /etc/odbcinst.ini
-# Bibliotecas FreeTDS serão instaladas se necessário no runtime
 
 # Copiar as dependências Python instaladas
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages

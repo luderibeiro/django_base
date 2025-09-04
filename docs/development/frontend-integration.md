@@ -2,16 +2,17 @@
 
 Este guia detalha como um aplicativo frontend pode interagir com a API refatorada, focando nos endpoints de usuário e autenticação.
 
-### Formato de Dados (DTOs)
+## Formato de Dados (DTOs)
 
 As requisições e respostas da API seguem os DTOs definidos na camada de aplicação. É crucial que o frontend envie e espere dados nesses formatos.
 
-#### Exemplo: Criação de Usuário
+### Exemplo: Criação de Usuário
 
 **Requisição (Input):**
 
 -   **Endpoint**: `POST /v1/users/`
 -   **Body (JSON)**: Corresponde a `CreateUserRequest`
+
     ```json
     {
         "email": "novo.usuario@example.com",
@@ -28,6 +29,7 @@ As requisições e respostas da API seguem os DTOs definidos na camada de aplica
 
 -   **Status**: `201 Created` (sucesso), `400 Bad Request` (erro de validação/domínio)
 -   **Body (JSON)**: Corresponde a `CreateUserResponse` (e `UserReadSerializer`)
+
     ```json
     {
         "id": "<uuid-do-usuario>",
@@ -40,12 +42,13 @@ As requisições e respostas da API seguem os DTOs definidos na camada de aplica
     }
     ```
 
-#### Exemplo: Login de Usuário
+### Exemplo: Login de Usuário
 
 **Requisição (Input):**
 
 -   **Endpoint**: `POST /v1/login/`
 -   **Body (JSON)**: Corresponde a `LoginUserRequest`
+
     ```json
     {
         "email": "usuario.existente@example.com",
@@ -57,6 +60,7 @@ As requisições e respostas da API seguem os DTOs definidos na camada de aplica
 
 -   **Status**: `200 OK` (sucesso), `400 Bad Request` (credenciais inválidas)
 -   **Body (JSON)**: Corresponde a `LoginUserResponse`
+
     ```json
     {
         "id": "<uuid-do-usuario>",
@@ -91,6 +95,7 @@ headers: {
 
 -   **Status**: `200 OK` (sucesso), `401 Unauthorized` (sem token), `403 Forbidden` (sem permissão)
 -   **Body (JSON)**: Corresponde a `ListUsersResponse`
+
     ```json
     {
         "users": [
@@ -129,6 +134,7 @@ headers: {
 
 -   **Status**: `200 OK` (sucesso), `401 Unauthorized`, `403 Forbidden`, `404 Not Found`
 -   **Body (JSON)**: Corresponde a `CreateUserResponse` (e `UserReadSerializer`)
+
     ```json
     {
         "id": "<uuid-do-usuario>",
@@ -149,6 +155,7 @@ headers: {
 -   **Cabeçalhos**: Necessita `Authorization: Bearer <access_token>` de um usuário com permissão (`IsAdminUser`).
 -   **Parâmetros de URL**: `:id` é o ID do usuário (UUID).
 -   **Body (JSON)**: Corresponde a `ChangeUserPasswordRequest`
+
     ```json
     {
         "old_password": "senhaAntiga123",
@@ -160,6 +167,7 @@ headers: {
 
 -   **Status**: `200 OK` (sucesso), `400 Bad Request` (senha antiga incorreta), `401 Unauthorized`, `403 Forbidden`, `404 Not Found`
 -   **Body (JSON)**: Corresponde a `ChangeUserPasswordResponse`
+
     ```json
     {
         "success": true

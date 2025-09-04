@@ -870,6 +870,7 @@ sudo certbot renew
 ## 🆘 Solução de Problemas
 
 ### Problema: Aplicação não inicia
+
 ```bash
 # Verificar logs
 sudo journalctl -u django-base -f
@@ -879,6 +880,7 @@ sudo -u django bash -c "cd /opt/django_base && source venv/bin/activate && expor
 ```
 
 ### Problema: Erro de banco de dados
+
 ```bash
 # Verificar conexão
 sudo -u postgres psql -c "SELECT 1"
@@ -888,6 +890,7 @@ sudo tail -f /var/log/postgresql/postgresql-15-main.log
 ```
 
 ### Problema: Erro de SSL
+
 ```bash
 # Verificar certificados
 sudo certbot certificates
@@ -897,6 +900,7 @@ openssl s_client -connect seudominio.com:443
 ```
 
 ### Problema: Performance baixa
+
 ```bash
 # Verificar recursos
 htop

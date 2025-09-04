@@ -14,11 +14,13 @@ Follow these steps to run the project:
 
 1.  **Clone the Repository:**
 
+        ```bash
         git clone git@github.com:luderibeiro/django_base.git
+        ```
 
 2.  **Set Up the Environment:**
 
--   Create a `.env` file in the project root and add necessary configurations such as API keys, database settings, etc.
+    -   Create a `.env` file in the project root and add necessary configurations such as API keys, database settings, etc.
 
 3.  **Run Docker Compose:**
 

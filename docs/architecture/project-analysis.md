@@ -6,25 +6,25 @@ Este documento fornece uma análise detalhada da arquitetura, estrutura e funcio
 
 ## 🏗️ Estrutura do Projeto
 
-```
+```bash
 django_base/
 ├── 📁 project/                 # Aplicação Django principal
-│   ├── 📁 core/               # App principal com arquitetura limpa
-│   │   ├── 📁 domain/         # 🎯 Regras de negócio (Entities, Value Objects)
-│   │   ├── 📁 repositories/   # 🔄 Abstração de dados (Repository Pattern)
-│   │   ├── 📁 api/           # 🌐 Endpoints REST (Serializers, ViewSets)
-│   │   ├── 📁 admin/         # ⚙️ Interface administrativa
-│   │   ├── 📁 models/        # 🗄️ Modelos Django (Infrastructure)
-│   │   ├── 📁 middleware/    # 🔧 Middlewares customizados
-│   │   └── 📁 tests/         # 🧪 Testes automatizados
-│   ├── 📁 project/           # ⚙️ Configurações Django
-│   └── 📄 manage.py          # 🚀 Entry point Django
-├── 📁 docs/                  # 📚 Documentação MkDocs
-├── 📁 scripts/               # 🔧 Scripts de automação
-├── 📄 Makefile              # 🤖 Automação de tarefas
-├── 📄 Dockerfile            # 🐳 Container de produção
-├── 📄 docker-compose.yml    # 🐳 Orquestração de containers
-└── 📄 mkdocs.yml           # 📖 Configuração da documentação
+│   ├── 📁 core/                # App principal com arquitetura limpa
+│   │   ├── 📁 domain/          # 🎯 Regras de negócio (Entities, Value Objects)
+│   │   ├── 📁 repositories/    # 🔄 Abstração de dados (Repository Pattern)
+│   │   ├── 📁 api/             # 🌐 Endpoints REST (Serializers, ViewSets)
+│   │   ├── 📁 admin/           # ⚙️ Interface administrativa
+│   │   ├── 📁 models/          # 🗄️ Modelos Django (Infrastructure)
+│   │   ├── 📁 middleware/      # 🔧 Middlewares customizados
+│   │   └── 📁 tests/           # 🧪 Testes automatizados
+│   ├── 📁 project/             # ⚙️ Configurações Django
+│   └── 📄 manage.py            # 🚀 Entry point Django
+├── 📁 docs/                    # 📚 Documentação MkDocs
+├── 📁 scripts/                 # 🔧 Scripts de automação
+├── 📄 Makefile                 # 🤖 Automação de tarefas
+├── 📄 Dockerfile               # 🐳 Container de produção
+├── 📄 docker-compose.yml       # 🐳 Orquestração de containers
+└── 📄 mkdocs.yml               # 📖 Configuração da documentação
 ```
 
 ## 🎯 Arquitetura Limpa Implementada
@@ -32,6 +32,7 @@ django_base/
 ### Camadas da Arquitetura
 
 #### 1. 🎯 **Domain Layer** (`core/domain/`)
+
 **Responsabilidade**: Regras de negócio puras, independentes de frameworks
 
 ```python
@@ -50,12 +51,14 @@ class User:
 ```
 
 **Características**:
-- ✅ Sem dependências externas
-- ✅ Regras de negócio puras
-- ✅ Facilmente testável
-- ✅ Reutilizável em outros contextos
+
+-   ✅ Sem dependências externas
+-   ✅ Regras de negócio puras
+-   ✅ Facilmente testável
+-   ✅ Reutilizável em outros contextos
 
 #### 2. 🔄 **Repository Layer** (`core/repositories/`)
+
 **Responsabilidade**: Abstração de acesso a dados
 
 ```python
@@ -75,11 +78,13 @@ class DjangoUserRepository(UserRepositoryInterface):
 ```
 
 **Vantagens**:
-- 🔄 Troca fácil de banco de dados
-- 🧪 Testes isolados com mocks
-- 🎯 Lógica de negócio independente
+
+-   🔄 Troca fácil de banco de dados
+-   🧪 Testes isolados com mocks
+-   🎯 Lógica de negócio independente
 
 #### 3. 🌐 **API Layer** (`core/api/`)
+
 **Responsabilidade**: Endpoints REST e serialização
 
 ```python
@@ -96,33 +101,35 @@ class UserViewSet(viewsets.ModelViewSet):
 ```
 
 **Funcionalidades**:
-- 📊 Paginação automática
-- 🔍 Filtragem avançada
-- 🔐 Autenticação OAuth2
-- 📝 Documentação automática
+
+-   📊 Paginação automática
+-   🔍 Filtragem avançada
+-   🔐 Autenticação OAuth2
+-   📝 Documentação automática
 
 #### 4. ⚙️ **Infrastructure Layer** (`core/models/`, `project/`)
+
 **Responsabilidade**: Implementações técnicas e configurações
 
 ## 🧪 Sistema de Testes
 
 ### Estrutura de Testes
 
-```
+```bash
 core/tests/
 ├── 📁 unit/              # Testes unitários (domain, repositories)
 ├── 📁 integration/       # Testes de integração (API, database)
 ├── 📁 fixtures/          # Dados de teste reutilizáveis
-└── 📄 conftest.py       # Configurações pytest
+└── 📄 conftest.py        # Configurações pytest
 ```
 
 ### Cobertura de Testes
 
-- **48 testes** implementados
-- **100% cobertura** das funcionalidades principais
-- **Testes unitários** para regras de negócio
-- **Testes de integração** para APIs
-- **Testes de performance** para endpoints críticos
+-   **48 testes** implementados
+-   **100% cobertura** das funcionalidades principais
+-   **Testes unitários** para regras de negócio
+-   **Testes de integração** para APIs
+-   **Testes de performance** para endpoints críticos
 
 ### Exemplo de Teste
 
@@ -144,10 +151,10 @@ def test_user_creation_with_invalid_email():
 
 ### OAuth2 Implementation
 
-- **django-oauth-toolkit** para OAuth2
-- **Múltiplos grant types** suportados
-- **Scopes customizáveis** para diferentes permissões
-- **Token refresh** automático
+-   **django-oauth-toolkit** para OAuth2
+-   **Múltiplos grant types** suportados
+-   **Scopes customizáveis** para diferentes permissões
+-   **Token refresh** automático
 
 ### Fluxo de Autenticação
 
@@ -163,18 +170,21 @@ graph LR
 ### Funcionalidades Implementadas
 
 #### Paginação Inteligente
+
 ```python
 # Paginação automática em todos os endpoints
 GET /api/users/?page=1&page_size=20
 ```
 
 #### Filtragem Avançada
+
 ```python
 # Múltiplos filtros combinados
 GET /api/users/?name__icontains=john&created_at__gte=2024-01-01
 ```
 
 #### Ordenação Flexível
+
 ```python
 # Ordenação por múltiplos campos
 GET /api/users/?ordering=-created_at,name
@@ -182,12 +192,12 @@ GET /api/users/?ordering=-created_at,name
 
 ### Endpoints Disponíveis
 
-| Endpoint | Método | Descrição | Autenticação |
-|----------|--------|-----------|--------------|
-| `/api/users/` | GET, POST | Listar/Criar usuários | OAuth2 |
-| `/api/users/{id}/` | GET, PUT, DELETE | Detalhes do usuário | OAuth2 |
-| `/api/auth/token/` | POST | Obter token OAuth2 | Client Credentials |
-| `/api/auth/refresh/` | POST | Renovar token | Refresh Token |
+| Endpoint             | Método           | Descrição             | Autenticação       |
+| -------------------- | ---------------- | --------------------- | ------------------ |
+| `/api/users/`        | GET, POST        | Listar/Criar usuários | OAuth2             |
+| `/api/users/{id}/`   | GET, PUT, DELETE | Detalhes do usuário   | OAuth2             |
+| `/api/auth/token/`   | POST             | Obter token OAuth2    | Client Credentials |
+| `/api/auth/refresh/` | POST             | Renovar token         | Refresh Token      |
 
 ## 🐳 Containerização
 
@@ -207,9 +217,9 @@ FROM base as production
 
 ### Docker Compose
 
-- **Desenvolvimento**: `docker-compose.dev.yml`
-- **Produção**: `docker-compose.prod.yml`
-- **Serviços**: Django, PostgreSQL, Redis (cache)
+-   **Desenvolvimento**: `docker-compose.dev.yml`
+-   **Produção**: `docker-compose.prod.yml`
+-   **Serviços**: Django, PostgreSQL, Redis (cache)
 
 ## 🔧 Automação com Makefile
 
@@ -227,11 +237,11 @@ make docs-serve     # Serve documentação localmente
 
 ### Automações Implementadas
 
-- 🎨 **Formatação automática** com Black
-- 🔍 **Linting** com Flake8
-- 🔒 **Auditoria de segurança** com pip-audit
-- 🧪 **Testes automáticos** com pytest
-- 📊 **Relatórios de cobertura** com coverage.py
+-   🎨 **Formatação automática** com Black
+-   🔍 **Linting** com Flake8
+-   🔒 **Auditoria de segurança** com pip-audit
+-   🧪 **Testes automáticos** com pytest
+-   📊 **Relatórios de cobertura** com coverage.py
 
 ## 📚 Sistema de Documentação
 
@@ -241,76 +251,82 @@ make docs-serve     # Serve documentação localmente
 # mkdocs.yml
 site_name: Django Base - Clean Architecture
 theme:
-  name: material
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - toc.integrate
+    name: material
+    features:
+        - navigation.tabs
+        - navigation.sections
+        - toc.integrate
 ```
 
 ### Estrutura da Documentação
 
-- 🏗️ **Arquitetura**: Explicação detalhada das camadas
-- 🛠️ **Desenvolvimento**: Guias práticos
-- ⚙️ **Setup**: Configuração para diferentes ambientes
-- 🤝 **Contribuição**: Como contribuir com o projeto
+-   🏗️ **Arquitetura**: Explicação detalhada das camadas
+-   🛠️ **Desenvolvimento**: Guias práticos
+-   ⚙️ **Setup**: Configuração para diferentes ambientes
+-   🤝 **Contribuição**: Como contribuir com o projeto
 
 ## 🚀 Ambientes Suportados
 
 ### 1. **Desenvolvimento Local**
-- SQLite como banco padrão
-- Debug habilitado
-- Hot reload automático
-- Logs detalhados
+
+-   SQLite como banco padrão
+-   Debug habilitado
+-   Hot reload automático
+-   Logs detalhados
 
 ### 2. **Homologação/Staging**
-- PostgreSQL
-- Configurações de teste
-- Dados de exemplo
-- Monitoramento básico
+
+-   PostgreSQL
+-   Configurações de teste
+-   Dados de exemplo
+-   Monitoramento básico
 
 ### 3. **Produção**
-- PostgreSQL otimizado
-- Redis para cache
-- Logs estruturados
-- Monitoramento completo
-- SSL/HTTPS obrigatório
+
+-   PostgreSQL otimizado
+-   Redis para cache
+-   Logs estruturados
+-   Monitoramento completo
+-   SSL/HTTPS obrigatório
 
 ## 🔍 Qualidade de Código
 
 ### Métricas Implementadas
 
-- **Cobertura de testes**: 100% das funcionalidades principais
-- **Complexidade ciclomática**: Máximo 10 por função
-- **Linhas por arquivo**: Máximo 500 linhas
-- **Documentação**: Docstrings obrigatórias
+-   **Cobertura de testes**: 100% das funcionalidades principais
+-   **Complexidade ciclomática**: Máximo 10 por função
+-   **Linhas por arquivo**: Máximo 500 linhas
+-   **Documentação**: Docstrings obrigatórias
 
 ### Ferramentas de Qualidade
 
-- **Black**: Formatação consistente
-- **Flake8**: Análise estática
-- **pytest**: Framework de testes
-- **pip-audit**: Auditoria de segurança
+-   **Black**: Formatação consistente
+-   **Flake8**: Análise estática
+-   **pytest**: Framework de testes
+-   **pip-audit**: Auditoria de segurança
 
 ## 🎯 Casos de Uso Ideais
 
 ### 1. **APIs REST Profissionais**
-- Autenticação robusta
-- Paginação e filtragem
-- Documentação automática
-- Testes abrangentes
+
+-   Autenticação robusta
+-   Paginação e filtragem
+-   Documentação automática
+-   Testes abrangentes
 
 ### 2. **Sistemas Empresariais**
-- Arquitetura escalável
-- Separação de responsabilidades
-- Facilidade de manutenção
-- Padrões de qualidade
+
+-   Arquitetura escalável
+-   Separação de responsabilidades
+-   Facilidade de manutenção
+-   Padrões de qualidade
 
 ### 3. **Projetos Educacionais**
-- Código bem documentado
-- Exemplos práticos
-- Boas práticas implementadas
-- Fácil compreensão
+
+-   Código bem documentado
+-   Exemplos práticos
+-   Boas práticas implementadas
+-   Fácil compreensão
 
 ## 🚀 Próximos Passos
 

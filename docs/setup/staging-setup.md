@@ -495,6 +495,7 @@ Agendar no crontab:
 ## 🆘 Solução de Problemas
 
 ### Problema: Erro de conexão com banco de dados
+
 ```bash
 # Verificar se o PostgreSQL está rodando
 sudo systemctl status postgresql
@@ -504,6 +505,7 @@ sudo tail -f /var/log/postgresql/postgresql-15-main.log
 ```
 
 ### Problema: Erro de permissão
+
 ```bash
 # Verificar permissões dos arquivos
 ls -la /path/to/django_base/
@@ -514,6 +516,7 @@ sudo chmod -R 755 /path/to/django_base/
 ```
 
 ### Problema: Erro de SSL
+
 ```bash
 # Verificar certificados
 openssl x509 -in /path/to/certificate.crt -text -noout

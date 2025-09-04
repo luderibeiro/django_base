@@ -2,7 +2,7 @@
 
 Esta é a camada mais interna e contém as regras de negócio essenciais da aplicação (Entidades) e as abstrações para interações com o mundo exterior (Interfaces de Repositório e Gateways). Ela é completamente independente de qualquer framework ou banco de dados.
 
-### Entidades
+## Entidades
 
 -   `project/core/domain/entities/user.py`: Criada a entidade `User` para representar um usuário de forma agnóstica a frameworks, contendo apenas os atributos e métodos de domínio (ex: `email`, `first_name`, `is_admin`). Esta entidade não herda de `django.db.models.Model`.
 
