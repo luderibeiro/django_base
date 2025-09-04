@@ -71,10 +71,17 @@ nav:
           - Testes Automatizados: development/automated-testing.md
           - Paginação e Filtragem: development/pagination-filtering.md
           - Logs e Tratamento de Exceções: development/logging-error-handling.md
+    - API Reference:
+          - OpenAPI Schema: development/api-reference.md
+          - Domain Layer: development/domain-reference.md
+          - Use Cases: development/use-cases-reference.md
+          - Repositories: development/repositories-reference.md
     - Setup:
           - 🚀 Guia de Início Rápido: setup/quick-start-guide.md
           - Configuração do Projeto: setup/project-setup.md
           - Configuração da Documentação: setup/documentation-setup.md
+          - Setup Homologação (Staging): setup/staging-setup.md
+          - Setup Produção (detalhado): setup/production-setup.md
           - 🚀 Deploy Completo em Produção: setup/production-complete-guide.md
     - Análise do Projeto:
           - 📊 Análise Completa da Arquitetura: architecture/project-analysis.md
