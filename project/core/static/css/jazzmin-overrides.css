@@ -1,0 +1,16 @@
+/* Aumenta/controla o logo da tela de login do Jazzmin */
+body.login-page .login-logo img,
+body.hold-transition.login-page .login-logo img,
+.login-page .login-logo img,
+.login-page .brand-image {
+    max-height: 96px !important; /* ajuste aqui */
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+/* Se o template aplicar classe utilitária, garantimos responsividade */
+.login-page img.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
