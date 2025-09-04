@@ -5,7 +5,7 @@
 [![Django](https://img.shields.io/badge/Django-5.0+-green?style=for-the-badge&logo=django)](https://djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python)](https://python.org/)
 [![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen?style=for-the-badge)](https://github.com/luderibeiro/django_base/actions)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://github.com/luderibeiro/django_base/blob/main/LICENSE)
 [![Version](https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge)](https://github.com/luderibeiro/django_base/releases)
 
 **O template Django mais completo e profissional para iniciar seus projetos com Arquitetura Limpa!**
@@ -164,23 +164,28 @@ Este template é perfeito para criar forks especializados:
 
 ## 📊 **Estatísticas do Projeto**
 
--   **48 testes** passando com sucesso
--   **100% de cobertura** das funcionalidades principais
+-   **93% de cobertura de testes** com testes unitários e de integração
 -   **Arquitetura Limpa** implementada corretamente
+-   **OpenAPI/Swagger** documentação automática da API
+-   **Pre-commit hooks** para qualidade de código
+-   **MyPy** verificação de tipos estática
 -   **Docker** otimizado para dev e produção
--   **Documentação completa** e bem estruturada
--   **Makefile** para automação de tarefas
+-   **GitHub Actions CI/CD** pipeline completo
+-   **Documentação completa** com MkDocs
+-   **Makefile** com 20+ comandos de automação
 
 ---
 
 ## 🏆 **Por que este template é diferente?**
 
 1. **Arquitetura Limpa Real**: Não é apenas uma estrutura de pastas, é uma implementação real dos princípios
-2. **Testes Completos**: 48 testes que garantem qualidade e confiabilidade
-3. **Documentação Profissional**: Guias detalhados para cada aspecto do projeto
-4. **Automação**: Makefile que facilita o desenvolvimento
-5. **Configurações Completas**: Local, homologação e produção
-6. **Comunidade**: Projeto ativo com suporte da comunidade
+2. **Qualidade de Código**: Pre-commit hooks, MyPy, Black, Flake8 e Pydocstyle configurados
+3. **Documentação Automática**: OpenAPI/Swagger + MkDocstrings para documentação sempre atualizada
+4. **CI/CD Completo**: GitHub Actions com pipeline de testes, qualidade e deploy
+5. **93% Cobertura de Testes**: Testes unitários e de integração abrangentes
+6. **Automação Avançada**: Makefile com 20+ comandos para desenvolvimento
+7. **Configurações Completas**: Local, staging e produção com Docker otimizado
+8. **Comunidade Ativa**: Projeto em constante evolução com suporte da comunidade
 
 ---
 
