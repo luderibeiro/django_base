@@ -69,12 +69,15 @@ RUN adduser --disabled-password --no-create-home appuser
 RUN mkdir -p /data/web/static && \
     mkdir -p /data/web/media && \
     mkdir -p /app/project/logs && \
+    mkdir -p /app/data && \
     chown -R appuser:appuser /data/web/static && \
     chown -R appuser:appuser /data/web/media && \
     chown -R appuser:appuser /app/project/logs && \
+    chown -R appuser:appuser /app/data && \
     chmod -R 755 /data/web/static && \
     chmod -R 755 /data/web/media && \
-    chmod -R 755 /app/project/logs
+    chmod -R 755 /app/project/logs && \
+    chmod -R 755 /app/data
 
 # Copiar o código do projeto e scripts
 COPY project/ /app/project
