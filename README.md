@@ -64,9 +64,9 @@ make setup
 make run
 ```
 
-🎉 **Pronto!** Acesse http://127.0.0.1:8000
+🎉 **Pronto!** Acesse <http://127.0.0.1:8000>
 
-### 🐳 Com Docker
+### 🐳 Com Docke
 
 ```bash
 # Desenvolvimento
@@ -78,7 +78,7 @@ make docker-prod
 
 ## 🏗️ Arquitetura
 
-```
+```bash
 project/
 ├── core/                    # Aplicação principal
 │   ├── domain/             # Regras de negócio

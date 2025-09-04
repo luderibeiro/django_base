@@ -104,7 +104,7 @@ jobs:
             - name: 🔨 Build Docker image
               run: |
                   docker build -t django-base:latest .
-                  docker run --rm django-base:latest python manage.py check
+                  docker run --rm -w /app/project django-base:latest python manage.py check
 
 
     security:

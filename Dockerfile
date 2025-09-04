@@ -68,14 +68,20 @@ COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/pytho
 RUN adduser --disabled-password --no-create-home appuser
 RUN mkdir -p /data/web/static && \
     mkdir -p /data/web/media && \
+    mkdir -p /app/project/logs && \
     chown -R appuser:appuser /data/web/static && \
     chown -R appuser:appuser /data/web/media && \
+    chown -R appuser:appuser /app/project/logs && \
     chmod -R 755 /data/web/static && \
-    chmod -R 755 /data/web/media
+    chmod -R 755 /data/web/media && \
+    chmod -R 755 /app/project/logs
 
 # Copiar o código do projeto e scripts
 COPY project/ /app/project
 COPY scripts/ /app/scripts
+
+# Dar permissão de execução aos scripts
+RUN chmod +x /app/scripts/run.sh
 
 # Definir PATH para scripts e binários python
 ENV PATH="/app/scripts:/usr/local/bin:$PATH"
