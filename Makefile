@@ -104,20 +104,41 @@ clean-all: clean ## Limpa tudo incluindo ambiente virtual
 	@echo "$(GREEN)✅ Limpeza completa concluída!$(NC)"
 
 # Docker
-docker-build: ## Constrói a imagem Docker
-	@echo "$(BLUE)🐳 Construindo imagem Docker...$(NC)"
-	@docker build -t django-base .
+docker-build: ## Constrói a imagem Docker (produção)
+	@echo "$(BLUE)🐳 Construindo imagem Docker de produção...$(NC)"
+	@docker build -t django-base:latest .
 	@echo "$(GREEN)✅ Imagem Docker construída com sucesso!$(NC)"
+
+docker-build-dev: ## Constrói a imagem Docker de desenvolvimento (mais rápida)
+	@echo "$(BLUE)🐳 Construindo imagem Docker de desenvolvimento...$(NC)"
+	@docker build -f Dockerfile.dev -t django-base:dev .
+	@echo "$(GREEN)✅ Imagem Docker de desenvolvimento construída!$(NC)"
+
+docker-build-fast: ## Build rápido usando cache (apenas mudanças de código)
+	@echo "$(BLUE)⚡ Build rápido com cache...$(NC)"
+	@docker build --cache-from django-base:latest -t django-base:latest .
+	@echo "$(GREEN)✅ Build rápido concluído!$(NC)"
 
 docker-run: ## Executa o container Docker
 	@echo "$(BLUE)🐳 Executando container Docker...$(NC)"
 	@docker-compose -f docker-compose.dev.yml up --build
 	@echo "$(GREEN)✅ Container Docker executando!$(NC)"
 
+docker-run-dev: ## Executa container de desenvolvimento (mais rápido)
+	@echo "$(BLUE)🐳 Iniciando container de desenvolvimento...$(NC)"
+	@docker run --rm -p 8000:8000 -v $(PWD)/project:/app/project django-base:dev
+	@echo "$(GREEN)✅ Container de desenvolvimento executando!$(NC)"
+
 docker-stop: ## Para o container Docker
 	@echo "$(BLUE)🐳 Parando container Docker...$(NC)"
 	@docker-compose -f docker-compose.dev.yml down
 	@echo "$(GREEN)✅ Container Docker parado!$(NC)"
+
+docker-clean: ## Limpa imagens e containers não utilizados
+	@echo "$(BLUE)🧹 Limpando Docker...$(NC)"
+	@docker system prune -f
+	@docker image prune -f
+	@echo "$(GREEN)✅ Limpeza concluída!$(NC)"
 
 docker-prod: ## Executa em modo produção com Docker
 	@echo "$(BLUE)🐳 Executando em modo produção...$(NC)"

@@ -1,4 +1,4 @@
-# 🚀 _django_base_ - Template Profissional com Arquitetura Limpa
+# 🚀 **Django Base** - Template Profissional com Clean Architecture
 
 <div align="center">
 <a href="https://djangoproject.com/"><img src="https://img.shields.io/badge/Django-5.0+-green?style=for-the-badge&logo=django" alt="Django"></a>
@@ -9,7 +9,7 @@
 </div>
 
 <div align="center">
-<p style="font-size: 1.5rem; font-weight: bold;">O template Django mais completo e profissional para iniciar seus projetos com Arquitetura Limpa!</p>
+<p style="font-size: 1.5rem; font-weight: bold;">O template Django mais completo e profissional para iniciar seus projetos com Clean Architecture!</p>
 </div>
 
 <div align="center">
@@ -22,12 +22,12 @@
 
 ## ✨ Por que escolher o django_base como seu template?
 
-Este não é apenas mais um template Django. É uma **base sólida e profissional** que implementa os melhores padrões de desenvolvimento, seguindo rigorosamente os princípios da **Arquitetura Limpa**.
+Este não é apenas mais um template Django. É uma **base sólida e profissional** que implementa os melhores padrões de desenvolvimento, seguindo rigorosamente os princípios da **Clean Architecture**.
 
 ### 🎯 **Características Principais**
 
 -   ✅ **93% de cobertura de testes** com testes unitários e de integração
--   ✅ **Arquitetura Limpa** implementada corretamente
+-   ✅ **Clean Architecture** implementada corretamente
 -   ✅ **OpenAPI/Swagger** documentação automática da API
 -   ✅ **Pre-commit hooks** para qualidade de código
 -   ✅ **MyPy** verificação de tipos estática
@@ -40,9 +40,9 @@ Este não é apenas mais um template Django. É uma **base sólida e profissiona
 -   ✅ **Makefile** com 20+ comandos de automação
 -   ✅ **Configurações** para local, staging e produção
 
-### 🏗️ **Arquitetura Limpa - Por que é importante?**
+### 🏗️ **Clean Architecture - Por que é importante?**
 
-A Arquitetura Limpa garante que seu código seja:
+A Clean Architecture garante que seu código seja:
 
 -   🔄 **Independente de Frameworks**: Troque Django sem quebrar a lógica de negócio
 -   🧪 **Testável**: Teste regras de negócio sem banco de dados ou UI
@@ -167,7 +167,7 @@ Este template é perfeito para criar forks especializados:
 ## 📊 **Estatísticas do Projeto**
 
 -   **93% de cobertura de testes** com testes unitários e de integração
--   **Arquitetura Limpa** implementada corretamente
+-   **Clean Architecture** implementada corretamente
 -   **OpenAPI/Swagger** documentação automática da API
 -   **Pre-commit hooks** para qualidade de código
 -   **MyPy** verificação de tipos estática
@@ -180,7 +180,7 @@ Este template é perfeito para criar forks especializados:
 
 ## 🏆 **Por que este template é diferente?**
 
-1. **Arquitetura Limpa Real**: Não é apenas uma estrutura de pastas, é uma implementação real dos princípios
+1. **Clean Architecture Real**: Não é apenas uma estrutura de pastas, é uma implementação real dos princípios
 2. **Qualidade de Código**: Pre-commit hooks, MyPy, Black, Flake8 e Pydocstyle configurados
 3. **Documentação Automática**: OpenAPI/Swagger + MkDocstrings para documentação sempre atualizada
 4. **CI/CD Completo**: GitHub Actions com pipeline de testes, qualidade e deploy
