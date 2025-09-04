@@ -548,19 +548,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#200-2024-09-03" class="md-nav__link">
+  <a href="#210-2024-12-19" class="md-nav__link">
     <span class="md-ellipsis">
-      [2.0.0] - 2024-09-03
+      [2.1.0] - 2024-12-19
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[2.0.0] - 2024-09-03">
+    <nav class="md-nav" aria-label="[2.1.0] - 2024-12-19">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#adicionado" class="md-nav__link">
     <span class="md-ellipsis">
       Adicionado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhorado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Melhorado
     </span>
   </a>
   
@@ -576,7 +585,49 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#melhorado" class="md-nav__link">
+  <a href="#refatorado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refatorado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#200-2024-09-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      [2.0.0] - 2024-09-03
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.0.0] - 2024-09-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adicionado_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adicionado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corrigido_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrigido
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhorado_1" class="md-nav__link">
     <span class="md-ellipsis">
       Melhorado
     </span>
@@ -600,7 +651,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#adicionado_1" class="md-nav__link">
+  <a href="#adicionado_2" class="md-nav__link">
     <span class="md-ellipsis">
       Adicionado
     </span>
@@ -618,7 +669,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#refatorado" class="md-nav__link">
+  <a href="#refatorado_1" class="md-nav__link">
     <span class="md-ellipsis">
       Refatorado
     </span>
@@ -642,7 +693,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#adicionado_2" class="md-nav__link">
+  <a href="#adicionado_3" class="md-nav__link">
     <span class="md-ellipsis">
       Adicionado
     </span>
@@ -1659,8 +1710,81 @@
 <p>O formato é baseado em <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <h2 id="unreleased">[Unreleased]<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
-<h2 id="200-2024-09-03">[2.0.0] - 2024-09-03<a class="headerlink" href="#200-2024-09-03" title="Permanent link">&para;</a></h2>
+<h2 id="210-2024-12-19">[2.1.0] - 2024-12-19<a class="headerlink" href="#210-2024-12-19" title="Permanent link">&para;</a></h2>
 <h3 id="adicionado">Adicionado<a class="headerlink" href="#adicionado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>OpenAPI/Swagger Documentation</strong>: Implementação completa de documentação automática da API usando <code>drf-spectacular</code>, incluindo schema OpenAPI 3.0, interface Swagger UI e ReDoc para melhor experiência de desenvolvedor.</p>
+</li>
+<li>
+<p><strong>Pre-commit Hooks</strong>: Configuração de hooks de pre-commit para garantir qualidade de código, incluindo formatação automática (Black), linting (Flake8), verificação de docstrings (pydocstyle) e verificação de tipos (MyPy).</p>
+</li>
+<li>
+<p><strong>MyPy Static Type Checking</strong>: Implementação de verificação de tipos estática em modo gradual, com configuração específica para diferentes módulos e integração com Django via <code>django-stubs</code>.</p>
+</li>
+<li>
+<p><strong>MkDocstrings Integration</strong>: Integração do <code>mkdocstrings</code> para gerar documentação automática da API Python diretamente dos docstrings, criando referências completas para camadas de domínio, casos de uso e repositórios.</p>
+</li>
+<li>
+<p><strong>GitHub Actions CI/CD</strong>: Pipeline completo de CI/CD com workflows para testes, documentação, qualidade de código e deploy, incluindo templates para issues e pull requests.</p>
+</li>
+<li>
+<p><strong>Documentação Abrangente</strong>:</p>
+</li>
+<li>Guias completos de setup (produção, staging, quick-start)</li>
+<li>Análise detalhada de arquitetura do projeto</li>
+<li>Diretrizes de segurança e melhores práticas</li>
+<li>
+<p>Referências de API e documentação técnica</p>
+</li>
+<li>
+<p><strong>Ferramentas de Qualidade</strong>: Configuração de <code>pydocstyle</code>, <code>pytest-cov</code>, <code>flake8</code>, <code>black</code> e <code>pip-audit</code> para garantir padrões de código e segurança.</p>
+</li>
+<li>
+<p><strong>Assets e Branding</strong>: Logos e assets visuais do projeto em diferentes tamanhos para uso em documentação e interfaces.</p>
+</li>
+</ul>
+<h3 id="melhorado">Melhorado<a class="headerlink" href="#melhorado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Docstrings Completas</strong>: Adição de docstrings detalhadas em todo o projeto seguindo padrões PEP 257, incluindo módulos, classes, métodos e funções.</p>
+</li>
+<li>
+<p><strong>Cobertura de Testes</strong>: Aumento da cobertura de testes para 93% com testes unitários adicionais para middleware, URLs e casos de uso.</p>
+</li>
+<li>
+<p><strong>Configuração de Ambiente</strong>: Melhoria significativa na configuração de variáveis de ambiente com suporte a diferentes ambientes (desenvolvimento, staging, produção).</p>
+</li>
+<li>
+<p><strong>Makefile</strong>: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.</p>
+</li>
+<li>
+<p><strong>Estrutura de Documentação</strong>: Reorganização completa da documentação com navegação melhorada e seções específicas para diferentes aspectos do projeto.</p>
+</li>
+</ul>
+<h3 id="corrigido">Corrigido<a class="headerlink" href="#corrigido" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Exposição de Credenciais</strong>: Correção de problemas de segurança relacionados à exposição de credenciais em configurações e logs.</p>
+</li>
+<li>
+<p><strong>Configurações de Template</strong>: Correção de configurações de templates e paths para funcionamento correto em diferentes ambientes.</p>
+</li>
+<li>
+<p><strong>Imports Não Utilizados</strong>: Limpeza de imports desnecessários e otimização da estrutura de código.</p>
+</li>
+</ul>
+<h3 id="refatorado">Refatorado<a class="headerlink" href="#refatorado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Configurações de Settings</strong>: Refatoração das configurações do Django para melhor organização e segurança, incluindo configuração condicional de banco de dados.</p>
+</li>
+<li>
+<p><strong>Estrutura de Arquivos</strong>: Reorganização de arquivos estáticos, templates e configurações para melhor manutenibilidade.</p>
+</li>
+</ul>
+<h2 id="200-2024-09-03">[2.0.0] - 2024-09-03<a class="headerlink" href="#200-2024-09-03" title="Permanent link">&para;</a></h2>
+<h3 id="adicionado_1">Adicionado<a class="headerlink" href="#adicionado_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>Testes de Integração Completos</strong>: Implementação de uma suíte abrangente de testes de integração para todas as funcionalidades da API, incluindo autenticação, gerenciamento de usuários, paginação, filtragem e alteração de senhas. Todos os 48 testes estão passando com 100% de cobertura das funcionalidades principais.</p>
@@ -1675,7 +1799,7 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <p><strong>Limpeza e Otimização de Código</strong>: Remoção de imports não utilizados, logs de debug desnecessários e otimização da estrutura de código para melhor manutenibilidade.</p>
 </li>
 </ul>
-<h3 id="corrigido">Corrigido<a class="headerlink" href="#corrigido" title="Permanent link">&para;</a></h3>
+<h3 id="corrigido_1">Corrigido<a class="headerlink" href="#corrigido_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>Erro de Serializer de Alteração de Senha</strong>: Corrigido problema onde o serializer tentava chamar <code>to_internal_value()</code> em dados já validados, causando <code>AttributeError</code>.</p>
@@ -1690,7 +1814,7 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <p><strong>Logs de Debug</strong>: Removidos logs de debug temporários dos testes e middleware para produção.</p>
 </li>
 </ul>
-<h3 id="melhorado">Melhorado<a class="headerlink" href="#melhorado" title="Permanent link">&para;</a></h3>
+<h3 id="melhorado_1">Melhorado<a class="headerlink" href="#melhorado_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>Qualidade do Código</strong>: Aplicação de "pente fino" em todo o projeto, garantindo que não há problemas de linting, imports não utilizados ou código desnecessário.</p>
@@ -1703,7 +1827,7 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 </li>
 </ul>
 <h2 id="200-2024-07-30">[2.0.0] - 2024-07-30<a class="headerlink" href="#200-2024-07-30" title="Permanent link">&para;</a></h2>
-<h3 id="adicionado_1">Adicionado<a class="headerlink" href="#adicionado_1" title="Permanent link">&para;</a></h3>
+<h3 id="adicionado_2">Adicionado<a class="headerlink" href="#adicionado_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>Atualização de Dependências e Correção de Vulnerabilidades</strong>: Todas as dependências do projeto foram atualizadas para suas versões estáveis mais recentes, e as vulnerabilidades de segurança conhecidas no Django (5.0.14) e setuptools (66.1.1) foram corrigidas. Isso garante um ambiente de desenvolvimento e produção mais seguro e estável.</p>
@@ -1760,13 +1884,13 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <li><strong>Links de Documentação</strong>: Corrigidos links absolutos e relativos no <code>README.md</code> da raiz e no <code>docs/CONTRIBUTING.md</code> para garantir o funcionamento correto no GitHub Pages.</li>
 <li><strong>Navegação do MkDocs</strong>: Atualização do <code>mkdocs.yml</code> para incluir novas entradas de documentação (Testes Automatizados, Paginação e Filtragem, Logs e Tratamento de Exceções) e a nova entrada <code>Changelog</code>.</li>
 </ul>
-<h3 id="refatorado">Refatorado<a class="headerlink" href="#refatorado" title="Permanent link">&para;</a></h3>
+<h3 id="refatorado_1">Refatorado<a class="headerlink" href="#refatorado_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Modelo de Usuário Mais Leve</strong>: O modelo <code>User</code> do Django foi refatorado para herdar de <code>AbstractBaseUser</code> e <code>PermissionsMixin</code>, removendo o campo <code>username</code> e definindo <code>USERNAME_FIELD = "email"</code> e <code>REQUIRED_FIELDS</code> apropriadamente. A lógica em <code>DjangoUserRepository</code> e nos casos de uso foi adaptada para o novo modelo.</li>
 <li><strong>Implementação OAuth2 Completa</strong>: A <code>DjangoAuthGateway</code> foi atualizada para utilizar o <code>django-oauth-toolkit</code> para a geração real de tokens de acesso e refresh, substituindo a lógica de tokens fictícios. Configurações OAuth2 confirmadas em <code>settings.py</code> e <code>urls.py</code>.</li>
 </ul>
 <h2 id="110-projeto-base-de-arquitetura-limpa-inicial">[1.1.0] - Projeto Base de Arquitetura Limpa Inicial<a class="headerlink" href="#110-projeto-base-de-arquitetura-limpa-inicial" title="Permanent link">&para;</a></h2>
-<h3 id="adicionado_2">Adicionado<a class="headerlink" href="#adicionado_2" title="Permanent link">&para;</a></h3>
+<h3 id="adicionado_3">Adicionado<a class="headerlink" href="#adicionado_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Estrutura da Arquitetura Limpa</strong>: O projeto foi reestruturado em camadas distintas (Domínio, Aplicação, Infraestrutura, Apresentação), promovendo o desacoplamento e a separação de responsabilidades.<ul>
 <li><strong>Domínio</strong>: Entidades de negócio (<code>User</code>) e interfaces abstratas (<code>UserRepository</code>, <code>AuthGateway</code>).</li>
