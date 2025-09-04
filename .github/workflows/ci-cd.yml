@@ -104,7 +104,14 @@ jobs:
             - name: 🔨 Build Docker image
               run: |
                   docker build -t django-base:latest .
-                  docker run --rm -w /app/project django-base:latest python manage.py check
+
+            - name: 🧪 Test Docker image
+              env:
+                  DJANGO_SECRET_KEY: test-secret-key-for-ci
+                  DJANGO_DEBUG: False
+                  DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+              run: |
+                  docker run --rm -w /app/project -e DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -e DJANGO_DEBUG=$DJANGO_DEBUG -e DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS django-base:latest python manage.py check
 
 
     security:
@@ -123,12 +130,14 @@ jobs:
                   scan-ref: "."
                   format: "sarif"
                   output: "trivy-results.sarif"
+                  ignore-unfixed: true
 
             - name: 📤 Upload Trivy scan results
               uses: github/codeql-action/upload-sarif@v3
               if: always()
               with:
                   sarif_file: "trivy-results.sarif"
+                  category: "trivy"
 
     release:
         name: 🏷️ Create Release

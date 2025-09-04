@@ -80,8 +80,10 @@ RUN mkdir -p /data/web/static && \
 COPY project/ /app/project
 COPY scripts/ /app/scripts
 
-# Dar permissão de execução aos scripts
-RUN chmod +x /app/scripts/run.sh
+# Dar permissão de execução aos scripts e corrigir permissões
+RUN chmod +x /app/scripts/run.sh && \
+    chown -R appuser:appuser /app/project && \
+    chmod -R 755 /app/project
 
 # Definir PATH para scripts e binários python
 ENV PATH="/app/scripts:/usr/local/bin:$PATH"
