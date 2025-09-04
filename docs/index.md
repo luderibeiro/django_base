@@ -2,17 +2,17 @@
 
 <div align="center">
 
-[![Django](https://img.shields.io/badge/Django-5.0+-green?style=for-the-badge&logo=django)](https://djangoproject.com/)
-[![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python)](https://python.org/)
-[![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen?style=for-the-badge)](https://github.com/luderibeiro/django_base/actions)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://github.com/luderibeiro/django_base/blob/main/LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge)](https://github.com/luderibeiro/django_base/releases)
+<a href="https://djangoproject.com/"><img src="https://img.shields.io/badge/Django-5.0+-green?style=for-the-badge&logo=django" alt="Django"></a>
+<a href="https://python.org/"><img src="https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python" alt="Python"></a>
+<a href="https://github.com/luderibeiro/django_base/actions"><img src="https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen?style=for-the-badge" alt="Tests"></a>
+<a href="https://github.com/luderibeiro/django_base/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License"></a>
+<a href="https://github.com/luderibeiro/django_base/releases"><img src="https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge" alt="Version"></a>
 
 **O template Django mais completo e profissional para iniciar seus projetos com Arquitetura Limpa!**
 
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-2DA44E?style=for-the-badge&logo=github)](https://github.com/luderibeiro/django_base/generate)
-[![Fork on GitHub](https://img.shields.io/badge/Fork%20on%20GitHub-181717?style=for-the-badge&logo=github)](https://github.com/luderibeiro/django_base/fork)
-[![Star on GitHub](https://img.shields.io/badge/Star%20on%20GitHub-181717?style=for-the-badge&logo=github)](https://github.com/luderibeiro/django_base)
+<a href="https://github.com/luderibeiro/django_base/generate"><img src="https://img.shields.io/badge/Use%20this%20template-2DA44E?style=for-the-badge&logo=github" alt="Use this template"></a>
+<a href="https://github.com/luderibeiro/django_base/fork"><img src="https://img.shields.io/badge/Fork%20on%20GitHub-181717?style=for-the-badge&logo=github" alt="Fork on GitHub"></a>
+<a href="https://github.com/luderibeiro/django_base"><img src="https://img.shields.io/badge/Star%20on%20GitHub-181717?style=for-the-badge&logo=github" alt="Star on GitHub"></a>
 
 </div>
 
@@ -193,8 +193,8 @@ Este template é perfeito para criar forks especializados:
 
 **🌟 Se este projeto te ajudou, considere dar uma estrela!**
 
-[![Star on GitHub](https://img.shields.io/badge/Star%20on%20GitHub-181717?style=for-the-badge&logo=github)](https://github.com/luderibeiro/django_base)
-[![Fork on GitHub](https://img.shields.io/badge/Fork%20on%20GitHub-181717?style=for-the-badge&logo=github)](https://github.com/luderibeiro/django_base/fork)
+<a href="https://github.com/luderibeiro/django_base"><img src="https://img.shields.io/badge/Star%20on%20GitHub-181717?style=for-the-badge&logo=github" alt="Star on GitHub"></a>
+<a href="https://github.com/luderibeiro/django_base/fork"><img src="https://img.shields.io/badge/Fork%20on%20GitHub-181717?style=for-the-badge&logo=github" alt="Fork on GitHub"></a>
 
 -   **Feito com ❤️ pela comunidade Django**
 
