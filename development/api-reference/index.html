@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://luderibeiro.github.io/django_base/architecture/infrastructure-layer/">
+        <link rel="canonical" href="https://luderibeiro.github.io/django_base/development/api-reference/">
       
       
-        <link rel="prev" href="../application-layer/">
+        <link rel="prev" href="../logging-error-handling/">
       
       
-        <link rel="next" href="../presentation-layer/">
+        <link rel="next" href="../domain-reference/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Camada de Infraestrutura - Django Base - Template com Arquitetura Limpa</title>
+        <title>OpenAPI Schema - Django Base - Template com Arquitetura Limpa</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#camada-de-infraestrutura" class="md-skip">
+        <a href="#api-reference-openapi-schema" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Camada de Infraestrutura
+              OpenAPI Schema
             
           </span>
         </div>
@@ -295,13 +295,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../overview/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
           
   
   
@@ -321,7 +319,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../development/testing/" class="md-tabs__link">
+        <a href="../testing/" class="md-tabs__link">
           
   
   
@@ -337,11 +335,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../development/api-reference/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -381,7 +381,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../project-analysis/" class="md-tabs__link">
+        <a href="../../architecture/project-analysis/" class="md-tabs__link">
           
   
   
@@ -552,31 +552,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -589,7 +586,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Arquitetura
@@ -603,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../overview/" class="md-nav__link">
+      <a href="../../architecture/overview/" class="md-nav__link">
         
   
   
@@ -626,7 +623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../domain-layer/" class="md-nav__link">
+      <a href="../../architecture/domain-layer/" class="md-nav__link">
         
   
   
@@ -649,7 +646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../application-layer/" class="md-nav__link">
+      <a href="../../architecture/application-layer/" class="md-nav__link">
         
   
   
@@ -669,19 +666,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../architecture/infrastructure-layer/" class="md-nav__link">
         
   
   
@@ -692,7 +680,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -705,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../presentation-layer/" class="md-nav__link">
+      <a href="../../architecture/presentation-layer/" class="md-nav__link">
         
   
   
@@ -728,7 +715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../url-configuration/" class="md-nav__link">
+      <a href="../../architecture/url-configuration/" class="md-nav__link">
         
   
   
@@ -751,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lighter-user-model/" class="md-nav__link">
+      <a href="../../architecture/lighter-user-model/" class="md-nav__link">
         
   
   
@@ -826,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/testing/" class="md-nav__link">
+      <a href="../testing/" class="md-nav__link">
         
   
   
@@ -849,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/frontend-integration/" class="md-nav__link">
+      <a href="../frontend-integration/" class="md-nav__link">
         
   
   
@@ -872,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/generic-crud-use-cases/" class="md-nav__link">
+      <a href="../generic-crud-use-cases/" class="md-nav__link">
         
   
   
@@ -895,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/oauth2-implementation/" class="md-nav__link">
+      <a href="../oauth2-implementation/" class="md-nav__link">
         
   
   
@@ -918,7 +905,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/automated-testing/" class="md-nav__link">
+      <a href="../automated-testing/" class="md-nav__link">
         
   
   
@@ -941,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/pagination-filtering/" class="md-nav__link">
+      <a href="../pagination-filtering/" class="md-nav__link">
         
   
   
@@ -964,7 +951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/logging-error-handling/" class="md-nav__link">
+      <a href="../logging-error-handling/" class="md-nav__link">
         
   
   
@@ -991,28 +978,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
   
   
@@ -1025,7 +1015,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             API Reference
@@ -1036,10 +1026,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../development/api-reference/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    OpenAPI Schema
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1050,6 +1062,170 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#acesso-a-documentacao-interativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 Acesso à Documentação Interativa
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔗 Acesso à Documentação Interativa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#swagger-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Swagger UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReDoc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schema-openapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema OpenAPI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Autenticação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Endpoints Principais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Endpoints Principais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usuários
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autenticacao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autenticação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Exemplos de Uso
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Exemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criar-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criar Usuário
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listar-usuarios-com-paginacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Listar Usuários com Paginação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#login" class="md-nav__link">
+    <span class="md-ellipsis">
+      Login
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigos-de-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Códigos de Status
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Configuração
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1062,7 +1238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/domain-reference/" class="md-nav__link">
+      <a href="../domain-reference/" class="md-nav__link">
         
   
   
@@ -1085,7 +1261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/use-cases-reference/" class="md-nav__link">
+      <a href="../use-cases-reference/" class="md-nav__link">
         
   
   
@@ -1108,7 +1284,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/repositories-reference/" class="md-nav__link">
+      <a href="../repositories-reference/" class="md-nav__link">
         
   
   
@@ -1373,7 +1549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../project-analysis/" class="md-nav__link">
+      <a href="../../architecture/project-analysis/" class="md-nav__link">
         
   
   
@@ -1490,12 +1666,112 @@
   
 
 
-<h1 id="camada-de-infraestrutura">Camada de Infraestrutura<a class="headerlink" href="#camada-de-infraestrutura" title="Permanent link">&para;</a></h1>
-<p>Esta camada é responsável pela implementação das interfaces definidas na camada de Domínio. Ela lida com os detalhes técnicos, como persistência de dados (Django ORM) ou comunicação com serviços externos.</p>
+<h1 id="api-reference-openapi-schema">📚 API Reference - OpenAPI Schema<a class="headerlink" href="#api-reference-openapi-schema" title="Permanent link">&para;</a></h1>
+<p>Esta página contém a documentação completa da API REST do Django Base, gerada automaticamente a partir do código.</p>
+<h2 id="acesso-a-documentacao-interativa">🔗 Acesso à Documentação Interativa<a class="headerlink" href="#acesso-a-documentacao-interativa" title="Permanent link">&para;</a></h2>
+<h3 id="swagger-ui">Swagger UI<a class="headerlink" href="#swagger-ui" title="Permanent link">&para;</a></h3>
+<p>Acesse a documentação interativa da API através do Swagger UI:</p>
 <ul>
-<li><code>project/core/repositories/user_repository_impl.py</code>: Criada a implementação <code>DjangoUserRepository</code> que herda de <code>UserRepository</code> e utiliza o ORM do Django para interagir com o modelo <code>User</code> do Django. Inclui a conversão entre a entidade de domínio <code>User</code> e o modelo Django <code>User</code>.</li>
-<li><code>project/core/repositories/auth_gateway_impl.py</code>: Criada a implementação <code>DjangoAuthGateway</code> que herda de <code>AuthGateway</code> e utiliza o sistema de autenticação do Django para <code>check_password</code> e um placeholder para <code>create_tokens</code> e a implementação para <code>set_password</code>.</li>
+<li><strong>URL</strong>: <code>/api/docs/</code></li>
+<li><strong>Descrição</strong>: Interface interativa para testar endpoints da API</li>
 </ul>
+<h3 id="redoc">ReDoc<a class="headerlink" href="#redoc" title="Permanent link">&para;</a></h3>
+<p>Documentação alternativa com visual limpo:</p>
+<ul>
+<li><strong>URL</strong>: <code>/api/redoc/</code></li>
+<li><strong>Descrição</strong>: Documentação em formato ReDoc</li>
+</ul>
+<h3 id="schema-openapi">Schema OpenAPI<a class="headerlink" href="#schema-openapi" title="Permanent link">&para;</a></h3>
+<p>Schema JSON da API:</p>
+<ul>
+<li><strong>URL</strong>: <code>/api/schema/</code></li>
+<li><strong>Descrição</strong>: Schema OpenAPI 3.0 em formato JSON</li>
+</ul>
+<h2 id="autenticacao">🔐 Autenticação<a class="headerlink" href="#autenticacao" title="Permanent link">&para;</a></h2>
+<p>A API utiliza OAuth2 para autenticação. Para acessar os endpoints protegidos:</p>
+<ol>
+<li>
+<p><strong>Obter token de acesso</strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/o/token/<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/x-www-form-urlencoded&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;grant_type=password&amp;username=seu_email&amp;password=sua_senha&amp;client_id=seu_client_id&amp;client_secret=seu_client_secret&quot;</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong>Usar token nas requisições</strong>:
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer SEU_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span>http://localhost:8000/api/v1/users/
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h2 id="endpoints-principais">📋 Endpoints Principais<a class="headerlink" href="#endpoints-principais" title="Permanent link">&para;</a></h2>
+<h3 id="usuarios">Usuários<a class="headerlink" href="#usuarios" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>GET /api/v1/users/</code> - Listar usuários</li>
+<li><code>POST /api/v1/users/</code> - Criar usuário</li>
+<li><code>GET /api/v1/users/{id}/</code> - Obter usuário por ID</li>
+<li><code>PUT /api/v1/users/{id}/password/</code> - Alterar senha</li>
+</ul>
+<h3 id="autenticacao_1">Autenticação<a class="headerlink" href="#autenticacao_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>POST /api/v1/auth/login/</code> - Login de usuário</li>
+</ul>
+<h2 id="exemplos-de-uso">🎯 Exemplos de Uso<a class="headerlink" href="#exemplos-de-uso" title="Permanent link">&para;</a></h2>
+<h3 id="criar-usuario">Criar Usuário<a class="headerlink" href="#criar-usuario" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span>
+<span class="normal"><a href="#__codelineno-2-8">8</a></span>
+<span class="normal"><a href="#__codelineno-2-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/api/v1/users/<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer SEU_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="s1">    &quot;email&quot;: &quot;usuario@exemplo.com&quot;,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="s1">    &quot;first_name&quot;: &quot;João&quot;,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="s1">    &quot;last_name&quot;: &quot;Silva&quot;,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="s1">    &quot;password&quot;: &quot;senha123&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="s1">  }&#39;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="listar-usuarios-com-paginacao">Listar Usuários com Paginação<a class="headerlink" href="#listar-usuarios-com-paginacao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer SEU_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8000/api/v1/users/?limit=10&amp;offset=0&amp;search=joão&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="login">Login<a class="headerlink" href="#login" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/api/v1/auth/login/<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="s1">    &quot;email&quot;: &quot;usuario@exemplo.com&quot;,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="s1">    &quot;password&quot;: &quot;senha123&quot;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="s1">  }&#39;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="codigos-de-status">📊 Códigos de Status<a class="headerlink" href="#codigos-de-status" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>200</code> - Sucesso</li>
+<li><code>201</code> - Criado com sucesso</li>
+<li><code>400</code> - Dados inválidos</li>
+<li><code>401</code> - Não autenticado</li>
+<li><code>403</code> - Sem permissão</li>
+<li><code>404</code> - Recurso não encontrado</li>
+<li><code>500</code> - Erro interno do servidor</li>
+</ul>
+<h2 id="configuracao">🔧 Configuração<a class="headerlink" href="#configuracao" title="Permanent link">&para;</a></h2>
+<p>A documentação é gerada automaticamente usando <code>drf-spectacular</code> e está configurada em <code>SPECTACULAR_SETTINGS</code> no arquivo <code>settings.py</code>.</p>
+<p>Para regenerar o schema:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>python<span class="w"> </span>manage.py<span class="w"> </span>spectacular<span class="w"> </span>--file<span class="w"> </span>schema.yml
+</code></pre></div></td></tr></table></div>
 
 
 

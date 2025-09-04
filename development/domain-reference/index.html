@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://luderibeiro.github.io/django_base/architecture/infrastructure-layer/">
+        <link rel="canonical" href="https://luderibeiro.github.io/django_base/development/domain-reference/">
       
       
-        <link rel="prev" href="../application-layer/">
+        <link rel="prev" href="../api-reference/">
       
       
-        <link rel="next" href="../presentation-layer/">
+        <link rel="next" href="../use-cases-reference/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Camada de Infraestrutura - Django Base - Template com Arquitetura Limpa</title>
+        <title>Domain Layer - Django Base - Template com Arquitetura Limpa</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#camada-de-infraestrutura" class="md-skip">
+        <a href="#domain-layer-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Camada de Infraestrutura
+              Domain Layer
             
           </span>
         </div>
@@ -295,13 +295,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../overview/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
           
   
   
@@ -321,7 +319,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../development/testing/" class="md-tabs__link">
+        <a href="../testing/" class="md-tabs__link">
           
   
   
@@ -337,11 +335,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../development/api-reference/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../api-reference/" class="md-tabs__link">
           
   
   
@@ -381,7 +381,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../project-analysis/" class="md-tabs__link">
+        <a href="../../architecture/project-analysis/" class="md-tabs__link">
           
   
   
@@ -552,31 +552,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -589,7 +586,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Arquitetura
@@ -603,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../overview/" class="md-nav__link">
+      <a href="../../architecture/overview/" class="md-nav__link">
         
   
   
@@ -626,7 +623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../domain-layer/" class="md-nav__link">
+      <a href="../../architecture/domain-layer/" class="md-nav__link">
         
   
   
@@ -649,7 +646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../application-layer/" class="md-nav__link">
+      <a href="../../architecture/application-layer/" class="md-nav__link">
         
   
   
@@ -669,19 +666,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../architecture/infrastructure-layer/" class="md-nav__link">
         
   
   
@@ -692,7 +680,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -705,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../presentation-layer/" class="md-nav__link">
+      <a href="../../architecture/presentation-layer/" class="md-nav__link">
         
   
   
@@ -728,7 +715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../url-configuration/" class="md-nav__link">
+      <a href="../../architecture/url-configuration/" class="md-nav__link">
         
   
   
@@ -751,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lighter-user-model/" class="md-nav__link">
+      <a href="../../architecture/lighter-user-model/" class="md-nav__link">
         
   
   
@@ -826,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/testing/" class="md-nav__link">
+      <a href="../testing/" class="md-nav__link">
         
   
   
@@ -849,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/frontend-integration/" class="md-nav__link">
+      <a href="../frontend-integration/" class="md-nav__link">
         
   
   
@@ -872,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/generic-crud-use-cases/" class="md-nav__link">
+      <a href="../generic-crud-use-cases/" class="md-nav__link">
         
   
   
@@ -895,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/oauth2-implementation/" class="md-nav__link">
+      <a href="../oauth2-implementation/" class="md-nav__link">
         
   
   
@@ -918,7 +905,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/automated-testing/" class="md-nav__link">
+      <a href="../automated-testing/" class="md-nav__link">
         
   
   
@@ -941,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/pagination-filtering/" class="md-nav__link">
+      <a href="../pagination-filtering/" class="md-nav__link">
         
   
   
@@ -964,7 +951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/logging-error-handling/" class="md-nav__link">
+      <a href="../logging-error-handling/" class="md-nav__link">
         
   
   
@@ -991,28 +978,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
   
   
@@ -1025,7 +1015,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             API Reference
@@ -1039,7 +1029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/api-reference/" class="md-nav__link">
+      <a href="../api-reference/" class="md-nav__link">
         
   
   
@@ -1059,10 +1049,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../development/domain-reference/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Domain Layer
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1073,6 +1085,116 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Entidades
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Entidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Entity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contratos-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔌 Contratos (Interfaces)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Contratos (Interfaces)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generic Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auth-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auth Gateway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-sobre-a-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Notas sobre a Arquitetura
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Notas sobre a Arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principios-seguidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Princípios Seguidos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1085,7 +1207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/use-cases-reference/" class="md-nav__link">
+      <a href="../use-cases-reference/" class="md-nav__link">
         
   
   
@@ -1108,7 +1230,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/repositories-reference/" class="md-nav__link">
+      <a href="../repositories-reference/" class="md-nav__link">
         
   
   
@@ -1373,7 +1495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../project-analysis/" class="md-nav__link">
+      <a href="../../architecture/project-analysis/" class="md-nav__link">
         
   
   
@@ -1490,12 +1612,44 @@
   
 
 
-<h1 id="camada-de-infraestrutura">Camada de Infraestrutura<a class="headerlink" href="#camada-de-infraestrutura" title="Permanent link">&para;</a></h1>
-<p>Esta camada é responsável pela implementação das interfaces definidas na camada de Domínio. Ela lida com os detalhes técnicos, como persistência de dados (Django ORM) ou comunicação com serviços externos.</p>
+<h1 id="domain-layer-reference">🏗️ Domain Layer Reference<a class="headerlink" href="#domain-layer-reference" title="Permanent link">&para;</a></h1>
+<p>Esta página contém a documentação automática da camada de domínio, incluindo entidades e contratos.</p>
+<h2 id="entidades">📦 Entidades<a class="headerlink" href="#entidades" title="Permanent link">&para;</a></h2>
+<h3 id="user-entity">User Entity<a class="headerlink" href="#user-entity" title="Permanent link">&para;</a></h3>
+<p>::: core.domain.entities.user.User
+options:
+show_source: true
+show_root_heading: true</p>
+<h2 id="contratos-interfaces">🔌 Contratos (Interfaces)<a class="headerlink" href="#contratos-interfaces" title="Permanent link">&para;</a></h2>
+<h3 id="generic-repository">Generic Repository<a class="headerlink" href="#generic-repository" title="Permanent link">&para;</a></h3>
+<p>::: core.domain.data_access.GenericRepository
+options:
+show_source: true
+show_root_heading: true</p>
+<h3 id="user-repository">User Repository<a class="headerlink" href="#user-repository" title="Permanent link">&para;</a></h3>
+<p>::: core.domain.data_access.UserRepository
+options:
+show_source: true
+show_root_heading: true</p>
+<h3 id="auth-gateway">Auth Gateway<a class="headerlink" href="#auth-gateway" title="Permanent link">&para;</a></h3>
+<p>::: core.domain.gateways.AuthGateway
+options:
+show_source: true
+show_root_heading: true</p>
+<h2 id="notas-sobre-a-arquitetura">📝 Notas sobre a Arquitetura<a class="headerlink" href="#notas-sobre-a-arquitetura" title="Permanent link">&para;</a></h2>
+<p>A camada de domínio é o coração da aplicação e contém:</p>
 <ul>
-<li><code>project/core/repositories/user_repository_impl.py</code>: Criada a implementação <code>DjangoUserRepository</code> que herda de <code>UserRepository</code> e utiliza o ORM do Django para interagir com o modelo <code>User</code> do Django. Inclui a conversão entre a entidade de domínio <code>User</code> e o modelo Django <code>User</code>.</li>
-<li><code>project/core/repositories/auth_gateway_impl.py</code>: Criada a implementação <code>DjangoAuthGateway</code> que herda de <code>AuthGateway</code> e utiliza o sistema de autenticação do Django para <code>check_password</code> e um placeholder para <code>create_tokens</code> e a implementação para <code>set_password</code>.</li>
+<li><strong>Entidades</strong>: Objetos de negócio puros (sem dependências externas)</li>
+<li><strong>Contratos</strong>: Interfaces que definem as operações necessárias</li>
+<li><strong>Regras de Negócio</strong>: Lógica central da aplicação</li>
 </ul>
+<h3 id="principios-seguidos">Princípios Seguidos<a class="headerlink" href="#principios-seguidos" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Independência de Frameworks</strong>: Não depende do Django</li>
+<li><strong>Testabilidade</strong>: Pode ser testada sem banco de dados</li>
+<li><strong>Reutilização</strong>: Lógica de negócio pode ser reutilizada</li>
+<li><strong>Inversão de Dependência</strong>: Depende de abstrações, não implementações</li>
+</ol>
 
 
 
