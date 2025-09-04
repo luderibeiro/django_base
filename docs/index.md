@@ -2,11 +2,11 @@
 
 <div align="center">
 
-![Django](https://img.shields.io/badge/Django-5.0+-green?style=for-the-badge&logo=django)
-![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python)
-![Tests](https://img.shields.io/badge/Tests-48%20passing-brightgreen?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-2.0.0-orange?style=for-the-badge)
+[![Django](https://img.shields.io/badge/Django-5.0+-green?style=for-the-badge&logo=django)](https://djangoproject.com/)
+[![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python)](https://python.org/)
+[![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen?style=for-the-badge)](https://github.com/luderibeiro/django_base/actions)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge)](https://github.com/luderibeiro/django_base/releases)
 
 **O template Django mais completo e profissional para iniciar seus projetos com Arquitetura Limpa!**
 
@@ -24,15 +24,19 @@ Este não é apenas mais um template Django. É uma **base sólida e profissiona
 
 ### 🎯 **Características Principais**
 
--   ✅ **48 testes passando** com 100% de cobertura das funcionalidades principais
+-   ✅ **93% de cobertura de testes** com testes unitários e de integração
 -   ✅ **Arquitetura Limpa** implementada corretamente
+-   ✅ **OpenAPI/Swagger** documentação automática da API
+-   ✅ **Pre-commit hooks** para qualidade de código
+-   ✅ **MyPy** verificação de tipos estática
 -   ✅ **OAuth2** completo com django-oauth-toolkit
 -   ✅ **Paginação e Filtragem** avançadas
 -   ✅ **Logging e Tratamento de Exceções** robustos
 -   ✅ **Docker** otimizado para dev e produção
--   ✅ **Documentação completa** e bem estruturada
--   ✅ **Makefile** para automação de tarefas
--   ✅ **Configurações** para local, homologação e produção
+-   ✅ **GitHub Actions CI/CD** pipeline completo
+-   ✅ **Documentação completa** com MkDocs e MkDocstrings
+-   ✅ **Makefile** com 20+ comandos de automação
+-   ✅ **Configurações** para local, staging e produção
 
 ### 🏗️ **Arquitetura Limpa - Por que é importante?**
 

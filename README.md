@@ -3,7 +3,9 @@
 <div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
-[![Django](https://img.shields.io/badge/Django-5.2+-green.svg)](https://djangoproject.com)
+[![Django](https://img.shields.io/badge/Django-5.0+-green.svg)](https://djangoproject.com)
+[![Version](https://img.shields.io/badge/Version-2.1.0-orange.svg)](https://github.com/luderibeiro/django_base/releases)
+[![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen.svg)](https://github.com/luderibeiro/django_base/actions)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-MkDocs-blue.svg)](https://luderibeiro.github.io/django_base/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
@@ -28,12 +30,16 @@ Este template Django oferece uma **base sólida e profissional** para desenvolvi
 ### ✨ Principais Características
 
 - 🏗️ **Arquitetura Limpa** - Separação clara de responsabilidades
+- 📊 **93% Cobertura de Testes** - Suite completa de testes unitários e de integração
+- 📖 **OpenAPI/Swagger** - Documentação automática da API
+- 🔧 **Pre-commit Hooks** - Qualidade de código automatizada
+- 🐍 **MyPy** - Verificação de tipos estática
 - 🐳 **Docker Ready** - Containerização completa para desenvolvimento e produção
-- 🧪 **Testes Automatizados** - Suite completa de testes com pytest
-- 📚 **Documentação Rica** - Guias detalhados e exemplos práticos
-- 🔧 **Makefile Poderoso** - Automação de tarefas de desenvolvimento
+- 🚀 **GitHub Actions CI/CD** - Pipeline completo de integração contínua
+- 📚 **Documentação Rica** - MkDocs com MkDocstrings para documentação automática
+- 🔧 **Makefile Poderoso** - 20+ comandos de automação de desenvolvimento
 - 🎨 **Interface Admin** - Django Jazzmin para administração elegante
-- 🔐 **Autenticação OAuth** - Sistema de autenticação robusto
+- 🔐 **Autenticação OAuth2** - Sistema de autenticação robusto
 - 📊 **API REST** - Django REST Framework configurado
 
 ## 🚀 Início Rápido
