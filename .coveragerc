@@ -1,0 +1,16 @@
+[run]
+omit =
+    project/core/migrations/*
+    project/manage.py
+    project/project/asgi.py
+    project/project/wsgi.py
+    project/project/settings*.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.
+    raise NotImplementedError
+
+
+

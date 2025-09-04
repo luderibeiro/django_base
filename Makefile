@@ -54,7 +54,7 @@ test: ## Executa todos os testes
 
 test-coverage: ## Executa testes com cobertura
 	@echo "$(BLUE)🧪 Executando testes com cobertura...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) --cov=. --cov-report=html --cov-report=term
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) --cov=. --cov-config=../.coveragerc --cov-report=term-missing --cov-report=html
 	@echo "$(GREEN)✅ Relatório de cobertura gerado em htmlcov/$(NC)"
 
 test-watch: ## Executa testes em modo watch
@@ -130,6 +130,17 @@ lint: ## Executa linting no código
 	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && flake8 . --exclude=migrations,venv,__pycache__
 	@echo "$(GREEN)✅ Linting concluído!$(NC)"
 
+docstyle: ## Verifica docstrings com pydocstyle
+	@echo "$(BLUE)📖 Verificando docstrings (pydocstyle)...$(NC)"
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && pydocstyle core --config=../pydocstyle.ini || true
+	@echo "$(GREEN)✅ Verificação de docstrings concluída!$(NC)"
+
+docs-quality: ## Formata e verifica documentação de código (Black + pydocstyle)
+	@echo "$(BLUE)🧹 Formatando e verificando documentação...$(NC)"
+	@$(MAKE) format
+	@$(MAKE) docstyle
+	@echo "$(GREEN)✅ Documentação de código revisada!$(NC)"
+
 format: ## Formata o código
 	@echo "$(BLUE)🎨 Formatando código...$(NC)"
 	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && black . --exclude=migrations
@@ -150,6 +161,26 @@ docs-build: ## Constrói a documentação
 	@echo "$(BLUE)📚 Construindo documentação...$(NC)"
 	@mkdocs build
 	@echo "$(GREEN)✅ Documentação construída em site/$(NC)"
+
+docs-check: ## Valida documentação em modo estrito
+	@echo "$(BLUE)📚 Validando documentação (strict)...$(NC)"
+	@mkdocs build --strict
+	@echo "$(GREEN)✅ Documentação válida (sem links quebrados)!$(NC)"
+
+type-check: ## Executa verificação de tipos com mypy
+	@echo "$(BLUE)🔍 Verificando tipos (mypy)...$(NC)"
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && mypy --config-file=../mypy.ini core/
+	@echo "$(GREEN)✅ Verificação de tipos concluída!$(NC)"
+
+pre-commit-install: ## Instala hooks do pre-commit
+	@echo "$(BLUE)🔧 Instalando hooks do pre-commit...$(NC)"
+	@. $(VENV)/bin/activate && pre-commit install
+	@echo "$(GREEN)✅ Hooks do pre-commit instalados!$(NC)"
+
+pre-commit-run: ## Executa pre-commit em todos os arquivos
+	@echo "$(BLUE)🔧 Executando pre-commit...$(NC)"
+	@. $(VENV)/bin/activate && pre-commit run --all-files
+	@echo "$(GREEN)✅ Pre-commit executado!$(NC)"
 
 docs-deploy: ## Faz deploy da documentação
 	@echo "$(BLUE)📚 Fazendo deploy da documentação...$(NC)"
@@ -240,6 +271,8 @@ restore-db: ## Restaura backup do banco de dados
 analyze: ## Análise completa do código
 	@echo "$(BLUE)🔍 Executando análise completa do código...$(NC)"
 	@$(MAKE) lint
+	@$(MAKE) docstyle
+	@$(MAKE) type-check
 	@$(MAKE) security-check
 	@$(MAKE) test-coverage
 	@echo "$(GREEN)✅ Análise completa concluída!$(NC)"
@@ -270,10 +303,18 @@ requirements-check: ## Verifica dependências desatualizadas
 env-example: ## Cria arquivo .env de exemplo
 	@echo "$(BLUE)📝 Criando arquivo .env de exemplo...$(NC)"
 	@echo "# Configurações do Django" > .env.example
-	@echo "DEBUG=True" >> .env.example
-	@echo "SECRET_KEY=your-secret-key-here" >> .env.example
-	@echo "DATABASE_URL=sqlite:///db.sqlite3" >> .env.example
-	@echo "ALLOWED_HOSTS=localhost,127.0.0.1" >> .env.example
+	@echo "DJANGO_DEBUG=True" >> .env.example
+	@echo "DJANGO_SECRET_KEY=change-me-in-production" >> .env.example
+	@echo "DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1" >> .env.example
+	@echo "# Banco de dados (produção)" >> .env.example
+	@echo "DB_ENGINE=django.db.backends.postgresql" >> .env.example
+	@echo "DB_NAME=postgres" >> .env.example
+	@echo "DB_USER=postgres" >> .env.example
+	@echo "DB_PASSWORD=postgres" >> .env.example
+	@echo "DB_HOST=project_db" >> .env.example
+	@echo "DB_PORT=5432" >> .env.example
+	@echo "# DRF" >> .env.example
+	@echo "DRF_PAGE_SIZE=50" >> .env.example
 	@echo "$(GREEN)✅ Arquivo .env.example criado!$(NC)"
 
 # Performance e Monitoramento
@@ -304,6 +345,8 @@ ci-pipeline: ## Pipeline de CI/CD completo
 	@echo "$(BLUE)🔄 Executando pipeline CI/CD...$(NC)"
 	@$(MAKE) install
 	@$(MAKE) lint
+	@$(MAKE) docstyle
+	@$(MAKE) type-check
 	@$(MAKE) security-check
 	@$(MAKE) test-coverage
 	@$(MAKE) docs-build
