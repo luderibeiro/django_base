@@ -103,7 +103,7 @@ git push origin nome-da-sua-branch
 def test_user_creation_with_valid_data():
     """
     Testa a criação de usuário com dados válidos.
-    
+
     Given: Dados válidos de usuário
     When: Criar um novo usuário
     Then: Usuário deve ser criado com sucesso
@@ -111,10 +111,10 @@ def test_user_creation_with_valid_data():
     # Arrange
     email = "test@example.com"
     name = "Test User"
-    
+
     # Act
     user = User(email=email, name=name)
-    
+
     # Assert
     assert user.email == email
     assert user.name == name

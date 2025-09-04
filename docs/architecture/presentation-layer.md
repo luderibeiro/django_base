@@ -15,4 +15,3 @@ Esta camada é responsável por apresentar os dados ao usuário e receber entrad
     -   **`UserAlterPasswordAPIView`**: Usa `ChangeUserPasswordUseCase`.
     -   **`UserRetrieveAPIView`**: Usa `GetUserByIdUseCase`.
 -   `project/core/api/v1/views/auth.py`: Criada a `LoginAPIView` que utiliza o `LoginUserUseCase` para autenticação.
-

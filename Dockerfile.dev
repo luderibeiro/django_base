@@ -54,4 +54,3 @@ EXPOSE 8000
 
 # ENTRYPOINT é definido no docker-compose para desenvolvimento
 CMD [ "python", "/app/project/manage.py", "runserver", "0.0.0.0:8000" ]
-

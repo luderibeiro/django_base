@@ -178,6 +178,6 @@ Agora que seu projeto está rodando:
 
 ---
 
-**🎯 Objetivo alcançado?** Seu projeto Django com Arquitetura Limpa está rodando! 
+**🎯 Objetivo alcançado?** Seu projeto Django com Arquitetura Limpa está rodando!
 
 Se encontrou algum problema, [abra uma issue](https://github.com/luderibeiro/django_base/issues) no GitHub.

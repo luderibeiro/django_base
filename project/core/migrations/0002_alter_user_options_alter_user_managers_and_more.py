@@ -7,26 +7,26 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0001_initial'),
+        ("core", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='user',
+            name="user",
             options={},
         ),
         migrations.AlterModelManagers(
-            name='user',
+            name="user",
             managers=[
-                ('objects', core.models.user.UserManager()),
+                ("objects", core.models.user.UserManager()),
             ],
         ),
         migrations.RemoveField(
-            model_name='user',
-            name='date_joined',
+            model_name="user",
+            name="date_joined",
         ),
         migrations.RemoveField(
-            model_name='user',
-            name='username',
+            model_name="user",
+            name="username",
         ),
     ]

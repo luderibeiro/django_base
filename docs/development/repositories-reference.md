@@ -52,5 +52,3 @@ Os repositórios fazem a conversão entre:
 -   **Modelos Django** ↔ **Entidades de Domínio**
 -   **Querysets** ↔ **Listas de Entidades**
 -   **Exceções Django** ↔ **Exceções de Domínio**
-
-

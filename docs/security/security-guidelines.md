@@ -138,7 +138,7 @@ SECURE_HSTS_PRELOAD = True
    git filter-branch --force --index-filter \
    'git rm --cached --ignore-unmatch arquivo-com-credenciais' \
    --prune-empty --tag-name-filter cat -- --all
-   
+
    # Force push (coordenar com equipe)
    git push origin --force --all
    ```

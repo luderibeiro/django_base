@@ -4,6 +4,7 @@ Views da API para gerenciamento de usuários.
 Contém as views para listagem, criação, recuperação e alteração de senha
 de usuários, seguindo os padrões de Clean Architecture.
 """
+
 import logging
 
 from core.api.deps import (

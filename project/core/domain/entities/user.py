@@ -4,6 +4,7 @@ Entidades de domínio para usuários.
 Contém as entidades de domínio que representam os conceitos centrais
 do negócio relacionados a usuários.
 """
+
 import uuid
 from dataclasses import dataclass, field
 

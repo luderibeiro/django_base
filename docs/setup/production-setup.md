@@ -387,7 +387,7 @@ server {
 server {
     listen 443 ssl http2;
     server_name seudominio.com www.seudominio.com;
-    
+
     # SSL configuration
     ssl_certificate /etc/ssl/certs/seudominio.com.crt;
     ssl_certificate_key /etc/ssl/private/seudominio.com.key;
@@ -396,14 +396,14 @@ server {
     ssl_prefer_server_ciphers off;
     ssl_session_cache shared:SSL:10m;
     ssl_session_timeout 10m;
-    
+
     # Security headers
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
     add_header X-Content-Type-Options nosniff always;
     add_header X-Frame-Options DENY always;
     add_header X-XSS-Protection "1; mode=block" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-    
+
     # Gzip compression
     gzip on;
     gzip_vary on;
@@ -420,7 +420,7 @@ server {
         application/xml+rss
         application/atom+xml
         image/svg+xml;
-    
+
     # Static files
     location /static/ {
         alias /opt/django_base/staticfiles/;
@@ -428,7 +428,7 @@ server {
         add_header Cache-Control "public, immutable";
         access_log off;
     }
-    
+
     # Media files
     location /media/ {
         alias /opt/django_base/media/;
@@ -436,7 +436,7 @@ server {
         add_header Cache-Control "public, immutable";
         access_log off;
     }
-    
+
     # API endpoints with rate limiting
     location /api/ {
         limit_req zone=api burst=20 nodelay;
@@ -447,7 +447,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_redirect off;
     }
-    
+
     # Login endpoint with stricter rate limiting
     location /api/v1/auth/login/ {
         limit_req zone=login burst=5 nodelay;
@@ -458,7 +458,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_redirect off;
     }
-    
+
     # Main application
     location / {
         proxy_pass http://django_base;
@@ -715,23 +715,23 @@ def health_check(request):
         # Verificar banco de dados
         with connection.cursor() as cursor:
             cursor.execute("SELECT 1")
-        
+
         # Verificar cache
         cache.set('health_check', 'ok', 10)
         cache.get('health_check')
-        
+
         # Verificar Redis
         r = redis.Redis.from_url(settings.CACHES['default']['LOCATION'])
         r.ping()
-        
+
         # Verificar espaço em disco
         disk_usage = psutil.disk_usage('/')
         disk_free_percent = (disk_usage.free / disk_usage.total) * 100
-        
+
         # Verificar memória
         memory = psutil.virtual_memory()
         memory_available_percent = memory.available / memory.total * 100
-        
+
         return JsonResponse({
             'status': 'healthy',
             'database': 'ok',

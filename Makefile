@@ -354,4 +354,3 @@ ci-pipeline: ## Pipeline de CI/CD completo
 
 # Default target
 .DEFAULT_GOAL := help
-

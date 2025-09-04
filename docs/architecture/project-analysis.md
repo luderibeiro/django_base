@@ -41,7 +41,7 @@ class User:
     def __init__(self, email: str, name: str):
         self.email = self._validate_email(email)
         self.name = name
-    
+
     def _validate_email(self, email: str) -> str:
         # Validação de negócio, não técnica
         if '@' not in email:
@@ -63,7 +63,7 @@ class User:
 class UserRepositoryInterface:
     def save(self, user: User) -> User:
         pass
-    
+
     def find_by_email(self, email: str) -> Optional[User]:
         pass
 

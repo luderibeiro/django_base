@@ -8,96 +8,101 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 ## [Unreleased]
 
 ### Adicionado
-- Nenhuma mudança ainda
+
+-   Nenhuma mudança ainda
 
 ### Alterado
-- Nenhuma mudança ainda
+
+-   Nenhuma mudança ainda
 
 ### Corrigido
-- Nenhuma mudança ainda
+
+-   Nenhuma mudança ainda
 
 ### Removido
-- Nenhuma mudança ainda
+
+-   Nenhuma mudança ainda
 
 ## [2.1.0] - 2024-12-19
 
 ### Adicionado
 
-- **OpenAPI/Swagger Documentation**: Implementação completa de documentação automática da API usando `drf-spectacular`, incluindo schema OpenAPI 3.0, interface Swagger UI e ReDoc para melhor experiência de desenvolvedor.
+-   **OpenAPI/Swagger Documentation**: Implementação completa de documentação automática da API usando `drf-spectacular`, incluindo schema OpenAPI 3.0, interface Swagger UI e ReDoc para melhor experiência de desenvolvedor.
 
-- **Pre-commit Hooks**: Configuração de hooks de pre-commit para garantir qualidade de código, incluindo formatação automática (Black), linting (Flake8), verificação de docstrings (pydocstyle) e verificação de tipos (MyPy).
+-   **Pre-commit Hooks**: Configuração de hooks de pre-commit para garantir qualidade de código, incluindo formatação automática (Black), linting (Flake8), verificação de docstrings (pydocstyle) e verificação de tipos (MyPy).
 
-- **MyPy Static Type Checking**: Implementação de verificação de tipos estática em modo gradual, com configuração específica para diferentes módulos e integração com Django via `django-stubs`.
+-   **MyPy Static Type Checking**: Implementação de verificação de tipos estática em modo gradual, com configuração específica para diferentes módulos e integração com Django via `django-stubs`.
 
-- **MkDocstrings Integration**: Integração do `mkdocstrings` para gerar documentação automática da API Python diretamente dos docstrings, criando referências completas para camadas de domínio, casos de uso e repositórios.
+-   **MkDocstrings Integration**: Integração do `mkdocstrings` para gerar documentação automática da API Python diretamente dos docstrings, criando referências completas para camadas de domínio, casos de uso e repositórios.
 
-- **GitHub Actions CI/CD**: Pipeline completo de CI/CD com workflows para testes, documentação, qualidade de código e deploy, incluindo templates para issues e pull requests.
+-   **GitHub Actions CI/CD**: Pipeline completo de CI/CD com workflows para testes, documentação, qualidade de código e deploy, incluindo templates para issues e pull requests.
 
-- **Documentação Abrangente**:
-  - Guias completos de setup (produção, staging, quick-start)
-  - Análise detalhada de arquitetura do projeto
-  - Diretrizes de segurança e melhores práticas
-  - Referências de API e documentação técnica
+-   **Documentação Abrangente**:
 
-- **Ferramentas de Qualidade**: Configuração de `pydocstyle`, `pytest-cov`, `flake8`, `black` e `pip-audit` para garantir padrões de código e segurança.
+    -   Guias completos de setup (produção, staging, quick-start)
+    -   Análise detalhada de arquitetura do projeto
+    -   Diretrizes de segurança e melhores práticas
+    -   Referências de API e documentação técnica
 
-- **Assets e Branding**: Logos e assets visuais do projeto em diferentes tamanhos para uso em documentação e interfaces.
+-   **Ferramentas de Qualidade**: Configuração de `pydocstyle`, `pytest-cov`, `flake8`, `black` e `pip-audit` para garantir padrões de código e segurança.
+
+-   **Assets e Branding**: Logos e assets visuais do projeto em diferentes tamanhos para uso em documentação e interfaces.
 
 ### Melhorado
 
-- **Docstrings Completas**: Adição de docstrings detalhadas em todo o projeto seguindo padrões PEP 257, incluindo módulos, classes, métodos e funções.
+-   **Docstrings Completas**: Adição de docstrings detalhadas em todo o projeto seguindo padrões PEP 257, incluindo módulos, classes, métodos e funções.
 
-- **Cobertura de Testes**: Aumento da cobertura de testes para 93% com testes unitários adicionais para middleware, URLs e casos de uso.
+-   **Cobertura de Testes**: Aumento da cobertura de testes para 93% com testes unitários adicionais para middleware, URLs e casos de uso.
 
-- **Configuração de Ambiente**: Melhoria significativa na configuração de variáveis de ambiente com suporte a diferentes ambientes (desenvolvimento, staging, produção).
+-   **Configuração de Ambiente**: Melhoria significativa na configuração de variáveis de ambiente com suporte a diferentes ambientes (desenvolvimento, staging, produção).
 
-- **Makefile**: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.
+-   **Makefile**: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.
 
-- **Estrutura de Documentação**: Reorganização completa da documentação com navegação melhorada e seções específicas para diferentes aspectos do projeto.
+-   **Estrutura de Documentação**: Reorganização completa da documentação com navegação melhorada e seções específicas para diferentes aspectos do projeto.
 
 ### Corrigido
 
-- **Exposição de Credenciais**: Correção de problemas de segurança relacionados à exposição de credenciais em configurações e logs.
+-   **Exposição de Credenciais**: Correção de problemas de segurança relacionados à exposição de credenciais em configurações e logs.
 
-- **Configurações de Template**: Correção de configurações de templates e paths para funcionamento correto em diferentes ambientes.
+-   **Configurações de Template**: Correção de configurações de templates e paths para funcionamento correto em diferentes ambientes.
 
-- **Imports Não Utilizados**: Limpeza de imports desnecessários e otimização da estrutura de código.
+-   **Imports Não Utilizados**: Limpeza de imports desnecessários e otimização da estrutura de código.
 
 ### Refatorado
 
-- **Configurações de Settings**: Refatoração das configurações do Django para melhor organização e segurança, incluindo configuração condicional de banco de dados.
+-   **Configurações de Settings**: Refatoração das configurações do Django para melhor organização e segurança, incluindo configuração condicional de banco de dados.
 
-- **Estrutura de Arquivos**: Reorganização de arquivos estáticos, templates e configurações para melhor manutenibilidade.
+-   **Estrutura de Arquivos**: Reorganização de arquivos estáticos, templates e configurações para melhor manutenibilidade.
 
 ## [2.0.0] - 2024-09-03
 
 ### Adicionado
 
-- **Testes de Integração Completos**: Implementação de uma suíte abrangente de testes de integração para todas as funcionalidades da API, incluindo autenticação, gerenciamento de usuários, paginação, filtragem e alteração de senhas. Todos os 48 testes estão passando com 100% de cobertura das funcionalidades principais.
+-   **Testes de Integração Completos**: Implementação de uma suíte abrangente de testes de integração para todas as funcionalidades da API, incluindo autenticação, gerenciamento de usuários, paginação, filtragem e alteração de senhas. Todos os 48 testes estão passando com 100% de cobertura das funcionalidades principais.
 
-- **Tratamento Robusto de Exceções**: Melhoria significativa no tratamento de exceções, incluindo captura correta de `IntegrityError` para retornar 400 Bad Request em vez de 500 Internal Server Error, e tratamento adequado de erros de validação e permissões.
+-   **Tratamento Robusto de Exceções**: Melhoria significativa no tratamento de exceções, incluindo captura correta de `IntegrityError` para retornar 400 Bad Request em vez de 500 Internal Server Error, e tratamento adequado de erros de validação e permissões.
 
-- **Autenticação e Autorização Aprimoradas**: Implementação de autenticação robusta com OAuth2 e suporte a testes usando `force_authenticate` para maior confiabilidade nos testes de integração.
+-   **Autenticação e Autorização Aprimoradas**: Implementação de autenticação robusta com OAuth2 e suporte a testes usando `force_authenticate` para maior confiabilidade nos testes de integração.
 
-- **Limpeza e Otimização de Código**: Remoção de imports não utilizados, logs de debug desnecessários e otimização da estrutura de código para melhor manutenibilidade.
+-   **Limpeza e Otimização de Código**: Remoção de imports não utilizados, logs de debug desnecessários e otimização da estrutura de código para melhor manutenibilidade.
 
 ### Corrigido
 
-- **Erro de Serializer de Alteração de Senha**: Corrigido problema onde o serializer tentava chamar `to_internal_value()` em dados já validados, causando `AttributeError`.
+-   **Erro de Serializer de Alteração de Senha**: Corrigido problema onde o serializer tentava chamar `to_internal_value()` em dados já validados, causando `AttributeError`.
 
-- **Tratamento de IntegrityError**: Corrigido para capturar corretamente `django.db.utils.IntegrityError` e retornar 400 Bad Request para violações de constraint de banco de dados.
+-   **Tratamento de IntegrityError**: Corrigido para capturar corretamente `django.db.utils.IntegrityError` e retornar 400 Bad Request para violações de constraint de banco de dados.
 
-- **Imports Não Utilizados**: Removidos imports desnecessários (`filters`, `ClassVar`, `get_user_repository`) que estavam causando warnings de linting.
+-   **Imports Não Utilizados**: Removidos imports desnecessários (`filters`, `ClassVar`, `get_user_repository`) que estavam causando warnings de linting.
 
-- **Logs de Debug**: Removidos logs de debug temporários dos testes e middleware para produção.
+-   **Logs de Debug**: Removidos logs de debug temporários dos testes e middleware para produção.
 
 ### Melhorado
 
-- **Qualidade do Código**: Aplicação de "pente fino" em todo o projeto, garantindo que não há problemas de linting, imports não utilizados ou código desnecessário.
+-   **Qualidade do Código**: Aplicação de "pente fino" em todo o projeto, garantindo que não há problemas de linting, imports não utilizados ou código desnecessário.
 
-- **Estrutura de Testes**: Reorganização e otimização dos testes para maior clareza e manutenibilidade, com foco em testes de integração robustos.
+-   **Estrutura de Testes**: Reorganização e otimização dos testes para maior clareza e manutenibilidade, com foco em testes de integração robustos.
 
-- **Documentação**: Atualização da documentação para refletir as mudanças da versão 2.0.0, incluindo README e CHANGELOG.
+-   **Documentação**: Atualização da documentação para refletir as mudanças da versão 2.0.0, incluindo README e CHANGELOG.
 
 ## [2.0.0] - 2024-07-30
 

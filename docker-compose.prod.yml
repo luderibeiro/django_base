@@ -43,4 +43,3 @@ services:
 
 volumes:
     project_db_prod:
-

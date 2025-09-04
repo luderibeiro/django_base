@@ -109,5 +109,3 @@ Para regenerar o schema:
 ```bash
 python manage.py spectacular --file schema.yml
 ```
-
-

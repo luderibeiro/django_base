@@ -9,4 +9,3 @@ Os padrões de URL foram atualizados para refletir a nova estrutura da API.
     -   `path("users/alter_password/<uuid:pk>/", user.UserAlterPasswordAPIView.as_view(), name="user-alter-password")`
     -   `path("users/<uuid:pk>/", user.UserRetrieveAPIView.as_view(), name="retrieve-user")`
     -   `path("login/", auth.LoginAPIView.as_view(), name="login")`
-

@@ -139,5 +139,3 @@ Todos os use cases seguem o padrão:
 2. Executam a lógica de negócio
 3. Retornam um `Response` DTO
 4. Tratam exceções de forma consistente
-
-

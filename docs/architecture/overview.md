@@ -15,4 +15,3 @@ graph TD
         B -- Presentation/Persistence --> A
     end
 ```
-

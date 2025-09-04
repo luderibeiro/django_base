@@ -188,7 +188,7 @@ Crie o arquivo `/etc/nginx/sites-available/django_base_staging`:
 server {
     listen 80;
     server_name staging.seudominio.com;
-    
+
     # Redirecionar para HTTPS
     return 301 https://$server_name$request_uri;
 }
@@ -196,30 +196,30 @@ server {
 server {
     listen 443 ssl http2;
     server_name staging.seudominio.com;
-    
+
     # Certificados SSL
     ssl_certificate /path/to/certificate.crt;
     ssl_certificate_key /path/to/private.key;
-    
+
     # Configurações SSL
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512;
     ssl_prefer_server_ciphers off;
-    
+
     # Arquivos estáticos
     location /static/ {
         alias /path/to/django_base/project/staticfiles/;
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
-    
+
     # Arquivos de mídia
     location /media/ {
         alias /path/to/django_base/project/media/;
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
-    
+
     # Aplicação Django
     location / {
         proxy_pass http://127.0.0.1:8000;
@@ -402,11 +402,11 @@ def health_check(request):
         # Verificar banco de dados
         with connection.cursor() as cursor:
             cursor.execute("SELECT 1")
-        
+
         # Verificar cache
         cache.set('health_check', 'ok', 10)
         cache.get('health_check')
-        
+
         return JsonResponse({
             'status': 'healthy',
             'database': 'ok',
@@ -525,4 +525,3 @@ openssl s_client -connect staging.seudominio.com:443
 ---
 
 **🎉 Parabéns! Seu ambiente de homologação está configurado e pronto para uso!**
-

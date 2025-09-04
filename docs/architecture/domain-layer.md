@@ -13,4 +13,3 @@ Esta é a camada mais interna e contém as regras de negócio essenciais da apli
 ### Interfaces de Gateways (Auth, etc.)
 
 -   `project/core/domain/gateways.py`: Criada a interface abstrata `AuthGateway`, que define métodos para operações de autenticação como `check_password`, `create_tokens`, e `set_password`.
-

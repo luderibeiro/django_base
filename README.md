@@ -22,33 +22,33 @@
 
 Este template Django oferece uma **base sólida e profissional** para desenvolvimento de aplicações web e APIs, seguindo os princípios da **Clean Architecture**. Ideal para:
 
-- 🔥 **Startups** que precisam de desenvolvimento rápido e escalável
-- 🏢 **Empresas** que buscam padronização e qualidade de código
-- 👨‍💻 **Desenvolvedores** que querem aprender boas práticas de arquitetura
-- 🎓 **Estudantes** interessados em projetos bem estruturados
+-   🔥 **Startups** que precisam de desenvolvimento rápido e escalável
+-   🏢 **Empresas** que buscam padronização e qualidade de código
+-   👨‍💻 **Desenvolvedores** que querem aprender boas práticas de arquitetura
+-   🎓 **Estudantes** interessados em projetos bem estruturados
 
 ### ✨ Principais Características
 
-- 🏗️ **Arquitetura Limpa** - Separação clara de responsabilidades
-- 📊 **93% Cobertura de Testes** - Suite completa de testes unitários e de integração
-- 📖 **OpenAPI/Swagger** - Documentação automática da API
-- 🔧 **Pre-commit Hooks** - Qualidade de código automatizada
-- 🐍 **MyPy** - Verificação de tipos estática
-- 🐳 **Docker Ready** - Containerização completa para desenvolvimento e produção
-- 🚀 **GitHub Actions CI/CD** - Pipeline completo de integração contínua
-- 📚 **Documentação Rica** - MkDocs com MkDocstrings para documentação automática
-- 🔧 **Makefile Poderoso** - 20+ comandos de automação de desenvolvimento
-- 🎨 **Interface Admin** - Django Jazzmin para administração elegante
-- 🔐 **Autenticação OAuth2** - Sistema de autenticação robusto
-- 📊 **API REST** - Django REST Framework configurado
+-   🏗️ **Arquitetura Limpa** - Separação clara de responsabilidades
+-   📊 **93% Cobertura de Testes** - Suite completa de testes unitários e de integração
+-   📖 **OpenAPI/Swagger** - Documentação automática da API
+-   🔧 **Pre-commit Hooks** - Qualidade de código automatizada
+-   🐍 **MyPy** - Verificação de tipos estática
+-   🐳 **Docker Ready** - Containerização completa para desenvolvimento e produção
+-   🚀 **GitHub Actions CI/CD** - Pipeline completo de integração contínua
+-   📚 **Documentação Rica** - MkDocs com MkDocstrings para documentação automática
+-   🔧 **Makefile Poderoso** - 20+ comandos de automação de desenvolvimento
+-   🎨 **Interface Admin** - Django Jazzmin para administração elegante
+-   🔐 **Autenticação OAuth2** - Sistema de autenticação robusto
+-   📊 **API REST** - Django REST Framework configurado
 
 ## 🚀 Início Rápido
 
 ### Pré-requisitos
 
-- Python 3.12+
-- Docker & Docker Compose (opcional)
-- Git
+-   Python 3.12+
+-   Docker & Docker Compose (opcional)
+-   Git
 
 ### ⚡ Setup em 3 comandos
 
@@ -91,10 +91,10 @@ project/
 
 ### 🎯 Camadas da Arquitetura
 
-- **🎯 Domain**: Entidades e regras de negócio
-- **🔄 Repository**: Abstração de acesso a dados
-- **🌐 API**: Endpoints e serializers
-- **⚙️ Infrastructure**: Configurações e integrações
+-   **🎯 Domain**: Entidades e regras de negócio
+-   **🔄 Repository**: Abstração de acesso a dados
+-   **🌐 API**: Endpoints e serializers
+-   **⚙️ Infrastructure**: Configurações e integrações
 
 ## 📋 Comandos Disponíveis
 
@@ -111,13 +111,13 @@ make clean             # Limpeza de arquivos temporários
 
 ## 🛠️ Tecnologias
 
-- **Backend**: Django 5.2+, Django REST Framework
-- **Database**: PostgreSQL (produção), SQLite (desenvolvimento)
-- **Authentication**: Django OAuth Toolkit
-- **Testing**: pytest, pytest-django
-- **Documentation**: MkDocs
-- **Containerization**: Docker, Docker Compose
-- **Code Quality**: Black, Flake8, pip-audit
+-   **Backend**: Django 5.2+, Django REST Framework
+-   **Database**: PostgreSQL (produção), SQLite (desenvolvimento)
+-   **Authentication**: Django OAuth Toolkit
+-   **Testing**: pytest, pytest-django
+-   **Documentation**: MkDocs
+-   **Containerization**: Docker, Docker Compose
+-   **Code Quality**: Black, Flake8, pip-audit
 
 ## 📖 Documentação Completa
 
@@ -125,10 +125,10 @@ Para guias detalhados, exemplos e referências da API, acesse nossa [**documenta
 
 ### 📚 Guias Disponíveis
 
-- [🚀 Setup do Projeto](https://luderibeiro.github.io/django_base/setup/project-setup/)
-- [🏗️ Arquitetura Detalhada](https://luderibeiro.github.io/django_base/architecture/)
-- [🧪 Testes Automatizados](https://luderibeiro.github.io/django_base/development/automated-testing/)
-- [🚀 Deploy em Produção](https://luderibeiro.github.io/django_base/setup/production-setup/)
+-   [🚀 Setup do Projeto](https://luderibeiro.github.io/django_base/setup/project-setup/)
+-   [🏗️ Arquitetura Detalhada](https://luderibeiro.github.io/django_base/architecture/)
+-   [🧪 Testes Automatizados](https://luderibeiro.github.io/django_base/development/automated-testing/)
+-   [🚀 Deploy em Produção](https://luderibeiro.github.io/django_base/setup/production-setup/)
 
 ## 🤝 Contribuição
 
@@ -144,11 +144,11 @@ Contribuições são muito bem-vindas! Este projeto foi criado para ser um **tem
 
 ### 🎯 Ideias para Contribuição
 
-- 📱 Templates específicos (e-commerce, blog, API, etc.)
-- 🔧 Melhorias na automação
-- 📚 Tradução da documentação
-- 🧪 Novos casos de teste
-- 🎨 Melhorias na UI/UX
+-   📱 Templates específicos (e-commerce, blog, API, etc.)
+-   🔧 Melhorias na automação
+-   📚 Tradução da documentação
+-   🧪 Novos casos de teste
+-   🎨 Melhorias na UI/UX
 
 ## 📄 Licença
 
@@ -158,10 +158,10 @@ Este projeto está licenciado sob a [MIT License](LICENSE) - veja o arquivo LICE
 
 Se este template foi útil para você:
 
-- ⭐ Dê uma estrela no repositório
-- 🍴 Faça um fork para suas customizações
-- 📢 Compartilhe com outros desenvolvedores
-- 🐛 Reporte bugs ou sugira melhorias
+-   ⭐ Dê uma estrela no repositório
+-   🍴 Faça um fork para suas customizações
+-   📢 Compartilhe com outros desenvolvedores
+-   🐛 Reporte bugs ou sugira melhorias
 
 ---
 

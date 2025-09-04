@@ -208,21 +208,21 @@ sudo tee /etc/nginx/sites-available/django << EOF
 server {
     listen 80;
     server_name seudominio.com www.seudominio.com;
-    
+
     location = /favicon.ico { access_log off; log_not_found off; }
-    
+
     location /static/ {
         root /home/django/seu-projeto/project;
         expires 30d;
         add_header Cache-Control "public, immutable";
     }
-    
+
     location /media/ {
         root /home/django/seu-projeto/project;
         expires 30d;
         add_header Cache-Control "public, immutable";
     }
-    
+
     location / {
         include proxy_params;
         proxy_pass http://127.0.0.1:8000;
@@ -297,7 +297,7 @@ services:
       - "9090:9090"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-  
+
   grafana:
     image: grafana/grafana
     ports:

@@ -48,5 +48,3 @@ A camada de domínio é o coração da aplicação e contém:
 2. **Testabilidade**: Pode ser testada sem banco de dados
 3. **Reutilização**: Lógica de negócio pode ser reutilizada
 4. **Inversão de Dependência**: Depende de abstrações, não implementações
-
-
