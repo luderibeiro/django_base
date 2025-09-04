@@ -111,7 +111,7 @@ jobs:
                   DJANGO_DEBUG: True
                   DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
               run: |
-                  docker run --rm -w /app/project -e DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -e DJANGO_DEBUG=$DJANGO_DEBUG -e DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS django-base:latest python manage.py check --settings=project.settings_test
+                  docker run --rm -w /app/project -e DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -e DJANGO_DEBUG=$DJANGO_DEBUG -e DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS django-base:latest sh -c "python manage.py check --settings=project.settings_test"
 
 
     security:
