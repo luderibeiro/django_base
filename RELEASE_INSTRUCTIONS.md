@@ -4,7 +4,7 @@
 
 ### Como criar a release:
 
-1. **Acesse o GitHub**: https://github.com/luderibeiro/django_base/releases/new
+1. **Acesse o GitHub**: <https://github.com/luderibeiro/django_base/releases/new>
 
 2. **Configure a release**:
 

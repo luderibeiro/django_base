@@ -1,8 +1,8 @@
 FROM python:3.12-slim-bookworm AS builder
 LABEL mantainer="@luderibeiro"
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
@@ -48,8 +48,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # --- IMAGEM FINAL DE EXECUÇÃO ---
 FROM python:3.12-slim-bookworm
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
@@ -58,8 +58,7 @@ WORKDIR /app
 # Vamos copiar apenas o essencial.
 COPY --from=builder /usr/bin/wkhtmlto* /usr/bin/
 COPY --from=builder /etc/odbcinst.ini /etc/odbcinst.ini
-COPY --from=builder /usr/lib/x86_64-linux-gnu/libtds* /usr/lib/x86_64-linux-gnu/ # Exemplo, pode precisar de mais libs
-COPY --from=builder /usr/local/lib/libtds* /usr/local/lib/ # Exemplo, pode precisar de mais libs
+# Bibliotecas FreeTDS serão instaladas se necessário no runtime
 
 # Copiar as dependências Python instaladas
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages

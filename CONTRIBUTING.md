@@ -162,6 +162,7 @@ def test_user_creation_with_valid_data():
 Encorajamos a criação de forks especializados! Aqui estão algumas ideias:
 
 ### 🛒 Django E-commerce Base
+
 ```bash
 git clone https://github.com/luderibeiro/django_base.git django-ecommerce-base
 cd django-ecommerce-base
@@ -174,6 +175,7 @@ cd django-ecommerce-base
 ```
 
 ### 🎓 Django Education Base
+
 ```bash
 # Funcionalidades educacionais:
 # - Sistema de cursos
@@ -183,6 +185,7 @@ cd django-ecommerce-base
 ```
 
 ### 🏥 Django Healthcare Base
+
 ```bash
 # Funcionalidades de saúde:
 # - Prontuários eletrônicos

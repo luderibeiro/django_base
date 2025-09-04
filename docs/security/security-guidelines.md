@@ -13,6 +13,7 @@
 ### ✅ Boas Práticas
 
 #### 1. Variáveis de Ambiente
+
 ```bash
 # .env (nunca commitado)
 SECRET_KEY=sua-chave-super-secreta-aqui
@@ -21,12 +22,15 @@ API_KEY=sua-api-key-secreta
 ```
 
 #### 2. GitHub Secrets
+
 Para CI/CD, use GitHub Secrets:
+
 - `SECRET_KEY_FOR_CI`
 - `DATABASE_URL_TEST`
 - `API_KEYS`
 
 #### 3. Configuração Segura do Superusuário
+
 ```bash
 # ✅ Correto - Interativo
 make createsuperuser
@@ -38,6 +42,7 @@ make createsuperuser
 ## 🛡️ Configurações de Produção
 
 ### Django Settings
+
 ```python
 # settings/production.py
 import os
@@ -56,6 +61,7 @@ ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 ```
 
 ### Banco de Dados
+
 ```python
 DATABASES = {
     'default': {
@@ -72,6 +78,7 @@ DATABASES = {
 ## 🔐 Autenticação e Autorização
 
 ### OAuth2 Seguro
+
 ```python
 # settings.py
 OAUTH2_SETTINGS = {
@@ -85,6 +92,7 @@ OAUTH2_SETTINGS = {
 ```
 
 ### Middleware de Segurança
+
 ```python
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
