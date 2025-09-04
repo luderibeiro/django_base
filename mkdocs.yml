@@ -33,11 +33,7 @@ theme:
 markdown_extensions:
     - admonition
     - pymdownx.details
-    - pymdownx.superfences:
-          custom_fences:
-              - name: mermaid
-                class: mermaid
-                format: python/name:pymdownx.superfences.fence_code_format
+    - pymdownx.superfences
     - pymdownx.critic
     - pymdownx.caret
     - pymdownx.mark
@@ -55,9 +51,6 @@ markdown_extensions:
     - codehilite
     - meta
     - abbr
-    - pymdownx.emoji:
-          emoji_index: python/name:material.extensions.emoji.twemoji
-          emoji_generator: python/name:material.extensions.emoji.to_svg
 
 nav:
     - Home: index.md
