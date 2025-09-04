@@ -1,7 +1,7 @@
 """Casos de uso genéricos para operações CRUD no domínio."""
 
 from dataclasses import dataclass
-from typing import Generic, List, Optional, TypeVar
+from typing import Generic, List, TypeVar
 
 from core.domain.data_access import GenericRepository
 
@@ -10,14 +10,18 @@ T = TypeVar("T")  # Representa a entidade de domínio
 
 @dataclass
 class GenericCreateRequest(Generic[T]):
-    """Input para criação de entidade de domínio."""
+    """
+    Input para criação de entidade de domínio.
+    """
 
     data: T
 
 
 @dataclass
 class GenericReadResponse(Generic[T]):
-    """Resposta contendo uma entidade de domínio única."""
+    """
+    Resposta contendo uma entidade de domínio única.
+    """
 
     data: T
 

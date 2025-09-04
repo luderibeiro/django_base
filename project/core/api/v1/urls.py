@@ -16,4 +16,3 @@ urlpatterns = [
     ),
     path("login/", auth.LoginAPIView.as_view(), name="login"),
 ]
-
