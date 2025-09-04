@@ -1,57 +1,174 @@
-# Django Project Template
+# 🚀 Django Base - Clean Architecture Template
 
-Quer ler este README em português? [Clique aqui](README.md)
+<div align="center">
 
-This repository serves as a template for starting projects in Python (version 3.12) with the Django framework (version 5.0).
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+[![Django](https://img.shields.io/badge/Django-5.0+-green.svg)](https://djangoproject.com)
+[![Version](https://img.shields.io/badge/Version-2.1.0-orange.svg)](https://github.com/luderibeiro/django_base/releases)
+[![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen.svg)](https://github.com/luderibeiro/django_base/actions)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue.svg)](https://luderibeiro.github.io/django_base/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
 
-## About the Project
+**🌟 Professional template for Django projects with Clean Architecture**
 
-This Django project is Dockerized and follows the principles of Clean Architecture. It provides a solid structure for developing a variety of applications, from APIs to web applications.
+[📖 Documentation](https://luderibeiro.github.io/django_base/) • [🚀 Quick Start](#-quick-start) • [🏗️ Architecture](#️-architecture) • [🤝 Contributing](#-contributing)
 
-## How to Use
+</div>
 
-Follow these steps to run the project:
+---
 
-1.  **Clone the Repository:**
+## 🎯 About the Project
 
-        ```bash
-        git clone git@github.com:luderibeiro/django_base.git
-        ```
+This Django template provides a **solid and professional foundation** for developing web applications and APIs, following **Clean Architecture** principles. Perfect for:
 
-2.  **Set Up the Environment:**
+-   🔥 **Startups** that need fast and scalable development
+-   🏢 **Companies** seeking code standardization and quality
+-   👨‍💻 **Developers** who want to learn good architecture practices
+-   🎓 **Students** interested in well-structured projects
 
-    -   Create a `.env` file in the project root and add necessary configurations such as API keys, database settings, etc.
+### ✨ Key Features
 
-3.  **Run Docker Compose:**
+-   🏗️ **Clean Architecture** - Clear separation of responsibilities
+-   📊 **93% Test Coverage** - Complete suite of unit and integration tests
+-   📖 **OpenAPI/Swagger** - Automatic API documentation
+-   🔧 **Pre-commit Hooks** - Automated code quality
+-   🐍 **MyPy** - Static type checking
+-   🐳 **Docker Ready** - Complete containerization for development and production
+-   🚀 **GitHub Actions CI/CD** - Complete continuous integration pipeline
+-   📚 **Rich Documentation** - MkDocs with MkDocstrings for automatic documentation
+-   🔧 **Powerful Makefile** - 20+ development automation commands
+-   🎨 **Admin Interface** - Django Jazzmin for elegant administration
+-   🔐 **OAuth2 Authentication** - Robust authentication system
+-   📊 **REST API** - Configured Django REST Framework
 
-        docker-compose up --build
+## 🚀 Quick Start
 
-`Note: The `--build` flag should be executed only the first time the project is installed or when there are changes in the build files.`
+### Prerequisites
 
-4. **Access the Application:**
-   The application will be available at `http://localhost:8000`.
+-   Python 3.12+
+-   Docker & Docker Compose (optional)
+-   Git
 
-   If you want to access the admin page, simply go to `http://localhost:8000/admin/`.
+### ⚡ Setup in 3 commands
 
-**Error Handling**
+```bash
+# 1. Clone the template
+git clone https://github.com/luderibeiro/django_base.git my_project
+cd my_project
 
--   In case you encounter this error: PermissionError: [Errno 13] Permission denied: '/data/web/static/admin'
-    Run the following command:
+# 2. Configure the environment
+make setup
 
-        sudo chown -R user:group data
+# 3. Start the server
+make run
+```
 
-`Note: Replace "user" with your local machine username and "group" with the user's group.`
+🎉 **Done!** Access <http://127.0.0.1:8000>
 
-## Contribution
+### 🐳 With Docker
 
-Feel free to contribute improvements or new features. Just follow these steps:
+```bash
+# Development
+make docker-run
 
-1. Fork the repository.
-2. Create a branch for your contribution: `git checkout -b feature/new-feature`.
-3. Make your changes and commit: `git commit -m 'Add new feature'`.
-4. Push to the branch: `git push origin feature/new-feature`.
-5. Open a pull request.
+# Production
+make docker-prod
+```
 
-## License
+## 🏗️ Architecture
 
-This project is licensed under the [MIT License](LICENSE).
+```bash
+project/
+├── core/                    # Main application
+│   ├── domain/             # Business rules
+│   ├── repositories/       # Data access
+│   ├── api/               # REST endpoints
+│   └── admin/             # Administrative interface
+├── project/               # Django settings
+└── tests/                 # Automated tests
+```
+
+### 🎯 Architecture Layers
+
+-   **🎯 Domain**: Entities and business rules
+-   **🔄 Repository**: Data access abstraction
+-   **🌐 API**: Endpoints and serializers
+-   **⚙️ Infrastructure**: Settings and integrations
+
+## 📋 Available Commands
+
+```bash
+make help              # List all commands
+make setup             # Complete initial setup
+make test              # Run all tests
+make test-coverage     # Tests with coverage
+make lint              # Code analysis
+make format            # Automatic formatting
+make docs-serve        # Serve local documentation
+make clean             # Clean temporary files
+```
+
+## 🛠️ Technologies
+
+-   **Backend**: Django 5.2+, Django REST Framework
+-   **Database**: PostgreSQL (production), SQLite (development)
+-   **Authentication**: Django OAuth Toolkit
+-   **Testing**: pytest, pytest-django
+-   **Documentation**: MkDocs
+-   **Containerization**: Docker, Docker Compose
+-   **Code Quality**: Black, Flake8, pip-audit
+
+## 📖 Complete Documentation
+
+For detailed guides, examples and API references, access our [**complete documentation**](https://luderibeiro.github.io/django_base/).
+
+### 📚 Available Guides
+
+-   [🚀 Project Setup](https://luderibeiro.github.io/django_base/setup/project-setup/)
+-   [🏗️ Detailed Architecture](https://luderibeiro.github.io/django_base/architecture/)
+-   [🧪 Automated Testing](https://luderibeiro.github.io/django_base/development/automated-testing/)
+-   [🚀 Production Deploy](https://luderibeiro.github.io/django_base/setup/production-setup/)
+
+## 🤝 Contributing
+
+Contributions are very welcome! This project was created to be a **community template**.
+
+### 💡 How to Contribute
+
+1. 🍴 Fork the project
+2. 🌟 Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. ✅ Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. 📤 Push to the branch (`git push origin feature/AmazingFeature`)
+5. 🔄 Open a Pull Request
+
+### 🎯 Ideas for Contribution
+
+-   📱 Specific templates (e-commerce, blog, API, etc.)
+-   🔧 Automation improvements
+-   📚 Documentation translation
+-   🧪 New test cases
+-   🎨 UI/UX improvements
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+
+## 🌟 Support the Project
+
+If this template was useful to you:
+
+-   ⭐ Give a star to the repository
+-   🍴 Fork for your customizations
+-   📢 Share with other developers
+-   🐛 Report bugs or suggest improvements
+
+---
+
+<div align="center">
+
+**Developed with ❤️ for the Django community**
+
+[📖 Documentation](https://luderibeiro.github.io/django_base/) • [🐛 Issues](https://github.com/luderibeiro/django_base/issues) • [💬 Discussions](https://github.com/luderibeiro/django_base/discussions)
+
+</div>
