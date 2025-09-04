@@ -187,7 +187,6 @@ Este template é perfeito para criar forks especializados:
 5. **93% Cobertura de Testes**: Testes unitários e de integração abrangentes
 6. **Automação Avançada**: Makefile com 20+ comandos para desenvolvimento
 7. **Configurações Completas**: Local, staging e produção com Docker otimizado
-8. **Comunidade Ativa**: Projeto em constante evolução com suporte da comunidade
 
 ---
 
