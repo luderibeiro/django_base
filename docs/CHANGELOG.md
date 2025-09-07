@@ -56,7 +56,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 -   **Configuração de Ambiente**: Melhoria significativa na configuração de variáveis de ambiente com suporte a diferentes ambientes (desenvolvimento, staging, produção).
 
--   **Makefile**: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.
+-   **scripts/Makefile**: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.
 
 -   **Estrutura de Documentação**: Reorganização completa da documentação com navegação melhorada e seções específicas para diferentes aspectos do projeto.
 

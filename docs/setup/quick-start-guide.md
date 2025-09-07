@@ -6,13 +6,13 @@ Este guia te levará do zero ao projeto rodando em menos de 5 minutos!
 
 ### Obrigatórios
 
-- **Python 3.12+** ([Download](https://python.org/downloads/))
-- **Git** ([Download](https://git-scm.com/downloads))
+-   **Python 3.12+** ([Download](https://python.org/downloads/))
+-   **Git** ([Download](https://git-scm.com/downloads))
 
 ### Opcionais (mas recomendados)
 
-- **Docker & Docker Compose** ([Download](https://docker.com/get-started))
-- **Make** (geralmente já instalado no Linux/Mac)
+-   **Docker & Docker Compose** ([Download](https://docker.com/get-started))
+-   **Make** (geralmente já instalado no Linux/Mac)
 
 ## ⚡ Setup em 3 Comandos
 
@@ -178,13 +178,15 @@ Agora que seu projeto está rodando:
 
 ## 💡 Dicas Pro
 
-- Use `make test-watch` durante desenvolvimento
-- Execute `make lint` antes de commits
-- Use `make docs-serve` para ver a documentação localmente
-- Configure seu IDE para usar o ambiente virtual em `venv/`
+-   Use `make test-watch` durante desenvolvimento
+-   Execute `make lint` antes de commits
+-   Use `make docs-serve` para ver a documentação localmente
+-   Configure seu IDE para usar o ambiente virtual em `venv/`
 
 ---
 
 **🎯 Objetivo alcançado?** Seu projeto Django com Arquitetura Limpa está rodando!
 
 Se encontrou algum problema, [abra uma issue](https://github.com/luderibeiro/django_base/issues) no GitHub.
+
+Após a instalação e configuração, você pode usar os comandos do `scripts/Makefile` para automatizar tarefas comuns:

@@ -39,6 +39,8 @@ make createsuperuser
 # Nunca faça isso em código público
 ```
 
+Para gerar um novo `SECRET_KEY`, você pode usar o comando `scripts/make generate-secret-key`.
+
 ## 🛡️ Configurações de Produção
 
 ### Django Settings
