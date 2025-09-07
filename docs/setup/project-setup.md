@@ -13,7 +13,7 @@ A maneira mais fácil e recomendada de configurar o projeto é usando Docker Com
 
 ### 1. Ambiente de Desenvolvimento
 
-Utilize o `Dockerfile.dev` e o `docker-compose.dev.yml` para um ambiente de desenvolvimento com hot-reload.
+Utilize o `docker-compose.dev.yml` (localizado em `docker/`) orquestra os serviços em desenvolvimento, e o `Dockerfile.dev` (localizado em `docker/`) contém as instruções para construir a imagem de desenvolvimento.
 
 1.  **Construir e Iniciar os Serviços de Desenvolvimento:**
 
@@ -50,7 +50,7 @@ Utilize o `Dockerfile.dev` e o `docker-compose.dev.yml` para um ambiente de dese
 
 ### 2. Ambiente de Produção
 
-Para simular o ambiente de produção localmente ou preparar para o deploy, utilize o `Dockerfile` principal (otimizado para produção) e o `docker-compose.prod.yml`.
+Para simular o ambiente de produção localmente ou preparar para o deploy, utilize o `Dockerfile` (localizado em `docker/`) e o `docker-compose.prod.yml` (localizados em `docker/`) são usados para o ambiente de produção, otimizados para performance e escalabilidade.
 
 1.  **Configurar Variáveis de Ambiente de Produção:**
 
