@@ -227,10 +227,10 @@ class UserAPITest(APITestCase):
 A implementação dos testes automatizados seguiu os seguintes passos:
 
 1.  **Criação de Novo Arquivo de Documentação**: O arquivo `docs/development/automated-testing.md` foi criado para descrever a estratégia de testes.
-2.  **Atualização de `mkdocs.yml`**: O novo arquivo de documentação foi adicionado à navegação do MkDocs.
+2.  **Atualização de `config/mkdocs.yml`**: O novo arquivo de documentação foi adicionado à navegação do MkDocs.
 3.  **Instalação de Dependências de Teste**: `pytest` e `pytest-mock` foram adicionados ao `project/requirements.txt` e instalados. `pytest-django` já estava presente.
 4.  **Estrutura de Diretórios de Testes**: Os diretórios `project/core/tests/unit/` e `project/core/tests/integration/` foram criados para organizar os testes.
-5.  **Configuração do `pytest.ini`**: Um arquivo `pytest.ini` foi criado na raiz do projeto com configurações básicas para o `pytest` (ex: `DJANGO_SETTINGS_MODULE`, `python_files`, `addopts`).
+5.  **Configuração do `config/pytest.ini`**: Um arquivo `config/pytest.ini` foi criado na raiz do projeto com configurações básicas para o `pytest` (ex: `DJANGO_SETTINGS_MODULE`, `python_files`, `addopts`).
 6.  **Implementação de Testes Unitários (Domínio)**: O arquivo `project/core/tests/unit/test_user_entity.py` foi criado com testes para a entidade `User`.
 7.  **Implementação de Testes Unitários (Aplicação)**: Os arquivos `project/core/tests/unit/test_user_use_cases.py` e `project/core/tests/unit/test_generic_use_cases.py` foram criados com testes para os casos de uso de `User` e casos de uso genéricos, respectivamente, utilizando mocks.
 8.  **Implementação de Testes de Integração (API)**: Os arquivos `project/core/tests/integration/test_auth_api.py` e `project/core/tests/integration/test_user_api.py` foram criados com testes de integração para os _endpoints_ da API de autenticação e gerenciamento de usuários, incluindo a obtenção e uso de tokens de acesso.

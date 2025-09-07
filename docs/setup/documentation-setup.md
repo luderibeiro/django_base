@@ -14,12 +14,12 @@ pip install mkdocs mkdocs-material
 
 A documentação está organizada no diretório `docs/`. O arquivo principal é `docs/index.md` (que substitui o antigo `docs/README.md`). Os demais arquivos Markdown estão distribuídos em subdiretórios lógicos (e.g., `architecture/`, `development/`, `setup/`).
 
-## 3. Configuração do MkDocs (`mkdocs.yml`)
+## 3. Configuração do MkDocs (`config/mkdocs.yml`)
 
-O arquivo `mkdocs.yml` na raiz do projeto configura o site da documentação. Ele define o nome do site, URL do repositório, tema, extensões Markdown e a estrutura de navegação (`nav`).
+O arquivo `config/mkdocs.yml` na raiz do projeto configura o site da documentação. Ele define o nome do site, URL do repositório, tema, extensões Markdown e a estrutura de navegação (`nav`).
 
 ```yaml
-site_name: Django Clean Architecture Base Project
+site_name: Django Base Project
 site_url: https://your-username.github.io/django_base/ # Atualize com o seu URL
 repo_url: https://github.com/your-username/django_base/ # Atualize com o seu repositório
 edit_uri: edit/main/docs/ # Caminho para editar arquivos no GitHub

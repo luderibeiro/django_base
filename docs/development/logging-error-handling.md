@@ -306,7 +306,7 @@ class UserAPITest(APITestCase):
 ## 8. Passos da Implementação
 
 1.  **Criação do arquivo de documentação**: Criado `docs/development/logging-error-handling.md`.
-2.  **Atualização do `mkdocs.yml`**: Adicionado o link para o novo documento na navegação.
+2.  **Atualização do `config/mkdocs.yml`**: Adicionado o link para o novo documento na navegação.
 3.  **Configuração de Logs**: Adicionada a configuração de `LOGGING` em `project/project/settings.py`.
 4.  **Criação do Middleware**: Criado `project/core/middleware/custom_exception_middleware.py` com o _handler_ de exceções.
 5.  **Integração do Middleware**: Adicionado o `CustomExceptionMiddleware` à lista `MIDDLEWARE` e configurado `REST_FRAMEWORK["EXCEPTION_HANDLER"]` em `project/project/settings.py`.

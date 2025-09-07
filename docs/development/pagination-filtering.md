@@ -283,7 +283,7 @@ class UserAPITest(APITestCase):
 A implementação da paginação e filtragem para a listagem de usuários seguiu os seguintes passos:
 
 1.  **Criação de Novo Arquivo de Documentação**: O arquivo `docs/development/pagination-filtering.md` foi criado para descrever a estratégia de paginação e filtragem.
-2.  **Atualização de `mkdocs.yml`**: O novo arquivo de documentação foi adicionado à navegação do MkDocs.
+2.  **Atualização de `config/mkdocs.yml`**: O novo arquivo de documentação foi adicionado à navegação do MkDocs.
 3.  **Atualização de Casos de Uso (`ListUsersUseCase`)**: `ListUsersRequest` e `ListUsersResponse` foram modificados para incluir parâmetros de paginação (`offset`, `limit`) e filtragem (`search_query`). O `ListUsersUseCase` foi adaptado para utilizar esses parâmetros e delegar a lógica ao repositório.
 4.  **Atualização da Interface de Repositório (`UserRepository`)**: O método abstrato `get_all_paginated_filtered` foi adicionado à interface `UserRepository`.
 5.  **Atualização da Implementação de Repositório (`DjangoUserRepository`)**: O método `get_all_paginated_filtered` foi implementado, utilizando o ORM do Django (com `Q` para filtragem `icontains`) para aplicar a lógica de paginação e filtragem.

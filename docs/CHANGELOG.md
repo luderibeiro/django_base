@@ -135,7 +135,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
     -   `project/core/tests/unit/test_generic_use_cases.py`
     -   `project/core/tests/integration/test_auth_api.py`
     -   `project/core/tests/integration/test_user_api.py`
-    -   Configuração do Pytest (`pytest.ini`) e adição de dependências (`pytest`, `pytest-mock`, `pytest-django`).
+    -   Configuração do Pytest (`config/pytest.ini`) e adição de dependências (`pytest`, `pytest-mock`, `pytest-django`).
     -   Documentação detalhada em `docs/development/automated-testing.md`.
 -   **Paginação e Filtragem**: Adicionadas capacidades de paginação (`offset`, `limit`) e filtragem (`search_query`) para a API de listagem de usuários. Isso envolveu modificações nos DTOs, interface de repositório, implementação do repositório (`DjangoUserRepository` usando `Q` objects), _serializers_ e _views_ do DRF, e testes de integração abrangentes.
     -   `project/core/domain/use_cases/user_use_cases.py`: DTOs `ListUsersRequest`, `ListUsersResponse` e `ListUsersUseCase` atualizados.
@@ -150,7 +150,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 ### Alterado
 
 -   **Links de Documentação**: Corrigidos links absolutos e relativos no `README.md` da raiz e no `docs/CONTRIBUTING.md` para garantir o funcionamento correto no GitHub Pages.
--   **Navegação do MkDocs**: Atualização do `mkdocs.yml` para incluir novas entradas de documentação (Testes Automatizados, Paginação e Filtragem, Logs e Tratamento de Exceções) e a nova entrada `Changelog`.
+-   **Navegação do MkDocs**: Atualização do `config/mkdocs.yml` para incluir novas entradas de documentação (Testes Automatizados, Paginação e Filtragem, Logs e Tratamento de Exceções) e a nova entrada `Changelog`.
 
 ### Refatorado
 

@@ -153,7 +153,7 @@ lint: ## Executa linting no código
 
 docstyle: ## Verifica docstrings com pydocstyle
 	@echo "$(BLUE)📖 Verificando docstrings (pydocstyle)...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && pydocstyle core --config=../pydocstyle.ini || true
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && pydocstyle core --config=../config/pydocstyle.ini || true
 	@echo "$(GREEN)✅ Verificação de docstrings concluída!$(NC)"
 
 docs-quality: ## Formata e verifica documentação de código (Black + pydocstyle)
@@ -190,7 +190,7 @@ docs-check: ## Valida documentação em modo estrito
 
 type-check: ## Executa verificação de tipos com mypy
 	@echo "$(BLUE)🔍 Verificando tipos (mypy)...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && mypy --config-file=../mypy.ini core/
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && mypy --config-file=../config/mypy.ini core/
 	@echo "$(GREEN)✅ Verificação de tipos concluída!$(NC)"
 
 pre-commit-install: ## Instala hooks do pre-commit
