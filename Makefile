@@ -49,17 +49,17 @@ install: ## Instala todas as dependências
 # Testes
 test: ## Executa todos os testes
 	@echo "$(BLUE)🧪 Executando testes...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) -v
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) -c ../config/pytest.ini -v
 	@echo "$(GREEN)✅ Testes executados com sucesso!$(NC)"
 
 test-coverage: ## Executa testes com cobertura
 	@echo "$(BLUE)🧪 Executando testes com cobertura...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) --cov=. --cov-config=../.coveragerc --cov-report=term-missing --cov-report=html
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) -c ../config/pytest.ini --cov=. --cov-config=../.coveragerc --cov-report=term-missing --cov-report=html
 	@echo "$(GREEN)✅ Relatório de cobertura gerado em htmlcov/$(NC)"
 
 test-watch: ## Executa testes em modo watch
 	@echo "$(BLUE)🧪 Executando testes em modo watch...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) -f
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) -c ../config/pytest.ini -f
 
 # Servidor de desenvolvimento
 run: ## Inicia o servidor de desenvolvimento
@@ -106,17 +106,17 @@ clean-all: clean ## Limpa tudo incluindo ambiente virtual
 # Docker
 docker-build: ## Constrói a imagem Docker (produção)
 	@echo "$(BLUE)🐳 Construindo imagem Docker de produção...$(NC)"
-	@docker build -t django-base:latest docker/
+	@docker build -f docker/Dockerfile -t django-base:latest .
 	@echo "$(GREEN)✅ Imagem Docker construída com sucesso!$(NC)"
 
 docker-build-dev: ## Constrói a imagem Docker de desenvolvimento (mais rápida)
 	@echo "$(BLUE)🐳 Construindo imagem Docker de desenvolvimento...$(NC)"
-	@docker build -f docker/Dockerfile.dev -t django-base:dev docker/
+	@docker build -f docker/Dockerfile.dev -t django-base:dev .
 	@echo "$(GREEN)✅ Imagem Docker de desenvolvimento construída!$(NC)"
 
 docker-build-fast: ## Build rápido usando cache (apenas mudanças de código)
 	@echo "$(BLUE)⚡ Build rápido com cache...$(NC)"
-	@docker build --cache-from django-base:latest -t django-base:latest docker/
+	@docker build --cache-from django-base:latest -f docker/Dockerfile -t django-base:latest .
 	@echo "$(GREEN)✅ Build rápido concluído!$(NC)"
 
 docker-run: ## Executa o container Docker
