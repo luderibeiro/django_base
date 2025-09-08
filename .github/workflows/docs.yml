@@ -2,7 +2,7 @@ name: 📚 Deploy Documentation
 
 on:
     push:
-        branches: [main]
+        branches: [main, develop, reorganizing]
         paths:
             - "docs/**"
             - "mkdocs.yml"
