@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -2026,10 +2026,10 @@
 <p>A implementação dos testes automatizados seguiu os seguintes passos:</p>
 <ol>
 <li><strong>Criação de Novo Arquivo de Documentação</strong>: O arquivo <code>docs/development/automated-testing.md</code> foi criado para descrever a estratégia de testes.</li>
-<li><strong>Atualização de <code>mkdocs.yml</code></strong>: O novo arquivo de documentação foi adicionado à navegação do MkDocs.</li>
+<li><strong>Atualização de <code>config/mkdocs.yml</code></strong>: O novo arquivo de documentação foi adicionado à navegação do MkDocs.</li>
 <li><strong>Instalação de Dependências de Teste</strong>: <code>pytest</code> e <code>pytest-mock</code> foram adicionados ao <code>project/requirements.txt</code> e instalados. <code>pytest-django</code> já estava presente.</li>
 <li><strong>Estrutura de Diretórios de Testes</strong>: Os diretórios <code>project/core/tests/unit/</code> e <code>project/core/tests/integration/</code> foram criados para organizar os testes.</li>
-<li><strong>Configuração do <code>pytest.ini</code></strong>: Um arquivo <code>pytest.ini</code> foi criado na raiz do projeto com configurações básicas para o <code>pytest</code> (ex: <code>DJANGO_SETTINGS_MODULE</code>, <code>python_files</code>, <code>addopts</code>).</li>
+<li><strong>Configuração do <code>config/pytest.ini</code></strong>: Um arquivo <code>config/pytest.ini</code> foi criado na raiz do projeto com configurações básicas para o <code>pytest</code> (ex: <code>DJANGO_SETTINGS_MODULE</code>, <code>python_files</code>, <code>addopts</code>).</li>
 <li><strong>Implementação de Testes Unitários (Domínio)</strong>: O arquivo <code>project/core/tests/unit/test_user_entity.py</code> foi criado com testes para a entidade <code>User</code>.</li>
 <li><strong>Implementação de Testes Unitários (Aplicação)</strong>: Os arquivos <code>project/core/tests/unit/test_user_use_cases.py</code> e <code>project/core/tests/unit/test_generic_use_cases.py</code> foram criados com testes para os casos de uso de <code>User</code> e casos de uso genéricos, respectivamente, utilizando mocks.</li>
 <li><strong>Implementação de Testes de Integração (API)</strong>: Os arquivos <code>project/core/tests/integration/test_auth_api.py</code> e <code>project/core/tests/integration/test_user_api.py</code> foram criados com testes de integração para os <em>endpoints</em> da API de autenticação e gerenciamento de usuários, incluindo a obtenção e uso de tokens de acesso.</li>

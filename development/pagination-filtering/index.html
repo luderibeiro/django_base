@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -2139,7 +2139,7 @@
 <p>A implementação da paginação e filtragem para a listagem de usuários seguiu os seguintes passos:</p>
 <ol>
 <li><strong>Criação de Novo Arquivo de Documentação</strong>: O arquivo <code>docs/development/pagination-filtering.md</code> foi criado para descrever a estratégia de paginação e filtragem.</li>
-<li><strong>Atualização de <code>mkdocs.yml</code></strong>: O novo arquivo de documentação foi adicionado à navegação do MkDocs.</li>
+<li><strong>Atualização de <code>config/mkdocs.yml</code></strong>: O novo arquivo de documentação foi adicionado à navegação do MkDocs.</li>
 <li><strong>Atualização de Casos de Uso (<code>ListUsersUseCase</code>)</strong>: <code>ListUsersRequest</code> e <code>ListUsersResponse</code> foram modificados para incluir parâmetros de paginação (<code>offset</code>, <code>limit</code>) e filtragem (<code>search_query</code>). O <code>ListUsersUseCase</code> foi adaptado para utilizar esses parâmetros e delegar a lógica ao repositório.</li>
 <li><strong>Atualização da Interface de Repositório (<code>UserRepository</code>)</strong>: O método abstrato <code>get_all_paginated_filtered</code> foi adicionado à interface <code>UserRepository</code>.</li>
 <li><strong>Atualização da Implementação de Repositório (<code>DjangoUserRepository</code>)</strong>: O método <code>get_all_paginated_filtered</code> foi implementado, utilizando o ORM do Django (com <code>Q</code> para filtragem <code>icontains</code>) para aplicar a lógica de paginação e filtragem.</li>

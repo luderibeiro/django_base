@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -1596,7 +1596,7 @@
 <h2 id="configuracao-com-docker-compose-recomendado">Configuração com Docker Compose (Recomendado)<a class="headerlink" href="#configuracao-com-docker-compose-recomendado" title="Permanent link">&para;</a></h2>
 <p>A maneira mais fácil e recomendada de configurar o projeto é usando Docker Compose, com arquivos de configuração separados para desenvolvimento e produção.</p>
 <h3 id="1-ambiente-de-desenvolvimento">1. Ambiente de Desenvolvimento<a class="headerlink" href="#1-ambiente-de-desenvolvimento" title="Permanent link">&para;</a></h3>
-<p>Utilize o <code>Dockerfile.dev</code> e o <code>docker-compose.dev.yml</code> para um ambiente de desenvolvimento com hot-reload.</p>
+<p>Utilize o <code>docker-compose.dev.yml</code> (localizado em <code>docker/</code>) orquestra os serviços em desenvolvimento, e o <code>Dockerfile.dev</code> (localizado em <code>docker/</code>) contém as instruções para construir a imagem de desenvolvimento.</p>
 <ol>
 <li>
 <p><strong>Construir e Iniciar os Serviços de Desenvolvimento:</strong></p>
@@ -1627,7 +1627,7 @@
 </li>
 </ol>
 <h3 id="2-ambiente-de-producao">2. Ambiente de Produção<a class="headerlink" href="#2-ambiente-de-producao" title="Permanent link">&para;</a></h3>
-<p>Para simular o ambiente de produção localmente ou preparar para o deploy, utilize o <code>Dockerfile</code> principal (otimizado para produção) e o <code>docker-compose.prod.yml</code>.</p>
+<p>Para simular o ambiente de produção localmente ou preparar para o deploy, utilize o <code>Dockerfile</code> (localizado em <code>docker/</code>) e o <code>docker-compose.prod.yml</code> (localizados em <code>docker/</code>) são usados para o ambiente de produção, otimizados para performance e escalabilidade.</p>
 <ol>
 <li>
 <p><strong>Configurar Variáveis de Ambiente de Produção:</strong></p>

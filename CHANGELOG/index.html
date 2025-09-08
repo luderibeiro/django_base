@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -1827,7 +1827,7 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <p><strong>Configuração de Ambiente</strong>: Melhoria significativa na configuração de variáveis de ambiente com suporte a diferentes ambientes (desenvolvimento, staging, produção).</p>
 </li>
 <li>
-<p><strong>Makefile</strong>: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.</p>
+<p><strong>scripts/Makefile</strong>: Expansão do Makefile com mais de 20 comandos de automação para desenvolvimento, testes, documentação e deploy.</p>
 </li>
 <li>
 <p><strong>Estrutura de Documentação</strong>: Reorganização completa da documentação com navegação melhorada e seções específicas para diferentes aspectos do projeto.</p>
@@ -1917,7 +1917,7 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <p><strong>Otimização e Refatoração de Arquivos Docker</strong>: Reestruturação do <code>Dockerfile</code> para um modelo multi-stage (build e execução) com imagem base mais leve (<code>python:3.12-slim-bookworm</code>), combinação de comandos <code>RUN</code> para reduzir camadas, e otimização na instalação de dependências. Introdução de arquivos <code>docker-compose.dev.yml</code> e <code>docker-compose.prod.yml</code> para separar as configurações de ambientes de desenvolvimento e produção, com <code>Dockerfile.dev</code> para desenvolvimento e <code>.dockerignore</code> para exclusão de arquivos desnecessários.</p>
 <ul>
 <li><code>.dockerignore</code>: Novo arquivo para exclusão de arquivos irrelevantes no contexto de build.</li>
-<li><code>Dockerfile</code>: Refatorado para multi-stage build e otimizado para produção.</li>
+<li><code>docker/Dockerfile</code>: Refatorado para multi-stage build e otimizado para produção.</li>
 <li><code>Dockerfile.dev</code>: Novo arquivo para ambiente de desenvolvimento.</li>
 <li><code>docker-compose.dev.yml</code>: Novo arquivo para orquestração de serviços em desenvolvimento.</li>
 <li><code>docker-compose.prod.yml</code>: Novo arquivo para orquestração de serviços em produção.</li>
@@ -1934,7 +1934,7 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <li><code>project/core/tests/unit/test_generic_use_cases.py</code></li>
 <li><code>project/core/tests/integration/test_auth_api.py</code></li>
 <li><code>project/core/tests/integration/test_user_api.py</code></li>
-<li>Configuração do Pytest (<code>pytest.ini</code>) e adição de dependências (<code>pytest</code>, <code>pytest-mock</code>, <code>pytest-django</code>).</li>
+<li>Configuração do Pytest (<code>config/pytest.ini</code>) e adição de dependências (<code>pytest</code>, <code>pytest-mock</code>, <code>pytest-django</code>).</li>
 <li>Documentação detalhada em <code>docs/development/automated-testing.md</code>.</li>
 </ul>
 </li>
@@ -1953,7 +1953,7 @@ e este projeto adere a <a href="https://semver.org/spec/v2.0.0.html">Semantic Ve
 <h3 id="alterado_1">Alterado<a class="headerlink" href="#alterado_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Links de Documentação</strong>: Corrigidos links absolutos e relativos no <code>README.md</code> da raiz e no <code>docs/CONTRIBUTING.md</code> para garantir o funcionamento correto no GitHub Pages.</li>
-<li><strong>Navegação do MkDocs</strong>: Atualização do <code>mkdocs.yml</code> para incluir novas entradas de documentação (Testes Automatizados, Paginação e Filtragem, Logs e Tratamento de Exceções) e a nova entrada <code>Changelog</code>.</li>
+<li><strong>Navegação do MkDocs</strong>: Atualização do <code>config/mkdocs.yml</code> para incluir novas entradas de documentação (Testes Automatizados, Paginação e Filtragem, Logs e Tratamento de Exceções) e a nova entrada <code>Changelog</code>.</li>
 </ul>
 <h3 id="refatorado_1">Refatorado<a class="headerlink" href="#refatorado_1" title="Permanent link">&para;</a></h3>
 <ul>

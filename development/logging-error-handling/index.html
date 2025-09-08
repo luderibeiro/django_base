@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -2165,7 +2165,7 @@
 <h2 id="8-passos-da-implementacao">8. Passos da Implementação<a class="headerlink" href="#8-passos-da-implementacao" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Criação do arquivo de documentação</strong>: Criado <code>docs/development/logging-error-handling.md</code>.</li>
-<li><strong>Atualização do <code>mkdocs.yml</code></strong>: Adicionado o link para o novo documento na navegação.</li>
+<li><strong>Atualização do <code>config/mkdocs.yml</code></strong>: Adicionado o link para o novo documento na navegação.</li>
 <li><strong>Configuração de Logs</strong>: Adicionada a configuração de <code>LOGGING</code> em <code>project/project/settings.py</code>.</li>
 <li><strong>Criação do Middleware</strong>: Criado <code>project/core/middleware/custom_exception_middleware.py</code> com o <em>handler</em> de exceções.</li>
 <li><strong>Integração do Middleware</strong>: Adicionado o <code>CustomExceptionMiddleware</code> à lista <code>MIDDLEWARE</code> e configurado <code>REST_FRAMEWORK["EXCEPTION_HANDLER"]</code> em <code>project/project/settings.py</code>.</li>
