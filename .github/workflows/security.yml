@@ -1,0 +1,170 @@
+name: 🔒 Security Scanning
+
+on:
+    push:
+        branches: [main, develop]
+    pull_request:
+        branches: [main]
+    schedule:
+        # Run daily at 2 AM UTC
+        - cron: '0 2 * * *'
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    security-events: write
+
+jobs:
+    security-scan:
+        name: 🔒 Security Scan
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 📥 Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: 🐍 Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.12"
+                  cache: "pip"
+
+            - name: 📦 Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r project/requirements.txt
+                  pip install bandit safety pip-audit semgrep
+
+            - name: 🔍 Run Bandit (Python security linter)
+              run: |
+                  cd project
+                  bandit -r core/ -f json -o bandit-report.json || true
+                  bandit -r core/ -f txt
+
+            - name: 🔒 Run Safety (known vulnerabilities)
+              run: |
+                  cd project
+                  safety check --json --output=safety-report.json || true
+                  safety check
+
+            - name: 🔍 Run pip-audit
+              run: |
+                  cd project
+                  pip-audit --format=json --output=pip-audit-report.json || true
+                  pip-audit
+
+            - name: 🔍 Run Semgrep (SAST)
+              run: |
+                  semgrep --config=auto --json --output=semgrep-report.json . || true
+                  semgrep --config=auto .
+
+            - name: 🔍 Run Trivy (container scanning)
+              uses: aquasecurity/trivy-action@master
+              with:
+                  scan-type: 'fs'
+                  scan-ref: '.'
+                  format: 'json'
+                  output: 'trivy-report.json'
+                  ignore-unfixed: true
+
+            - name: 🔍 Run Trivy (vulnerability scanning)
+              uses: aquasecurity/trivy-action@master
+              with:
+                  scan-type: 'fs'
+                  scan-ref: '.'
+                  format: 'table'
+                  ignore-unfixed: true
+
+            - name: 📊 Generate security summary
+              run: |
+                  python -c "
+                  import json
+                  import os
+                  
+                  def load_json_safe(filename):
+                      try:
+                          with open(filename, 'r') as f:
+                              return json.load(f)
+                      except (FileNotFoundError, json.JSONDecodeError):
+                          return {}
+                  
+                  # Load reports
+                  bandit = load_json_safe('project/bandit-report.json')
+                  safety = load_json_safe('project/safety-report.json')
+                  pip_audit = load_json_safe('project/pip-audit-report.json')
+                  semgrep = load_json_safe('semgrep-report.json')
+                  trivy = load_json_safe('trivy-report.json')
+                  
+                  # Count issues
+                  bandit_issues = len(bandit.get('results', []))
+                  safety_issues = len(safety.get('vulnerabilities', []))
+                  pip_audit_issues = len(pip_audit.get('vulnerabilities', []))
+                  semgrep_issues = len(semgrep.get('results', []))
+                  trivy_issues = len(trivy.get('Results', [{}])[0].get('Vulnerabilities', []))
+                  
+                  summary = {
+                      'bandit_issues': bandit_issues,
+                      'safety_issues': safety_issues,
+                      'pip_audit_issues': pip_audit_issues,
+                      'semgrep_issues': semgrep_issues,
+                      'trivy_issues': trivy_issues,
+                      'total_issues': bandit_issues + safety_issues + pip_audit_issues + semgrep_issues + trivy_issues,
+                      'timestamp': os.popen('date -u +%Y-%m-%dT%H:%M:%SZ').read().strip()
+                  }
+                  
+                  with open('security_summary.json', 'w') as f:
+                      json.dump(summary, f, indent=2)
+                  
+                  print('Security Summary:')
+                  print(json.dumps(summary, indent=2))
+                  
+                  # Exit with error if critical issues found
+                  if summary['total_issues'] > 0:
+                      print(f'❌ Found {summary[\"total_issues\"]} security issues')
+                      exit(1)
+                  else:
+                      print('✅ No security issues found')
+                  "
+
+            - name: 📤 Upload security reports
+              uses: actions/upload-artifact@v4
+              with:
+                  name: security-reports
+                  path: |
+                      project/bandit-report.json
+                      project/safety-report.json
+                      project/pip-audit-report.json
+                      semgrep-report.json
+                      trivy-report.json
+                      security_summary.json
+
+            - name: 🚨 Create security issue if critical issues found
+              if: failure()
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const fs = require('fs');
+                      const summary = JSON.parse(fs.readFileSync('security_summary.json', 'utf8'));
+                      
+                      await github.rest.issues.create({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          title: `🚨 Security vulnerabilities detected (${summary.total_issues} issues)`,
+                          body: `## Security Alert
+                          
+                          **Issues found:**
+                          - Bandit: ${summary.bandit_issues} issues
+                          - Safety: ${summary.safety_issues} issues
+                          - pip-audit: ${summary.pip_audit_issues} issues
+                          - Semgrep: ${summary.semgrep_issues} issues
+                          - Trivy: ${summary.trivy_issues} issues
+                          
+                          **Total:** ${summary.total_issues} security issues
+                          
+                          Please review the security reports and fix the vulnerabilities.
+                          
+                          Generated on: ${summary.timestamp}`,
+                          labels: ['security', 'urgent', 'vulnerability']
+                      });
