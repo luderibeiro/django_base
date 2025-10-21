@@ -223,6 +223,80 @@ check: ## Executa verificações do Django
 	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && $(MANAGE) check
 	@echo "$(GREEN)✅ Verificações concluídas!$(NC)"
 
+# Novos comandos de automação
+init-project: ## Limpa template para novo projeto (remove arquivos específicos)
+	@echo "$(BLUE)🧹 Limpando template para novo projeto...$(NC)"
+	@rm -f teste.txt commit.sh
+	@rm -f project_improvements.md project_standards.md
+	@rm -f RELEASE_NOTES_v2.1.0.md EVOLUTION_GUIDE.md
+	@echo "$(GREEN)✅ Template limpo para novo projeto!$(NC)"
+	@echo "$(YELLOW)💡 Agora você pode personalizar o projeto$(NC)"
+
+update-deps: ## Atualiza dependências com verificação de segurança
+	@echo "$(BLUE)📦 Atualizando dependências...$(NC)"
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && pip list --outdated
+	@echo "$(YELLOW)⚠️  Verificando vulnerabilidades antes da atualização...$(NC)"
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && pip-audit
+	@echo "$(YELLOW)💡 Execute 'pip install --upgrade package-name' para atualizar pacotes específicos$(NC)"
+
+benchmark: ## Executa testes de performance
+	@echo "$(BLUE)⚡ Executando benchmarks de performance...$(NC)"
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && pytest --benchmark-only --benchmark-save=performance -v
+	@echo "$(GREEN)✅ Benchmarks executados!$(NC)"
+
+sonar-scan: ## Executa análise local com SonarScanner
+	@echo "$(BLUE)🔍 Executando análise SonarCloud local...$(NC)"
+	@if ! command -v sonar-scanner >/dev/null 2>&1; then \
+		echo "$(YELLOW)⚠️  SonarScanner não encontrado. Instalando...$(NC)"; \
+		wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip; \
+		unzip sonar-scanner-cli-4.8.0.2856-linux.zip; \
+		export PATH=$$PWD/sonar-scanner-4.8.0.2856-linux/bin:$$PATH; \
+	fi
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && pytest --cov=core --cov-report=xml:coverage.xml --cov-report=term --junitxml=test-results.xml
+	@sonar-scanner -Dsonar.projectKey=django-base-template -Dsonar.organization=luderibeiro -Dsonar.sources=project/core -Dsonar.python.coverage.reportPaths=project/coverage.xml -Dsonar.python.xunit.reportPath=project/test-results.xml
+	@echo "$(GREEN)✅ Análise SonarCloud concluída!$(NC)"
+
+db-backup: ## Melhora backup do banco de dados
+	@echo "$(BLUE)💾 Fazendo backup do banco de dados...$(NC)"
+	@mkdir -p backups
+	@if [ -f "$(PROJECT_DIR)/db.sqlite3" ]; then \
+		cp $(PROJECT_DIR)/db.sqlite3 backups/db_backup_$$(date +%Y%m%d_%H%M%S).sqlite3; \
+		echo "$(GREEN)✅ Backup SQLite criado em backups/$(NC)"; \
+	else \
+		echo "$(YELLOW)⚠️  Banco SQLite não encontrado. Tentando PostgreSQL...$(NC)"; \
+		pg_dump -h localhost -U postgres -d postgres > backups/pg_backup_$$(date +%Y%m%d_%H%M%S).sql; \
+		echo "$(GREEN)✅ Backup PostgreSQL criado em backups/$(NC)"; \
+	fi
+
+db-restore: ## Restaura backup do banco de dados
+	@echo "$(BLUE)🔄 Restaurando backup do banco de dados...$(NC)"
+	@ls -la backups/
+	@read -p "Digite o nome do arquivo de backup: " backup; \
+	if [[ "$$backup" == *.sqlite3 ]]; then \
+		cp backups/$$backup $(PROJECT_DIR)/db.sqlite3; \
+		echo "$(GREEN)✅ Banco SQLite restaurado!$(NC)"; \
+	elif [[ "$$backup" == *.sql ]]; then \
+		psql -h localhost -U postgres -d postgres < backups/$$backup; \
+		echo "$(GREEN)✅ Banco PostgreSQL restaurado!$(NC)"; \
+	else \
+		echo "$(RED)❌ Formato de arquivo não suportado$(NC)"; \
+	fi
+
+generate-env: ## Gera arquivo .env com valores seguros
+	@echo "$(BLUE)📝 Gerando arquivo .env...$(NC)"
+	@python scripts/generate_env.py
+	@echo "$(GREEN)✅ Arquivo .env gerado!$(NC)"
+
+health-check: ## Executa health check completo da aplicação
+	@echo "$(BLUE)🏥 Executando health check...$(NC)"
+	@python scripts/health_check.py
+	@echo "$(GREEN)✅ Health check concluído!$(NC)"
+
+setup-oauth: ## Configura OAuth2 application automaticamente
+	@echo "$(BLUE)🔐 Configurando OAuth2 application...$(NC)"
+	@python scripts/setup_oauth_client.py
+	@echo "$(GREEN)✅ OAuth2 application configurado!$(NC)"
+
 # Desenvolvimento
 dev-setup: ## Setup completo para desenvolvimento
 	@echo "$(BLUE)🛠️ Configurando ambiente de desenvolvimento...$(NC)"
