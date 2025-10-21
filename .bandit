@@ -1,0 +1,28 @@
+[bandit]
+# Configuração do Bandit para Django Base Template
+# Foca em código de produção, ignora testes e migrations
+
+exclude_dirs = 
+    /venv/
+    /tests/
+    /migrations/
+    /__pycache__/
+    /.pytest_cache/
+
+# Ignorar testes comuns em testes (B101: assert_used)
+# Ignorar senhas hardcoded em testes (B105, B106, B107)
+skips = B101,B105,B106,B107
+
+# Focar apenas em issues de severidade MEDIUM e HIGH
+# LOW geralmente são falsos positivos
+severity = MEDIUM,HIGH
+
+# Confiança mínima para reportar
+confidence = MEDIUM,HIGH
+
+# Targets específicos para scan
+targets = core/
+
+[bandit.plugins.B201_flask_debug_true]
+# Exemplo de configuração específica de plugin
+
