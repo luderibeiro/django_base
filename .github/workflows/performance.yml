@@ -64,6 +64,8 @@ jobs:
                   REDIS_URL: redis://localhost:6379/0
                   SECRET_KEY: ${{ secrets.SECRET_KEY_FOR_CI }}
                   DEBUG: False
+                  OAUTH2_CLIENT_ID: test-client-id
+                  OAUTH2_CLIENT_SECRET: test-client-secret
               run: |
                   cd project
                   export PYTHONPATH=$PWD
