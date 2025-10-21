@@ -172,10 +172,10 @@ def test_delete_entity_use_case_not_found(mock_generic_repository):
     entity_id = str(uuid.uuid4())
     # DeleteEntityUseCase não verifica se a entidade existe, apenas deleta
     # Isso é esperado para operações idempotentes
-    
+
     use_case = DeleteEntityUseCase(repository=mock_generic_repository)
     request = GenericDeleteRequest(id=entity_id)
-    
+
     response = use_case.execute(request)
 
     mock_generic_repository.delete.assert_called_once_with(entity_id)

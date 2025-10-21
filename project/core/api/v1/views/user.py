@@ -47,7 +47,9 @@ class UserListAPIView(generics.ListAPIView):
         list_users_response = list_users_use_case.execute(list_users_request)
 
         response_serializer = UserListResponseSerializer(instance=list_users_response)
-        logger.info(f"Listagem de usuários (admin) retornou {len(list_users_response.users)} usuários")
+        logger.info(
+            f"Listagem de usuários (admin) retornou {len(list_users_response.users)} usuários"
+        )
         return Response(response_serializer.data, status=status.HTTP_200_OK)
 
 
@@ -72,10 +74,14 @@ class UserAlterPasswordAPIView(generics.UpdateAPIView):
             response_serializer = UserAlterPasswordSerializer(
                 instance=change_password_response
             )
-            logger.info(f"Senha do usuário com ID: {kwargs['pk']} alterada com sucesso (admin)")
+            logger.info(
+                f"Senha do usuário com ID: {kwargs['pk']} alterada com sucesso (admin)"
+            )
             return Response(response_serializer.data, status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.warning(f"Falha ao alterar senha do usuário com ID: {kwargs['pk']} (admin) - {str(e)}")
+            logger.warning(
+                f"Falha ao alterar senha do usuário com ID: {kwargs['pk']} (admin) - {str(e)}"
+            )
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -98,7 +104,9 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
             logger.info(f"Usuário com ID: {user_id} recuperado com sucesso (admin)")
             return Response(response_serializer.data, status=status.HTTP_200_OK)
         except ObjectDoesNotExist as e:
-            logger.warning(f"Falha ao recuperar usuário com ID: {user_id} (admin) - {str(e)}")
+            logger.warning(
+                f"Falha ao recuperar usuário com ID: {user_id} (admin) - {str(e)}"
+            )
             return Response({"detail": str(e)}, status=status.HTTP_404_NOT_FOUND)
 
 
@@ -119,7 +127,9 @@ class UserCreateAPIView(generics.CreateAPIView):
             create_user_use_case = get_create_user_use_case()
             create_user_response = create_user_use_case.execute(create_user_request)
             read_serializer = UserReadSerializer(instance=create_user_response)
-            logger.info(f"Usuário com ID: {create_user_response.id} criado com sucesso (público)")
+            logger.info(
+                f"Usuário com ID: {create_user_response.id} criado com sucesso (público)"
+            )
             return Response(read_serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as e:
             logger.warning(f"Falha ao criar usuário (público) - {str(e)}")

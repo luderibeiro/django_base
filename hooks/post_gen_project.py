@@ -25,7 +25,7 @@ def remove_template_files():
         "project_standards.md",
         "RELEASE_NOTES_v2.1.0.md",
     ]
-    
+
     for file_path in template_files:
         if os.path.exists(file_path):
             if os.path.isdir(file_path):
@@ -40,9 +40,9 @@ def generate_secret_key():
     """Generate a secure SECRET_KEY for Django."""
     import secrets
     import string
-    
+
     alphabet = string.ascii_letters + string.digits + "!@#$%^&*(-_=+)"
-    secret_key = ''.join(secrets.choice(alphabet) for _ in range(50))
+    secret_key = "".join(secrets.choice(alphabet) for _ in range(50))
     return secret_key
 
 
@@ -52,12 +52,16 @@ def update_env_file():
     if env_file.exists():
         # Read current content
         content = env_file.read_text()
-        
+
         # Replace placeholder values
         secret_key = generate_secret_key()
-        content = content.replace("change-me-in-production-please-use-a-secure-key", secret_key)
-        content = content.replace("your-oauth2-client-id", f"{{ cookiecutter.project_slug }}-client-id")
-        
+        content = content.replace(
+            "change-me-in-production-please-use-a-secure-key", secret_key
+        )
+        content = content.replace(
+            "your-oauth2-client-id", "{{ cookiecutter.project_slug }}-client-id"
+        )
+
         # Write back
         env_file.write_text(content)
         print("🔐 Updated .env file with secure values")
@@ -69,10 +73,16 @@ def initialize_git_repo():
         try:
             subprocess.run(["git", "init"], check=True, capture_output=True)
             subprocess.run(["git", "add", "."], check=True, capture_output=True)
-            subprocess.run([
-                "git", "commit", "-m", 
-                "🎉 Initial commit: {{ cookiecutter.project_name }} setup"
-            ], check=True, capture_output=True)
+            subprocess.run(
+                [
+                    "git",
+                    "commit",
+                    "-m",
+                    "🎉 Initial commit: {{ cookiecutter.project_name }} setup",
+                ],
+                check=True,
+                capture_output=True,
+            )
             print("📦 Initialized git repository")
         except subprocess.CalledProcessError as e:
             print(f"⚠️  Warning: Could not initialize git repository: {e}")
@@ -82,12 +92,12 @@ def install_pre_commit_hooks():
     """Install pre-commit hooks if requested."""
     if "{{ cookiecutter.use_pre_commit }}" == "y":
         try:
-            subprocess.run([
-                "python", "-m", "pip", "install", "pre-commit"
-            ], check=True, capture_output=True)
-            subprocess.run([
-                "pre-commit", "install"
-            ], check=True, capture_output=True)
+            subprocess.run(
+                ["python", "-m", "pip", "install", "pre-commit"],
+                check=True,
+                capture_output=True,
+            )
+            subprocess.run(["pre-commit", "install"], check=True, capture_output=True)
             print("🔧 Installed pre-commit hooks")
         except subprocess.CalledProcessError as e:
             print(f"⚠️  Warning: Could not install pre-commit hooks: {e}")
@@ -108,12 +118,12 @@ def update_readme():
     readme_file = Path("README.md")
     if readme_file.exists():
         content = readme_file.read_text()
-        
+
         # Replace template placeholders
         content = content.replace("Django Base", "{{ cookiecutter.project_name }}")
         content = content.replace("django_base", "{{ cookiecutter.project_slug }}")
         content = content.replace("luderibeiro", "{{ cookiecutter.github_username }}")
-        
+
         readme_file.write_text(content)
         print("📖 Updated README.md with project information")
 
@@ -130,13 +140,13 @@ def run_initial_migrations():
 def main():
     """Main post-generation function."""
     print("🚀 Setting up {{ cookiecutter.project_name }}...")
-    
+
     # Change to the generated project directory
     project_dir = Path("{{ cookiecutter.project_slug }}")
     if project_dir.exists():
         os.chdir(project_dir)
         print(f"📁 Changed to project directory: {project_dir}")
-    
+
     # Perform setup tasks
     remove_template_files()
     update_env_file()
@@ -145,7 +155,7 @@ def main():
     install_pre_commit_hooks()
     create_oauth_application()
     run_initial_migrations()
-    
+
     print("\n✅ Project setup completed!")
     print("\n📋 Next steps:")
     print("1. cd {{ cookiecutter.project_slug }}")

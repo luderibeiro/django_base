@@ -20,7 +20,9 @@ class UserAPITest(APITestCase):
         self.login_url = reverse("core:login")
 
         # Limpar usuários existentes para evitar conflitos
-        User.objects.filter(email__in=["admin@example.com", "regular@example.com"]).delete()
+        User.objects.filter(
+            email__in=["admin@example.com", "regular@example.com"]
+        ).delete()
 
         self.admin_user_data = {
             "email": "admin@example.com",

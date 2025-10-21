@@ -109,7 +109,11 @@ structlog.configure(
         structlog.processors.StackInfoRenderer(),
         structlog.processors.format_exc_info,
         structlog.processors.UnicodeDecoder(),
-        structlog.processors.JSONRenderer() if not DEBUG else structlog.dev.ConsoleRenderer(),
+        (
+            structlog.processors.JSONRenderer()
+            if not DEBUG
+            else structlog.dev.ConsoleRenderer()
+        ),
     ],
     context_class=dict,
     logger_factory=structlog.stdlib.LoggerFactory(),

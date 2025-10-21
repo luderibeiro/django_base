@@ -16,24 +16,28 @@ T = TypeVar("T")
 @dataclass
 class GenericRequest:
     """Base class for all request objects."""
+
     pass
 
 
 @dataclass
 class GenericGetByIdRequest(GenericRequest):
     """Request object for getting an entity by ID."""
+
     entity_id: str
 
 
 @dataclass
 class GenericDeleteRequest(GenericRequest):
     """Request object for deleting an entity by ID."""
+
     entity_id: str
 
 
 @dataclass
 class GenericListRequest(GenericRequest):
     """Request object for listing entities with pagination and filtering."""
+
     offset: int = 0
     limit: int = 50
     search_query: Optional[str] = None
@@ -42,12 +46,14 @@ class GenericListRequest(GenericRequest):
 @dataclass
 class GenericCreateRequest(GenericRequest, Generic[T]):
     """Request object for creating an entity."""
+
     entity: T
 
 
 @dataclass
 class GenericUpdateRequest(GenericRequest, Generic[T]):
     """Request object for updating an entity."""
+
     entity: T
 
 

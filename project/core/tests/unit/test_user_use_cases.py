@@ -319,7 +319,7 @@ def test_get_user_by_id_use_case_not_found(mock_user_repository):
     use_case = GetUserByIdUseCase(user_repository=mock_user_repository)
 
     from core.domain.exceptions import EntityNotFoundException
-    
+
     with pytest.raises(EntityNotFoundException):
         use_case.execute(get_request)
 

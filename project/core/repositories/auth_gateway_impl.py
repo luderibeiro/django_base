@@ -59,8 +59,12 @@ class DjangoAuthGateway(AuthGateway):
                 seconds=settings.OAUTH2_PROVIDER["ACCESS_TOKEN_EXPIRE_SECONDS"]
             ),
         )
-        
-        logger.info("Access token created successfully", user_id=str(user.id), application_id=str(application.id))
+
+        logger.info(
+            "Access token created successfully",
+            user_id=str(user.id),
+            application_id=str(application.id),
+        )
 
         # Create a new refresh token
         refresh_token = RefreshToken.objects.create(

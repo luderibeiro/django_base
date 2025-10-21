@@ -248,19 +248,19 @@ jobs:
                   python -c "
                   import json
                   import os
-                  
+
                   # Read outdated packages
                   with open('project/outdated_packages.json', 'r') as f:
                       outdated = json.load(f)
-                  
+
                   # Read audit report
                   with open('project/audit_report.json', 'r') as f:
                       audit = json.load(f)
-                  
+
                   # Read safety report
                   with open('project/safety_report.json', 'r') as f:
                       safety = json.load(f)
-                  
+
                   # Generate summary
                   summary = {
                       'outdated_count': len(outdated),
@@ -268,10 +268,10 @@ jobs:
                       'safety_issues': len(safety.get('vulnerabilities', [])),
                       'timestamp': os.popen('date -u +%Y-%m-%dT%H:%M:%SZ').read().strip()
                   }
-                  
+
                   with open('dependency_summary.json', 'w') as f:
                       json.dump(summary, f, indent=2)
-                  
+
                   print('Dependency Summary:')
                   print(json.dumps(summary, indent=2))
                   "
@@ -293,22 +293,22 @@ jobs:
                   script: |
                       const fs = require('fs');
                       const summary = JSON.parse(fs.readFileSync('dependency_summary.json', 'utf8'));
-                      
+
                       if (summary.vulnerabilities > 0 || summary.safety_issues > 0) {
                           await github.rest.issues.create({
                               owner: context.repo.owner,
                               repo: context.repo.repo,
                               title: `🚨 Security vulnerabilities detected in dependencies`,
                               body: `## Security Alert
-                              
+
                               **Vulnerabilities found:**
                               - pip-audit: ${summary.vulnerabilities} issues
                               - safety: ${summary.safety_issues} issues
-                              
+
                               **Outdated packages:** ${summary.outdated_count}
-                              
+
                               Please review and update dependencies to resolve security issues.
-                              
+
                               Generated on: ${summary.timestamp}`,
                               labels: ['security', 'dependencies', 'urgent']
                           });

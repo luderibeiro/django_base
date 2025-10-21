@@ -17,7 +17,7 @@
     "include_sentry": "n",
     "deployment_platform": [
         "AWS",
-        "GCP", 
+        "GCP",
         "Azure",
         "Heroku",
         "Digital Ocean",

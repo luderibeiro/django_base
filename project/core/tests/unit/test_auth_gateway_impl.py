@@ -171,8 +171,12 @@ def setup_auth_gateway_mocks():
         )
         # também "preencha" referências internas para que asserts que comparam objetos funcionem
         mock_access_token_instance_for_create.user = None
-        mock_access_token_instance_for_create.application = mock_application_instance_for_get
-        mock_refresh_token_instance_for_create.access_token = mock_access_token_instance_for_create
+        mock_access_token_instance_for_create.application = (
+            mock_application_instance_for_get
+        )
+        mock_refresh_token_instance_for_create.access_token = (
+            mock_access_token_instance_for_create
+        )
         yield {
             "user_model": mock_user_model,
             "application_manager": mock_application_manager,
@@ -267,7 +271,7 @@ def test_create_tokens_success_existing_application(setup_auth_gateway_mocks):
 
 def test_create_tokens_success_new_application(setup_auth_gateway_mocks):
     """Test que verifica o comportamento quando a aplicação OAuth2 não existe.
-    
+
     O comportamento esperado é que uma exceção ClientApplicationNotFound seja levantada
     quando a aplicação não é encontrada, pois o gateway não cria aplicações automaticamente.
     """
@@ -281,9 +285,9 @@ def test_create_tokens_success_new_application(setup_auth_gateway_mocks):
     mocks["user_model"].objects.get.return_value = mock_user
 
     gateway = DjangoAuthGateway()
-    
+
     from core.domain.exceptions import ClientApplicationNotFound
-    
+
     with pytest.raises(ClientApplicationNotFound, match="Client application not found"):
         gateway.create_tokens(user_id)
 
@@ -299,7 +303,7 @@ def test_create_tokens_user_not_found(setup_auth_gateway_mocks):
     gateway = DjangoAuthGateway()
 
     from core.domain.exceptions import AuthenticationError
-    
+
     with pytest.raises(AuthenticationError, match="User not found"):
         gateway.create_tokens(user_id)
 
@@ -334,7 +338,7 @@ def test_set_password_user_not_found(setup_auth_gateway_mocks):
     gateway = DjangoAuthGateway()
 
     from core.domain.exceptions import AuthenticationError
-    
+
     with pytest.raises(AuthenticationError, match="User not found"):
         gateway.set_password(user_id, "new_password")
 

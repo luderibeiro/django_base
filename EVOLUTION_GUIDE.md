@@ -191,7 +191,7 @@ make update-deps    # Atualizar dependências
 
 **Justificativa**: Facilita manutenção, testabilidade e evolução do código.
 
-**Consequências**: 
+**Consequências**:
 - ✅ Código mais organizado e testável
 - ✅ Dependências bem definidas
 - ⚠️ Maior complexidade inicial

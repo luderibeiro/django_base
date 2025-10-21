@@ -15,7 +15,7 @@ from pathlib import Path
 def generate_secret_key(length=50):
     """Gera uma SECRET_KEY segura para Django."""
     alphabet = string.ascii_letters + string.digits + "!@#$%^&*(-_=+)"
-    return ''.join(secrets.choice(alphabet) for _ in range(length))
+    return "".join(secrets.choice(alphabet) for _ in range(length))
 
 
 def generate_oauth_client_id(project_name="django-base"):
@@ -27,7 +27,7 @@ def generate_env_content():
     """Gera o conteúdo do arquivo .env."""
     secret_key = generate_secret_key()
     oauth_client_id = generate_oauth_client_id()
-    
+
     content = f"""# Django Base Template - Environment Variables
 # Generated automatically - DO NOT commit to version control
 
@@ -94,21 +94,21 @@ PROMETHEUS_ENABLED=False
 def main():
     """Função principal."""
     print("🔐 Gerando arquivo .env com valores seguros...")
-    
+
     # Verificar se já existe um .env
     env_file = Path(".env")
     if env_file.exists():
         response = input("⚠️  Arquivo .env já existe. Deseja sobrescrever? (y/N): ")
-        if response.lower() != 'y':
+        if response.lower() != "y":
             print("❌ Operação cancelada.")
             return
-    
+
     # Gerar conteúdo
     content = generate_env_content()
-    
+
     # Escrever arquivo
     env_file.write_text(content)
-    
+
     print("✅ Arquivo .env gerado com sucesso!")
     print("🔑 SECRET_KEY gerada automaticamente")
     print("🔐 OAuth2 CLIENT_ID gerado automaticamente")
