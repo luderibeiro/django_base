@@ -1,0 +1,59 @@
+{
+    "project_name": "Django Project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "project_description": "A Django project with Clean Architecture",
+    "author_name": "Your Name",
+    "author_email": "your.email@example.com",
+    "github_username": "{{ cookiecutter.author_name.lower().replace(' ', '') }}",
+    "python_version": "3.12",
+    "django_version": "5.2",
+    "use_docker": "y",
+    "use_postgresql": "y",
+    "use_redis": "y",
+    "include_oauth": "y",
+    "include_swagger": "y",
+    "include_celery": "n",
+    "include_elasticsearch": "n",
+    "include_sentry": "n",
+    "deployment_platform": [
+        "AWS",
+        "GCP", 
+        "Azure",
+        "Heroku",
+        "Digital Ocean",
+        "Docker"
+    ],
+    "database_engine": [
+        "postgresql",
+        "mysql",
+        "sqlite"
+    ],
+    "cache_backend": [
+        "redis",
+        "memcached",
+        "database"
+    ],
+    "email_backend": [
+        "console",
+        "smtp",
+        "sendgrid",
+        "ses"
+    ],
+    "logging_level": [
+        "DEBUG",
+        "INFO",
+        "WARNING",
+        "ERROR"
+    ],
+    "use_github_actions": "y",
+    "use_pre_commit": "y",
+    "use_sonarcloud": "y",
+    "license": [
+        "MIT",
+        "Apache-2.0",
+        "GPL-3.0",
+        "BSD-3-Clause",
+        "Proprietary"
+    ],
+    "open_source": "y"
+}
