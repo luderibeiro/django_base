@@ -1,14 +1,19 @@
 import os
+import secrets
 from datetime import timedelta
 from typing import Tuple
 
-from core.domain.gateways import AuthGateway
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.utils import timezone
 from oauth2_provider.models import AccessToken, Application, RefreshToken
+import structlog
+
+from core.domain.exceptions import AuthenticationError, ClientApplicationNotFound
+from core.domain.gateways import AuthGateway
 
 User = get_user_model()
+logger = structlog.get_logger(__name__)
 
 
 class DjangoAuthGateway(AuthGateway):
@@ -24,47 +29,44 @@ class DjangoAuthGateway(AuthGateway):
         try:
             user = User.objects.get(id=user_id)
         except User.DoesNotExist:
-            raise ValueError("User not found")
+            raise AuthenticationError("User not found")
 
-        # Para propósitos de desenvolvimento/exemplo, assumimos uma aplicação cliente padrão.
-        # Em um cenário real, você buscaria a aplicação cliente associada à requisição.
+        # Look up the client application based on the client_id from the request
+        client_id = os.getenv("OAUTH2_CLIENT_ID")
+        if not client_id:
+            logger.error("OAUTH2_CLIENT_ID environment variable not defined")
+            raise ValueError("OAUTH2_CLIENT_ID environment variable not defined")
+
         try:
-            application = Application.objects.get(name="Default Application")
+            application = Application.objects.get(client_id=client_id)
         except Application.DoesNotExist:
-            # Se não existir, crie uma (apenas para ambiente de desenvolvimento/teste)
-            application = Application.objects.create(
-                name="Default Application",
-                client_type="public",
-                authorization_grant_type="password",
-            )
+            logger.error("Client application not found", client_id=client_id)
+            raise ClientApplicationNotFound("Client application not found")
 
-        # Remove quaisquer tokens existentes para o usuário e aplicação
+        # Remove any existing tokens for the user and application
         AccessToken.objects.filter(user=user, application=application).delete()
         RefreshToken.objects.filter(user=user, application=application).delete()
 
-        # Crie um novo access token
+        # Create a new access token
+        scope = os.getenv("OAUTH2_SCOPES", "read write")
         access_token = AccessToken.objects.create(
             user=user,
             application=application,
-            token="access_token_"
-            + str(user_id)
-            + "_"
-            + os.urandom(30).hex(),  # Gerar um token real
-            scope="read write",
+            token=secrets.token_urlsafe(32),  # Generate a real token
+            scope=scope,
             expires=timezone.now()
             + timedelta(
                 seconds=settings.OAUTH2_PROVIDER["ACCESS_TOKEN_EXPIRE_SECONDS"]
             ),
         )
+        
+        logger.info("Access token created successfully", user_id=str(user.id), application_id=str(application.id))
 
-        # Crie um novo refresh token
+        # Create a new refresh token
         refresh_token = RefreshToken.objects.create(
             user=user,
             application=application,
-            token="refresh_token_"
-            + str(user_id)
-            + "_"
-            + os.urandom(30).hex(),  # Gerar um token real
+            token=secrets.token_urlsafe(32),  # Generate a real token
             access_token=access_token,
         )
 
@@ -76,4 +78,4 @@ class DjangoAuthGateway(AuthGateway):
             user.set_password(new_password)
             user.save()
         except User.DoesNotExist:
-            raise ValueError("User not found")
+            raise AuthenticationError("User not found")
