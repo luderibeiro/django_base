@@ -1,13 +1,27 @@
 [run]
+source = project/core
 omit =
     project/core/migrations/*
     project/manage.py
     project/project/asgi.py
     project/project/wsgi.py
     project/project/settings*.py
+    project/core/tests/*
+    project/core/static/*
+    project/core/templates/*
 
 [report]
 exclude_lines =
     pragma: no cover
     if __name__ == .__main__.
     raise NotImplementedError
+    def __repr__
+    def __str__
+    raise NotImplementedError
+    if TYPE_CHECKING:
+
+[html]
+directory = htmlcov
+
+[xml]
+output = project/coverage.xml

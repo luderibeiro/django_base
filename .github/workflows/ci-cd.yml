@@ -80,7 +80,7 @@ jobs:
               run: |
                   cd project
                   export PYTHONPATH=$PWD
-                  pytest --cov=. --cov-report=xml --cov-report=html --cov-report=term
+                  pytest --cov=core --cov-report=xml:coverage.xml --cov-report=html:htmlcov --cov-report=term --junitxml=test-results.xml
 
             - name: 📊 Upload coverage to Codecov
               uses: codecov/codecov-action@v3
@@ -88,6 +88,18 @@ jobs:
                   file: ./project/coverage.xml
                   flags: unittests
                   name: codecov-umbrella
+
+            - name: 🔍 SonarCloud Scan
+              uses: SonarSource/sonarcloud-github-action@master
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              with:
+                  args: >
+                      -Dsonar.organization=luderibeiro
+                      -Dsonar.projectKey=django-base-template
+                      -Dsonar.python.coverage.reportPaths=project/coverage.xml
+                      -Dsonar.python.xunit.reportPath=project/test-results.xml
 
     docker:
         name: 🐳 Docker Build
