@@ -55,10 +55,26 @@ MockDjangoUser.objects = Mock()
 
 # Mock para o modelo Application do oauth2_provider
 class MockApplication:
-    def __init__(self, name, client_type, authorization_grant_type):
+    def __init__(
+        self,
+        name,
+        client_type,
+        authorization_grant_type,
+        id=1,
+        client_id="test-client-id",
+        client_secret="test-client-secret",
+        user_id=1,
+    ):
+        self.id = id
         self.name = name
         self.client_type = client_type
         self.authorization_grant_type = authorization_grant_type
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.user_id = user_id
+
+    def __str__(self):
+        return f"<MockApplication {self.client_id}>"
 
 
 # Mock para AccessToken e RefreshToken
@@ -93,12 +109,13 @@ def setup_auth_gateway_mocks():
         name="Default Application",
         client_type="public",
         authorization_grant_type="password",
+        id=1,
+        client_id="test-client-id",
+        client_secret="test-client-secret",
+        user_id=1,
     )
-    mock_application_manager.get.side_effect = [
-        mock_application_instance_for_get,  # Para o primeiro teste (existing application)
-        Application.DoesNotExist,  # Simula que a aplicação não existe (new application)
-        mock_application_instance_for_get,  # Reset para o terceiro teste
-    ]
+    # Por padrão, retorna a instância — testes individuais podem sobrescrever side_effect quando necessário
+    mock_application_manager.get.return_value = mock_application_instance_for_get
     mock_application_manager.create.return_value = mock_application_instance_for_get
 
     # Mock do manager para AccessToken
@@ -152,6 +169,10 @@ def setup_auth_gateway_mocks():
         mock_access_token_instance_for_create.expires = (
             mock_now.return_value + timedelta(seconds=3600)
         )
+        # também "preencha" referências internas para que asserts que comparam objetos funcionem
+        mock_access_token_instance_for_create.user = None
+        mock_access_token_instance_for_create.application = mock_application_instance_for_get
+        mock_refresh_token_instance_for_create.access_token = mock_access_token_instance_for_create
         yield {
             "user_model": mock_user_model,
             "application_manager": mock_application_manager,
@@ -213,17 +234,14 @@ def test_create_tokens_success_existing_application(setup_auth_gateway_mocks):
     user_id = str(uuid.uuid4())
     mock_user = MockDjangoUser(id=user_id, email="test@example.com")
 
-    # Configura o side_effect para simular que a aplicação existe
-    mocks["application_manager"].get.side_effect = [
-        mocks["mock_application_instance_for_get"]
-    ]
+    # Por padrão, o manager.get já retorna a instância configurada no fixture
     mocks["user_model"].objects.get.return_value = mock_user
 
     gateway = DjangoAuthGateway()
     access_token, refresh_token = gateway.create_tokens(user_id)
 
     mocks["user_model"].objects.get.assert_called_once_with(id=user_id)
-    mocks["application_manager"].get.assert_called_once_with(name="Default Application")
+    mocks["application_manager"].get.assert_called_once_with(client_id="test-client-id")
     # A aplicação não deve ser criada se já existe
     mocks["application_manager"].create.assert_not_called()
 
@@ -248,43 +266,29 @@ def test_create_tokens_success_existing_application(setup_auth_gateway_mocks):
 
 
 def test_create_tokens_success_new_application(setup_auth_gateway_mocks):
+    """Test que verifica o comportamento quando a aplicação OAuth2 não existe.
+    
+    O comportamento esperado é que uma exceção ClientApplicationNotFound seja levantada
+    quando a aplicação não é encontrada, pois o gateway não cria aplicações automaticamente.
+    """
     mocks = setup_auth_gateway_mocks
     user_id = str(uuid.uuid4())
     mock_user = MockDjangoUser(id=user_id, email="test@example.com")
 
-    # Configura o side_effect para simular que a aplicação NÃO existe
-    mocks["application_manager"].get.side_effect = Application.DoesNotExist
+    # Configura o side_effect para simular que a aplicação NÃO existe -> raise da exceção
+    mocks["application_manager"].get.side_effect = Application.DoesNotExist()
+
     mocks["user_model"].objects.get.return_value = mock_user
 
     gateway = DjangoAuthGateway()
-    access_token, refresh_token = gateway.create_tokens(user_id)
+    
+    from core.domain.exceptions import ClientApplicationNotFound
+    
+    with pytest.raises(ClientApplicationNotFound, match="Client application not found"):
+        gateway.create_tokens(user_id)
 
     mocks["user_model"].objects.get.assert_called_once_with(id=user_id)
-    mocks["application_manager"].get.assert_called_once_with(name="Default Application")
-    # A aplicação deve ser criada
-    mocks["application_manager"].create.assert_called_once_with(
-        name="Default Application",
-        client_type="public",
-        authorization_grant_type="password",
-    )
-    mocks["access_token_manager"].filter.assert_called_once()
-    mocks["refresh_token_manager"].filter.assert_called_once()
-    mocks["access_token_manager"].create.assert_called_once_with(
-        user=mock_user,
-        application=mocks["mock_application_instance_for_get"],
-        token=ANY,  # Token é gerado aleatoriamente
-        scope="read write",
-        expires=ANY,  # Usar ANY para a data de expiração
-    )
-    mocks["refresh_token_manager"].create.assert_called_once_with(
-        user=mock_user,
-        application=mocks["mock_application_instance_for_get"],
-        token=ANY,  # Token é gerado aleatoriamente
-        access_token=mocks["mock_access_token_instance_for_create"],
-    )
-
-    assert access_token == "mock_access_token"
-    assert refresh_token == "mock_refresh_token"
+    mocks["application_manager"].get.assert_called_once_with(client_id="test-client-id")
 
 
 def test_create_tokens_user_not_found(setup_auth_gateway_mocks):
@@ -294,7 +298,9 @@ def test_create_tokens_user_not_found(setup_auth_gateway_mocks):
 
     gateway = DjangoAuthGateway()
 
-    with pytest.raises(ValueError, match="User not found"):
+    from core.domain.exceptions import AuthenticationError
+    
+    with pytest.raises(AuthenticationError, match="User not found"):
         gateway.create_tokens(user_id)
 
     mocks["user_model"].objects.get.assert_called_once_with(id=user_id)
@@ -327,7 +333,9 @@ def test_set_password_user_not_found(setup_auth_gateway_mocks):
 
     gateway = DjangoAuthGateway()
 
-    with pytest.raises(ValueError, match="User not found"):
+    from core.domain.exceptions import AuthenticationError
+    
+    with pytest.raises(AuthenticationError, match="User not found"):
         gateway.set_password(user_id, "new_password")
 
     mocks["user_model"].objects.get.assert_called_once_with(id=user_id)

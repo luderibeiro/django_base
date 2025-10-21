@@ -19,6 +19,9 @@ class UserAPITest(APITestCase):
         self.list_users_url = reverse("core:user-list")
         self.login_url = reverse("core:login")
 
+        # Limpar usuários existentes para evitar conflitos
+        User.objects.filter(email__in=["admin@example.com", "regular@example.com"]).delete()
+
         self.admin_user_data = {
             "email": "admin@example.com",
             "password": "adminpassword123",
@@ -40,9 +43,11 @@ class UserAPITest(APITestCase):
         self.regular_access_token = self._get_access_token(self.regular_user)
 
     def _get_access_token(self, user):
+        # Usar o mesmo client_id definido no conftest.py e settings
         application, _ = Application.objects.get_or_create(
-            name="Default Application",
+            client_id="test-client-id",
             defaults={
+                "name": "Test App",
                 "client_type": "public",
                 "authorization_grant_type": "password",
                 "skip_authorization": True,  # Importante para testes

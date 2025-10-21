@@ -318,7 +318,9 @@ def test_get_user_by_id_use_case_not_found(mock_user_repository):
 
     use_case = GetUserByIdUseCase(user_repository=mock_user_repository)
 
-    with pytest.raises(ValueError, match="Entity not found"):
+    from core.domain.exceptions import EntityNotFoundException
+    
+    with pytest.raises(EntityNotFoundException):
         use_case.execute(get_request)
 
     mock_user_repository.get_by_id.assert_called_once_with(user_id)

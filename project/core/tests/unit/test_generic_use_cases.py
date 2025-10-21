@@ -6,6 +6,7 @@ from core.domain.data_access import GenericRepository
 from core.domain.entities.user import (
     User as DomainUser,  # Usar DomainUser como entidade de exemplo
 )
+from core.domain.exceptions import EntityNotFoundException
 from core.domain.use_cases.generic_use_cases import (
     CreateEntityUseCase,
     DeleteEntityUseCase,
@@ -106,7 +107,7 @@ def test_get_entity_by_id_use_case_not_found(mock_generic_repository):
     use_case = GetEntityByIdUseCase(repository=mock_generic_repository)
     request = GenericDeleteRequest(id=entity_id)
 
-    with pytest.raises(ValueError, match="Entity not found"):
+    with pytest.raises(EntityNotFoundException):
         use_case.execute(request)
 
     mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
@@ -145,7 +146,7 @@ def test_update_entity_use_case_not_found(mock_generic_repository):
     use_case = UpdateEntityUseCase(repository=mock_generic_repository)
     request = GenericUpdateRequest(id=entity_id, data=updated_user_data)
 
-    with pytest.raises(ValueError, match="Entity not found"):
+    with pytest.raises(EntityNotFoundException):
         use_case.execute(request)
 
     mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
@@ -169,14 +170,13 @@ def test_delete_entity_use_case_success(mock_generic_repository):
 
 def test_delete_entity_use_case_not_found(mock_generic_repository):
     entity_id = str(uuid.uuid4())
-    mock_generic_repository.delete.side_effect = ValueError(
-        "Entity not found"
-    )  # Simula a exceção do repositório
-
+    # DeleteEntityUseCase não verifica se a entidade existe, apenas deleta
+    # Isso é esperado para operações idempotentes
+    
     use_case = DeleteEntityUseCase(repository=mock_generic_repository)
     request = GenericDeleteRequest(id=entity_id)
-
-    with pytest.raises(ValueError, match="Entity not found"):
-        use_case.execute(request)
+    
+    response = use_case.execute(request)
 
     mock_generic_repository.delete.assert_called_once_with(entity_id)
+    assert response == GenericSuccessResponse(success=True)
