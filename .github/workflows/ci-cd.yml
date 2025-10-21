@@ -1,18 +1,24 @@
-name: 🚀 CI/CD Pipeline
+name: 🚀 Unified CI/CD Pipeline
 
 on:
     push:
         branches: [main, develop]
     pull_request:
         branches: [main]
+    schedule:
+        # Run security and dependency checks daily at 2 AM UTC
+        - cron: '0 2 * * *'
+    workflow_dispatch:
 
 permissions:
     contents: read
     pages: write
     id-token: write
+    security-events: write
+    pull-requests: write
 
 jobs:
-    test:
+    test-and-quality:
         name: 🧪 Tests & Quality
         runs-on: ubuntu-latest
 
@@ -43,6 +49,8 @@ jobs:
         steps:
             - name: 📥 Checkout code
               uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
             - name: 🐍 Set up Python
               uses: actions/setup-python@v4
@@ -54,7 +62,7 @@ jobs:
               run: |
                   python -m pip install --upgrade pip
                   pip install -r project/requirements.txt
-                  pip install coverage pytest-cov flake8 black pip-audit
+                  pip install coverage pytest-cov flake8 black pip-audit bandit safety
 
             - name: 🎨 Code formatting check
               run: |
@@ -71,14 +79,24 @@ jobs:
                   cd project
                   pip-audit
 
+            - name: 🔍 Security scan with Bandit
+              run: |
+                  cd project
+                  bandit -r core/ -f json -o bandit-report.json || true
+                  bandit -r core/ -f txt
+
+            - name: 🔍 Safety check
+              run: |
+                  cd project
+                  safety check --json --output=safety-report.json || true
+                  safety check
+
             - name: 🧪 Run tests with coverage
               env:
                   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
                   REDIS_URL: redis://localhost:6379/0
                   SECRET_KEY: ${{ secrets.SECRET_KEY_FOR_CI }}
                   DEBUG: False
-                  OAUTH2_CLIENT_ID: test-client-id
-                  OAUTH2_CLIENT_SECRET: test-client-secret
               run: |
                   cd project
                   export PYTHONPATH=$PWD
@@ -103,10 +121,74 @@ jobs:
                       -Dsonar.python.coverage.reportPaths=project/coverage.xml
                       -Dsonar.python.xunit.reportPath=project/test-results.xml
 
-    docker:
+            - name: 📤 Upload test reports
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: test-reports
+                  path: |
+                      project/coverage.xml
+                      project/test-results.xml
+                      project/bandit-report.json
+                      project/safety-report.json
+                      htmlcov/
+
+    performance-test:
+        name: ⚡ Performance Tests
+        runs-on: ubuntu-latest
+        needs: test-and-quality
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+        services:
+            postgres:
+                image: postgres:13
+                env:
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_DB: test_db
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+                ports:
+                    - 5432:5432
+
+        steps:
+            - name: 📥 Checkout code
+              uses: actions/checkout@v4
+
+            - name: 🐍 Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.12"
+                  cache: "pip"
+
+            - name: 📦 Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r project/requirements.txt
+                  pip install pytest-benchmark locust
+
+            - name: 🧪 Run performance tests
+              env:
+                  DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
+                  SECRET_KEY: ${{ secrets.SECRET_KEY_FOR_CI }}
+                  DEBUG: False
+              run: |
+                  cd project
+                  export PYTHONPATH=$PWD
+                  pytest --benchmark-only --benchmark-save=performance -v
+
+            - name: 📤 Upload performance reports
+              uses: actions/upload-artifact@v4
+              with:
+                  name: performance-reports
+                  path: project/.benchmarks/
+
+    docker-build:
         name: 🐳 Docker Build
         runs-on: ubuntu-latest
-        needs: test
+        needs: test-and-quality
 
         steps:
             - name: 📥 Checkout code
@@ -127,64 +209,136 @@ jobs:
               run: |
                   docker run --rm -w /app/project -e DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -e DJANGO_DEBUG=$DJANGO_DEBUG -e DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS --entrypoint="" django-base:latest python manage.py check --settings=project.settings_test
 
-    security:
-        name: 🔒 Security Scan
+    dependency-check:
+        name: 📦 Dependency Check
         runs-on: ubuntu-latest
-        needs: test
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
 
         steps:
             - name: 📥 Checkout code
               uses: actions/checkout@v4
 
-            - name: 🔍 Run Trivy vulnerability scanner
-              uses: aquasecurity/trivy-action@master
+            - name: 🐍 Set up Python
+              uses: actions/setup-python@v4
               with:
-                  scan-type: "fs"
-                  scan-ref: "."
-                  format: "table"
-                  ignore-unfixed: true
+                  python-version: "3.12"
+                  cache: "pip"
 
-    release:
-        name: 🏷️ Create Release
+            - name: 📦 Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r project/requirements.txt
+                  pip install pip-audit safety
+
+            - name: 🔍 Check for outdated packages
+              run: |
+                  cd project
+                  pip list --outdated --format=json > outdated_packages.json
+                  echo "Outdated packages found:"
+                  cat outdated_packages.json
+
+            - name: 🔒 Security audit
+              run: |
+                  cd project
+                  pip-audit --format=json --output=audit_report.json
+                  safety check --json --output=safety_report.json
+
+            - name: 📊 Generate dependency report
+              run: |
+                  python -c "
+                  import json
+                  import os
+                  
+                  # Read outdated packages
+                  with open('project/outdated_packages.json', 'r') as f:
+                      outdated = json.load(f)
+                  
+                  # Read audit report
+                  with open('project/audit_report.json', 'r') as f:
+                      audit = json.load(f)
+                  
+                  # Read safety report
+                  with open('project/safety_report.json', 'r') as f:
+                      safety = json.load(f)
+                  
+                  # Generate summary
+                  summary = {
+                      'outdated_count': len(outdated),
+                      'vulnerabilities': len(audit.get('vulnerabilities', [])),
+                      'safety_issues': len(safety.get('vulnerabilities', [])),
+                      'timestamp': os.popen('date -u +%Y-%m-%dT%H:%M:%SZ').read().strip()
+                  }
+                  
+                  with open('dependency_summary.json', 'w') as f:
+                      json.dump(summary, f, indent=2)
+                  
+                  print('Dependency Summary:')
+                  print(json.dumps(summary, indent=2))
+                  "
+
+            - name: 📤 Upload dependency reports
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dependency-reports
+                  path: |
+                      project/outdated_packages.json
+                      project/audit_report.json
+                      project/safety_report.json
+                      dependency_summary.json
+
+            - name: 🚨 Create issue if vulnerabilities found
+              if: failure()
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const fs = require('fs');
+                      const summary = JSON.parse(fs.readFileSync('dependency_summary.json', 'utf8'));
+                      
+                      if (summary.vulnerabilities > 0 || summary.safety_issues > 0) {
+                          await github.rest.issues.create({
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              title: `🚨 Security vulnerabilities detected in dependencies`,
+                              body: `## Security Alert
+                              
+                              **Vulnerabilities found:**
+                              - pip-audit: ${summary.vulnerabilities} issues
+                              - safety: ${summary.safety_issues} issues
+                              
+                              **Outdated packages:** ${summary.outdated_count}
+                              
+                              Please review and update dependencies to resolve security issues.
+                              
+                              Generated on: ${summary.timestamp}`,
+                              labels: ['security', 'dependencies', 'urgent']
+                          });
+                      }
+
+    docs-deploy:
+        name: 📚 Deploy Documentation
         runs-on: ubuntu-latest
-        needs: [test, docker]
-        if: github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[release]')
+        needs: test-and-quality
+        if: github.ref == 'refs/heads/main'
 
         steps:
-            - name: 📥 Checkout code
+            - name: 📥 Checkout
               uses: actions/checkout@v4
               with:
                   fetch-depth: 0
 
-            - name: 🏷️ Generate tag
-              id: tag
-              run: |
-                  VERSION=$(date +%Y.%m.%d)-$(git rev-parse --short HEAD)
-                  echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-            - name: 📦 Create Release
-              uses: actions/create-release@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: 🐍 Setup Python
+              uses: actions/setup-python@v4
               with:
-                  tag_name: v${{ steps.tag.outputs.version }}
-                  release_name: Release v${{ steps.tag.outputs.version }}
-                  body: |
-                      ## 🚀 Django Base Release v${{ steps.tag.outputs.version }}
+                  python-version: "3.12"
+                  cache: "pip"
 
-                      ### ✨ Principais Mudanças
-                      - Melhorias na arquitetura limpa
-                      - Atualizações de segurança
-                      - Documentação aprimorada
+            - name: 📦 Install dependencies
+              run: |
+                  pip install --upgrade pip
+                  pip install mkdocs mkdocs-material pymdown-extensions
 
-                      ### 🔧 Como Usar
-                      ```bash
-                      git clone https://github.com/luderibeiro/django_base.git
-                      cd django_base
-                      make setup
-                      ```
-
-                      ### 📚 Documentação
-                      Acesse: https://luderibeiro.github.io/django_base/
-                  draft: false
-                  prerelease: false
+            - name: 🚀 Deploy to GitHub Pages
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                  mkdocs gh-deploy --force
