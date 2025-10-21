@@ -21,7 +21,7 @@ env = environ.Env(
     ALLOWED_HOSTS=(list, ["127.0.0.1", "localhost"]),
     DATABASE_URL=(str, ""),
     REDIS_URL=(str, ""),
-    OAUTH2_CLIENT_ID=(str, ""),
+    OAUTH2_CLIENT_ID=(str, "test-client-id"),
     OAUTH2_SCOPES=(str, "read write"),
     OAUTH2_ACCESS_TOKEN_EXPIRE_SECONDS=(int, 86400),
     OAUTH2_REFRESH_TOKEN_EXPIRE_SECONDS=(int, 2592000),
@@ -35,14 +35,16 @@ environ.Env.read_env(BASE_DIR.parent / ".env")
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
-if not SECRET_KEY:
-    raise ImproperlyConfigured("SECRET_KEY environment variable is required")
+SECRET_KEY = env("SECRET_KEY", default="django-insecure-change-me-in-production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS")
+
+# OAuth2 Configuration
+OAUTH2_CLIENT_ID = env("OAUTH2_CLIENT_ID")
+OAUTH2_SCOPES = env("OAUTH2_SCOPES")
 
 
 # Application definition

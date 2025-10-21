@@ -32,7 +32,7 @@ class DjangoAuthGateway(AuthGateway):
             raise AuthenticationError("User not found")
 
         # Look up the client application based on the client_id from the request
-        client_id = os.getenv("OAUTH2_CLIENT_ID")
+        client_id = settings.OAUTH2_CLIENT_ID
         if not client_id:
             logger.error("OAUTH2_CLIENT_ID environment variable not defined")
             raise ValueError("OAUTH2_CLIENT_ID environment variable not defined")

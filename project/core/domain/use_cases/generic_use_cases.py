@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Generic, List, TypeVar
 
 from core.domain.data_access import GenericRepository
+from core.domain.exceptions import EntityNotFoundException
 
 T = TypeVar("T")  # Representa a entidade de domínio
 
@@ -99,7 +100,7 @@ class GetEntityByIdUseCase(UseCase[T]):
     ) -> GenericReadResponse[T]:  # Usando GenericDeleteRequest para ID
         entity = self.repository.get_by_id(request.id)
         if not entity:
-            raise ValueError("Entity not found")
+            raise EntityNotFoundException("Entity", request.id)
         return GenericReadResponse(data=entity)
 
 
@@ -113,7 +114,7 @@ class UpdateEntityUseCase(UseCase[T]):
         # Primeiro, verificar se a entidade existe
         existing_entity = self.repository.get_by_id(request.id)
         if not existing_entity:
-            raise ValueError("Entity not found")
+            raise EntityNotFoundException("Entity", request.id)
 
         # Assumimos que o request.data já contém a entidade atualizada completa
         # ou apenas os campos a serem atualizados. A lógica de merge pode ser mais complexa.

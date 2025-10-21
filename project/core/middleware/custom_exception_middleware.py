@@ -15,6 +15,8 @@ from rest_framework.exceptions import APIException, ValidationError
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
 
+from core.domain.exceptions import EntityNotFoundException
+
 logger = logging.getLogger(__name__)
 
 
@@ -32,6 +34,12 @@ def custom_exception_handler(exc, context):
     if response is not None and isinstance(exc, ValidationError):
         # Do nothing, default handler already formats it correctly.
         pass
+    elif isinstance(exc, EntityNotFoundException):
+        # Handle EntityNotFoundException as 404 Not Found
+        response_data = {"detail": str(exc), "status_code": status.HTTP_404_NOT_FOUND}
+        if settings.DEBUG:
+            response_data["traceback"] = traceback.format_exc()
+        response = Response(response_data, status=status.HTTP_404_NOT_FOUND)
     elif isinstance(exc, ValueError):
         # Handle ValueErrors from domain/use cases as 400 Bad Request
         response_data = {"detail": str(exc), "status_code": status.HTTP_400_BAD_REQUEST}
