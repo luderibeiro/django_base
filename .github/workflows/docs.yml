@@ -42,4 +42,9 @@ jobs:
               run: |
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                  mkdocs gh-deploy --force --remote-name origin --remote-url https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+
+                  # Reconfigura o remote origin com autenticação via token
+                  git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+
+                  # Faz o deploy forçado da documentação
+                  mkdocs gh-deploy --force --remote-name origin
