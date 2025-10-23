@@ -122,7 +122,7 @@ jobs:
                         -Dsonar.projectKey=luderibeiro_django_base
                         -Dsonar.python.coverage.reportPaths=project/coverage.xml
                         -Dsonar.python.xunit.reportPath=project/test-results.xml
-        
+
             - name: 📤 Upload test reports
               uses: actions/upload-artifact@v4
               if: always()

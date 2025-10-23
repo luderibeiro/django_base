@@ -2,7 +2,7 @@
 # Configuração do Bandit para Django Base Template
 # Foca em código de produção, ignora testes e migrations
 
-exclude_dirs = 
+exclude_dirs =
     /venv/
     /tests/
     /migrations/
@@ -25,4 +25,3 @@ targets = core/
 
 [bandit.plugins.B201_flask_debug_true]
 # Exemplo de configuração específica de plugin
-
