@@ -105,11 +105,12 @@ jobs:
                   pytest --cov=core --cov-report=xml:coverage.xml --cov-report=html:htmlcov --cov-report=term --junitxml=test-results.xml
 
             - name: 📊 Upload coverage to Codecov
-              uses: codecov/codecov-action@v3
+              uses: codecov/codecov-action@v5
               with:
                   file: ./project/coverage.xml
                   flags: unittests
                   name: codecov-umbrella
+                  token: ${{ secrets.CODECOV_TOKEN }}
 
             - name: 🔍 SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@master
