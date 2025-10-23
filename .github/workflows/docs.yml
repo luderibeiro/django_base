@@ -42,6 +42,10 @@ jobs:
               run: |
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+                  # Remove o remote atual e recria com autenticação via token
                   git remote remove origin
                   git remote add origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+
+                  # Faz o deploy com autenticação correta
                   mkdocs gh-deploy --force --remote-name origin
