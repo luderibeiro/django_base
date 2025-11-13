@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+      directory: "/project"
+      schedule:
+          # Configuração para rodar semanalmente às segundas-feiras
+          interval: "daily"
+
+      # --- O resto do seu arquivo (commit-message, groups, etc.) ---
+      commit-message:
+          prefix: "chore(deps)"
+          include: "scope"
