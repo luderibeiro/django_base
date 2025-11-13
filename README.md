@@ -6,9 +6,11 @@
 [![Django](https://img.shields.io/badge/Django-5.0+-green.svg)](https://djangoproject.com)
 [![Version](https://img.shields.io/badge/Version-2.1.0-orange.svg)](https://github.com/luderibeiro/django_base/releases)
 [![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen.svg)](https://github.com/luderibeiro/django_base/actions)
+<br>
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=luderibeiro_django_base&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=luderibeiro_django_base)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=luderibeiro_django_base&metric=coverage)](https://sonarcloud.io/summary/new_code?id=luderibeiro_django_base)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=luderibeiro_django_base&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=luderibeiro_django_base)
+<br>
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-MkDocs-blue.svg)](https://luderibeiro.github.io/django_base/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
