@@ -7,7 +7,7 @@
 [![Version](https://img.shields.io/badge/Version-2.1.0-orange.svg)](https://github.com/luderibeiro/django_base/releases)
 [![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen.svg)](https://github.com/luderibeiro/django_base/actions)
 <br>
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=luderibeiro_django_base&metric=overall_alert_status)](https://sonarcloud.io/summary/overall?id=luderibeiro_django_base)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=luderibeiro_django_base&metric=alert_status)](https://sonarcloud.io/summary/overall?id=luderibeiro_django_base)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=luderibeiro_django_base&metric=overall_coverage)](https://sonarcloud.io/summary/overall?id=luderibeiro_django_base)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=luderibeiro_django_base&metric=overall_sqale_rating)](https://sonarcloud.io/summary/overall?id=luderibeiro_django_base)
 <br>
