@@ -107,7 +107,7 @@ jobs:
             - name: 📊 Upload coverage to Codecov
               uses: codecov/codecov-action@v5
               with:
-                  file: ./project/coverage.xml
+                  files: ./project/coverage.xml
                   flags: unittests
                   name: codecov-umbrella
                   token: ${{ secrets.CODECOV_TOKEN }}
@@ -243,15 +243,15 @@ jobs:
             - name: 🔒 Security audit
               run: |
                   cd project
-                  # Ignorar vulnerabilidade do pip em si (ferramenta de build)
-                  pip-audit --format=json --output=audit_report.json --ignore-vuln GHSA-4xh5-x5gv-qwph || echo "[]" > audit_report.json
-                  safety check --json --output=safety_report.json || echo "[]" > safety_report.json
+                  pip-audit --format=json --output=audit_report.json --ignore-vuln GHSA-4xh5-x5gv-qwph || true
+                  safety check --json --output=safety_report.json || true
 
             - name: 📊 Generate dependency report
               run: |
                   python -c "
                   import json
                   import os
+                  import sys
 
                   # Read outdated packages
                   with open('project/outdated_packages.json', 'r') as f:
@@ -273,12 +273,19 @@ jobs:
                       'timestamp': os.popen('date -u +%Y-%m-%dT%H:%M:%SZ').read().strip()
                   }
 
+                  # Escreve o sumário ANTES de falhar
                   with open('dependency_summary.json', 'w') as f:
                       json.dump(summary, f, indent=2)
 
                   print('Dependency Summary:')
                   print(json.dumps(summary, indent=2))
+
+                  # Agora, falha o passo se houver vulnerabilidades
+                  if summary['vulnerabilities'] > 0 or summary['safety_issues'] > 0:
+                      print(f\"🚨 Found {summary['vulnerabilities']} audit issues and {summary['safety_issues']} safety issues.\")
+                      sys.exit(1)
                   "
+                          "
 
             - name: 📤 Upload dependency reports
               uses: actions/upload-artifact@v4
