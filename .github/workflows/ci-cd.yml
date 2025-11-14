@@ -119,8 +119,8 @@ jobs:
                   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               with:
                   args: >
-                      -Dsonar.organization=luderibeiro
-                      -Dsonar.projectKey=luderibeiro_django_base
+                      -Dsonar.organization=tcc2-lude-eric-2025-2
+                      -Dsonar.projectKey=TCC2-Lude-Eric-2025-2_django_base
                       -Dsonar.python.coverage.reportPaths=project/coverage.xml
                       -Dsonar.python.xunit.reportPath=project/test-results.xml
 
