@@ -177,3 +177,5 @@ Se este template foi útil para você:
 [📖 Documentação](https://luderibeiro.github.io/django_base/) • [🐛 Issues](https://github.com/luderibeiro/django_base/issues) • [💬 Discussões](https://github.com/luderibeiro/django_base/discussions)
 
 </div>
+
+FORK PARA O TCC2 em Engenharia de Software na UnB - FCTE.
