@@ -123,9 +123,6 @@ jobs:
                       -Dsonar.projectKey=TCC2-Lude-Eric-2025-2_django_base
                       -Dsonar.python.coverage.reportPaths=project/coverage.xml
                       -Dsonar.python.xunit.reportPath=project/test-results.xml
-                      -Dsonar.exclusions=**/migrations/**
-                      -Dsonar.test.exclusions=**/migrations/**
-                      -Dsonar.coverage.exclusions=**/migrations/**
 
             - name: 📤 Upload test reports
               uses: actions/upload-artifact@v4
