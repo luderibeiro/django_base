@@ -125,7 +125,7 @@ jobs:
                       -Dsonar.python.xunit.reportPath=project/test-results.xml
                       -Dsonar.exclusions=**/migrations/**,**/venv/**,**/__pycache__/**,**/static/**,**/media/**
                       -Dsonar.test.exclusions=**/migrations/**,**/venv/**,**/__pycache__/**
-                      -Dsonar.coverage.exclusions=**/migrations/**,**/venv/**,**/__pycache__/**,**/asgi.py,**/wsgi.py,**/manage.py
+                      -Dsonar.coverage.exclusions=**/migrations/**,**/venv/**,**/__pycache__/**
 
             - name: 📤 Upload test reports
               uses: actions/upload-artifact@v4
