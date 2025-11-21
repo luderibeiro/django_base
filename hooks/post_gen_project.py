@@ -15,16 +15,21 @@ from pathlib import Path
 
 def remove_template_files():
     """Remove files that are specific to the template, not the generated project."""
-    template_files = [
-        "teste.txt",
-        "commit.sh",
-        "cookiecutter.json",
-        "hooks/",
-        "EVOLUTION_GUIDE.md",
-        "project_improvements.md",
-        "project_standards.md",
-        "RELEASE_NOTES_v2.1.0.md",
-    ]
+         template_files = [
+-        "teste.txt",
+-        "commit.sh",
+-        "cookiecutter.json",
+-        "hooks/",
+-        "EVOLUTION_GUIDE.md",
+-        "project_improvements.md",
+-        "project_standards.md",
+-        "RELEASE_NOTES_v2.1.0.md",
++        "teste.txt",
++        "commit.sh",
++        "cookiecutter.json",
++        "hooks/",
++        "meta/",
+     ]
 
     for file_path in template_files:
         if os.path.exists(file_path):
