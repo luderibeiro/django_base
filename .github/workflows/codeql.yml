@@ -1,0 +1,51 @@
+name: "CodeQL Advanced Security"
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        # Configurado para rodar quando vocês abrirem PRs das features do TCC
+        branches: ["main"]
+    schedule:
+        # Roda semanalmente (opcional, bom para monitoramento contínuo)
+        - cron: "30 1 * * 0"
+
+jobs:
+    analyze:
+        name: Analyze
+        # Runner oficial do GitHub (Linux)
+        runs-on: ubuntu-latest
+        permissions:
+            actions: read
+            contents: read
+            # Permissão necessária para escrever os alertas na aba "Security"
+            security-events: write
+
+        strategy:
+            fail-fast: false
+            matrix:
+                # Definindo a linguagem do projeto
+                language: ["python"]
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            # Inicializa o CodeQL e baixa as queries de análise
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v3
+              with:
+                  languages: ${{ matrix.language }}
+                  # DICA PRO TCC: 'security-and-quality' inclui regras de manutenção
+                  # além das regras críticas de segurança. É mais rigoroso.
+                  queries: security-and-quality
+
+            # Tenta construir o projeto automaticamente (para Python, instala dependências básicas)
+            - name: Autobuild
+              uses: github/codeql-action/autobuild@v3
+
+            # Executa a análise propriamente dita
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@v3
+              with:
+                  category: "/language:${{matrix.language}}"
