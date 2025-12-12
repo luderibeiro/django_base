@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "core",
+    "cart",
 ]
 
 # Explicitly define MIDDLEWARE for tests to ensure all necessary middleware classes are loaded.

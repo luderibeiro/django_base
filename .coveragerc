@@ -1,14 +1,18 @@
 [run]
-source = project/core
+# Como o pytest roda dentro de 'project/', o source é o diretório atual (.)
+source = project/
 omit =
-    project/core/migrations/*
-    project/manage.py
-    project/project/asgi.py
-    project/project/wsgi.py
-    project/project/settings*.py
-    project/core/tests/*
-    project/core/static/*
-    project/core/templates/*
+    # Padrões genéricos para ignorar em QUALQUER app (core, cart, etc)
+    */migrations/*
+    */tests/*
+    */static/*
+    */templates/*
+    
+    # Arquivos específicos de configuração
+    manage.py
+    project/asgi.py
+    project/wsgi.py
+    project/settings*.py
 
 [report]
 exclude_lines =
@@ -17,11 +21,10 @@ exclude_lines =
     raise NotImplementedError
     def __repr__
     def __str__
-    raise NotImplementedError
     if TYPE_CHECKING:
 
 [html]
 directory = htmlcov
 
 [xml]
-output = project/coverage.xml
+output = coverage.xml
