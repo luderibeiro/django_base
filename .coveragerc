@@ -7,7 +7,7 @@ omit =
     */tests/*
     */static/*
     */templates/*
-    
+
     # Arquivos específicos de configuração
     manage.py
     project/asgi.py
