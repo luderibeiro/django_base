@@ -181,10 +181,8 @@ def test_cart_total_calculation_matches_expected(monkeypatch):
         data = get_resp.data
         # possíveis chaves: "total", "total_value", "total_amount" — aceitar qualquer uma presente
         possible_keys = ("total", "total_value", "total_amount", "totalValue", "total")
-        found = False
         for k in possible_keys:
             if k in data:
-                found = True
                 assert Decimal(str(data[k])) == expected
                 break
         # se não houver tal campo, não falhar — já validamos via service/model
