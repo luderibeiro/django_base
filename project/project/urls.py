@@ -30,6 +30,7 @@ urlpatterns = [
     path("{}/".format(settings.ADMIN_DEFAULT_PATH), admin.site.urls),
     path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
     path("", include(core_api_urls)),
+    path("cart/", include("cart.api.urls")),
     # OpenAPI documentation
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
