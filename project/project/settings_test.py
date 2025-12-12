@@ -11,6 +11,9 @@ DATABASES = {
 # Explicitly define ROOT_URLCONF for tests
 ROOT_URLCONF = "project.urls"
 
+# Secret key for tests to enable session signing and similar features
+SECRET_KEY = "django-insecure-test-key"
+
 # Explicitly define INSTALLED_APPS for tests to ensure all necessary apps are loaded.
 INSTALLED_APPS = [
     "jazzmin",
