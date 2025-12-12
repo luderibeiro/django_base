@@ -4,10 +4,10 @@ Django settings reforçadas para segurança e configuração por ambiente.
 
 import os
 from pathlib import Path
-import structlog
-from django.core.exceptions import ImproperlyConfigured
 
 import environ
+import structlog
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "core",
+    "cart.apps.CartConfig",
 ]
 
 MIDDLEWARE = [
