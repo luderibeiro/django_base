@@ -46,15 +46,14 @@ install: ## Instala todas as dependências
 	@. $(VENV)/bin/activate && $(PIP) install -r $(REQUIREMENTS)
 	@echo "$(GREEN)✅ Dependências instaladas com sucesso!$(NC)"
 
-# Testes
 test: ## Executa todos os testes
 	@echo "$(BLUE)🧪 Executando testes...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) -v
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) -v core cart
 	@echo "$(GREEN)✅ Testes executados com sucesso!$(NC)"
 
 test-coverage: ## Executa testes com cobertura
 	@echo "$(BLUE)🧪 Executando testes com cobertura...$(NC)"
-	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) --cov=. --cov-config=../.coveragerc --cov-report=term-missing --cov-report=html
+	@cd $(PROJECT_DIR) && . ../$(VENV)/bin/activate && export PYTHONPATH=$$PWD && $(PYTEST) --cov=core --cov=cart --cov-config=../.coveragerc --cov-report=term-missing --cov-report=html
 	@echo "$(GREEN)✅ Relatório de cobertura gerado em htmlcov/$(NC)"
 
 test-watch: ## Executa testes em modo watch
@@ -121,7 +120,7 @@ docker-build-fast: ## Build rápido usando cache (apenas mudanças de código)
 
 docker-run: ## Executa o container Docker
 	@echo "$(BLUE)🐳 Executando container Docker...$(NC)"
-	@docker-compose -f docker-compose.dev.yml up --build
+	@docker compose -f docker-compose.dev.yml up --build
 	@echo "$(GREEN)✅ Container Docker executando!$(NC)"
 
 docker-run-dev: ## Executa container de desenvolvimento (mais rápido)
@@ -131,7 +130,7 @@ docker-run-dev: ## Executa container de desenvolvimento (mais rápido)
 
 docker-stop: ## Para o container Docker
 	@echo "$(BLUE)🐳 Parando container Docker...$(NC)"
-	@docker-compose -f docker-compose.dev.yml down
+	@docker compose -f docker-compose.dev.yml down
 	@echo "$(GREEN)✅ Container Docker parado!$(NC)"
 
 docker-clean: ## Limpa imagens e containers não utilizados
@@ -142,7 +141,7 @@ docker-clean: ## Limpa imagens e containers não utilizados
 
 docker-prod: ## Executa em modo produção com Docker
 	@echo "$(BLUE)🐳 Executando em modo produção...$(NC)"
-	@docker-compose -f docker-compose.prod.yml up --build -d
+	@docker compose -f docker-compose.prod.yml up --build -d
 	@echo "$(GREEN)✅ Aplicação rodando em produção!$(NC)"
 
 # Qualidade de código

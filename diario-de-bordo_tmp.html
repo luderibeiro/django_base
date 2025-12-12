@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>diario-de-bordo.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="di%C3%A1rio-de-bordo-do-tcc-interven%C3%A7%C3%A3o-a---projeto-django-base">Diário de Bordo do TCC (Intervenção A) - Projeto Django Base</h1>
+<p><strong>Projeto:</strong> django_base (Intervenção A - Carrinho de Compras)
+<strong>Funcionalidade:</strong> Módulo de Carrinho de Compras (<code>cart</code>)
+<strong>Período de Execução:</strong> Novembro/Dezembro 2025</p>
+<hr>
+<h3 id="entrada-de-di%C3%A1rio-24112025-a-26112025---defini%C3%A7%C3%A3o-de-arquitetura-e-configura%C3%A7%C3%A3o-inicial">Entrada de Diário: 24/11/2025 a 26/11/2025 - Definição de Arquitetura e Configuração Inicial</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Item</strong></th>
+<th style="text-align:left"><strong>Detalhe da Execução</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Pesquisador</strong></td>
+<td style="text-align:left">Lude Ribeiro</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Requisito(s) Focados</strong></td>
+<td style="text-align:left">Arquitetura do Módulo (Modular Monolith), Infraestrutura Django (Apps)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ferramenta de IA Utilizada</strong></td>
+<td style="text-align:left">ChatGPT 4.0 (Interface Web)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Tempo Gasto na Tarefa</strong></td>
+<td style="text-align:left">~3 horas</td>
+</tr>
+</tbody>
+</table>
+<h4 id="11-objetivo-da-sess%C3%A3o">1.1. Objetivo da Sessão</h4>
+<p><strong>Descrição:</strong> Obter da IA a estrutura de pastas correta para um novo módulo isolado (<code>cart</code>) dentro do padrão &quot;Modular Monolith&quot;, gerar os scripts de automação (<code>bash</code>) para criação dos arquivos e configurar o Django (<code>INSTALLED_APPS</code>) para reconhecer o novo módulo.</p>
+<h4 id="12-prompts-e-intera%C3%A7%C3%B5es-com-a-ia">1.2. Prompts e Interações com a IA</h4>
+<p><strong>Prompt de Entrada:</strong></p>
+<pre class="hljs"><code><div>Atue como um Arquiteto de Software Sênior especialista em Python e Django.
+Estou trabalhando no projeto `django_base` (Monolito Modular + Clean Architecture).
+Contexto Arquitetural:
+- Domínios separados em módulos raiz.
+- Estrutura interna: `domain/`, `services/`, `api/`, `tests/`.
+
+Sua Missão:
+Preciso criar um NOVO módulo isolado chamado `cart` para gerenciar o Carrinho de Compras.
+Requisitos Funcionais:
+1. Persistência: O carrinho deve ser salvo no banco.
+2. Dono: Suportar usuários autenticados e anônimos.
+3. Relacionamento: `CartItem` deve ter FK para `Product` (do módulo `core`).
+
+Entregáveis:
+A) Script Bash para criar a árvore de diretórios.
+B) Configuração (`apps.py`) e string para `INSTALLED_APPS`.
+C) Modelagem de Domínio (`models.py`).
+D) Service Skeleton.
+</div></code></pre>
+<p><strong>Resposta/Sugestão de Código da IA (Trecho Relevante):</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># A IA assumiu que a raiz do projeto era a raiz do git</span>
+MODULE_DIR=<span class="hljs-string">"cart"</span>
+mkdir -p <span class="hljs-variable">${MODULE_DIR}</span>/{domain,services,api,tests}
+<span class="hljs-comment"># ... (script gerado criava pastas na raiz errada, fora de 'project/')</span>
+</div></code></pre>
+<h4 id="13-an%C3%A1lise-da-sugest%C3%A3o-da-ia-e-decis%C3%A3o-do-pesquisador">1.3. Análise da Sugestão da IA e Decisão do Pesquisador</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Decisão</strong></th>
+<th style="text-align:left"><strong>Descrição e Justificativa (Conexão com RNFs)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Rejeitado (Parcial)</strong></td>
+<td style="text-align:left">O script bash gerado pela IA estava sintaticamente correto, mas <strong>posicionalmente errado</strong>. A IA assumiu que o comando seria rodado na raiz do repositório, ignorando que o projeto Django real vivia dentro de uma subpasta <code>project/</code>. Isso violaria a integridade da arquitetura se executado cegamente.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Modificado</strong></td>
+<td style="text-align:left">O pesquisador interveio manualmente, movendo a execução do script para dentro da pasta <code>project/</code> para garantir que o módulo <code>cart</code> fosse criado como &quot;irmão&quot; do <code>core</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Acatado Integralmente</strong></td>
+<td style="text-align:left">A sugestão de configuração do <code>apps.py</code> (<code>CartConfig</code>) e a string de <code>INSTALLED_APPS</code> (&quot;cart.apps.CartConfig&quot;) estavam corretas e foram utilizadas.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="14-observa%C3%A7%C3%B5es-cr%C3%ADticas-incidente-de-contexto">1.4. Observações Críticas (Incidente de Contexto)</h4>
+<ul>
+<li><strong>Análise de Falha de Contexto:</strong> Durante esta sessão, ocorreu um erro de infraestrutura (Docker/IPv6). A sessão de debugging consumiu dezenas de páginas de contexto. Ao tentar retornar ao código Python após resolver o Docker, a IA &quot;esqueceu&quot; as definições de Clean Architecture estabelecidas no início, exigindo reinjeção manual de contexto.</li>
+</ul>
+<hr>
+<h3 id="entrada-de-di%C3%A1rio-26112025---implementa%C3%A7%C3%A3o-da-api-e-migra%C3%A7%C3%A3o-de-ferramenta">Entrada de Diário: 26/11/2025 - Implementação da API e Migração de Ferramenta</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Item</strong></th>
+<th style="text-align:left"><strong>Detalhe da Execução</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Pesquisador</strong></td>
+<td style="text-align:left">Lude Ribeiro</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Requisito(s) Focados</strong></td>
+<td style="text-align:left">HU-A1 (Adicionar Item), Integração API-Service</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ferramenta de IA Utilizada</strong></td>
+<td style="text-align:left">ChatGPT 4.0 (Web) -&gt; <strong>Migração para GitHub Copilot Agent</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Tempo Gasto na Tarefa</strong></td>
+<td style="text-align:left">~45 minutos</td>
+</tr>
+</tbody>
+</table>
+<h4 id="21-objetivo-da-sess%C3%A3o">2.1. Objetivo da Sessão</h4>
+<p><strong>Descrição:</strong> Implementar as Views (DRF) e Serializers para o endpoint de adição de itens, conectando a API ao Serviço de Domínio.</p>
+<h4 id="22-prompts-e-intera%C3%A7%C3%B5es-com-a-ia">2.2. Prompts e Interações com a IA</h4>
+<p><strong>Prompt de Entrada (ChatGPT):</strong></p>
+<pre class="hljs"><code><div>Agora vamos criar a API.
+1) Crie `cart/api/serializers.py`.
+2) Crie `cart/api/views.py` usando o `CartService`.
+3) Registre no router.
+</div></code></pre>
+<p><strong>Resposta/Sugestão de Código da IA (O Erro):</strong>
+A IA sugeriu um código que gerava <code>400 Bad Request</code> no endpoint <code>add_item</code>. Ao ser questionada sobre o erro, entrou em contradição cíclica:</p>
+<blockquote>
+<p><em>&quot;O endpoint está correto.&quot;</em> -&gt; <em>&quot;Ah, desculpe, o serializer está errado.&quot;</em> -&gt; <em>&quot;Sugiro mudar para GenericViewSet.&quot;</em> (Mudança desnecessária).</p>
+</blockquote>
+<h4 id="23-an%C3%A1lise-da-sugest%C3%A3o-da-ia-e-decis%C3%A3o-do-pesquisador">2.3. Análise da Sugestão da IA e Decisão do Pesquisador</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Decisão</strong></th>
+<th style="text-align:left"><strong>Descrição e Justificativa</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Rejeitado</strong></td>
+<td style="text-align:left">As sugestões de correção do ChatGPT tornaram-se contraditórias e alucinatórias (sugerindo imports circulares e arquivos que não existiam).</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Decisão Metodológica</strong></td>
+<td style="text-align:left"><strong>Interrupção do uso do ChatGPT Web.</strong> Diagnóstico: A ferramenta perdeu a capacidade de rastrear o estado de 3 arquivos interdependentes (<code>models</code>, <code>views</code>, <code>serializers</code>) sem acesso direto ao filesystem.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ação (Pivô)</strong></td>
+<td style="text-align:left">Migração imediata para o <strong>GitHub Copilot Agent</strong> no VS Code, utilizando o comando <code>@workspace</code> para indexar o projeto real.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="24-conclus%C3%A3o-da-sess%C3%A3o">2.4. Conclusão da Sessão</h4>
+<p>A falha confirmou a hipótese de que LLMs baseados em chat sem acesso ao contexto local são insuficientes para refatoração de múltiplos arquivos simultâneos.</p>
+<hr>
+<h3 id="entrada-de-di%C3%A1rio---implementa%C3%A7%C3%A3o-de-regras-de-neg%C3%B3cio-cartservice">Entrada de Diário: - Implementação de Regras de Negócio (CartService)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Item</strong></th>
+<th style="text-align:left"><strong>Detalhe da Execução</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Pesquisador</strong></td>
+<td style="text-align:left">Lude Ribeiro</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Requisito(s) Focados</strong></td>
+<td style="text-align:left">RNF-A2 (Complexidade), Regra de Negócio (Estoque/Preço)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ferramenta de IA Utilizada</strong></td>
+<td style="text-align:left">GitHub Copilot Agent (<code>@workspace</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Tempo Gasto na Tarefa</strong></td>
+<td style="text-align:left">~40 minutos</td>
+</tr>
+</tbody>
+</table>
+<h4 id="31-objetivo-da-sess%C3%A3o">3.1. Objetivo da Sessão</h4>
+<p><strong>Descrição:</strong> Implementar a lógica robusta de <code>add_item</code> no <code>CartService</code>, garantindo validação de estoque e integridade de dados (snapshot de preço), e refatorar para reduzir complexidade.</p>
+<h4 id="32-prompts-e-intera%C3%A7%C3%B5es-com-a-ia">3.2. Prompts e Interações com a IA</h4>
+<p><strong>Prompt de Entrada (Copilot):</strong></p>
+<pre class="hljs"><code><div>@workspace Agora vamos focar na robustez da Lógica de Negócios no `CartService`.
+Analise o método `add_item`. Preciso que você implemente:
+1. Validação de Estoque: verifique se `product.stock` &gt;= quantidade. Lance ValueError.
+2. Snapshot de Preço: Garanta que o `price_snapshot` use o preço atual.
+3. Atomicidade.
+</div></code></pre>
+<p><strong>Resposta/Sugestão de Código da IA (Trecho Relevante):</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">@transaction.atomic</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_item</span><span class="hljs-params">(self, *, cart: Cart, product_id: int, quantity: int = <span class="hljs-number">1</span>)</span> -&gt; CartItem:</span>
+    product = Product.objects.get(pk=product_id)
+
+    <span class="hljs-comment"># A IA extraiu a validação para um método privado (reduzindo complexidade)</span>
+    self._validate_stock(product, quantity)
+
+    current_price = product.price
+    <span class="hljs-comment"># Uso correto de select_for_update para evitar Race Condition</span>
+    item, created = CartItem.objects.select_for_update().get_or_create(
+        cart=cart, product_id=product_id,
+        defaults={<span class="hljs-string">"quantity"</span>: quantity, <span class="hljs-string">"price_snapshot"</span>: current_price},
+    )
+    <span class="hljs-comment"># ...</span>
+    <span class="hljs-keyword">return</span> item
+</div></code></pre>
+<h4 id="33-an%C3%A1lise-da-sugest%C3%A3o-da-ia-e-decis%C3%A3o-do-pesquisador">3.3. Análise da Sugestão da IA e Decisão do Pesquisador</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Decisão</strong></th>
+<th style="text-align:left"><strong>Descrição e Justificativa</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Acatado Integralmente</strong></td>
+<td style="text-align:left">A sugestão do Copilot foi tecnicamente perfeita. Ele implementou a atomicidade de transação (<code>@transaction.atomic</code>), o <em>row locking</em> (<code>select_for_update</code>) e a extração de método auxiliar (<code>_validate_stock</code>) sem alucinações, pois tinha acesso ao código real dos Models via <code>@workspace</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="entrada-de-di%C3%A1rio-inserir-data---gera%C3%A7%C3%A3o-de-testes-e-corre%C3%A7%C3%A3o-de-configura%C3%A7%C3%A3o">Entrada de Diário: [Inserir Data] - Geração de Testes e Correção de Configuração</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Item</strong></th>
+<th style="text-align:left"><strong>Detalhe da Execução</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Pesquisador</strong></td>
+<td style="text-align:left">Lude Ribeiro</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Requisito(s) Focados</strong></td>
+<td style="text-align:left">RNF-A1 (Testabilidade/Cobertura)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ferramenta de IA Utilizada</strong></td>
+<td style="text-align:left">GitHub Copilot Agent</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Tempo Gasto na Tarefa</strong></td>
+<td style="text-align:left">~50 minutos</td>
+</tr>
+</tbody>
+</table>
+<h4 id="41-objetivo-da-sess%C3%A3o">4.1. Objetivo da Sessão</h4>
+<p><strong>Descrição:</strong> Gerar uma suíte de testes de integração para o módulo <code>cart</code> e garantir que a cobertura de testes atinja a baseline (&gt;90%).</p>
+<h4 id="42-prompts-e-intera%C3%A7%C3%B5es-com-a-ia">4.2. Prompts e Interações com a IA</h4>
+<p><strong>Prompt de Entrada:</strong></p>
+<pre class="hljs"><code><div>@workspace Gere testes de integração para `cart/tests/integration/test_cart_endpoints.py` cobrindo:
+1. Fluxo Anônimo.
+2. Erro de Quantidade Negativa (400).
+3. Produto Inexistente (404).
+</div></code></pre>
+<p><strong>Incidente (Resposta do Terminal ao rodar testes):</strong></p>
+<pre class="hljs"><code><div>RuntimeError: Model class cart.models.cart.Cart doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
+</div></code></pre>
+<p><strong>Prompt de Correção (Enviado ao Copilot):</strong></p>
+<pre class="hljs"><code><div>@workspace Recebi este erro ao rodar os testes. Analise o `settings.py` e `settings_test.py` e me diga o que falta.
+</div></code></pre>
+<h4 id="43-an%C3%A1lise-da-sugest%C3%A3o-da-ia-e-decis%C3%A3o-do-pesquisador">4.3. Análise da Sugestão da IA e Decisão do Pesquisador</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Decisão</strong></th>
+<th style="text-align:left"><strong>Descrição e Justificativa (Conexão com RNFs)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Acatado Integralmente</strong></td>
+<td style="text-align:left">O Copilot identificou corretamente que, embora o app <code>cart</code> estivesse no <code>settings.py</code>, ele estava ausente do <code>settings_test.py</code> (usado pelo Pytest). A IA gerou o patch para corrigir o arquivo de configuração de testes.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="44-observa%C3%A7%C3%B5es-cr%C3%ADticas-e-rastreamento-sonar">4.4. Observações Críticas e Rastreamento Sonar</h4>
+<ul>
+<li><strong>Problema de Cobertura:</strong> Inicialmente, o relatório de <em>coverage</em> ignorou o módulo <code>cart</code> (0%).</li>
+<li><strong>Correção:</strong> Foi necessário ajustar manualmente o comando do <code>Makefile</code> para incluir <code>--cov=cart</code>.</li>
+<li><strong>Resultado Final:</strong> Após a correção e adição de testes unitários para o Domínio, a cobertura do módulo <code>cart</code> atingiu níveis excelentes:
+<ul>
+<li><strong>CartService:</strong> 98% de Cobertura.</li>
+<li><strong>CartViewSet:</strong> 92% de Cobertura.</li>
+<li><strong>Total do Módulo:</strong> 92%.</li>
+</ul>
+</li>
+<li><strong>Conclusão:</strong> A meta de manter a baseline de qualidade (&gt;90%) foi atingida com sucesso.</li>
+</ul>
+
+</body>
+</html>
