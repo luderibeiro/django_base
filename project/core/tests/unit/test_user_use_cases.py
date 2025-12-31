@@ -126,7 +126,9 @@ def test_login_user_use_case_user_not_found(mock_user_repository, mock_auth_gate
         user_repository=mock_user_repository, auth_gateway=mock_auth_gateway
     )
 
-    with pytest.raises(ValueError, match="Invalid credentials"):
+    from core.domain.exceptions import AuthenticationError
+
+    with pytest.raises(AuthenticationError, match="Invalid credentials"):
         use_case.execute(login_request)
 
     mock_user_repository.get_user_by_email.assert_called_once_with(login_request.email)
@@ -148,7 +150,9 @@ def test_login_user_use_case_invalid_password(mock_user_repository, mock_auth_ga
         user_repository=mock_user_repository, auth_gateway=mock_auth_gateway
     )
 
-    with pytest.raises(ValueError, match="Invalid credentials"):
+    from core.domain.exceptions import AuthenticationError
+
+    with pytest.raises(AuthenticationError, match="Invalid credentials"):
         use_case.execute(login_request)
 
     mock_user_repository.get_user_by_email.assert_called_once_with(login_request.email)
@@ -197,7 +201,9 @@ def test_change_user_password_use_case_incorrect_old_password(
         user_repository=mock_user_repository, auth_gateway=mock_auth_gateway
     )
 
-    with pytest.raises(ValueError, match="Old password is incorrect"):
+    from core.domain.exceptions import AuthenticationError
+
+    with pytest.raises(AuthenticationError, match="Old password is incorrect"):
         use_case.execute(change_request)
 
     mock_auth_gateway.check_password.assert_called_once_with(user_id, "wrongpass")

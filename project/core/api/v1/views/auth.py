@@ -46,7 +46,7 @@ class LoginAPIView(APIView):
         except (ValueError, AuthenticationError):
             logger.warning("Falha no login para email: %s", email)
             return Response(
-                {"detail": "Credenciais inválidas"}, status=status.HTTP_400_BAD_REQUEST
+                {"detail": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST
             )
         except Throttled:
             raise  # Re-raise para DRF tratar

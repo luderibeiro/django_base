@@ -12,6 +12,7 @@ from core.domain.use_cases.generic_use_cases import (
     DeleteEntityUseCase,
     GenericCreateRequest,
     GenericDeleteRequest,
+    GenericGetByIdRequest,
     GenericListRequest,
     GenericListResponse,
     GenericReadResponse,
@@ -91,9 +92,7 @@ def test_get_entity_by_id_use_case_success(mock_generic_repository):
     mock_generic_repository.get_by_id.return_value = domain_user
 
     use_case = GetEntityByIdUseCase(repository=mock_generic_repository)
-    request = GenericDeleteRequest(
-        id=entity_id
-    )  # Usando GenericDeleteRequest como um request para ID
+    request = GenericGetByIdRequest(entity_id=entity_id)
     response = use_case.execute(request)
 
     mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
@@ -105,7 +104,7 @@ def test_get_entity_by_id_use_case_not_found(mock_generic_repository):
     mock_generic_repository.get_by_id.return_value = None
 
     use_case = GetEntityByIdUseCase(repository=mock_generic_repository)
-    request = GenericDeleteRequest(id=entity_id)
+    request = GenericGetByIdRequest(entity_id=entity_id)
 
     with pytest.raises(EntityNotFoundException):
         use_case.execute(request)
@@ -127,7 +126,7 @@ def test_update_entity_use_case_success(mock_generic_repository):
     mock_generic_repository.update.return_value = updated_user_data
 
     use_case = UpdateEntityUseCase(repository=mock_generic_repository)
-    request = GenericUpdateRequest(id=entity_id, data=updated_user_data)
+    request = GenericUpdateRequest(entity_id=entity_id, data=updated_user_data)
     response = use_case.execute(request)
 
     mock_generic_repository.get_by_id.assert_called_once_with(entity_id)
@@ -144,7 +143,7 @@ def test_update_entity_use_case_not_found(mock_generic_repository):
     mock_generic_repository.get_by_id.return_value = None
 
     use_case = UpdateEntityUseCase(repository=mock_generic_repository)
-    request = GenericUpdateRequest(id=entity_id, data=updated_user_data)
+    request = GenericUpdateRequest(entity_id=entity_id, data=updated_user_data)
 
     with pytest.raises(EntityNotFoundException):
         use_case.execute(request)
@@ -161,7 +160,7 @@ def test_delete_entity_use_case_success(mock_generic_repository):
     )
 
     use_case = DeleteEntityUseCase(repository=mock_generic_repository)
-    request = GenericDeleteRequest(id=entity_id)
+    request = GenericDeleteRequest(entity_id=entity_id)
     response = use_case.execute(request)
 
     mock_generic_repository.delete.assert_called_once_with(entity_id)
@@ -174,7 +173,7 @@ def test_delete_entity_use_case_not_found(mock_generic_repository):
     # Isso é esperado para operações idempotentes
 
     use_case = DeleteEntityUseCase(repository=mock_generic_repository)
-    request = GenericDeleteRequest(id=entity_id)
+    request = GenericDeleteRequest(entity_id=entity_id)
 
     response = use_case.execute(request)
 

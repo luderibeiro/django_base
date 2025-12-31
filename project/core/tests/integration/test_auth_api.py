@@ -13,6 +13,11 @@ User = get_user_model()
 @pytest.mark.django_db
 class AuthAPITest(APITestCase):
     def setUp(self):
+        # Desabilitar rate limiting nos testes
+        from core.api.v1.views.auth import LoginAPIView
+
+        LoginAPIView.throttle_classes = []
+
         self.login_url = reverse("core:login")
         self.user_data = {
             "email": "test@example.com",
