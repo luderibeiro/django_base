@@ -50,17 +50,12 @@ class LoginAPIView(APIView):
             )
         except Throttled:
             raise  # Re-raise para DRF tratar
-        except AuthenticationFailed:
+        except AuthenticationFailed as e:
             logger.warning("Falha de autenticação para email: %s", email)
-            return Response(
-                {"detail": "Falha na autenticação"},
-                status=status.HTTP_401_UNAUTHORIZED,
-            )
-        except PermissionDenied:
+            return Response({"detail": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
+        except PermissionDenied as e:
             logger.warning("Permissão negada para email: %s", email)
-            return Response(
-                {"detail": "Permissão negada"}, status=status.HTTP_403_FORBIDDEN
-            )
+            return Response({"detail": str(e)}, status=status.HTTP_403_FORBIDDEN)
         except Exception:
             logger.error(
                 "Erro inesperado no login para email: %s", email, exc_info=True
