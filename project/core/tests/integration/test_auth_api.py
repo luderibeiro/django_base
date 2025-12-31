@@ -83,7 +83,9 @@ class AuthAPITest(APITestCase):
     def test_login_failure_authentication_failed(self, mock_get_use_case):
         """Testa tratamento de exceção AuthenticationFailed."""
         mock_use_case = mock_get_use_case.return_value
-        mock_use_case.execute.side_effect = AuthenticationFailed("Authentication failed")
+        mock_use_case.execute.side_effect = AuthenticationFailed(
+            "Authentication failed"
+        )
 
         response = self.client.post(
             self.login_url,
