@@ -125,7 +125,9 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
             )
             return Response(response_serializer.data, status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
-            logger.warning("Falha ao recuperar usuário com ID: %s (admin)", safe_user_id)
+            logger.warning(
+                "Falha ao recuperar usuário com ID: %s (admin)", safe_user_id
+            )
             return Response(
                 {"detail": "Usuário não encontrado"}, status=status.HTTP_404_NOT_FOUND
             )
