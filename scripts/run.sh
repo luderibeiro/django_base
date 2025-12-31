@@ -1,23 +1,22 @@
 #!/bin/sh
 
 # Run the application
-# Shell will fail if executation fails
+# Shell will fail if execution fails
 
 set -e
-host=$2
 
-# while ! curl -L http://$host/ 2>&1 | grep '52'; do
-#   echo "⏳ Waiting for Postgres ($POSTGRES_HOST $POSTGRES_PORT) to be available ⌛"
-#   sleep 5
-# done
-# shift
-
-echo "✅ Postgres is available ♫♪ - Starting the Application ⏩"
+echo "🚀 Iniciando aplicação Django..."
 
 cd /app/project
-python manage.py makemigrations --noinput
-python manage.py migrate --noinput
-python manage.py collectstatic --noinput
-python manage.py runserver 0.0.0.0:8000
 
-exec $@
+# Executar migrações (makemigrations apenas se necessário)
+echo "🗄️  Executando migrações..."
+python manage.py migrate --noinput
+
+# Coletar arquivos estáticos
+echo "📁 Coletando arquivos estáticos..."
+python manage.py collectstatic --noinput
+
+# Iniciar servidor
+echo "✅ Aplicação pronta! Iniciando servidor..."
+python manage.py runserver 0.0.0.0:8000
