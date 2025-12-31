@@ -95,24 +95,39 @@ def main():
     """Função principal."""
     print("🔐 Gerando arquivo .env com valores seguros...")
 
-    # Verificar se já existe um .env
-    env_file = Path(".env")
-    if env_file.exists():
-        response = input("⚠️  Arquivo .env já existe. Deseja sobrescrever? (y/N): ")
-        if response.lower() != "y":
-            print("❌ Operação cancelada.")
-            return
-
     # Gerar conteúdo
     content = generate_env_content()
 
-    # Escrever arquivo
-    env_file.write_text(content)
+    # Verificar se já existe um .env na raiz
+    env_file_root = Path(".env")
+    env_file_dotenv = Path("dotenv_files/.env")
+    
+    # Criar diretório dotenv_files se não existir
+    env_file_dotenv.parent.mkdir(parents=True, exist_ok=True)
+    
+    files_to_create = []
+    if env_file_root.exists():
+        response = input("⚠️  Arquivo .env na raiz já existe. Deseja sobrescrever? (y/N): ")
+        if response.lower() == "y":
+            files_to_create.append(env_file_root)
+    else:
+        files_to_create.append(env_file_root)
+    
+    if env_file_dotenv.exists():
+        response = input("⚠️  Arquivo dotenv_files/.env já existe. Deseja sobrescrever? (y/N): ")
+        if response.lower() == "y":
+            files_to_create.append(env_file_dotenv)
+    else:
+        files_to_create.append(env_file_dotenv)
 
-    print("✅ Arquivo .env gerado com sucesso!")
+    # Escrever arquivos
+    for env_file in files_to_create:
+        env_file.write_text(content)
+        print(f"✅ Arquivo {env_file} gerado com sucesso!")
+
     print("🔑 SECRET_KEY gerada automaticamente")
     print("🔐 OAuth2 CLIENT_ID gerado automaticamente")
-    print("⚠️  Lembre-se de não commitar o arquivo .env para o repositório!")
+    print("⚠️  Lembre-se de não commitar os arquivos .env para o repositório!")
 
 
 if __name__ == "__main__":

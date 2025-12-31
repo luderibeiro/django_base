@@ -28,8 +28,18 @@ env = environ.Env(
     DRF_PAGE_SIZE=(int, 50),
 )
 
-# Read .env file
-environ.Env.read_env(BASE_DIR.parent / ".env")
+# Read .env file - try multiple locations for flexibility
+# Priority: 1) .env in root, 2) dotenv_files/.env, 3) dotenv_files/.env-example (as fallback)
+env_paths = [
+    BASE_DIR.parent / ".env",
+    BASE_DIR.parent / "dotenv_files" / ".env",
+    BASE_DIR.parent / "dotenv_files" / ".env-example",
+]
+
+for env_path in env_paths:
+    if env_path.exists():
+        environ.Env.read_env(env_path)
+        break
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/

@@ -72,34 +72,38 @@ def create_oauth_application():
 
 def update_env_file(client_id, client_secret):
     """Atualiza arquivo .env com as credenciais OAuth2."""
-    env_file = Path(".env")
-    if not env_file.exists():
+    env_files = [Path(".env"), Path("dotenv_files/.env")]
+    found_files = [f for f in env_files if f.exists()]
+    
+    if not found_files:
         print("⚠️  Arquivo .env não encontrado. Execute 'make generate-env' primeiro.")
         return False
 
     try:
-        # Ler conteúdo atual
-        content = env_file.read_text()
+        for env_file in found_files:
+            # Ler conteúdo atual
+            content = env_file.read_text()
 
-        # Atualizar credenciais
-        lines = content.split("\n")
-        updated_lines = []
+            # Atualizar credenciais
+            lines = content.split("\n")
+            updated_lines = []
 
-        for line in lines:
-            if line.startswith("OAUTH2_CLIENT_ID="):
-                updated_lines.append(f"OAUTH2_CLIENT_ID={client_id}")
-            elif line.startswith("OAUTH2_CLIENT_SECRET="):
+            for line in lines:
+                if line.startswith("OAUTH2_CLIENT_ID="):
+                    updated_lines.append(f"OAUTH2_CLIENT_ID={client_id}")
+                elif line.startswith("OAUTH2_CLIENT_SECRET="):
+                    updated_lines.append(f"OAUTH2_CLIENT_SECRET={client_secret}")
+                else:
+                    updated_lines.append(line)
+
+            # Adicionar CLIENT_SECRET se não existir
+            if not any(line.startswith("OAUTH2_CLIENT_SECRET=") for line in lines):
                 updated_lines.append(f"OAUTH2_CLIENT_SECRET={client_secret}")
-            else:
-                updated_lines.append(line)
 
-        # Adicionar CLIENT_SECRET se não existir
-        if not any(line.startswith("OAUTH2_CLIENT_SECRET=") for line in lines):
-            updated_lines.append(f"OAUTH2_CLIENT_SECRET={client_secret}")
-
-        # Escrever arquivo atualizado
-        env_file.write_text("\n".join(updated_lines))
-        print("✅ Arquivo .env atualizado com credenciais OAuth2")
+            # Escrever arquivo atualizado
+            env_file.write_text("\n".join(updated_lines))
+            print(f"✅ Arquivo {env_file} atualizado com credenciais OAuth2")
+        
         return True
 
     except Exception as e:
