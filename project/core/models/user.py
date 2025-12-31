@@ -96,7 +96,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         """Retorna o nome completo do usuário.
-        
+
         Returns
         -------
         str
@@ -106,7 +106,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         """Retorna o primeiro nome do usuário.
-        
+
         Returns
         -------
         str

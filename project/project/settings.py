@@ -498,15 +498,13 @@ else:
 # CORS Configuration (se necessário para frontend separado)
 CORS_ALLOWED_ORIGINS = env(
     "CORS_ALLOWED_ORIGINS",
-    default=(
-        ["http://localhost:3000", "http://127.0.0.1:3000"]
-        if DEBUG
-        else []
-    ),
+    default=(["http://localhost:3000", "http://127.0.0.1:3000"] if DEBUG else []),
 )
 # Se CORS_ALLOWED_ORIGINS for string, converter para lista
 if isinstance(CORS_ALLOWED_ORIGINS, str):
-    CORS_ALLOWED_ORIGINS = [origin.strip() for origin in CORS_ALLOWED_ORIGINS.split(",") if origin.strip()]
+    CORS_ALLOWED_ORIGINS = [
+        origin.strip() for origin in CORS_ALLOWED_ORIGINS.split(",") if origin.strip()
+    ]
 CORS_ALLOW_CREDENTIALS = True
 
 # drf-spectacular configuration
