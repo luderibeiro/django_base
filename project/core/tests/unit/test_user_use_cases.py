@@ -226,7 +226,8 @@ def test_change_user_password_use_case_user_not_found(
         user_repository=mock_user_repository, auth_gateway=mock_auth_gateway
     )
 
-    with pytest.raises(ValueError, match="User not found"):
+    from core.domain.exceptions import EntityNotFoundException
+    with pytest.raises(EntityNotFoundException):
         use_case.execute(change_request)
 
     mock_auth_gateway.check_password.assert_called_once_with(user_id, "oldpass")
