@@ -33,29 +33,32 @@ class LoginAPIView(APIView):
         )
 
         login_user_use_case = get_login_user_use_case()
+        email = login_request.email
         try:
-            logger.info(f"Tentativa de login para email: {login_request.email}")
+            logger.info("Tentativa de login para email: %s", email)
             login_response = login_user_use_case.execute(login_request)
             response_serializer = LoginResponseSerializer(instance=login_response)
-            logger.info(f"Login bem-sucedido para email: {login_request.email}")
+            logger.info("Login bem-sucedido para email: %s", email)
             return Response(response_serializer.data, status=status.HTTP_200_OK)
-        except ValueError as e:
-            logger.warning(f"Falha no login para email {login_request.email}: {str(e)}")
-            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        except AuthenticationFailed as e:
-            logger.warning(
-                f"Falha de autenticação para email {login_request.email}: {str(e)}"
+        except ValueError:
+            logger.warning("Falha no login para email: %s", email)
+            return Response(
+                {"detail": "Credenciais inválidas"}, status=status.HTTP_400_BAD_REQUEST
             )
-            return Response({"detail": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
-        except PermissionDenied as e:
-            logger.warning(
-                f"Permissão negada para email {login_request.email}: {str(e)}"
+        except AuthenticationFailed:
+            logger.warning("Falha de autenticação para email: %s", email)
+            return Response(
+                {"detail": "Falha na autenticação"},
+                status=status.HTTP_401_UNAUTHORIZED,
             )
-            return Response({"detail": str(e)}, status=status.HTTP_403_FORBIDDEN)
-        except Exception as e:
+        except PermissionDenied:
+            logger.warning("Permissão negada para email: %s", email)
+            return Response(
+                {"detail": "Permissão negada"}, status=status.HTTP_403_FORBIDDEN
+            )
+        except Exception:
             logger.error(
-                f"Erro inesperado no login para email {login_request.email}: {str(e)}",
-                exc_info=True,
+                "Erro inesperado no login para email: %s", email, exc_info=True
             )
             return Response(
                 {"detail": "Erro interno do servidor"},

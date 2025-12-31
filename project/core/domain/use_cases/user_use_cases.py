@@ -9,8 +9,6 @@ from core.domain.use_cases.generic_use_cases import (
     CreateEntityUseCase,
     GenericCreateRequest,
     GenericDeleteRequest,
-    GenericListRequest,
-    GenericListResponse,
     GenericReadResponse,
     GetEntityByIdUseCase,
     ListEntitiesUseCase,

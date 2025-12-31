@@ -5,7 +5,7 @@ Testes unitários para resolução de URLs.
 import pytest
 from django.conf import settings
 from django.test import TestCase
-from django.urls import resolve, reverse
+from django.urls import reverse
 
 
 class TestURLResolution(TestCase):

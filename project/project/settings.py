@@ -2,10 +2,8 @@
 Django settings reforçadas para segurança e configuração por ambiente.
 """
 
-import os
 from pathlib import Path
 import structlog
-from django.core.exceptions import ImproperlyConfigured
 
 import environ
 
