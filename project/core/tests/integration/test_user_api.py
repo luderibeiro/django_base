@@ -95,6 +95,20 @@ class UserAPITest(APITestCase):
         assert "items" in response.data
         assert "total_items" in response.data
 
+    def test_retrieve_user_not_found(self):
+        """Testa recuperação de usuário inexistente."""
+        from core.api.v1.views.user import UserRetrieveAPIView
+
+        # Desabilitar rate limiting para este teste
+        UserRetrieveAPIView.throttle_classes = []
+
+        self.client.force_authenticate(user=self.admin_user)
+        fake_user_id = "00000000-0000-0000-0000-000000000000"
+        url = reverse("core:user-detail", kwargs={"pk": fake_user_id})
+        response = self.client.get(url, format="json")
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert "detail" in response.data
+
     def test_list_users_as_admin_with_pagination_and_filter(self):
         for i in range(3):
             User.objects.create_user(

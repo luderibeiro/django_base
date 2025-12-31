@@ -7,6 +7,8 @@ from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
 from rest_framework.test import APITestCase
 
+from core.api.throttles import LoginRateThrottle
+
 User = get_user_model()
 
 
@@ -149,3 +151,32 @@ class AuthAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
         self.assertIn("detail", response.data)
         self.assertEqual(response.data["detail"], "Erro interno do servidor")
+
+    def test_login_throttled_exception(self):
+        """Testa que exceção Throttled é re-lançada para DRF tratar."""
+        from core.api.v1.views.auth import LoginAPIView
+
+        # Reabilitar rate limiting para este teste
+        LoginAPIView.throttle_classes = [LoginRateThrottle]
+
+        # Limpar cache antes do teste
+        from django.core.cache import cache
+
+        cache.clear()
+
+        # Simular múltiplas requisições para atingir o limite
+        for i in range(6):  # 5 é o limite, 6 deve ser bloqueado
+            response = self.client.post(
+                self.login_url,
+                {
+                    "email": self.user_data["email"],
+                    "password": "wrongpassword",
+                },
+                format="json",
+            )
+
+        # A última requisição deve retornar 429
+        assert response.status_code == status.HTTP_429_TOO_MANY_REQUESTS
+
+        # Desabilitar novamente para outros testes
+        LoginAPIView.throttle_classes = []
