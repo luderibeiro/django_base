@@ -4,6 +4,7 @@ from unittest.mock import Mock
 import pytest
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
+from core.domain.exceptions import AuthenticationError, EntityNotFoundException
 from core.domain.gateways import AuthGateway
 from core.domain.use_cases.user_use_cases import (
     ChangeUserPasswordRequest,
@@ -226,7 +227,6 @@ def test_change_user_password_use_case_user_not_found(
         user_repository=mock_user_repository, auth_gateway=mock_auth_gateway
     )
 
-    from core.domain.exceptions import EntityNotFoundException
     with pytest.raises(EntityNotFoundException):
         use_case.execute(change_request)
 
