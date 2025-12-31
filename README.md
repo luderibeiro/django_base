@@ -71,7 +71,7 @@ make run
 
 🎉 **Pronto!** Acesse <http://127.0.0.1:8000>
 
-### 🐳 Com Docke
+### 🐳 Com Docker
 
 ```bash
 # Desenvolvimento
@@ -104,12 +104,15 @@ project/
 ## 📋 Comandos Disponíveis
 
 ```bash
-make help              # Lista todos os comandos
-make setup             # Configuração inicial completa
+make help              # Lista todos os comandos disponíveis
+make setup             # Configuração inicial completa (gera .env automaticamente)
+make install           # Instala dependências
+make run               # Inicia servidor de desenvolvimento
 make test              # Executa todos os testes
 make test-coverage     # Testes com cobertura
 make lint              # Análise de código
 make format            # Formatação automática
+make generate-env      # Gera arquivo .env com valores seguros
 make docs-serve        # Serve documentação local
 make clean             # Limpeza de arquivos temporários
 ```
