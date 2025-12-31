@@ -142,6 +142,12 @@ class UserAPITest(APITestCase):
         assert response.data["email"] == self.regular_user.email
 
     def test_retrieve_user_as_admin_not_found(self):
+        """Testa recuperação de usuário inexistente."""
+        from core.api.v1.views.user import UserRetrieveAPIView
+
+        # Desabilitar rate limiting para este teste
+        UserRetrieveAPIView.throttle_classes = []
+
         self.client.force_authenticate(user=self.admin_user)
         non_existent_id = uuid.uuid4()
         response = self.client.get(
@@ -149,6 +155,7 @@ class UserAPITest(APITestCase):
             format="json",
         )
         assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert "detail" in response.data
 
     def test_retrieve_user_unauthenticated_failure(self):
         response = self.client.get(
