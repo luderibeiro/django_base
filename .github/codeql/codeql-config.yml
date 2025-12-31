@@ -1,0 +1,14 @@
+name: "CodeQL Configuration for Django Base"
+
+paths:
+  - project/
+
+paths-ignore:
+  - "**/migrations/**"
+  - "**/venv/**"
+  - "**/.venv/**"
+  - "**/node_modules/**"
+  - "**/__pycache__/**"
+  - "**/*.pyc"
+  - "**/site-packages/**"
+
