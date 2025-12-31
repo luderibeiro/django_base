@@ -94,7 +94,7 @@ class DjangoUserRepository(UserRepository):
         return [self._to_domain_user(user) for user in django_users]
 
     def get_all_paginated_filtered(
-        self, offset: int, limit: int, search_query: str | None
+        self, offset: int, limit: int, search_query: Optional[str]
     ) -> tuple[List[DomainUser], int]:
         queryset = DjangoUser.objects.exclude(is_superuser=True)
 

@@ -1,5 +1,6 @@
 import logging
 from dataclasses import dataclass
+from typing import Optional
 
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
@@ -162,7 +163,7 @@ class ChangeUserPasswordUseCase:
 class ListUsersRequest:
     offset: int = 0
     limit: int = 10
-    search_query: str | None = None
+    search_query: Optional[str] = None
 
 
 @dataclass

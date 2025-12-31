@@ -121,7 +121,7 @@ class UserRepository(GenericRepository[User]):
 
     @abstractmethod
     def get_all_paginated_filtered(
-        self, offset: int, limit: int, search_query: str | None
+        self, offset: int, limit: int, search_query: Optional[str]
     ) -> tuple[List[User], int]:
         """Lista usuários com paginação e filtro."""
         pass
