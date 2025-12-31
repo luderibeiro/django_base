@@ -11,7 +11,6 @@ from core.domain.exceptions import AuthenticationError, EntityNotFoundException
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from rest_framework import generics, status
-from rest_framework.exceptions import Throttled
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
@@ -28,6 +27,19 @@ from ..serializers.user import (
 logger = logging.getLogger(__name__)
 
 User = get_user_model()
+
+
+def _sanitize_for_log(value):
+    """
+    Sanitiza valores para uso em logs, removendo caracteres de controle.
+
+    Remove caracteres de nova linha e retorno de carro para prevenir
+    log injection.
+    """
+    if value is None:
+        return ""
+    value_str = str(value)
+    return value_str.replace("\r", "").replace("\n", "")
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -64,7 +76,8 @@ class UserAlterPasswordAPIView(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         user_id = str(kwargs.get("pk", ""))
-        logger.info("Alterando senha do usuário com ID: %s (admin)", user_id)
+        safe_user_id = _sanitize_for_log(user_id)
+        logger.info("Alterando senha do usuário com ID: %s (admin)", safe_user_id)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         change_password_request = serializer.validated_data
@@ -78,12 +91,12 @@ class UserAlterPasswordAPIView(generics.UpdateAPIView):
                 instance=change_password_response
             )
             logger.info(
-                "Senha do usuário com ID: %s alterada com sucesso (admin)", user_id
+                "Senha do usuário com ID: %s alterada com sucesso (admin)", safe_user_id
             )
             return Response(response_serializer.data, status=status.HTTP_200_OK)
         except (ValueError, AuthenticationError, EntityNotFoundException):
             logger.warning(
-                "Falha ao alterar senha do usuário com ID: %s (admin)", user_id
+                "Falha ao alterar senha do usuário com ID: %s (admin)", safe_user_id
             )
             return Response(
                 {"detail": "Falha ao alterar senha"}, status=status.HTTP_400_BAD_REQUEST
@@ -99,17 +112,20 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         user_id = str(kwargs.get("pk", ""))
-        logger.info("Recuperando usuário com ID: %s (admin)", user_id)
+        safe_user_id = _sanitize_for_log(user_id)
+        logger.info("Recuperando usuário com ID: %s (admin)", safe_user_id)
         get_user_request = GetUserByIdRequest(user_id=user_id)
 
         get_user_use_case = get_get_user_by_id_use_case()
         try:
             user_response = get_user_use_case.execute(get_user_request)
             response_serializer = UserReadSerializer(instance=user_response)
-            logger.info("Usuário com ID: %s recuperado com sucesso (admin)", user_id)
+            logger.info(
+                "Usuário com ID: %s recuperado com sucesso (admin)", safe_user_id
+            )
             return Response(response_serializer.data, status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
-            logger.warning("Falha ao recuperar usuário com ID: %s (admin)", user_id)
+            logger.warning("Falha ao recuperar usuário com ID: %s (admin)", safe_user_id)
             return Response(
                 {"detail": "Usuário não encontrado"}, status=status.HTTP_404_NOT_FOUND
             )

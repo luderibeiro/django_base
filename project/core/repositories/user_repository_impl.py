@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
-from core.domain.exceptions import EntityNotFoundException, RepositoryError
+from core.domain.exceptions import EntityNotFoundException
 from core.models.user import User as DjangoUser
 from django.db.models import Q
 
