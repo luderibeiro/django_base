@@ -45,7 +45,7 @@ class GenericListResponse(Generic[T]):
 class GenericUpdateRequest(Generic[T]):
     """Input para atualização de entidade (id + dados)."""
 
-    id: str
+    entity_id: str
     data: T
 
 
@@ -53,7 +53,7 @@ class GenericUpdateRequest(Generic[T]):
 class GenericDeleteRequest:
     """Input mínimo para remoção/consulta por id."""
 
-    id: str
+    entity_id: str
 
 
 @dataclass
@@ -95,12 +95,10 @@ class GetEntityByIdUseCase(UseCase[T]):
     def __init__(self, repository: GenericRepository[T]):
         self.repository = repository
 
-    def execute(
-        self, request: GenericDeleteRequest
-    ) -> GenericReadResponse[T]:  # Usando GenericDeleteRequest para ID
-        entity = self.repository.get_by_id(request.id)
+    def execute(self, request: GenericGetByIdRequest) -> GenericReadResponse[T]:
+        entity = self.repository.get_by_id(request.entity_id)
         if not entity:
-            raise EntityNotFoundException("Entity", request.id)
+            raise EntityNotFoundException("Entity", request.entity_id)
         return GenericReadResponse(data=entity)
 
 
@@ -112,16 +110,16 @@ class UpdateEntityUseCase(UseCase[T]):
 
     def execute(self, request: GenericUpdateRequest[T]) -> GenericReadResponse[T]:
         # Primeiro, verificar se a entidade existe
-        existing_entity = self.repository.get_by_id(request.id)
+        existing_entity = self.repository.get_by_id(request.entity_id)
         if not existing_entity:
-            raise EntityNotFoundException("Entity", request.id)
+            raise EntityNotFoundException("Entity", request.entity_id)
 
         # Assumimos que o request.data já contém a entidade atualizada completa
         # ou apenas os campos a serem atualizados. A lógica de merge pode ser mais complexa.
         # Por simplicidade, substituiremos a entidade com o que vem no request.data
         updated_entity = request.data
         updated_entity.id = (
-            request.id
+            request.entity_id
         )  # Garantir que o ID da entidade sendo atualizada é o correto
         saved_entity = self.repository.update(updated_entity)
         return GenericReadResponse(data=saved_entity)
@@ -134,5 +132,5 @@ class DeleteEntityUseCase(UseCase[T]):
         self.repository = repository
 
     def execute(self, request: GenericDeleteRequest) -> GenericSuccessResponse:
-        self.repository.delete(request.id)
+        self.repository.delete(request.entity_id)
         return GenericSuccessResponse(success=True)

@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
+from core.domain.exceptions import EntityNotFoundException, RepositoryError
 from core.models.user import User as DjangoUser
 from django.db.models import Q
 
@@ -65,15 +66,17 @@ class DjangoUserRepository(UserRepository):
             return self._to_domain_user(django_user)
         except DjangoUser.DoesNotExist:
             logger.warning("Update failed: User not found with ID: %s", user.id)
-            raise ValueError("User not found for update")
+            raise EntityNotFoundException("User", user.id)
 
     def delete(self, user_id: str) -> None:
         logger.info("Attempting to delete user with ID: %s", user_id)
-        deleted_count, _ = DjangoUser.objects.filter(id=user_id).delete()
-        if deleted_count == 0:
+        try:
+            user = DjangoUser.objects.get(id=user_id)
+            user.delete()
+            logger.info("User deleted successfully with ID: %s", user_id)
+        except DjangoUser.DoesNotExist:
             logger.warning("Delete failed: User not found with ID: %s", user_id)
-            raise ValueError("User not found for deletion")
-        logger.info("User deleted successfully with ID: %s", user_id)
+            raise EntityNotFoundException("User", user_id)
 
     def _to_domain_user(self, django_user: DjangoUser) -> DomainUser:
         return DomainUser(
@@ -97,6 +100,12 @@ class DjangoUserRepository(UserRepository):
         self, offset: int, limit: int, search_query: Optional[str]
     ) -> tuple[List[DomainUser], int]:
         queryset = DjangoUser.objects.exclude(is_superuser=True)
+
+        if search_query:
+            # Validação: limita tamanho da query de busca para prevenir DoS
+            search_query = search_query.strip()[:100]  # Máximo 100 caracteres
+            if not search_query:
+                search_query = None
 
         if search_query:
             queryset = queryset.filter(

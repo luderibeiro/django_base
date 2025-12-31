@@ -3,12 +3,14 @@
 import logging
 
 from core.api.deps import get_login_user_use_case
+from core.api.throttles import LoginRateThrottle
 from core.api.v1.serializers.user import LoginRequestSerializer, LoginResponseSerializer
+from core.domain.exceptions import AuthenticationError
 from core.domain.use_cases.user_use_cases import (
     LoginUserRequest,  # Corrigido o caminho de importação
 )
 from rest_framework import status
-from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
+from rest_framework.exceptions import AuthenticationFailed, PermissionDenied, Throttled
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -22,6 +24,7 @@ class LoginAPIView(APIView):
     """
 
     permission_classes = (AllowAny,)
+    throttle_classes = [LoginRateThrottle]
 
     def post(self, request, *args, **kwargs):
         """Processa requisição de login."""
@@ -40,11 +43,13 @@ class LoginAPIView(APIView):
             response_serializer = LoginResponseSerializer(instance=login_response)
             logger.info("Login bem-sucedido para email: %s", email)
             return Response(response_serializer.data, status=status.HTTP_200_OK)
-        except ValueError:
+        except (ValueError, AuthenticationError):
             logger.warning("Falha no login para email: %s", email)
             return Response(
                 {"detail": "Credenciais inválidas"}, status=status.HTTP_400_BAD_REQUEST
             )
+        except Throttled:
+            raise  # Re-raise para DRF tratar
         except AuthenticationFailed:
             logger.warning("Falha de autenticação para email: %s", email)
             return Response(

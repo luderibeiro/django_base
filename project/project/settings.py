@@ -307,6 +307,14 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": env("DRF_PAGE_SIZE"),
+    "DEFAULT_THROTTLE_CLASSES": [
+        "core.api.throttles.RateLimitThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "user": "100/hour",
+        "login": "5/5min",
+        "user_creation": "3/hour",
+    },
     "EXCEPTION_HANDLER": "core.middleware.custom_exception_middleware.custom_exception_handler",  # Handler de exceção customizado
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }

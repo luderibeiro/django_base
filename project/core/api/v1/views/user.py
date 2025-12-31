@@ -6,9 +6,12 @@ from core.api.deps import (
     get_get_user_by_id_use_case,
     get_list_users_use_case,
 )
+from core.api.throttles import UserCreationRateThrottle
+from core.domain.exceptions import AuthenticationError, EntityNotFoundException
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from rest_framework import generics, status
+from rest_framework.exceptions import Throttled
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
@@ -48,9 +51,7 @@ class UserListAPIView(generics.ListAPIView):
 
         response_serializer = UserListResponseSerializer(instance=list_users_response)
         user_count = len(list_users_response.users)
-        logger.info(
-            "Listagem de usuários (admin) retornou %d usuários", user_count
-        )
+        logger.info("Listagem de usuários (admin) retornou %d usuários", user_count)
         return Response(response_serializer.data, status=status.HTTP_200_OK)
 
 
@@ -80,7 +81,7 @@ class UserAlterPasswordAPIView(generics.UpdateAPIView):
                 "Senha do usuário com ID: %s alterada com sucesso (admin)", user_id
             )
             return Response(response_serializer.data, status=status.HTTP_200_OK)
-        except ValueError as e:
+        except (ValueError, AuthenticationError, EntityNotFoundException):
             logger.warning(
                 "Falha ao alterar senha do usuário com ID: %s (admin)", user_id
             )
@@ -120,6 +121,7 @@ class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateRequestSerializer
     permission_classes = (AllowAny,)
+    throttle_classes = [UserCreationRateThrottle]
 
     def create(self, request, *args, **kwargs):
         logger.info("Criando novo usuário (público)")

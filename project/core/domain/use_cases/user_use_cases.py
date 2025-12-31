@@ -5,10 +5,11 @@ from typing import Optional
 from core.domain.data_access import UserRepository
 from core.domain.entities.user import User as DomainUser
 from core.domain.gateways import AuthGateway
+from core.domain.exceptions import AuthenticationError, EntityNotFoundException
 from core.domain.use_cases.generic_use_cases import (
     CreateEntityUseCase,
     GenericCreateRequest,
-    GenericDeleteRequest,
+    GenericGetByIdRequest,
     GenericReadResponse,
     GetEntityByIdUseCase,
     ListEntitiesUseCase,
@@ -106,11 +107,11 @@ class LoginUserUseCase:
         user = self.user_repository.get_user_by_email(request.email)
         if not user:
             logger.warning("Login failed: User not found for email %s", request.email)
-            raise ValueError("Invalid credentials")
+            raise AuthenticationError("Invalid credentials")
 
         if not self.auth_gateway.check_password(user.id, request.password):
             logger.warning("Login failed: Invalid password for user ID %s", user.id)
-            raise ValueError("Invalid credentials")
+            raise AuthenticationError("Invalid credentials")
 
         access_token, refresh_token = self.auth_gateway.create_tokens(user.id)
         logger.info(
@@ -146,11 +147,11 @@ class ChangeUserPasswordUseCase:
 
     def execute(self, request: ChangeUserPasswordRequest) -> ChangeUserPasswordResponse:
         if not self.auth_gateway.check_password(request.user_id, request.old_password):
-            raise ValueError("Old password is incorrect")
+            raise AuthenticationError("Old password is incorrect")
 
         user = self.user_repository.get_by_id(request.user_id)
         if not user:
-            raise ValueError("User not found")
+            raise EntityNotFoundException("User", request.user_id)
 
         self.auth_gateway.set_password(user.id, request.new_password)
 
@@ -233,9 +234,7 @@ class GetUserByIdUseCase:
         )
 
     def execute(self, request: GetUserByIdRequest) -> CreateUserResponse:
-        generic_request = GenericDeleteRequest(
-            id=request.user_id
-        )  # Usando GenericDeleteRequest para ID
+        generic_request = GenericGetByIdRequest(entity_id=request.user_id)
         get_entity_response = self.generic_get_by_id_use_case.execute(generic_request)
         user = get_entity_response.data
 
