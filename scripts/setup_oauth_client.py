@@ -81,27 +81,27 @@ def update_env_file(client_id, client_secret):
 
     try:
         for env_file in found_files:
-        # Ler conteúdo atual
-        content = env_file.read_text()
+            # Ler conteúdo atual
+            content = env_file.read_text()
 
-        # Atualizar credenciais
-        lines = content.split("\n")
-        updated_lines = []
+            # Atualizar credenciais
+            lines = content.split("\n")
+            updated_lines = []
 
-        for line in lines:
-            if line.startswith("OAUTH2_CLIENT_ID="):
-                updated_lines.append(f"OAUTH2_CLIENT_ID={client_id}")
-            elif line.startswith("OAUTH2_CLIENT_SECRET="):
+            for line in lines:
+                if line.startswith("OAUTH2_CLIENT_ID="):
+                    updated_lines.append(f"OAUTH2_CLIENT_ID={client_id}")
+                elif line.startswith("OAUTH2_CLIENT_SECRET="):
+                    updated_lines.append(f"OAUTH2_CLIENT_SECRET={client_secret}")
+                else:
+                    updated_lines.append(line)
+
+            # Adicionar CLIENT_SECRET se não existir
+            if not any(line.startswith("OAUTH2_CLIENT_SECRET=") for line in lines):
                 updated_lines.append(f"OAUTH2_CLIENT_SECRET={client_secret}")
-            else:
-                updated_lines.append(line)
 
-        # Adicionar CLIENT_SECRET se não existir
-        if not any(line.startswith("OAUTH2_CLIENT_SECRET=") for line in lines):
-            updated_lines.append(f"OAUTH2_CLIENT_SECRET={client_secret}")
-
-        # Escrever arquivo atualizado
-        env_file.write_text("\n".join(updated_lines))
+            # Escrever arquivo atualizado
+            env_file.write_text("\n".join(updated_lines))
             print(f"✅ Arquivo {env_file} atualizado com credenciais OAuth2")
         
         return True

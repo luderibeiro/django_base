@@ -6,6 +6,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
+from django.core.validators import MaxLengthValidator, RegexValidator
 from django.db import models
 
 
@@ -78,8 +79,26 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=150)
+    first_name = models.CharField(
+        max_length=30,
+        validators=[
+            MaxLengthValidator(30),
+            RegexValidator(
+                regex=r"^[a-zA-ZÀ-ÿ\s]+$",
+                message="Nome deve conter apenas letras e espaços",
+            ),
+        ],
+    )
+    last_name = models.CharField(
+        max_length=150,
+        validators=[
+            MaxLengthValidator(150),
+            RegexValidator(
+                regex=r"^[a-zA-ZÀ-ÿ\s]+$",
+                message="Sobrenome deve conter apenas letras e espaços",
+            ),
+        ],
+    )
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)

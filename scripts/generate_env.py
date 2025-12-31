@@ -122,7 +122,7 @@ def main():
 
     # Escrever arquivos
     for env_file in files_to_create:
-    env_file.write_text(content)
+        env_file.write_text(content)
         print(f"✅ Arquivo {env_file} gerado com sucesso!")
 
     print("🔑 SECRET_KEY gerada automaticamente")

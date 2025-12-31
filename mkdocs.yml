@@ -76,6 +76,7 @@ nav:
           - Logs e Tratamento de Exceções: development/logging-error-handling.md
           - Melhorias Futuras: development/future-improvements.md
           - Melhorias de Organização: development/organization-improvements.md
+          - 🔍 Análise de Melhorias: development/ANALISE_MELHORIAS.md
     - API Reference:
           - OpenAPI Schema: development/api-reference.md
           - Domain Layer: development/domain-reference.md

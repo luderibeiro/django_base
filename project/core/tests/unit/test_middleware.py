@@ -6,7 +6,6 @@ from unittest.mock import Mock, patch
 
 import pytest
 from core.middleware.custom_exception_middleware import custom_exception_handler
-from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from rest_framework.response import Response

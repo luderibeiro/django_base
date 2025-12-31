@@ -86,7 +86,12 @@ class ListUsersRequestSerializer(serializers.Serializer):
 
     offset = serializers.IntegerField(default=0, required=False, min_value=0)
     limit = serializers.IntegerField(default=10, required=False, min_value=1)
-    search_query = serializers.CharField(required=False, allow_blank=True)
+    search_query = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        max_length=100,
+        help_text="Query de busca (máximo 100 caracteres)",
+    )
 
 
 class UserAlterPasswordSerializer(serializers.Serializer):

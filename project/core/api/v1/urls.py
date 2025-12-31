@@ -1,5 +1,5 @@
 from core.api.v1.views import auth, user
-from django.urls import include, path
+from django.urls import path
 
 urlpatterns = [
     path("users/", user.UserCreateAPIView.as_view(), name="create-user"),
