@@ -50,6 +50,13 @@ class GenericUpdateRequest(Generic[T]):
 
 
 @dataclass
+class GenericGetByIdRequest:
+    """Input para buscar entidade por id."""
+
+    entity_id: str
+
+
+@dataclass
 class GenericDeleteRequest:
     """Input mínimo para remoção/consulta por id."""
 
