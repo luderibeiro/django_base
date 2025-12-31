@@ -86,18 +86,27 @@ class TestRateLimitThrottle:
             key = throttle.get_cache_key(request, mock_view)
 
         # Simular histórico com requisições antigas
+        # O histórico é ordenado com mais recente primeiro (insert(0, now))
+        # Então removemos do final (history[-1]) que é o mais antigo
         import time
 
-        old_time = time.time() - 4000  # Mais antiga que duration
-        recent_time = time.time() - 100  # Recente
-        cache.set(key, [old_time, recent_time], throttle.duration)
+        now = time.time()
+        old_time = now - 4000  # Mais antiga que duration
+        recent_time = now - 100  # Recente
+        # Histórico: [recent_time, old_time] - recent_time primeiro (mais recente)
+        cache.set(key, [recent_time, old_time], throttle.duration)
 
         result = throttle.allow_request(request, mock_view)
 
-        # Deve permitir e limpar requisições antigas
+        # Deve permitir e limpar requisições antigas do final
         assert result is True
         history = cache.get(key, [])
-        assert len(history) == 2  # old_time removida, recent_time + nova requisição
+        # old_time removida, recent_time mantida, nova requisição adicionada no início
+        assert len(history) == 2
+        # Verifica que old_time foi removida (não está mais no histórico)
+        assert old_time not in history
+        # Verifica que recent_time ainda está
+        assert recent_time in history
 
     def test_allow_request_rate_limit_exceeded(self, request_factory, mock_view):
         """Testa bloqueio quando limite de requisições é excedido."""

@@ -104,7 +104,7 @@ class UserAPITest(APITestCase):
 
         self.client.force_authenticate(user=self.admin_user)
         fake_user_id = "00000000-0000-0000-0000-000000000000"
-        url = reverse("core:user-detail", kwargs={"pk": fake_user_id})
+        url = reverse("core:retrieve-user", kwargs={"pk": fake_user_id})
         response = self.client.get(url, format="json")
         assert response.status_code == status.HTTP_404_NOT_FOUND
         assert "detail" in response.data
