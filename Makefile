@@ -12,12 +12,12 @@ REQUIREMENTS := $(PROJECT_DIR)/requirements.txt
 PYTEST := pytest
 MANAGE := $(PYTHON) manage.py
 
-# Cores para output
-RED := \033[0;31m
-GREEN := \033[0;32m
-YELLOW := \033[1;33m
-BLUE := \033[0;34m
-NC := \033[0m # No Color
+# Cores para output (usando tput para compatibilidade)
+RED := $$(tput setaf 1 2>/dev/null || echo '\033[0;31m')
+GREEN := $$(tput setaf 2 2>/dev/null || echo '\033[0;32m')
+YELLOW := $$(tput setaf 3 2>/dev/null || echo '\033[1;33m')
+BLUE := $$(tput setaf 4 2>/dev/null || echo '\033[0;34m')
+NC := $$(tput sgr0 2>/dev/null || echo '\033[0m')
 
 # Help
 help: ## Mostra esta mensagem de ajuda
