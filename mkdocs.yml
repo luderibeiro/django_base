@@ -65,6 +65,7 @@ nav:
           - Camada de Apresentação (API DRF): architecture/presentation-layer.md
           - Configuração de URLs: architecture/url-configuration.md
           - Modelo de Usuário Mais Leve: architecture/lighter-user-model.md
+          - Guia de Evolução: architecture/evolution-guide.md
     - Desenvolvimento:
           - Como Testar: development/testing.md
           - Guia de Integração Frontend: development/frontend-integration.md
@@ -73,6 +74,8 @@ nav:
           - Testes Automatizados: development/automated-testing.md
           - Paginação e Filtragem: development/pagination-filtering.md
           - Logs e Tratamento de Exceções: development/logging-error-handling.md
+          - Melhorias Futuras: development/future-improvements.md
+          - Melhorias de Organização: development/organization-improvements.md
     - API Reference:
           - OpenAPI Schema: development/api-reference.md
           - Domain Layer: development/domain-reference.md

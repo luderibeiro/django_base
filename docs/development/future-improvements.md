@@ -1,64 +1,61 @@
-# Possíveis melhorias no projeto
+# 🚀 Melhorias Futuras
 
-Este documento lista as possíveis melhorias no projeto, organizadas por arquivo e priorizadas para facilitar a implementação. As melhorias são apresentadas em formato de checklist para facilitar o acompanhamento do progresso.
+Este documento lista as possíveis melhorias no projeto, organizadas por componente e priorizadas para facilitar a implementação futura.
 
-## Priorização das Melhorias
+## 📊 Priorização
 
 -   **Prioridade Alta:** Melhorias que impactam a segurança, a estabilidade ou o desempenho do projeto.
 -   **Prioridade Média:** Melhorias que aprimoram a legibilidade, a manutenibilidade ou a testabilidade do código.
 -   **Prioridade Baixa:** Melhorias que adicionam funcionalidades extras ou que aprimoram a experiência do desenvolvedor.
 
-## project/project/settings.py
+## ⚙️ Configurações (settings.py)
 
 **Prioridade Média**
 
--   [ ] **Variáveis de ambiente:** Utilizar um pacote como `python-decouple` ou `django-environ` para facilitar a gestão das variáveis de ambiente e garantir que todas as variáveis necessárias estejam definidas.
--   [ ] **Configuração de DEBUG:** Simplificar a configuração de DEBUG usando `DEBUG = bool(strtobool(os.getenv("DJANGO_DEBUG", "True")))`.
--   [ ] **ALLOWED_HOSTS:** Simplificar a definição de `ALLOWED_HOSTS` com uma list comprehension mais direta.
--   [ ] **Configuração de banco de dados:** Simplificar a configuração do banco de dados usando um único bloco de código e ajustando as configurações com base na variável `DEBUG`. Adicionar suporte para diferentes tipos de bancos de dados através de variáveis de ambiente.
--   [ ] **Logging:** Aprimorar a configuração de logging com a adição de logs estruturados usando um pacote como `structlog`.
--   [ ] **Oauth Configuration:** Adicionar mais opções de configuração, como a possibilidade de configurar o tempo de vida dos tokens de acesso e refresh tokens através de variáveis de ambiente.
+-   [ ] **Configuração de DEBUG:** Simplificar usando `DEBUG = bool(strtobool(os.getenv("DJANGO_DEBUG", "True")))`.
+-   [ ] **ALLOWED_HOSTS:** Simplificar a definição com uma list comprehension mais direta.
+-   [ ] **Configuração de banco de dados:** Adicionar suporte para diferentes tipos de bancos de dados através de variáveis de ambiente.
+-   [ ] **OAuth Configuration:** Adicionar mais opções de configuração, como tempo de vida dos tokens através de variáveis de ambiente.
 
-## project/core/models/user.py
+## 👤 Modelos (core/models/user.py)
 
 **Prioridade Média**
 
--   [ ] **Validação de campos:** Adicionar validadores para garantir que os campos `first_name` e `last_name` não excedam os limites definidos (`max_length`).
--   [ ] **Métodos de conveniência:** Adicionar métodos de conveniência para obter o nome completo do usuário, como `get_full_name()` e `get_short_name()`.
+-   [ ] **Validação de campos:** Adicionar validadores para garantir que os campos `first_name` e `last_name` não excedam os limites definidos.
+-   [ ] **Métodos de conveniência:** Adicionar métodos `get_full_name()` e `get_short_name()`.
 
-## project/core/api/v1/views/
+## 🌐 Views da API
 
 ### auth.py
 
 **Prioridade Média**
 
--   [ ] **Tratamento de exceções:** Adicionar tratamento para outras exceções que podem ocorrer, como `AuthenticationError` ou `PermissionDenied`.
--   [ ] **Logging:** Adicionar logging para registrar as tentativas de login, tanto as bem-sucedidas quanto as mal-sucedidas.
+-   [ ] **Tratamento de exceções:** Adicionar tratamento para outras exceções como `AuthenticationError` ou `PermissionDenied`.
+-   [ ] **Logging:** Adicionar logging para registrar tentativas de login (sucesso e falha).
 
 ### user.py
 
 **Prioridade Média**
 
--   [ ] **Tratamento de exceções:** Adicionar tratamento para outras exceções que podem ocorrer, como `ObjectDoesNotExist` ou `ValidationError`.
--   [ ] **Logging:** Adicionar logging para registrar as ações realizadas nas views, como criação, listagem, recuperação e alteração de senha de usuários.
--   [ ] **Nomes de variáveis:** Simplificar o código passando `serializer.validated_data` diretamente para o caso de uso.
+-   [ ] **Tratamento de exceções:** Adicionar tratamento para `ObjectDoesNotExist` ou `ValidationError`.
+-   [ ] **Logging:** Adicionar logging para registrar ações nas views (criação, listagem, recuperação, alteração de senha).
 -   [ ] **Paginação:** Considerar o uso de `PageNumberPagination` do Django REST Framework.
 
-## project/core/domain/
+## 🎯 Camada de Domínio
 
 ### data_access.py
 
 **Prioridade Média**
 
--   [ ] **Duplicação de métodos:** Remover os métodos duplicados da interface `UserRepository` e deixar apenas os métodos específicos para usuários.
+-   [ ] **Duplicação de métodos:** Remover métodos duplicados da interface `UserRepository`.
 -   [ ] **Type Hints:** Usar `Optional[str]` para `search_query` em `get_all_paginated_filtered`.
 
 ### entities/user.py
 
 **Prioridade Média**
 
--   [ ] **Congruência com o modelo Django:** Criar testes de integração que validem a correspondência entre a entidade de domínio e o modelo Django.
--   [ ] **Métodos de conveniência:** Adicionar métodos de conveniência para obter o nome completo do usuário, como `get_full_name()` e `get_short_name()`.
+-   [ ] **Congruência com modelo Django:** Criar testes de integração que validem a correspondência entre a entidade de domínio e o modelo Django.
+-   [ ] **Métodos de conveniência:** Adicionar métodos `get_full_name()` e `get_short_name()`.
 
 ### use_cases/generic_use_cases.py
 
@@ -67,26 +64,25 @@ Este documento lista as possíveis melhorias no projeto, organizadas por arquivo
 -   [ ] **Consistência nos Requests:** Criar um `GenericGetByIdRequest` para manter a semântica correta.
 -   [ ] **Lógica de atualização:** Implementar uma lógica de merge mais sofisticada para atualizar apenas os campos modificados.
 -   [ ] **Tratamento de erros:** Criar exceções customizadas para representar erros específicos do domínio, como `EntityNotFoundException`.
--   [ ] **GenericListRequest:** Adicionar os campos `offset`, `limit` e `search_query` para habilitar filtros e paginação.
+-   [ ] **GenericListRequest:** Adicionar campos `offset`, `limit` e `search_query` para habilitar filtros e paginação.
 
 ### use_cases/user_use_cases.py
 
 **Prioridade Média**
 
--   [ ] **CreateUserUseCase:** Adicionar a lógica para definir a senha do usuário, possivelmente delegando para o `AuthGateway`.
+-   [ ] **CreateUserUseCase:** Adicionar lógica para definir a senha do usuário, possivelmente delegando para o `AuthGateway`.
 -   [ ] **GetUserByIdUseCase:** Usar `GenericGetByIdRequest` em vez de `GenericDeleteRequest`.
 -   [ ] **Duplicação de informações:** Reutilizar a entidade `User` ou criar uma classe base para evitar duplicação nas classes de resposta.
 -   [ ] **Logging:** Adicionar logging em pontos estratégicos dos casos de uso.
 -   [ ] **ListUsersUseCase:** Evitar a conversão de `user` para `CreateUserResponse` dentro do `ListUsersUseCase`.
 -   [ ] **Type Hints:** Usar `Optional[str]` para `search_query` em `ListUsersRequest`.
 
-## project/core/repositories/
+## 🔄 Repositórios
 
 ### auth_gateway_impl.py
 
 **Prioridade Alta**
 
--   [ ] **Geração de tokens:** Usar uma biblioteca específica para geração de tokens, como `secrets` do Python ou uma biblioteca JWT.
 -   [ ] **Busca da aplicação cliente:** Buscar a aplicação cliente com base em informações da requisição. A criação da aplicação cliente deve ser feita em um processo separado.
 -   [ ] **Tratamento de erros:** Lançar exceções customizadas para representar erros específicos do domínio.
 -   [ ] **Hardcoded Scopes:** Permitir a configuração dos scopes.
@@ -101,7 +97,7 @@ Este documento lista as possíveis melhorias no projeto, organizadas por arquivo
 -   [ ] **Exclusão de superusuários:** Adicionar uma opção para incluir ou excluir superusuários na listagem.
 -   [ ] **Paginação:** Usar a paginação do Django (`Paginator`) para garantir um comportamento consistente e evitar problemas de desempenho.
 
-## project/core/tests/
+## 🧪 Testes
 
 ### unit/test_user_use_cases.py
 
@@ -124,7 +120,7 @@ Este documento lista as possíveis melhorias no projeto, organizadas por arquivo
 -   [ ] **DRY (Don't Repeat Yourself):** Refatorar os testes para evitar duplicação de código.
 -   [ ] **Cobertura:** Adicionar testes para cobrir todos os cenários possíveis.
 
-## Dockerfile
+## 🐳 Docker
 
 **Prioridade Média**
 
@@ -135,13 +131,55 @@ Este documento lista as possíveis melhorias no projeto, organizadas por arquivo
 -   [ ] **Multi-stage build:** Garantir que apenas os arquivos necessários sejam copiados do builder para a imagem final.
 -   [ ] **Healthcheck:** Adicionar um healthcheck para verificar se a aplicação está saudável.
 
-## Makefile
+## 📝 Makefile
 
 **Prioridade Baixa**
 
--   [ ] **Ativação do ambiente virtual:** Usar `source $(VENV)/bin/activate` em vez de `. $(VENV)/bin/activate`.
 -   [ ] **Variáveis de ambiente:** Definir as variáveis de ambiente no início do `Makefile`.
 -   [ ] **Cores:** Usar uma biblioteca como `tput` para garantir que as cores sejam exibidas corretamente em todos os terminais.
 -   [ ] **Comandos Docker:** Usar variáveis para definir os nomes das imagens e dos arquivos de configuração do Docker.
 -   [ ] **Comandos Git:** Adicionar uma verificação se o repositório Git foi configurado.
 -   [ ] **Linters:** Usar um arquivo de configuração para personalizar o comportamento do `flake8`.
+
+## 📚 Documentação
+
+**Prioridade Média**
+
+-   [ ] **Exemplos práticos:** Adicionar mais exemplos de uso da API
+-   [ ] **Tutoriais passo-a-passo:** Criar tutoriais para cenários comuns
+-   [ ] **Diagramas:** Adicionar diagramas de arquitetura e fluxo de dados
+-   [ ] **Traduções:** Considerar tradução da documentação para outros idiomas
+
+## 🔒 Segurança
+
+**Prioridade Alta**
+
+-   [ ] **Rate limiting:** Implementar rate limiting para endpoints da API
+-   [ ] **CORS:** Configurar CORS adequadamente para produção
+-   [ ] **HTTPS:** Forçar HTTPS em produção
+-   [ ] **Headers de segurança:** Adicionar headers de segurança (HSTS, CSP, etc.)
+-   [ ] **Auditoria de segurança:** Implementar auditoria regular de dependências
+
+## ⚡ Performance
+
+**Prioridade Média**
+
+-   [ ] **Cache:** Implementar cache para queries frequentes
+-   [ ] **Otimização de queries:** Adicionar `select_related` e `prefetch_related` onde necessário
+-   [ ] **Índices de banco:** Adicionar índices para campos frequentemente consultados
+-   [ ] **Compressão:** Habilitar compressão de respostas HTTP
+-   [ ] **CDN:** Configurar CDN para arquivos estáticos
+
+## 🎨 Organização de Arquivos
+
+**Prioridade Baixa**
+
+-   [ ] **Estrutura de pastas:** Revisar e otimizar estrutura de pastas
+-   [ ] **Nomenclatura:** Padronizar nomenclatura de arquivos e diretórios
+-   [ ] **Separação de ambientes:** Melhorar separação de configurações por ambiente
+-   [ ] **Assets:** Organizar melhor assets e arquivos estáticos
+
+---
+
+**Nota:** Este documento é atualizado regularmente conforme melhorias são implementadas ou novas necessidades são identificadas.
+
