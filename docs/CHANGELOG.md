@@ -9,36 +9,61 @@ e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ### Adicionado
 
--   Scripts de revisão completa e teste de endpoints (`scripts/revisao_completa.sh`, `scripts/test_endpoints.sh`)
--   Documentação completa da revisão e refatoração (`REVISAO_COMPLETA.md`, `REVISAO_EXECUTADA.md`)
+-   Nenhuma mudança ainda
 
 ### Alterado
 
--   **Makefile**: Simplificado removendo comandos redundantes (redução de ~450 para ~270 linhas, 40% de redução)
--   **settings.py**: Agora lê arquivo `.env` de múltiplos locais (raiz, `dotenv_files/.env`, `dotenv_files/.env-example`)
--   **requirements.txt**: Adicionadas dependências faltantes (pip-audit, gunicorn, mkdocs, requests)
--   **scripts/generate_env.py**: Agora cria `.env` em múltiplos locais para compatibilidade
--   **scripts/run.sh**: Removido `makemigrations` automático (executar apenas quando necessário)
--   **README.md**: Corrigido erro de digitação e melhoradas instruções de setup
+-   Nenhuma mudança ainda
 
 ### Corrigido
 
--   Inconsistência de localização do arquivo `.env` (settings.py vs docker-compose)
--   Dependências faltantes no `requirements.txt`
--   Execução automática desnecessária de `makemigrations` no `run.sh`
+-   Nenhuma mudança ainda
+
+### Removido
+
+-   Nenhuma mudança ainda
+
+## [2.2.0] - 2024-12-31
+
+### Adicionado
+
+-   **Scripts de Automação**: Scripts de revisão completa (`scripts/revisao_completa.sh`) e teste de endpoints (`scripts/test_endpoints.sh`) para facilitar validação do projeto
+-   **Documentação de Melhorias**: Documentos sobre melhorias futuras (`docs/development/future-improvements.md`) e organização (`docs/development/organization-improvements.md`)
+-   **Guia de Evolução**: Guia completo de evolução do projeto movido para `docs/architecture/evolution-guide.md`
+-   **Geração Automática de .env**: Comando `make setup` agora gera automaticamente arquivo `.env` se não existir
+-   **Suporte a Múltiplos Locais de .env**: `settings.py` agora lê `.env` de múltiplos locais (raiz, `dotenv_files/.env`, `dotenv_files/.env-example`)
+
+### Alterado
+
+-   **Makefile**: Simplificado e reorganizado, removendo comandos redundantes (redução de ~450 para ~270 linhas, 40% de redução)
+-   **requirements.txt**: Organizado em seções lógicas e adicionadas dependências faltantes (pip-audit, gunicorn, mkdocs, requests)
+-   **scripts/generate_env.py**: Agora cria `.env` em múltiplos locais para compatibilidade com Docker
+-   **scripts/setup_oauth_client.py**: Atualiza `.env` em múltiplos locais
+-   **scripts/run.sh**: Melhoradas mensagens de log e removido `makemigrations` automático (executar apenas quando necessário)
+-   **README.md**: Corrigido erro de digitação e melhoradas instruções de setup
+-   **mkdocs.yml**: Adicionados novos documentos à navegação (evolution-guide, future-improvements, organization-improvements)
+
+### Corrigido
+
+-   **Inconsistência de .env**: Corrigida inconsistência entre localização esperada por `settings.py` e `docker-compose`
+-   **Dependências Faltantes**: Adicionadas dependências necessárias que estavam faltando no `requirements.txt`
+-   **Execução Automática**: Removida execução automática desnecessária de `makemigrations` no `run.sh`
 
 ### Refatorado
 
--   **Makefile**: Reorganizado em seções lógicas, removidos comandos redundantes
--   **Organização de arquivos**: Movidos arquivos de documentação para locais apropriados:
+-   **Makefile**: Reorganizado em seções lógicas (Setup, Desenvolvimento, Banco de Dados, Testes, Qualidade, Docker, etc.)
+-   **Organização de Arquivos**: Reorganização completa da documentação:
     - `project_standards.md` → `.github/PROJECT_STANDARDS.md`
     - `EVOLUTION_GUIDE.md` → `docs/architecture/evolution-guide.md`
--   Removidos arquivos desnecessários (`teste.txt`, `commit.sh`)
+    - `RELEASE_NOTES_v2.1.0.md` → `docs/RELEASE_NOTES_v2.1.0.md`
+    - `project_improvements.md` → `docs/development/future-improvements.md`
+-   **Raiz do Projeto**: Limpeza da raiz, removendo arquivos desnecessários e organizando documentação
 
 ### Removido
 
 -   Arquivos temporários e de teste (`teste.txt`, `commit.sh`)
--   Comandos redundantes do Makefile (`pre-commit-run`, `git-commit`, etc.)
+-   Comandos redundantes do Makefile (`pre-commit-run`, `git-commit`, `git-push`, `backup-db` duplicado, etc.)
+-   Documentos de revisão já integrados no CHANGELOG
 
 ## [2.1.0] - 2024-12-19
 

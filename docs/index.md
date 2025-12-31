@@ -5,7 +5,7 @@
 <a href="https://python.org/"><img src="https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python" alt="Python"></a>
 <a href="https://github.com/luderibeiro/django_base/actions"><img src="https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen?style=for-the-badge" alt="Tests"></a>
 <a href="https://github.com/luderibeiro/django_base/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License"></a>
-<a href="https://github.com/luderibeiro/django_base/releases"><img src="https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge" alt="Version"></a>
+<a href="https://github.com/luderibeiro/django_base/releases"><img src="https://img.shields.io/badge/Version-2.2.0-orange?style=for-the-badge" alt="Version"></a>
 </div>
 
 <div align="center">

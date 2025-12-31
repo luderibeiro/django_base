@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
 [![Django](https://img.shields.io/badge/Django-5.0+-green.svg)](https://djangoproject.com)
-[![Version](https://img.shields.io/badge/Version-2.1.0-orange.svg)](https://github.com/luderibeiro/django_base/releases)
+[![Version](https://img.shields.io/badge/Version-2.2.0-orange.svg)](https://github.com/luderibeiro/django_base/releases)
 [![Tests](https://img.shields.io/badge/Tests-93%25%20coverage-brightgreen.svg)](https://github.com/luderibeiro/django_base/actions)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-MkDocs-blue.svg)](https://luderibeiro.github.io/django_base/)
