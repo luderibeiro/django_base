@@ -50,7 +50,12 @@ SECRET_KEY = env("SECRET_KEY", default="django-insecure-change-me-in-production"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = env("ALLOWED_HOSTS")
+# Simplificar ALLOWED_HOSTS com list comprehension
+ALLOWED_HOSTS = (
+    env("ALLOWED_HOSTS")
+    if isinstance(env("ALLOWED_HOSTS"), list)
+    else [host.strip() for host in str(env("ALLOWED_HOSTS")).split(",") if host.strip()]
+)
 
 # OAuth2 Configuration
 OAUTH2_CLIENT_ID = env("OAUTH2_CLIENT_ID")
@@ -61,6 +66,7 @@ OAUTH2_SCOPES = env("OAUTH2_SCOPES")
 
 INSTALLED_APPS = [
     "jazzmin",
+    "corsheaders",
     "rest_framework",
     "oauth2_provider",
     "drf_spectacular",
@@ -75,6 +81,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -463,6 +470,44 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success",
     },
 }
+
+# ============================================================================
+# SEGURANÇA
+# ============================================================================
+
+# Headers de Segurança
+if not DEBUG:
+    # HTTPS e Segurança em Produção
+    SECURE_SSL_REDIRECT = env("SECURE_SSL_REDIRECT", default=False)
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_HSTS_SECONDS = env("SECURE_HSTS_SECONDS", default=31536000)  # 1 ano
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = env("SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
+    SECURE_HSTS_PRELOAD = env("SECURE_HSTS_PRELOAD", default=True)
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = "DENY"
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+else:
+    # Configurações mais permissivas para desenvolvimento
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    X_FRAME_OPTIONS = "SAMEORIGIN"
+
+# CORS Configuration (se necessário para frontend separado)
+CORS_ALLOWED_ORIGINS = env(
+    "CORS_ALLOWED_ORIGINS",
+    default=(
+        ["http://localhost:3000", "http://127.0.0.1:3000"]
+        if DEBUG
+        else []
+    ),
+)
+# Se CORS_ALLOWED_ORIGINS for string, converter para lista
+if isinstance(CORS_ALLOWED_ORIGINS, str):
+    CORS_ALLOWED_ORIGINS = [origin.strip() for origin in CORS_ALLOWED_ORIGINS.split(",") if origin.strip()]
+CORS_ALLOW_CREDENTIALS = True
 
 # drf-spectacular configuration
 SPECTACULAR_SETTINGS = {
