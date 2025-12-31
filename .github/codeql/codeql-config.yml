@@ -5,10 +5,10 @@ paths:
 
 paths-ignore:
   - "**/migrations/**"
-  - "**/tests/**"
   - "**/venv/**"
   - "**/.venv/**"
   - "**/node_modules/**"
   - "**/__pycache__/**"
   - "**/*.pyc"
+  - "**/site-packages/**"
 
