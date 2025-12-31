@@ -43,14 +43,21 @@ class LoginAPIView(APIView):
             logger.warning(f"Falha no login para email {login_request.email}: {str(e)}")
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         except AuthenticationFailed as e:
-            logger.warning(f"Falha de autenticação para email {login_request.email}: {str(e)}")
+            logger.warning(
+                f"Falha de autenticação para email {login_request.email}: {str(e)}"
+            )
             return Response({"detail": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
         except PermissionDenied as e:
-            logger.warning(f"Permissão negada para email {login_request.email}: {str(e)}")
+            logger.warning(
+                f"Permissão negada para email {login_request.email}: {str(e)}"
+            )
             return Response({"detail": str(e)}, status=status.HTTP_403_FORBIDDEN)
         except Exception as e:
-            logger.error(f"Erro inesperado no login para email {login_request.email}: {str(e)}", exc_info=True)
+            logger.error(
+                f"Erro inesperado no login para email {login_request.email}: {str(e)}",
+                exc_info=True,
+            )
             return Response(
                 {"detail": "Erro interno do servidor"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
