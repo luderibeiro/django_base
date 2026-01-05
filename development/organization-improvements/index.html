@@ -1,0 +1,2742 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://luderibeiro.github.io/django_base/development/organization-improvements/">
+      
+      
+        <link rel="prev" href="../future-improvements/">
+      
+      
+        <link rel="next" href="../ANALISE_MELHORIAS/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Melhorias de Organização - Django Base - Template com Arquitetura Limpa</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#melhorias-de-organizacao-do-projeto" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Django Base - Template com Arquitetura Limpa" class="md-header__button md-logo" aria-label="Django Base - Template com Arquitetura Limpa" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Django Base - Template com Arquitetura Limpa
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Melhorias de Organização
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/luderibeiro/django_base/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CHANGELOG/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CONTRIBUTING/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Guia de Contribuição
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CODE_OF_CONDUCT/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Código de Conduta
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Arquitetura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../testing/" class="md-tabs__link">
+          
+  
+  
+  Desenvolvimento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../api-reference/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../setup/quick-start-guide/" class="md-tabs__link">
+          
+  
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/project-analysis/" class="md-tabs__link">
+          
+  
+  
+  Análise do Projeto
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../security/security-guidelines/" class="md-tabs__link">
+          
+  
+  
+  Segurança
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Django Base - Template com Arquitetura Limpa" class="md-nav__button md-logo" aria-label="Django Base - Template com Arquitetura Limpa" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Django Base - Template com Arquitetura Limpa
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/luderibeiro/django_base/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia de Contribuição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CODE_OF_CONDUCT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Código de Conduta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitetura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão Geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/domain-layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camada de Domínio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/application-layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camada de Aplicação (Casos de Uso)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/infrastructure-layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camada de Infraestrutura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/presentation-layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camada de Apresentação (API DRF)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/url-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuração de URLs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/lighter-user-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo de Usuário Mais Leve
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/evolution-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia de Evolução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Desenvolvimento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Como Testar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia de Integração Frontend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generic-crud-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Casos de Uso CRUD Genéricos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oauth2-implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementação OAuth2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../automated-testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testes Automatizados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pagination-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paginação e Filtragem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging-error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logs e Tratamento de Exceções
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../future-improvements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Melhorias Futuras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Melhorias de Organização
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Melhorias de Organização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#melhorias-propostas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Melhorias Propostas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Melhorias Propostas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-estrutura-de-diretorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Estrutura de Diretórios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Estrutura de Diretórios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-separacao-de-configuracoes-por-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Separação de Configurações por Ambiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-organizacao-de-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Organização de Assets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-nomenclatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Nomenclatura
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Nomenclatura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-padronizacao-de-nomes-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Padronização de Nomes de Arquivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-nomenclatura-de-variaveis-e-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Nomenclatura de Variáveis e Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-organizacao-de-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Organização de Documentação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Organização de Documentação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-estrutura-atual-vs-proposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Estrutura Atual vs. Proposta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-documentacao-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Documentação de Código
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-configuracoes-e-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configurações e Scripts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Configurações e Scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-organizacao-de-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Organização de Scripts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-configuracoes-de-ferramentas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Configurações de Ferramentas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-separacao-de-template-vs-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Separação de Template vs. Projeto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Separação de Template vs. Projeto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-arquivos-especificos-de-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Arquivos Específicos de Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-melhorias-de-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Melhorias de Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Melhorias de Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-estrutura-de-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Estrutura de Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-arquivos-de-configuracao-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Arquivos de Configuração Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-cicd-e-automacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. CI/CD e Automação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. CI/CD e Automação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-organizacao-de-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Organização de Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Testes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-organizacao-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Organização de Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Dependências
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Dependências">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-separacao-de-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Separação de Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-organizacao-de-dockerfiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Organização de Dockerfiles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Priorização
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Priorização">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alta-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alta Prioridade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#media-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Média Prioridade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baixa-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Baixa Prioridade
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Implementação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-fundacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1: Fundação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-estrutura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2: Estrutura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3-refinamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 3: Refinamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ANALISE_MELHORIAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔍 Análise de Melhorias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAPI Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../domain-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use Cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repositories-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repositories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/quick-start-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🚀 Guia de Início Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/project-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuração do Projeto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/documentation-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuração da Documentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/staging-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup Homologação (Staging)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/production-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup Produção (detalhado)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/production-complete-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🚀 Deploy Completo em Produção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análise do Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Análise do Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/project-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📊 Análise Completa da Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/security-guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔒 Diretrizes de Segurança
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/luderibeiro/django_base/edit/main/docs/development/organization-improvements.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/luderibeiro/django_base/raw/main/docs/development/organization-improvements.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="melhorias-de-organizacao-do-projeto">📁 Melhorias de Organização do Projeto<a class="headerlink" href="#melhorias-de-organizacao-do-projeto" title="Permanent link">&para;</a></h1>
+<p>Este documento lista melhorias sugeridas para a organização de arquivos, pastas e nomenclatura do projeto Django Base.</p>
+<h2 id="objetivos">🎯 Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Melhorar a clareza e navegabilidade do projeto</li>
+<li>Facilitar a manutenção e evolução</li>
+<li>Padronizar nomenclatura e estrutura</li>
+<li>Otimizar para diferentes tipos de uso (template, projeto base, etc.)</li>
+</ul>
+<h2 id="melhorias-propostas">📋 Melhorias Propostas<a class="headerlink" href="#melhorias-propostas" title="Permanent link">&para;</a></h2>
+<h3 id="1-estrutura-de-diretorios">1. Estrutura de Diretórios<a class="headerlink" href="#1-estrutura-de-diretorios" title="Permanent link">&para;</a></h3>
+<h4 id="11-separacao-de-configuracoes-por-ambiente">1.1 Separação de Configurações por Ambiente<a class="headerlink" href="#11-separacao-de-configuracoes-por-ambiente" title="Permanent link">&para;</a></h4>
+<p><strong>Problema Atual:</strong>
+- Configurações misturadas em <code>project/project/settings.py</code>
+- Dificuldade em gerenciar diferentes ambientes</p>
+<p><strong>Sugestão:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>project/project/
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>├── settings/
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>│   ├── __init__.py
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>│   ├── base.py          # Configurações base
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>│   ├── development.py   # Configurações de desenvolvimento
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>│   ├── staging.py       # Configurações de staging
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>│   ├── production.py    # Configurações de produção
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>│   └── test.py          # Configurações de teste
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Benefícios:</strong>
+- Separação clara de responsabilidades
+- Facilita manutenção por ambiente
+- Reduz risco de expor configurações sensíveis</p>
+<h4 id="12-organizacao-de-assets">1.2 Organização de Assets<a class="headerlink" href="#12-organizacao-de-assets" title="Permanent link">&para;</a></h4>
+<p><strong>Problema Atual:</strong>
+- Assets espalhados em diferentes locais
+- Falta de estrutura clara para imagens, CSS, JS</p>
+<p><strong>Sugestão:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>project/core/
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>├── static/
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>│   ├── css/
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>│   ├── js/
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>│   ├── img/
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>│   └── fonts/
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>├── templates/
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a>│   └── core/
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>│       ├── base.html
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>│       └── components/
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a>└── media/  # Apenas em desenvolvimento
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Benefícios:</strong>
+- Estrutura mais clara e profissional
+- Facilita uso de ferramentas de build (webpack, etc.)
+- Melhor organização para projetos maiores</p>
+<h3 id="2-nomenclatura">2. Nomenclatura<a class="headerlink" href="#2-nomenclatura" title="Permanent link">&para;</a></h3>
+<h4 id="21-padronizacao-de-nomes-de-arquivos">2.1 Padronização de Nomes de Arquivos<a class="headerlink" href="#21-padronizacao-de-nomes-de-arquivos" title="Permanent link">&para;</a></h4>
+<p><strong>Regras Propostas:</strong>
+- <strong>Models</strong>: <code>user.py</code>, <code>product.py</code> (singular, lowercase)
+- <strong>Views</strong>: <code>user_views.py</code>, <code>auth_views.py</code> (plural + <code>_views</code>)
+- <strong>Serializers</strong>: <code>user_serializers.py</code> (plural + <code>_serializers</code>)
+- <strong>Tests</strong>: <code>test_user.py</code>, <code>test_auth.py</code> (prefixo <code>test_</code>)
+- <strong>Use Cases</strong>: <code>user_use_cases.py</code> (plural + <code>_use_cases</code>)
+- <strong>Repositories</strong>: <code>user_repository.py</code> (singular + <code>_repository</code>)</p>
+<p><strong>Benefícios:</strong>
+- Consistência em todo o projeto
+- Facilita localização de arquivos
+- Melhora experiência do desenvolvedor</p>
+<h4 id="22-nomenclatura-de-variaveis-e-classes">2.2 Nomenclatura de Variáveis e Classes<a class="headerlink" href="#22-nomenclatura-de-variaveis-e-classes" title="Permanent link">&para;</a></h4>
+<p><strong>Regras Propostas:</strong>
+- <strong>Classes</strong>: PascalCase (<code>UserRepository</code>, <code>CreateUserUseCase</code>)
+- <strong>Funções/Métodos</strong>: snake_case (<code>create_user</code>, <code>get_all_users</code>)
+- <strong>Constantes</strong>: UPPER_SNAKE_CASE (<code>MAX_RETRY_ATTEMPTS</code>)
+- <strong>Variáveis privadas</strong>: <code>_private_variable</code> (prefixo <code>_</code>)</p>
+<h3 id="3-organizacao-de-documentacao">3. Organização de Documentação<a class="headerlink" href="#3-organizacao-de-documentacao" title="Permanent link">&para;</a></h3>
+<h4 id="31-estrutura-atual-vs-proposta">3.1 Estrutura Atual vs. Proposta<a class="headerlink" href="#31-estrutura-atual-vs-proposta" title="Permanent link">&para;</a></h4>
+<p><strong>Atual:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>docs/
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>├── architecture/
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>├── development/
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>├── setup/
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>└── security/
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Melhorias:</strong>
+- Adicionar <code>docs/guides/</code> para tutoriais passo-a-passo
+- Adicionar <code>docs/examples/</code> para exemplos de código
+- Adicionar <code>docs/faq/</code> para perguntas frequentes
+- Adicionar <code>docs/migration/</code> para guias de migração</p>
+<h4 id="32-documentacao-de-codigo">3.2 Documentação de Código<a class="headerlink" href="#32-documentacao-de-codigo" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+- Adicionar docstrings em todos os módulos públicos
+- Usar formato Google ou NumPy para docstrings
+- Incluir exemplos de uso nos docstrings
+- Manter documentação sincronizada com código</p>
+<h3 id="4-configuracoes-e-scripts">4. Configurações e Scripts<a class="headerlink" href="#4-configuracoes-e-scripts" title="Permanent link">&para;</a></h3>
+<h4 id="41-organizacao-de-scripts">4.1 Organização de Scripts<a class="headerlink" href="#41-organizacao-de-scripts" title="Permanent link">&para;</a></h4>
+<p><strong>Problema Atual:</strong>
+- Scripts na raiz ou em <code>scripts/</code> sem organização clara</p>
+<p><strong>Sugestão:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>scripts/
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>├── setup/          # Scripts de configuração inicial
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>│   ├── generate_env.py
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>│   └── setup_oauth.py
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>├── maintenance/    # Scripts de manutenção
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>│   ├── backup_db.py
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>│   └── cleanup.py
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>├── testing/        # Scripts de teste
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>│   ├── test_endpoints.sh
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>│   └── revisao_completa.sh
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>└── deployment/    # Scripts de deploy
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a>    └── deploy.sh
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Benefícios:</strong>
+- Organização clara por função
+- Facilita manutenção
+- Melhora descoberta de scripts</p>
+<h4 id="42-configuracoes-de-ferramentas">4.2 Configurações de Ferramentas<a class="headerlink" href="#42-configuracoes-de-ferramentas" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+- Mover todas as configurações para <code>.config/</code> ou manter na raiz com prefixo claro
+- Agrupar configurações relacionadas</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span>
+<span class="normal"><a href="#__codelineno-4-8">8</a></span>
+<span class="normal"><a href="#__codelineno-4-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>.config/
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>├── python/
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>│   ├── mypy.ini
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>│   ├── pytest.ini
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>│   └── pydocstyle.ini
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>├── docker/
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>│   └── docker-compose.override.yml.example
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>└── ci/
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>    └── sonar-project.properties
+</code></pre></div></td></tr></table></div>
+<p><strong>OU manter na raiz com nomenclatura clara:</strong>
+- <code>mypy.ini</code> → <code>python-mypy.ini</code>
+- <code>pytest.ini</code> → <code>python-pytest.ini</code></p>
+<h3 id="5-separacao-de-template-vs-projeto">5. Separação de Template vs. Projeto<a class="headerlink" href="#5-separacao-de-template-vs-projeto" title="Permanent link">&para;</a></h3>
+<h4 id="51-arquivos-especificos-de-template">5.1 Arquivos Específicos de Template<a class="headerlink" href="#51-arquivos-especificos-de-template" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+- Mover arquivos específicos do template para <code>.template/</code> ou <code>template_files/</code>
+- Incluir apenas arquivos essenciais no template final</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>template_files/
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>├── cookiecutter.json
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>├── hooks/
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>│   ├── pre_gen_project.py
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>│   └── post_gen_project.py
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>└── examples/
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>    └── .env.example
+</code></pre></div></td></tr></table></div>
+<h3 id="6-melhorias-de-git">6. Melhorias de Git<a class="headerlink" href="#6-melhorias-de-git" title="Permanent link">&para;</a></h3>
+<h4 id="61-estrutura-de-branches">6.1 Estrutura de Branches<a class="headerlink" href="#61-estrutura-de-branches" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+- <code>main</code> - Código estável
+- <code>develop</code> - Desenvolvimento ativo
+- <code>feature/*</code> - Novas funcionalidades
+- <code>fix/*</code> - Correções de bugs
+- <code>docs/*</code> - Melhorias de documentação</p>
+<h4 id="62-arquivos-de-configuracao-git">6.2 Arquivos de Configuração Git<a class="headerlink" href="#62-arquivos-de-configuracao-git" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+- Adicionar <code>.gitattributes</code> para normalização de linha
+- Melhorar <code>.gitignore</code> com mais padrões
+- Adicionar <code>.gitmessage</code> para template de commits</p>
+<h3 id="7-cicd-e-automacao">7. CI/CD e Automação<a class="headerlink" href="#7-cicd-e-automacao" title="Permanent link">&para;</a></h3>
+<h4 id="71-organizacao-de-workflows">7.1 Organização de Workflows<a class="headerlink" href="#71-organizacao-de-workflows" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>.github/
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>├── workflows/
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>│   ├── ci/
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>│   │   ├── test.yml
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>│   │   └── lint.yml
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>│   ├── cd/
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>│   │   └── deploy.yml
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>│   └── maintenance/
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>│       └── dependency-update.yml
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a>├── ISSUE_TEMPLATE/
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>└── PULL_REQUEST_TEMPLATE.md
+</code></pre></div></td></tr></table></div></p>
+<h3 id="8-testes">8. Testes<a class="headerlink" href="#8-testes" title="Permanent link">&para;</a></h3>
+<h4 id="81-organizacao-de-testes">8.1 Organização de Testes<a class="headerlink" href="#81-organizacao-de-testes" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>project/core/tests/
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>├── unit/
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>│   ├── domain/
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>│   ├── use_cases/
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>│   └── repositories/
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>├── integration/
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>│   ├── api/
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>│   └── database/
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>├── e2e/
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>│   └── scenarios/
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>└── fixtures/
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>    └── factories.py
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Benefícios:</strong>
+- Separação clara por tipo de teste
+- Facilita execução seletiva
+- Melhora organização</p>
+<h3 id="9-dependencias">9. Dependências<a class="headerlink" href="#9-dependencias" title="Permanent link">&para;</a></h3>
+<h4 id="91-separacao-de-requirements">9.1 Separação de Requirements<a class="headerlink" href="#91-separacao-de-requirements" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span>
+<span class="normal"><a href="#__codelineno-8-6">6</a></span>
+<span class="normal"><a href="#__codelineno-8-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>project/
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>├── requirements/
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>│   ├── base.txt        # Dependências base
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>│   ├── development.txt # Dependências de desenvolvimento
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>│   ├── production.txt  # Dependências de produção
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>│   └── test.txt        # Dependências de teste
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>└── requirements.txt    # Aponta para base.txt (compatibilidade)
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Benefícios:</strong>
+- Instalação seletiva por ambiente
+- Reduz tamanho de imagens Docker
+- Melhora segurança</p>
+<h3 id="10-docker">10. Docker<a class="headerlink" href="#10-docker" title="Permanent link">&para;</a></h3>
+<h4 id="101-organizacao-de-dockerfiles">10.1 Organização de Dockerfiles<a class="headerlink" href="#101-organizacao-de-dockerfiles" title="Permanent link">&para;</a></h4>
+<p><strong>Sugestão:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span>
+<span class="normal"><a href="#__codelineno-9-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>docker/
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>├── Dockerfile.base
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>├── Dockerfile.dev
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>├── Dockerfile.prod
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>├── docker-compose.dev.yml
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>├── docker-compose.prod.yml
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>└── .dockerignore
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Benefícios:</strong>
+- Organização clara
+- Facilita manutenção
+- Melhora reutilização</p>
+<h2 id="priorizacao">📊 Priorização<a class="headerlink" href="#priorizacao" title="Permanent link">&para;</a></h2>
+<h3 id="alta-prioridade">Alta Prioridade<a class="headerlink" href="#alta-prioridade" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Separação de configurações por ambiente</li>
+<li>Padronização de nomenclatura</li>
+<li>Organização de scripts</li>
+<li>Separação de requirements</li>
+</ol>
+<h3 id="media-prioridade">Média Prioridade<a class="headerlink" href="#media-prioridade" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Organização de assets</li>
+<li>Melhorias de estrutura de testes</li>
+<li>Organização de documentação</li>
+<li>Estrutura de branches Git</li>
+</ol>
+<h3 id="baixa-prioridade">Baixa Prioridade<a class="headerlink" href="#baixa-prioridade" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Reorganização de Dockerfiles</li>
+<li>Separação template vs. projeto</li>
+<li>Configurações de ferramentas</li>
+</ol>
+<h2 id="implementacao">🚀 Implementação<a class="headerlink" href="#implementacao" title="Permanent link">&para;</a></h2>
+<h3 id="fase-1-fundacao">Fase 1: Fundação<a class="headerlink" href="#fase-1-fundacao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Padronizar nomenclatura</li>
+<li>Organizar scripts</li>
+<li>Separar requirements</li>
+</ul>
+<h3 id="fase-2-estrutura">Fase 2: Estrutura<a class="headerlink" href="#fase-2-estrutura" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Separar configurações por ambiente</li>
+<li>Reorganizar testes</li>
+<li>Melhorar organização de assets</li>
+</ul>
+<h3 id="fase-3-refinamento">Fase 3: Refinamento<a class="headerlink" href="#fase-3-refinamento" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Otimizar Docker</li>
+<li>Melhorar documentação</li>
+<li>Implementar melhorias de Git</li>
+</ul>
+<h2 id="notas">📝 Notas<a class="headerlink" href="#notas" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Todas as mudanças devem ser retrocompatíveis quando possível</li>
+<li>Documentar breaking changes claramente</li>
+<li>Manter referências atualizadas</li>
+<li>Testar em diferentes ambientes antes de aplicar</li>
+</ul>
+<hr />
+<p><strong>Última atualização:</strong> 2024-12-31
+<strong>Status:</strong> Propostas para discussão e implementação gradual</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.tabs", "navigation.sections", "search.highlight", "search.suggest", "toc.integrate", "content.tabs.link", "content.code.annotate", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
