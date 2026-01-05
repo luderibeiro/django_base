@@ -6,6 +6,8 @@ from core.api.deps import (
     get_get_user_by_id_use_case,
     get_list_users_use_case,
 )
+from core.api.throttles import UserCreationRateThrottle
+from core.domain.exceptions import AuthenticationError, EntityNotFoundException
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from rest_framework import generics, status
@@ -25,6 +27,19 @@ from ..serializers.user import (
 logger = logging.getLogger(__name__)
 
 User = get_user_model()
+
+
+def _sanitize_for_log(value):
+    """
+    Sanitiza valores para uso em logs, removendo caracteres de controle.
+
+    Remove caracteres de nova linha e retorno de carro para prevenir
+    log injection.
+    """
+    if value is None:
+        return ""
+    value_str = str(value)
+    return value_str.replace("\r", "").replace("\n", "")
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -47,9 +62,8 @@ class UserListAPIView(generics.ListAPIView):
         list_users_response = list_users_use_case.execute(list_users_request)
 
         response_serializer = UserListResponseSerializer(instance=list_users_response)
-        logger.info(
-            f"Listagem de usuários (admin) retornou {len(list_users_response.users)} usuários"
-        )
+        user_count = len(list_users_response.users)
+        logger.info("Listagem de usuários (admin) retornou %d usuários", user_count)
         return Response(response_serializer.data, status=status.HTTP_200_OK)
 
 
@@ -61,7 +75,9 @@ class UserAlterPasswordAPIView(generics.UpdateAPIView):
     permission_classes = (IsAdminUser,)  # Restaurado para IsAdminUser
 
     def update(self, request, *args, **kwargs):
-        logger.info(f"Alterando senha do usuário com ID: {kwargs['pk']} (admin)")
+        user_id = str(kwargs.get("pk", ""))
+        safe_user_id = _sanitize_for_log(user_id)
+        logger.info("Alterando senha do usuário com ID: %s (admin)", safe_user_id)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         change_password_request = serializer.validated_data
@@ -75,14 +91,16 @@ class UserAlterPasswordAPIView(generics.UpdateAPIView):
                 instance=change_password_response
             )
             logger.info(
-                f"Senha do usuário com ID: {kwargs['pk']} alterada com sucesso (admin)"
+                "Senha do usuário com ID: %s alterada com sucesso (admin)", safe_user_id
             )
             return Response(response_serializer.data, status=status.HTTP_200_OK)
-        except ValueError as e:
+        except (ValueError, AuthenticationError, EntityNotFoundException):
             logger.warning(
-                f"Falha ao alterar senha do usuário com ID: {kwargs['pk']} (admin) - {str(e)}"
+                "Falha ao alterar senha do usuário com ID: %s (admin)", safe_user_id
             )
-            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "Falha ao alterar senha"}, status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
@@ -93,21 +111,26 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()  # Adicionado queryset
 
     def retrieve(self, request, *args, **kwargs):
-        user_id = kwargs["pk"]
-        logger.info(f"Recuperando usuário com ID: {user_id} (admin)")
-        get_user_request = GetUserByIdRequest(user_id=str(user_id))
+        user_id = str(kwargs.get("pk", ""))
+        safe_user_id = _sanitize_for_log(user_id)
+        logger.info("Recuperando usuário com ID: %s (admin)", safe_user_id)
+        get_user_request = GetUserByIdRequest(user_id=user_id)
 
         get_user_use_case = get_get_user_by_id_use_case()
         try:
             user_response = get_user_use_case.execute(get_user_request)
             response_serializer = UserReadSerializer(instance=user_response)
-            logger.info(f"Usuário com ID: {user_id} recuperado com sucesso (admin)")
-            return Response(response_serializer.data, status=status.HTTP_200_OK)
-        except ObjectDoesNotExist as e:
-            logger.warning(
-                f"Falha ao recuperar usuário com ID: {user_id} (admin) - {str(e)}"
+            logger.info(
+                "Usuário com ID: %s recuperado com sucesso (admin)", safe_user_id
             )
-            return Response({"detail": str(e)}, status=status.HTTP_404_NOT_FOUND)
+            return Response(response_serializer.data, status=status.HTTP_200_OK)
+        except ObjectDoesNotExist:
+            logger.warning(
+                "Falha ao recuperar usuário com ID: %s (admin)", safe_user_id
+            )
+            return Response(
+                {"detail": "Usuário não encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -116,6 +139,7 @@ class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateRequestSerializer
     permission_classes = (AllowAny,)
+    throttle_classes = [UserCreationRateThrottle]
 
     def create(self, request, *args, **kwargs):
         logger.info("Criando novo usuário (público)")
@@ -127,10 +151,11 @@ class UserCreateAPIView(generics.CreateAPIView):
             create_user_use_case = get_create_user_use_case()
             create_user_response = create_user_use_case.execute(create_user_request)
             read_serializer = UserReadSerializer(instance=create_user_response)
-            logger.info(
-                f"Usuário com ID: {create_user_response.id} criado com sucesso (público)"
-            )
+            user_id = str(create_user_response.id)
+            logger.info("Usuário com ID: %s criado com sucesso (público)", user_id)
             return Response(read_serializer.data, status=status.HTTP_201_CREATED)
-        except ValidationError as e:
-            logger.warning(f"Falha ao criar usuário (público) - {str(e)}")
-            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        except ValidationError:
+            logger.warning("Falha ao criar usuário (público)")
+            return Response(
+                {"detail": "Dados inválidos"}, status=status.HTTP_400_BAD_REQUEST
+            )
